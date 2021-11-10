@@ -3,8 +3,10 @@ public enum ResourceName
     //Currency
     gold = 1,
 
-    //Level 1 
-    logwood = 1000,
+    //Material Level 1
+    logwood = 1001,
+    ironOre = 1002,
 
-    //Why we set a number for each enum?
+    //Material Level 1
+    ironIngot = 2002,
 }
