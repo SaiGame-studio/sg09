@@ -4,5 +4,5 @@ using System;
 public class Resource
 {
     public ResourceName name;
-    public int number;
+    public int number = 0;
 }
