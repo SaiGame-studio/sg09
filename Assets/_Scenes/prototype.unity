@@ -2233,6 +2233,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4148668532926806450, guid: 8f20578c311bb4744807f01a1c5d233d, type: 3}
   m_PrefabInstance: {fileID: 4148668533534518163}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &735777314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735777313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b5457704e2c91418fd0701c4c6acd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceName: 0
+  number: 1
+  speed: 2
+  timer: Infinity
 --- !u!136 &735777315
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4642,11 +4658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00fc9286866fc2245875139741d42af0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resources:
-  - name: 1
-    number: 1000
-  - name: 1001
-    number: 222
+  resources: []
 --- !u!1001 &1736731160
 PrefabInstance:
   m_ObjectHideFlags: 0
