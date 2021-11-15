@@ -1,6 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
+
+public class ResNameParser
+{
+    public static ResourceName FromString(string name)
+    {
+        //name = name.ToLower();
+        return (ResourceName)Enum.Parse(typeof(ResourceName), name);
+    }
+}
+
+
 
 public enum ResourceName
 {
@@ -18,4 +27,5 @@ public enum ResourceName
     //Material Level 2
     blank = 2001,
     ironIgnot = 2002,
+
 }
