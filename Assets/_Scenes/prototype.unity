@@ -3603,7 +3603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3edd0456117487428cc0bb34edd2174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceName: 0
+  resourceName: 1000
   resCurrent: 0
   resMax: Infinity
 --- !u!1001 &1220395299
@@ -3788,7 +3788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3edd0456117487428cc0bb34edd2174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceName: 0
+  resourceName: 1001
   resCurrent: 0
   resMax: Infinity
 --- !u!1001 &1280485125
@@ -5454,7 +5454,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dd871d2c28775043811411830e2299d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resHolders: []
+  resHolders:
+  - {fileID: 1157940032}
+  - {fileID: 1245875699}
 --- !u!4 &1824588193
 Transform:
   m_ObjectHideFlags: 0
