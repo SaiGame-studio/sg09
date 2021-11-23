@@ -8,7 +8,7 @@ public class ResGenerator : SaiBehaviour
     [SerializeField] protected List<Resource> resCreate;
     [SerializeField] protected List<Resource> resRequire;
     [SerializeField] protected float createTimer = 0f;
-    [SerializeField] protected float createDelay = 2f;
+    [SerializeField] protected float createDelay = 7f;
 
     protected override void FixedUpdate()
     {
