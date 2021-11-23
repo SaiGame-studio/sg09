@@ -1,8 +1,8 @@
 using System;
 
 [Serializable]
-public struct Resource
+public class Resource
 {
     public ResourceName name;
-    public int number;
+    public int number = 0;
 }
