@@ -5,6 +5,15 @@ using UnityEngine;
 public class ResGenerator : SaiBehaviour
 {
     [SerializeField] protected List<ResHolder> resHolders;
+    [SerializeField] protected List<Resource> resCreate;
+    [SerializeField] protected List<Resource> resRequire;
+    [SerializeField] protected float createTimer = 0f;
+    [SerializeField] protected float createDelay = 2f;
+
+    protected override void FixedUpdate()
+    {
+        this.Creating();
+    }
 
     protected override void LoadComponents()
     {
@@ -25,5 +34,28 @@ public class ResGenerator : SaiBehaviour
         }
 
         Debug.Log(transform.name + ": LoadHolders");
+    }
+
+    protected virtual void Creating()
+    {
+        this.createTimer += Time.fixedDeltaTime;
+        if (this.createTimer < this.createDelay) return;
+        this.createTimer = 0;
+
+        if (!this.IsRequireEnough()) return;
+        
+        foreach(Resource res in this.resCreate)
+        {
+            ResHolder resHolder = this.resHolders.Find((holder) => holder.Name() == res.name);
+            resHolder.Add(res.number);
+        }
+    }
+
+    protected virtual bool IsRequireEnough()
+    {
+        if (this.resRequire.Count < 1) return true;
+
+        //TODO: this is not done yet
+        return false;
     }
 }

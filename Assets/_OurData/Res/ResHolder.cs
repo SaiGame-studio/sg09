@@ -21,4 +21,18 @@ public class ResHolder : SaiBehaviour
         this.resourceName = ResNameParser.FromString(name);
         Debug.Log(transform.name + ": LoadResName");
     }
+
+    public virtual ResourceName Name()
+    {
+        return this.resourceName;
+    }
+
+    public virtual float Add(int number)
+    {
+        this.resCurrent += number;
+
+        if (this.resCurrent > this.resMax) this.resCurrent = this.resMax;
+        return this.resCurrent;
+    }
+
 }

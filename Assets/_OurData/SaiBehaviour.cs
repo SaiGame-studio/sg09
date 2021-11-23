@@ -14,6 +14,11 @@ public class SaiBehaviour : MonoBehaviour
         this.LoadComponents();
     }
 
+    protected virtual void FixedUpdate()
+    {
+        //For Overide
+    }
+
     protected virtual void LoadComponents()
     {
         //For Overide
