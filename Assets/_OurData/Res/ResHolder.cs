@@ -35,4 +35,9 @@ public class ResHolder : SaiBehaviour
         return this.resCurrent;
     }
 
+    public virtual void SetLimit(float max)
+    {
+        this.resMax = max;
+    }
+
 }

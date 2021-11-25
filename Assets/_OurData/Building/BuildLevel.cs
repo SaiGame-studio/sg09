@@ -9,7 +9,7 @@ public class BuildLevel : SaiBehaviour
     private void OnEnable()
     {
         this.ShowBuilding();
-        InvokeRepeating("ShowNextBuild", 3, 2);
+        //InvokeRepeating("ShowNextBuild", 3, 2);
     }
 
     protected override void LoadComponents()
@@ -35,9 +35,15 @@ public class BuildLevel : SaiBehaviour
     /// </summary>
     protected virtual void ShowNextBuild()
     {
-        if (this.currentLevel >= this.levels.Count - 1) return;
+        if (this.currentLevel >= this.levels.Count - 2) return;
 
         this.currentLevel++;
+        this.ShowBuilding();
+    }
+
+    public virtual void ShowLastBuild()
+    {
+        this.currentLevel = this.levels.Count - 1;
         this.ShowBuilding();
     }
 

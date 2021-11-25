@@ -8,6 +8,7 @@ public class Tree : ResGenerator
     {
         base.LoadComponents();
         this.LoadResCreate();
+        this.SetLimit();
     }
 
     protected virtual void LoadResCreate()
@@ -20,5 +21,11 @@ public class Tree : ResGenerator
 
         this.resCreate.Clear();
         this.resCreate.Add(res);
+    }
+
+    protected virtual void SetLimit()
+    {
+        ResHolder resHolder = this.GetHolder(ResourceName.logwood);
+        resHolder.SetLimit(1);
     }
 }

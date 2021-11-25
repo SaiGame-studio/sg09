@@ -46,7 +46,7 @@ public class ResGenerator : SaiBehaviour
         
         foreach(Resource res in this.resCreate)
         {
-            ResHolder resHolder = this.resHolders.Find((holder) => holder.Name() == res.name);
+            ResHolder resHolder = this.GetHolder(res.name);
             resHolder.Add(res.number);
         }
     }
@@ -57,5 +57,15 @@ public class ResGenerator : SaiBehaviour
 
         //TODO: this is not done yet
         return false;
+    }
+
+    public virtual ResHolder GetHolder(ResourceName name)
+    {
+        return this.resHolders.Find((holder) => holder.Name() == name);
+    }
+
+    public virtual float GetCreateDelay()
+    {
+        return this.createDelay;
     }
 }
