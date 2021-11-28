@@ -9,8 +9,6 @@ public class ResNameParser
     }
 }
 
-
-
 public enum ResourceName
 {
     noResource = 0,

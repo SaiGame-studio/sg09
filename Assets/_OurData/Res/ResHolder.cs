@@ -39,5 +39,4 @@ public class ResHolder : SaiBehaviour
     {
         this.resMax = max;
     }
-
 }

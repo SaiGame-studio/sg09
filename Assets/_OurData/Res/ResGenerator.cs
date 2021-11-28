@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResGenerator : SaiBehaviour
+public class ResGenerator : Warehouse
 {
-    [SerializeField] protected List<ResHolder> resHolders;
     [SerializeField] protected List<Resource> resCreate;
     [SerializeField] protected List<Resource> resRequire;
     [SerializeField] protected float createTimer = 0f;
@@ -13,27 +12,6 @@ public class ResGenerator : SaiBehaviour
     protected override void FixedUpdate()
     {
         this.Creating();
-    }
-
-    protected override void LoadComponents()
-    {
-        this.LoadHolders();
-    }
-
-    protected virtual void LoadHolders()
-    {
-        if (this.resHolders.Count > 0) return;
-
-        Transform res = transform.Find("Res");
-        foreach (Transform resTran in res)
-        {
-            Debug.Log(resTran.name);
-            ResHolder resHolder = resTran.GetComponent<ResHolder>();
-            if (resHolder == null) continue;
-            this.resHolders.Add(resHolder);
-        }
-
-        Debug.Log(transform.name + ": LoadHolders");
     }
 
     protected virtual void Creating()
@@ -57,11 +35,6 @@ public class ResGenerator : SaiBehaviour
 
         //TODO: this is not done yet
         return false;
-    }
-
-    public virtual ResHolder GetHolder(ResourceName name)
-    {
-        return this.resHolders.Find((holder) => holder.Name() == name);
     }
 
     public virtual float GetCreateDelay()
