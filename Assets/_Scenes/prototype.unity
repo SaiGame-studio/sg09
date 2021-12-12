@@ -8800,8 +8800,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingCtrls:
-  - {fileID: 686496607}
   - {fileID: 423195307}
+  - {fileID: 686496607}
 --- !u!1 &2074939562
 GameObject:
   m_ObjectHideFlags: 0
