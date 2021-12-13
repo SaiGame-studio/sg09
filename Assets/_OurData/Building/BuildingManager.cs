@@ -32,7 +32,7 @@ public class BuildingManager : SaiBehaviour
         Debug.Log(transform.name + "LoadBuildingCtrls", gameObject);
     }
 
-    public virtual Transform FindBuilding(Transform worker)
+    public virtual BuildingCtrl FindBuilding(Transform worker)
     {
         BuildingCtrl buildingCtrl;
         for (int i = 0; i < this.buildingCtrls.Count; i++)
@@ -41,7 +41,7 @@ public class BuildingManager : SaiBehaviour
             if (!buildingCtrl.workers.IsNeedWorker()) continue;
 
             buildingCtrl.workers.AddWorker(worker);
-            return buildingCtrl.transform;
+            return buildingCtrl;
         }
         return null;
     }

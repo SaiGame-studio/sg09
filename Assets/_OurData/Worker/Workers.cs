@@ -9,7 +9,7 @@ public class Workers : SaiBehaviour
 
     protected override void LoadComponents()
     {
-        this.LoadWorkers();
+        //this.LoadWorkers();
     }
 
     protected virtual void LoadWorkers()
@@ -22,7 +22,7 @@ public class Workers : SaiBehaviour
             this.workers.Add(worker);
         }
 
-        Debug.Log(transform.name + ": LoadWorkers");
+        Debug.Log(transform.name + ": LoadWorkers", gameObject);
     }
 
     public virtual bool IsNeedWorker()

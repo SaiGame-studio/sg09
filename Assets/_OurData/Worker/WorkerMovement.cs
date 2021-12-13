@@ -64,8 +64,8 @@ public class WorkerMovement : SaiBehaviour
 
     protected virtual void FindHouse()
     {
-        Transform house = BuildingManager.instance.FindBuilding(transform);
-        if (house == null) return;
-        this.target = house;
+        BuildingCtrl buildingCtrl = BuildingManager.instance.FindBuilding(transform);
+        if (buildingCtrl == null) return;
+        this.target = buildingCtrl.door;
     }
 }
