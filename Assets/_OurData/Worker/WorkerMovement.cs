@@ -3,6 +3,7 @@ using UnityEngine.AI;
 
 public class WorkerMovement : SaiBehaviour
 {
+    public WorkerCtrl workerCtrl;
     [SerializeField] protected Transform target;
     [SerializeField] protected NavMeshAgent navMeshAgent;
     [SerializeField] protected Animator animator;
@@ -12,15 +13,22 @@ public class WorkerMovement : SaiBehaviour
     protected override void LoadComponents()
     {
         base.LoadComponents();
+        this.LoadWorkerCtrl();
         this.LoadAgent();
         this.LoadAnimator();
     }
 
     protected override void FixedUpdate()
     {
-        this.FindHouse();
         this.Moving();
         this.Animating();
+    }
+
+    protected virtual void LoadWorkerCtrl()
+    {
+        if (this.workerCtrl != null) return;
+        this.workerCtrl = GetComponent<WorkerCtrl>();
+        Debug.Log(transform.name + ": LoadWorkerCtrl", gameObject);
     }
 
     protected virtual void LoadAgent()
@@ -60,12 +68,5 @@ public class WorkerMovement : SaiBehaviour
     {
         this.animator.SetBool("isWalking", this.isWalking);
         this.animator.SetBool("isWorking", this.isWorking);
-    }
-
-    protected virtual void FindHouse()
-    {
-        BuildingCtrl buildingCtrl = BuildingManager.instance.FindBuilding(transform);
-        if (buildingCtrl == null) return;
-        this.target = buildingCtrl.door;
     }
 }
