@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Workers : SaiBehaviour
 {
+    [SerializeField] protected int maxWorker = 1;
     [SerializeField] protected List<Transform> workers;
 
     protected override void LoadComponents()
     {
-        this.LoadWorkers();
+        //this.LoadWorkers();
     }
 
     protected virtual void LoadWorkers()
@@ -21,6 +22,17 @@ public class Workers : SaiBehaviour
             this.workers.Add(worker);
         }
 
-        Debug.Log(transform.name + ": LoadWorkers");
+        Debug.Log(transform.name + ": LoadWorkers", gameObject);
+    }
+
+    public virtual bool IsNeedWorker()
+    {
+        if (this.workers.Count >= this.maxWorker) return false;
+        return true;
+    }
+
+    public virtual void AddWorker(Transform worker)
+    {
+        this.workers.Add(worker);
     }
 }

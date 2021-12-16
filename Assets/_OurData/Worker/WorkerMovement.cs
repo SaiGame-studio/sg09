@@ -3,24 +3,30 @@ using UnityEngine.AI;
 
 public class WorkerMovement : SaiBehaviour
 {
+    public WorkerCtrl workerCtrl;
     [SerializeField] protected Transform target;
     [SerializeField] protected NavMeshAgent navMeshAgent;
-    [SerializeField] protected Animator animator;
     [SerializeField] protected bool isWalking = false;
     [SerializeField] protected bool isWorking = false;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
+        this.LoadWorkerCtrl();
         this.LoadAgent();
-        this.LoadAnimator();
     }
 
     protected override void FixedUpdate()
     {
-        this.FindHouse();
         this.Moving();
         this.Animating();
+    }
+
+    protected virtual void LoadWorkerCtrl()
+    {
+        if (this.workerCtrl != null) return;
+        this.workerCtrl = GetComponent<WorkerCtrl>();
+        Debug.Log(transform.name + ": LoadWorkerCtrl", gameObject);
     }
 
     protected virtual void LoadAgent()
@@ -30,12 +36,6 @@ public class WorkerMovement : SaiBehaviour
         Debug.Log(transform.name + ": LoadAgent", gameObject);
     }
 
-    protected virtual void LoadAnimator()
-    {
-        if (this.animator != null) return;
-        this.animator = GetComponentInChildren<Animator>();
-        Debug.Log(transform.name + ": LoadAnimator", gameObject);
-    }
 
     public virtual void SetTarget(Transform trans)
     {
@@ -58,14 +58,7 @@ public class WorkerMovement : SaiBehaviour
 
     protected virtual void Animating()
     {
-        this.animator.SetBool("isWalking", this.isWalking);
-        this.animator.SetBool("isWorking", this.isWorking);
-    }
-
-    protected virtual void FindHouse()
-    {
-        Transform house = BuildingManager.instance.FindBuilding();
-        if (house == null) return;
-        this.target = house;
+        this.workerCtrl.animator.SetBool("isWalking", this.isWalking);
+        this.workerCtrl.animator.SetBool("isWorking", this.isWorking);
     }
 }

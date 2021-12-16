@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +22,7 @@ public class BuildingManager : SaiBehaviour
     protected virtual void LoadBuildingCtrls()
     {
         if (this.buildingCtrls.Count > 0) return;
-         foreach(Transform child in transform)
+        foreach (Transform child in transform)
         {
             BuildingCtrl ctrl = child.GetComponent<BuildingCtrl>();
             if (ctrl == null) continue;
@@ -33,8 +32,32 @@ public class BuildingManager : SaiBehaviour
         Debug.Log(transform.name + "LoadBuildingCtrls", gameObject);
     }
 
-    public virtual Transform FindBuilding()
+    public virtual BuildingCtrl FindBuilding(Transform worker)
     {
-       return this.buildingCtrls[0].transform;
+        BuildingCtrl buildingCtrl;
+        for (int i = 0; i < this.buildingCtrls.Count; i++)
+        {
+            buildingCtrl = this.buildingCtrls[i];
+            if (!buildingCtrl.workers.IsNeedWorker()) continue;
+
+            buildingCtrl.workers.AddWorker(worker);
+            return buildingCtrl;
+        }
+        return null;
+    }
+
+    public virtual BuildingCtrl FindBuilding(Transform worker, BuildingType buildingType)
+    {
+        //TODO
+        BuildingCtrl buildingCtrl;
+        for (int i = 0; i < this.buildingCtrls.Count; i++)
+        {
+            buildingCtrl = this.buildingCtrls[i];
+            if (!buildingCtrl.workers.IsNeedWorker()) continue;
+
+            buildingCtrl.workers.AddWorker(worker);
+            return buildingCtrl;
+        }
+        return null;
     }
 }
