@@ -11,8 +11,8 @@ public class WorkerTask : SaiBehaviour
     {
         base.FixedUpdate();
 
-        this.FindBuilding();
-        this.WorkPlanning();
+        if (this.GetBuilding()) this.WorkPlanning();
+        else this.FindBuilding();
     }
 
     protected override void LoadComponents()
@@ -30,8 +30,6 @@ public class WorkerTask : SaiBehaviour
 
     protected virtual void FindBuilding()
     {
-        if (this.GetBuilding() != null) return;
-
         BuildingCtrl buildingCtrl = BuildingManager.instance.FindBuilding(transform, this.GetBuildingType());
         if (buildingCtrl == null) return;
         this.AssignBuilding(buildingCtrl);
@@ -57,7 +55,6 @@ public class WorkerTask : SaiBehaviour
 
     protected virtual void WorkPlanning()
     {
-        if (this.GetBuilding() == null) return;
         if (this.IsAtBuilding()) this.GoIntoBuilding();
         else this.GotoBuilding();
 
@@ -68,6 +65,7 @@ public class WorkerTask : SaiBehaviour
     {
         this.workerCtrl.workerMovement.SetTarget(null);
         this.inHouse = true;
+        //this.workerCtrl.workerModel.gameObject.SetActive(false);
     }
 
     protected virtual void Working()
