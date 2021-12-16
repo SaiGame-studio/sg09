@@ -6,7 +6,6 @@ public class WorkerMovement : SaiBehaviour
     public WorkerCtrl workerCtrl;
     [SerializeField] protected Transform target;
     [SerializeField] protected NavMeshAgent navMeshAgent;
-    [SerializeField] protected Animator animator;
     [SerializeField] protected bool isWalking = false;
     [SerializeField] protected bool isWorking = false;
 
@@ -15,7 +14,6 @@ public class WorkerMovement : SaiBehaviour
         base.LoadComponents();
         this.LoadWorkerCtrl();
         this.LoadAgent();
-        this.LoadAnimator();
     }
 
     protected override void FixedUpdate()
@@ -38,12 +36,6 @@ public class WorkerMovement : SaiBehaviour
         Debug.Log(transform.name + ": LoadAgent", gameObject);
     }
 
-    protected virtual void LoadAnimator()
-    {
-        if (this.animator != null) return;
-        this.animator = GetComponentInChildren<Animator>();
-        Debug.Log(transform.name + ": LoadAnimator", gameObject);
-    }
 
     public virtual void SetTarget(Transform trans)
     {
@@ -66,7 +58,7 @@ public class WorkerMovement : SaiBehaviour
 
     protected virtual void Animating()
     {
-        this.animator.SetBool("isWalking", this.isWalking);
-        this.animator.SetBool("isWorking", this.isWorking);
+        this.workerCtrl.animator.SetBool("isWalking", this.isWalking);
+        this.workerCtrl.animator.SetBool("isWorking", this.isWorking);
     }
 }

@@ -45,4 +45,19 @@ public class BuildingManager : SaiBehaviour
         }
         return null;
     }
+
+    public virtual BuildingCtrl FindBuilding(Transform worker, BuildingType buildingType)
+    {
+        //TODO
+        BuildingCtrl buildingCtrl;
+        for (int i = 0; i < this.buildingCtrls.Count; i++)
+        {
+            buildingCtrl = this.buildingCtrls[i];
+            if (!buildingCtrl.workers.IsNeedWorker()) continue;
+
+            buildingCtrl.workers.AddWorker(worker);
+            return buildingCtrl;
+        }
+        return null;
+    }
 }
