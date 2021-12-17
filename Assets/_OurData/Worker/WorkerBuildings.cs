@@ -18,4 +18,14 @@ public class WorkerBuildings : SaiBehaviour
     {
         return this.workBuilding;
     }
+
+    public virtual BuildingCtrl GetHome()
+    {
+        return this.homeBuilding;
+    }
+
+    public virtual void AssignHome(BuildingCtrl buildingCtrl)
+    {
+        this.homeBuilding = buildingCtrl;
+    }
 }

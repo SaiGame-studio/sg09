@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Warehouse : SaiBehaviour
 {
+    public BuildingType buildingType;
     [SerializeField] protected List<ResHolder> resHolders;
 
     protected override void LoadComponents()

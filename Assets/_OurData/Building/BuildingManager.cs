@@ -54,6 +54,7 @@ public class BuildingManager : SaiBehaviour
         {
             buildingCtrl = this.buildingCtrls[i];
             if (!buildingCtrl.workers.IsNeedWorker()) continue;
+            if (buildingCtrl.warehouse.buildingType != buildingType) continue;
 
             buildingCtrl.workers.AddWorker(worker);
             return buildingCtrl;
