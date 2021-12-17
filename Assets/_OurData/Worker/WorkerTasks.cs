@@ -3,14 +3,16 @@ using UnityEngine;
 public class WorkerTasks : SaiBehaviour
 {
     public WorkerCtrl workerCtrl;
-    [SerializeField] protected bool gotoWork = false;
+    [SerializeField] protected bool isNightTime = false;
+    [SerializeField] protected WorkerTask taskWorking;
+    [SerializeField] protected WorkerTask taskGoHome;
 
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
 
-        this.WorkFinding();
-        this.GotoWork();
+        if (this.isNightTime) this.GoHome();
+        else this.GoWork();
     }
 
     protected override void LoadComponents()
@@ -26,21 +28,15 @@ public class WorkerTasks : SaiBehaviour
         Debug.Log(transform.name + ": LoadWorkerCtrl", gameObject);
     }
 
-    protected virtual void WorkFinding()
+    protected virtual void GoHome()
     {
-        if (this.workerCtrl.workerBuildings.GetWork() != null) return;
-
-        BuildingCtrl buildingCtrl = BuildingManager.instance.FindBuilding(transform);
-        if (buildingCtrl == null) return;
-        this.workerCtrl.workerBuildings.AssignWork(buildingCtrl);
+        this.taskWorking.gameObject.SetActive(false);
+        this.taskGoHome.gameObject.SetActive(true);
     }
 
-    protected virtual void GotoWork()
+    protected virtual void GoWork()
     {
-        if (this.gotoWork == false) return;
-
-        BuildingCtrl workBuilding = this.workerCtrl.workerBuildings.GetWork();
-        if (workBuilding == null) return;
-        this.workerCtrl.workerMovement.SetTarget(workBuilding.door);
+        this.taskWorking.gameObject.SetActive(true);
+        this.taskGoHome.gameObject.SetActive(false);
     }
 }

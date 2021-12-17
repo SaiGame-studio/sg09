@@ -86,6 +86,6 @@ public class WorkerTask : SaiBehaviour
 
     protected virtual BuildingType GetBuildingType()
     {
-        return BuildingType.work_station;
+        return BuildingType.workStation;
     }
 }
