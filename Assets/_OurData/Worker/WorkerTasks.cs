@@ -11,6 +11,12 @@ public class WorkerTasks : SaiBehaviour
     {
         base.Awake();
         this.DisableTasks();
+        InvokeRepeating("Testing", 2f,5f);
+    }
+
+    protected virtual void Testing()
+    {
+        this.isNightTime = !this.isNightTime;
     }
 
     protected override void FixedUpdate()

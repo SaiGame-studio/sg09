@@ -15,6 +15,12 @@ public class WorkerTask : SaiBehaviour
         else this.FindBuilding();
     }
 
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        this.GoOutBuilding();
+    }
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -65,7 +71,13 @@ public class WorkerTask : SaiBehaviour
     {
         this.workerCtrl.workerMovement.SetTarget(null);
         this.inHouse = true;
-        //this.workerCtrl.workerModel.gameObject.SetActive(false);
+        this.workerCtrl.workerModel.gameObject.SetActive(false);
+    }
+
+    protected virtual void GoOutBuilding()
+    {
+        this.inHouse = false;
+        this.workerCtrl.workerModel.gameObject.SetActive(true);
     }
 
     protected virtual void Working()

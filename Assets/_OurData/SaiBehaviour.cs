@@ -19,6 +19,16 @@ public class SaiBehaviour : MonoBehaviour
         //For Overide
     }
 
+    protected virtual void OnDisable()
+    {
+        //For Overide
+    }
+
+    protected virtual void OnEnable()
+    {
+        //For Overide
+    }
+
     protected virtual void LoadComponents()
     {
         //For Overide
