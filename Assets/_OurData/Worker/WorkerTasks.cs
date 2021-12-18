@@ -7,6 +7,12 @@ public class WorkerTasks : SaiBehaviour
     [SerializeField] protected WorkerTask taskWorking;
     [SerializeField] protected WorkerTask taskGoHome;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        this.DisableTasks();
+    }
+
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
@@ -15,10 +21,12 @@ public class WorkerTasks : SaiBehaviour
         else this.GoWork();
     }
 
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadWorkerCtrl();
+        this.LoadTasks();
     }
 
     protected virtual void LoadWorkerCtrl()
@@ -26,6 +34,21 @@ public class WorkerTasks : SaiBehaviour
         if (this.workerCtrl != null) return;
         this.workerCtrl = GetComponent<WorkerCtrl>();
         Debug.Log(transform.name + ": LoadWorkerCtrl", gameObject);
+    }
+
+    protected virtual void LoadTasks()
+    {
+        if (this.taskWorking != null) return;
+        Transform tasksObj = transform.Find("Tasks");
+        this.taskWorking = tasksObj.GetComponentInChildren<TaskWorking>();
+        this.taskGoHome = tasksObj.GetComponentInChildren<TaskGoHome>();
+        Debug.Log(transform.name + ": LoadTasks", gameObject);
+    }
+
+    protected virtual void DisableTasks()
+    {
+        this.taskWorking.gameObject.SetActive(false);
+        this.taskGoHome.gameObject.SetActive(false);
     }
 
     protected virtual void GoHome()
