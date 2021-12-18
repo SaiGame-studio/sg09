@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1109740929
 Transform:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1122723540
 Transform:
   m_ObjectHideFlags: 0
@@ -241,13 +241,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8926543657883351482}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79713a89ab152f448864b6d0504f412c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   workerCtrl: {fileID: 4644705205001756138}
-  isNightTime: 1
+  isNightTime: 0
   taskWorking: {fileID: 7988192778585085762}
   taskGoHome: {fileID: 1109740930}
 --- !u!1001 &8926543656197079207
