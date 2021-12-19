@@ -82,7 +82,7 @@ public class WorkerTask : SaiBehaviour
 
     protected virtual void Working()
     {
-        //For overide
+        this.GetBuilding().buildingTask.DoingTask();
     }
 
     protected virtual BuildingCtrl GetBuilding()

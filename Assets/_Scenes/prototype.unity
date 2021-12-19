@@ -8865,11 +8865,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6413864487901155772, guid: be9b70cc4f45692438811b563712b076, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.19
+      value: 30.05
       objectReference: {fileID: 0}
     - target: {fileID: 6413864487901155772, guid: be9b70cc4f45692438811b563712b076, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.57
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 6413864487901155772, guid: be9b70cc4f45692438811b563712b076, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8973,26 +8973,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 895072855}
     m_Modifications:
-    - target: {fileID: 1109740928, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1122723539, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1594641574, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
-      propertyPath: taskGoHome
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1594641574, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
-      propertyPath: taskWorking
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5945043676172828316, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8926543657883351482, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
       propertyPath: m_Name
       value: Woodcutter
