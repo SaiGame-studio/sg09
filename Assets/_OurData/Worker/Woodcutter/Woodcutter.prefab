@@ -177,6 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   workerBuildings: {fileID: 9156344649438440300}
   workerMovement: {fileID: 8926543657883351481}
+  workerTasks: {fileID: 1594641574}
   animator: {fileID: 3065791915126717750}
   workerModel: {fileID: 8965485245702448972}
 --- !u!114 &8926543657883351481

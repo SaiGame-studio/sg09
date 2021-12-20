@@ -3,7 +3,6 @@ using UnityEngine;
 public class WorkerTask : SaiBehaviour
 {
     public WorkerCtrl workerCtrl;
-    [SerializeField] protected bool inHouse = false;
     [SerializeField] protected float buildingDistance = 0;
     [SerializeField] protected float buildDisLimit = 0.7f;
 
@@ -11,8 +10,16 @@ public class WorkerTask : SaiBehaviour
     {
         base.FixedUpdate();
 
-        if (this.GetBuilding()) this.WorkPlanning();
+        if (this.GetBuilding()) this.GettingReadyForWork();
         else this.FindBuilding();
+
+        if (workerCtrl.workerTasks.readyForTask) this.Working();
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        this.GoOutBuilding();
     }
 
     protected override void LoadComponents()
@@ -35,7 +42,7 @@ public class WorkerTask : SaiBehaviour
         this.AssignBuilding(buildingCtrl);
     }
 
-    protected virtual void GotoBuilding()
+    public virtual void GotoBuilding()
     {
         BuildingCtrl buildingCtrl = this.GetBuilding();
         this.workerCtrl.workerMovement.SetTarget(buildingCtrl.door);
@@ -53,24 +60,40 @@ public class WorkerTask : SaiBehaviour
         return this.buildingDistance;
     }
 
-    protected virtual void WorkPlanning()
+    protected virtual void GettingReadyForWork()
     {
-        if (this.IsAtBuilding()) this.GoIntoBuilding();
-        else this.GotoBuilding();
+        if (this.workerCtrl.workerTasks.readyForTask) return;
 
-        if(this.inHouse) this.Working(); ;
+        if (!this.IsAtBuilding())
+        {
+            this.GotoBuilding();
+            return;
+        }
+
+        this.workerCtrl.workerTasks.readyForTask = true;
+        this.GoIntoBuilding();
     }
 
-    protected virtual void GoIntoBuilding()
+    public virtual void GoIntoBuilding()
     {
+        if (this.workerCtrl.workerTasks.inHouse) return;
+
         this.workerCtrl.workerMovement.SetTarget(null);
-        this.inHouse = true;
-        //this.workerCtrl.workerModel.gameObject.SetActive(false);
+        this.workerCtrl.workerTasks.inHouse = true;
+        this.workerCtrl.workerModel.gameObject.SetActive(false);
+    }
+
+    public virtual void GoOutBuilding()
+    {
+        if (!this.workerCtrl.workerTasks.inHouse) return;
+
+        this.workerCtrl.workerTasks.inHouse = false;
+        this.workerCtrl.workerModel.gameObject.SetActive(true);
     }
 
     protected virtual void Working()
     {
-        //For overide
+        this.GetBuilding().buildingTask.DoingTask(this.workerCtrl);
     }
 
     protected virtual BuildingCtrl GetBuilding()

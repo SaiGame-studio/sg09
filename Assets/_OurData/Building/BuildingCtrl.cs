@@ -7,6 +7,7 @@ public class BuildingCtrl : SaiBehaviour
     public Transform door;
     public Workers workers;
     public Warehouse warehouse;
+    public BuildingTask buildingTask;
 
     protected override void LoadComponents()
     {
@@ -14,6 +15,7 @@ public class BuildingCtrl : SaiBehaviour
         this.LoadWorkers();
         this.LoadDoor();
         this.LoadWarehouse();
+        this.LoadBuldingTask();
     }
 
     protected virtual void LoadWorkers()
@@ -35,5 +37,12 @@ public class BuildingCtrl : SaiBehaviour
         if (this.warehouse != null) return;
         this.warehouse = GetComponent<Warehouse>();
         Debug.Log(transform.name + " LoadWarehouse", gameObject);
+    }
+
+    protected virtual void LoadBuldingTask()
+    {
+        if (this.buildingTask != null) return;
+        this.buildingTask = GetComponent<BuildingTask>();
+        Debug.Log(transform.name + " LoadBuldingTask", gameObject);
     }
 }

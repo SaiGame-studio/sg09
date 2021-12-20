@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6413864487901155772}
   - component: {fileID: 6413864487901155773}
-  - component: {fileID: 6413864487901155770}
   - component: {fileID: 6413864487901155768}
   - component: {fileID: 6413864487901155769}
   - component: {fileID: 6413864487901155771}
+  - component: {fileID: 6413864487901155770}
+  - component: {fileID: 9142610252589916622}
   m_Layer: 0
   m_Name: ForestHut
   m_TagString: Untagged
@@ -52,21 +53,6 @@ CapsuleCollider:
   m_Height: 8.63
   m_Direction: 1
   m_Center: {x: 0, y: 1.85, z: 0}
---- !u!114 &6413864487901155770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6413864487901155775}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b75cd4439bdc27c43b70ff525660281d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingType: 1
-  resHolders:
-  - {fileID: 6413864489172851547}
 --- !u!208 &6413864487901155768
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -98,6 +84,7 @@ MonoBehaviour:
   door: {fileID: 6413864488622051989}
   workers: {fileID: 6413864487901155771}
   warehouse: {fileID: 6413864487901155770}
+  buildingTask: {fileID: 9142610252589916622}
 --- !u!114 &6413864487901155771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +99,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxWorker: 4
   workers: []
+--- !u!114 &6413864487901155770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6413864487901155775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75cd4439bdc27c43b70ff525660281d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingType: 1
+  resHolders:
+  - {fileID: 6413864489172851547}
+--- !u!114 &9142610252589916622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6413864487901155775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d432e5ce4632ff045900fa4f9e881228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingCtrl: {fileID: 6413864487901155769}
+  taskTimer: 0
+  taskDelay: 5
+  plantTreeObj: {fileID: 5276937730439446297, guid: 5a29edc65d00e8b43969c0fbc9656818, type: 3}
+  treeRange: 27
+  treeDistance: 7
+  plantPlaces: []
 --- !u!1 &6413864488128703817
 GameObject:
   m_ObjectHideFlags: 0

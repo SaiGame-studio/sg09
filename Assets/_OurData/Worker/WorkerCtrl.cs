@@ -4,6 +4,7 @@ public class WorkerCtrl : SaiBehaviour
 {
     public WorkerBuildings workerBuildings;
     public WorkerMovement workerMovement;
+    public WorkerTasks workerTasks;
     public Animator animator;
     public Transform workerModel;
 
@@ -13,6 +14,14 @@ public class WorkerCtrl : SaiBehaviour
         this.LoadWorkerBuildings();
         this.LoadWorkerMovement();
         this.LoadAnimator();
+        this.LoadWorkerTasks();
+    }
+
+    protected virtual void LoadWorkerTasks()
+    {
+        if (this.workerTasks != null) return;
+        this.workerTasks = GetComponent<WorkerTasks>();
+        Debug.Log(transform.name + ": LoadWorkerTasks", gameObject);
     }
 
     protected virtual void LoadAnimator()

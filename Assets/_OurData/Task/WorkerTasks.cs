@@ -3,14 +3,22 @@ using UnityEngine;
 public class WorkerTasks : SaiBehaviour
 {
     public WorkerCtrl workerCtrl;
-    [SerializeField] protected bool isNightTime = false;
-    [SerializeField] protected WorkerTask taskWorking;
-    [SerializeField] protected WorkerTask taskGoHome;
+    public bool isNightTime = false;//TODO: it should not be here
+    public bool inHouse = false;
+    public bool readyForTask = false;
+    public WorkerTask taskWorking;
+    public WorkerTask taskGoHome;
 
     protected override void Awake()
     {
         base.Awake();
         this.DisableTasks();
+        //InvokeRepeating("Testing", 2f,5f);
+    }
+
+    protected virtual void Testing()
+    {
+        this.isNightTime = !this.isNightTime;
     }
 
     protected override void FixedUpdate()

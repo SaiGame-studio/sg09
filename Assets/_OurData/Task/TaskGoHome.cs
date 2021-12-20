@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class TaskGoHome : WorkerTask
 {
-
-    protected override void Working()
-    {
-        Debug.Log(transform.parent.parent.name + " Working", gameObject);
-    }
-
     protected override BuildingCtrl GetBuilding()
     {
         return this.workerCtrl.workerBuildings.GetHome();
