@@ -22,7 +22,7 @@ public class BuildingTask : SaiBehaviour
         Debug.Log(transform.name + " LoadBuildingCtrl", gameObject);
     }
 
-    protected virtual bool IsTimeToWork()
+    protected virtual bool IsTime2Work()
     {
         this.taskTimer += Time.fixedDeltaTime;
         if (this.taskTimer < this.taskDelay) return false;

@@ -3,7 +3,7 @@ using UnityEngine;
 public class WorkerTasks : SaiBehaviour
 {
     public WorkerCtrl workerCtrl;
-    public bool isNightTime = false;
+    public bool isNightTime = false;//TODO: it should not be here
     public bool inHouse = false;
     public bool readyForTask = false;
     public WorkerTask taskWorking;
