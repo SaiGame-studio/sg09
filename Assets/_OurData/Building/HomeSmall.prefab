@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 5826554060321502917}
   - component: {fileID: 5826554060321502919}
   - component: {fileID: 5826554060321502918}
+  - component: {fileID: 5629612617725266714}
   m_Layer: 0
   m_Name: HomeSmall
   m_TagString: Untagged
@@ -175,6 +176,7 @@ MonoBehaviour:
   door: {fileID: 5826554059968656873}
   workers: {fileID: 5826554060321502919}
   warehouse: {fileID: 5826554060321502918}
+  buildingTask: {fileID: 5629612617725266714}
 --- !u!114 &5826554060321502919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +206,21 @@ MonoBehaviour:
   buildingType: 2
   resHolders:
   - {fileID: 5826554061602044967}
+--- !u!114 &5629612617725266714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5826554060321502915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 374501144dd59a14384bf62da621684a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingCtrl: {fileID: 5826554060321502917}
+  taskTimer: 0
+  taskDelay: 5
 --- !u!1 &5826554061602044961
 GameObject:
   m_ObjectHideFlags: 0

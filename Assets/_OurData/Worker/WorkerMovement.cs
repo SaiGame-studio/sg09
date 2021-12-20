@@ -8,6 +8,8 @@ public class WorkerMovement : SaiBehaviour
     [SerializeField] protected NavMeshAgent navMeshAgent;
     [SerializeField] protected bool isWalking = false;
     [SerializeField] protected bool isWorking = false;
+    [SerializeField] protected float walkLimit = 0.7f;
+    [SerializeField] protected float targetDistance = 0f;
 
     protected override void LoadComponents()
     {
@@ -36,6 +38,10 @@ public class WorkerMovement : SaiBehaviour
         Debug.Log(transform.name + ": LoadAgent", gameObject);
     }
 
+    public virtual Transform GetTarget()
+    {
+        return this.target;
+    }
 
     public virtual void SetTarget(Transform trans)
     {
@@ -44,7 +50,7 @@ public class WorkerMovement : SaiBehaviour
 
     protected virtual void Moving()
     {
-        if (this.target == null)
+        if (this.target == null || this.IsClose2Target())
         {
             this.navMeshAgent.isStopped = true;
             this.isWalking = false;
@@ -54,6 +60,12 @@ public class WorkerMovement : SaiBehaviour
         this.isWalking = true;
         this.navMeshAgent.isStopped = false;
         this.navMeshAgent.SetDestination(this.target.position);
+    }
+        
+    protected virtual bool IsClose2Target()
+    {
+        this.targetDistance = Vector3.Distance(transform.position, this.target.position);
+        return this.targetDistance < this.walkLimit;
     }
 
     protected virtual void Animating()

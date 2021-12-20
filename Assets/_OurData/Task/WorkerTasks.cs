@@ -3,9 +3,11 @@ using UnityEngine;
 public class WorkerTasks : SaiBehaviour
 {
     public WorkerCtrl workerCtrl;
-    [SerializeField] protected bool isNightTime = false;
-    [SerializeField] protected WorkerTask taskWorking;
-    [SerializeField] protected WorkerTask taskGoHome;
+    public bool isNightTime = false;
+    public bool inHouse = false;
+    public bool readyForTask = false;
+    public WorkerTask taskWorking;
+    public WorkerTask taskGoHome;
 
     protected override void Awake()
     {

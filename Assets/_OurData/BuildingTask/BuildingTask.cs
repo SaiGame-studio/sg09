@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class BuildingTask : SaiBehaviour
 {
+    [Header("Building Task")]
     public BuildingCtrl buildingCtrl;
+    [SerializeField] protected float taskTimer = 0;
+    [SerializeField] protected float taskDelay = 5f;
 
     protected override void LoadComponents()
     {
@@ -19,7 +22,15 @@ public class BuildingTask : SaiBehaviour
         Debug.Log(transform.name + " LoadBuildingCtrl", gameObject);
     }
 
-    public virtual void DoingTask()
+    protected virtual bool IsTimeToWork()
+    {
+        this.taskTimer += Time.fixedDeltaTime;
+        if (this.taskTimer < this.taskDelay) return false;
+        this.taskTimer = 0;
+        return true;
+    }
+
+    public virtual void DoingTask(WorkerCtrl workerCtrl)
     {
         //For override
     }
