@@ -1,10 +1,10 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ForestHutTask : BuildingTask
 {
     [Header("Forest Hut")]
     [SerializeField] protected GameObject plantTreeObj;
+    [SerializeField] protected GameObject treePrefab;
     [SerializeField] protected float treeRange = 27f;
     [SerializeField] protected float treeDistance = 7f;
 
@@ -18,6 +18,7 @@ public class ForestHutTask : BuildingTask
     {
         if (this.plantTreeObj != null) return;
         this.plantTreeObj = Resources.Load<GameObject>("Building/MaskPositionObject");
+        this.treePrefab = Resources.Load<GameObject>("Res/Tree");
         Debug.Log(transform.name + " LoadObjects", gameObject);
     }
 
@@ -34,13 +35,26 @@ public class ForestHutTask : BuildingTask
     protected virtual void PlantTree(WorkerCtrl workerCtrl)
     {
         Transform target = workerCtrl.workerMovement.GetTarget();
-        if (target == null) target = this.GetPlantPlace();
 
-        if (target != null)
+        if (target == null) target = this.GetPlantPlace();
+        if (target == null) return;
+
+        workerCtrl.workerTasks.taskWorking.GoOutBuilding();
+        workerCtrl.workerMovement.SetTarget(target);
+
+        if (workerCtrl.workerMovement.IsClose2Target())
         {
-            workerCtrl.workerTasks.taskWorking.GoOutBuilding();
-            workerCtrl.workerMovement.SetTarget(target);
+            this.Planting(workerCtrl.transform);
+            workerCtrl.workerMovement.SetTarget(null);
+            Destroy(target.gameObject);
         }
+    }
+
+    protected virtual void Planting(Transform trans)
+    {
+        GameObject treeObj = Instantiate<GameObject>(this.treePrefab);
+        treeObj.transform.position = trans.position;
+        treeObj.transform.rotation = trans.rotation;
     }
 
     protected virtual Transform GetPlantPlace()
