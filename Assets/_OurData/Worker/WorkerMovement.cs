@@ -56,6 +56,8 @@ public class WorkerMovement : SaiBehaviour
         
     public virtual bool IsClose2Target()
     {
+        if (this.target == null) return false;
+
         Vector3 targetPos = this.target.position;
         targetPos.y = transform.position.y;
 
