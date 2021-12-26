@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class WorkerCtrl : SaiBehaviour
 {
@@ -7,6 +8,7 @@ public class WorkerCtrl : SaiBehaviour
     public WorkerTasks workerTasks;
     public Animator animator;
     public Transform workerModel;
+    public NavMeshAgent navMeshAgent;
 
     protected override void LoadComponents()
     {
@@ -15,6 +17,7 @@ public class WorkerCtrl : SaiBehaviour
         this.LoadWorkerMovement();
         this.LoadAnimator();
         this.LoadWorkerTasks();
+        this.LoadAgent();
     }
 
     protected virtual void LoadWorkerTasks()
@@ -44,5 +47,13 @@ public class WorkerCtrl : SaiBehaviour
         if (this.workerMovement != null) return;
         this.workerMovement = GetComponent<WorkerMovement>();
         Debug.Log(transform.name + ": LoadWorkerMovement", gameObject);
+    }
+
+    protected virtual void LoadAgent()
+    {
+        if (this.navMeshAgent != null) return;
+        this.navMeshAgent = GetComponent<NavMeshAgent>();
+        this.navMeshAgent.speed = 2f;
+        Debug.Log(transform.name + ": LoadAgent", gameObject);
     }
 }

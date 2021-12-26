@@ -5,7 +5,6 @@ public class WorkerMovement : SaiBehaviour
 {
     public WorkerCtrl workerCtrl;
     [SerializeField] protected Transform target;
-    [SerializeField] protected NavMeshAgent navMeshAgent;
     [SerializeField] protected bool isWalking = false;
     [SerializeField] protected bool isWorking = false;
     [SerializeField] protected float walkLimit = 0.7f;
@@ -15,7 +14,6 @@ public class WorkerMovement : SaiBehaviour
     {
         base.LoadComponents();
         this.LoadWorkerCtrl();
-        this.LoadAgent();
     }
 
     protected override void FixedUpdate()
@@ -31,12 +29,6 @@ public class WorkerMovement : SaiBehaviour
         Debug.Log(transform.name + ": LoadWorkerCtrl", gameObject);
     }
 
-    protected virtual void LoadAgent()
-    {
-        if (this.navMeshAgent != null) return;
-        this.navMeshAgent = GetComponent<NavMeshAgent>();
-        Debug.Log(transform.name + ": LoadAgent", gameObject);
-    }
 
     public virtual Transform GetTarget()
     {
@@ -52,19 +44,24 @@ public class WorkerMovement : SaiBehaviour
     {
         if (this.target == null || this.IsClose2Target())
         {
-            this.navMeshAgent.isStopped = true;
+            this.workerCtrl.navMeshAgent.isStopped = true;
             this.isWalking = false;
             return;
         }
 
         this.isWalking = true;
-        this.navMeshAgent.isStopped = false;
-        this.navMeshAgent.SetDestination(this.target.position);
+        this.workerCtrl.navMeshAgent.isStopped = false;
+        this.workerCtrl.navMeshAgent.SetDestination(this.target.position);
     }
         
-    protected virtual bool IsClose2Target()
+    public virtual bool IsClose2Target()
     {
-        this.targetDistance = Vector3.Distance(transform.position, this.target.position);
+        if (this.target == null) return false;
+
+        Vector3 targetPos = this.target.position;
+        targetPos.y = transform.position.y;
+
+        this.targetDistance = Vector3.Distance(transform.position, targetPos);
         return this.targetDistance < this.walkLimit;
     }
 

@@ -64,7 +64,7 @@ public class WorkerTask : SaiBehaviour
     {
         if (this.workerCtrl.workerTasks.readyForTask) return;
 
-        if (!this.IsAtBuilding())
+        if (!this.workerCtrl.workerMovement.IsClose2Target())
         {
             this.GotoBuilding();
             return;

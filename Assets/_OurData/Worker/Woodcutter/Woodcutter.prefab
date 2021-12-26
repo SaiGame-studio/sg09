@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   workerCtrl: {fileID: 4644705205001756138}
-  inHouse: 0
   buildingDistance: 0
   buildDisLimit: 0.7
 --- !u!1 &1122723539
@@ -91,7 +90,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   workerCtrl: {fileID: 4644705205001756138}
-  inHouse: 0
   buildingDistance: 0
   buildDisLimit: 0.7
 --- !u!1 &5945043676172828316
@@ -180,6 +178,7 @@ MonoBehaviour:
   workerTasks: {fileID: 1594641574}
   animator: {fileID: 3065791915126717750}
   workerModel: {fileID: 8965485245702448972}
+  navMeshAgent: {fileID: 8926543657883351480}
 --- !u!114 &8926543657883351481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,9 +193,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   workerCtrl: {fileID: 4644705205001756138}
   target: {fileID: 0}
-  navMeshAgent: {fileID: 8926543657883351480}
   isWalking: 0
   isWorking: 0
+  walkLimit: 0.7
+  targetDistance: 0
 --- !u!195 &8926543657883351480
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -207,7 +207,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -249,6 +249,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   workerCtrl: {fileID: 4644705205001756138}
   isNightTime: 0
+  inHouse: 0
+  readyForTask: 0
   taskWorking: {fileID: 7988192778585085762}
   taskGoHome: {fileID: 1109740930}
 --- !u!1001 &8926543656197079207
