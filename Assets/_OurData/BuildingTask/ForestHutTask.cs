@@ -6,6 +6,8 @@ public class ForestHutTask : BuildingTask
     [Header("Forest Hut")]
     [SerializeField] protected GameObject plantTreeObj;
     [SerializeField] protected List<GameObject> treePrefabs;
+    [SerializeField] protected List<GameObject> trees;
+    [SerializeField] protected int treeMax = 7;
     [SerializeField] protected float treeRange = 27f;
     [SerializeField] protected float treeDistance = 7f;
 
@@ -37,12 +39,31 @@ public class ForestHutTask : BuildingTask
 
     public override void DoingTask(WorkerCtrl workerCtrl)
     {
-        if (!this.IsTime2Work()) return;
+        WorkerTask taskWorking = workerCtrl.workerTasks.taskWorking;
+        TaskType currentTask = taskWorking.TaskCurrent();
+        switch (currentTask)
+        {
+            case TaskType.plantTree:
+                this.PlantTree(workerCtrl);
+                break;
+            case TaskType.goToWorkStation:
+                this.BackToWorkStation(workerCtrl);
+                break;
+            default:
+                if (this.IsTime2Work()) this.Planning(workerCtrl);
+                break;
+        }
+    }
 
-        string message = workerCtrl.name + " Working at " + transform.name;
-        Debug.Log(message, gameObject);
+    protected virtual void Planning(WorkerCtrl workerCtrl)
+    {
+        WorkerTask taskWorking = workerCtrl.workerTasks.taskWorking;
+        if (this.NeedMoreTree()) taskWorking.TaskAdd(TaskType.plantTree);
+    }
 
-        this.PlantTree(workerCtrl);
+    protected virtual bool NeedMoreTree()
+    {
+        return this.treeMax >= this.trees.Count;
     }
 
     protected virtual void PlantTree(WorkerCtrl workerCtrl)
@@ -57,9 +78,15 @@ public class ForestHutTask : BuildingTask
 
         if (workerCtrl.workerMovement.IsClose2Target())
         {
-            this.Planting(workerCtrl.transform);
             workerCtrl.workerMovement.SetTarget(null);
             Destroy(target.gameObject);//TODO: not done yet
+            this.Planting(workerCtrl.transform);
+
+            if (!this.NeedMoreTree())
+            {
+                workerCtrl.workerTasks.taskWorking.TaskCurrentDone();
+                workerCtrl.workerTasks.taskWorking.TaskAdd(TaskType.goToWorkStation);
+            }
         }
     }
 
@@ -69,6 +96,8 @@ public class ForestHutTask : BuildingTask
         GameObject treeObj = Instantiate<GameObject>(treePrefab);
         treeObj.transform.position = trans.position;
         treeObj.transform.rotation = trans.rotation;
+        this.trees.Add(treeObj);
+
     }
 
     protected virtual GameObject GetTreePrefab()
@@ -81,11 +110,7 @@ public class ForestHutTask : BuildingTask
     {
         Vector3 newTreePos = this.RandomPlaceForTree(); ;
         float dis = Vector3.Distance(transform.position, newTreePos);
-        if (dis < this.treeDistance)
-        {
-            Debug.Log("GetPlantPlace Destroy GameObject");
-            return null;
-        }
+        if (dis < this.treeDistance) return null;
 
         GameObject treePlace = Instantiate(this.plantTreeObj);
         treePlace.transform.position = newTreePos;

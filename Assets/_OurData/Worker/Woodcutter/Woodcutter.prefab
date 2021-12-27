@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   workerCtrl: {fileID: 4644705205001756138}
+  tasks: 
   buildingDistance: 0
   buildDisLimit: 0.7
 --- !u!1 &1122723539
@@ -90,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   workerCtrl: {fileID: 4644705205001756138}
+  tasks: 
   buildingDistance: 0
   buildDisLimit: 0.7
 --- !u!1 &5945043676172828316
@@ -141,7 +143,7 @@ GameObject:
   m_Layer: 0
   m_Name: Woodcutter
   m_TagString: Untagged
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

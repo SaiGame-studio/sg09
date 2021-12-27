@@ -6,19 +6,13 @@ public class WorkerTasks : SaiBehaviour
     public bool isNightTime = false;//TODO: it should not be here
     public bool inHouse = false;
     public bool readyForTask = false;
-    public WorkerTask taskWorking;
-    public WorkerTask taskGoHome;
+    public TaskWorking taskWorking;
+    public TaskGoHome taskGoHome;
 
     protected override void Awake()
     {
         base.Awake();
         this.DisableTasks();
-        //InvokeRepeating("Testing", 2f,5f);
-    }
-
-    protected virtual void Testing()
-    {
-        this.isNightTime = !this.isNightTime;
     }
 
     protected override void FixedUpdate()

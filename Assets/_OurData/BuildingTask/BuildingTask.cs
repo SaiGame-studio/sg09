@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BuildingTask : SaiBehaviour
@@ -28,6 +26,18 @@ public class BuildingTask : SaiBehaviour
         if (this.taskTimer < this.taskDelay) return false;
         this.taskTimer = 0;
         return true;
+    }
+
+    protected virtual void BackToWorkStation(WorkerCtrl workerCtrl)
+    {
+        WorkerTask taskWorking = workerCtrl.workerTasks.taskWorking;
+
+        taskWorking.GotoBuilding();
+        if (workerCtrl.workerMovement.IsClose2Target())
+        {
+            taskWorking.GoIntoBuilding();
+            taskWorking.TaskCurrentDone();
+        }
     }
 
     public virtual void DoingTask(WorkerCtrl workerCtrl)
