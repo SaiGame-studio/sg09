@@ -31,12 +31,11 @@ public class BuildingTask : SaiBehaviour
     protected virtual void BackToWorkStation(WorkerCtrl workerCtrl)
     {
         WorkerTask taskWorking = workerCtrl.workerTasks.taskWorking;
-
         taskWorking.GotoBuilding();
         if (workerCtrl.workerMovement.IsClose2Target())
         {
             taskWorking.GoIntoBuilding();
-            taskWorking.TaskCurrentDone();
+            workerCtrl.workerTasks.TaskCurrentDone();
         }
     }
 

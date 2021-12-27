@@ -4,7 +4,6 @@ using UnityEngine;
 public class WorkerTask : SaiBehaviour
 {
     public WorkerCtrl workerCtrl;
-    [SerializeField] protected List<TaskType> tasks;
     [SerializeField] protected float buildingDistance = 0;
     [SerializeField] protected float buildDisLimit = 0.7f;
 
@@ -112,25 +111,5 @@ public class WorkerTask : SaiBehaviour
     protected virtual BuildingType GetBuildingType()
     {
         return BuildingType.workStation;
-    }
-
-    public virtual void TaskAdd(TaskType taskType)
-    {
-        TaskType currentTask = this.TaskCurrent();
-        if (taskType == currentTask) return;
-
-        this.tasks.Add(taskType);
-    }
-
-    public virtual void TaskCurrentDone()
-    {
-        this.tasks.RemoveAt(this.tasks.Count - 1);
-    }
-
-    public virtual TaskType TaskCurrent()
-    {
-        if (this.tasks.Count <= 0) return TaskType.none;
-
-        return this.tasks[this.tasks.Count - 1];
     }
 }

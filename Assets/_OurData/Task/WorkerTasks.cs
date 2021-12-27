@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WorkerTasks : SaiBehaviour
@@ -8,6 +9,7 @@ public class WorkerTasks : SaiBehaviour
     public bool readyForTask = false;
     public TaskWorking taskWorking;
     public TaskGoHome taskGoHome;
+    [SerializeField] protected List<TaskType> tasks;
 
     protected override void Awake()
     {
@@ -63,5 +65,23 @@ public class WorkerTasks : SaiBehaviour
     {
         this.taskWorking.gameObject.SetActive(true);
         this.taskGoHome.gameObject.SetActive(false);
+    }
+
+    public virtual void TaskAdd(TaskType taskType)
+    {
+        TaskType currentTask = this.TaskCurrent();
+        if (taskType == currentTask) return;
+        this.tasks.Add(taskType);
+    }
+
+    public virtual void TaskCurrentDone()
+    {
+        this.tasks.RemoveAt(this.tasks.Count - 1);
+    }
+
+    public virtual TaskType TaskCurrent()
+    {
+        if (this.tasks.Count <= 0) return TaskType.none;
+        return this.tasks[this.tasks.Count - 1];
     }
 }

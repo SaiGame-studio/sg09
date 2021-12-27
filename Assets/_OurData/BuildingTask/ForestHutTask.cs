@@ -39,12 +39,13 @@ public class ForestHutTask : BuildingTask
 
     public override void DoingTask(WorkerCtrl workerCtrl)
     {
-        WorkerTask taskWorking = workerCtrl.workerTasks.taskWorking;
-        TaskType currentTask = taskWorking.TaskCurrent();
-        switch (currentTask)
+        switch (workerCtrl.workerTasks.TaskCurrent())
         {
             case TaskType.plantTree:
                 this.PlantTree(workerCtrl);
+                break;
+            case TaskType.chopTree:
+                //this.ChopTree(workerCtrl);
                 break;
             case TaskType.goToWorkStation:
                 this.BackToWorkStation(workerCtrl);
@@ -57,8 +58,7 @@ public class ForestHutTask : BuildingTask
 
     protected virtual void Planning(WorkerCtrl workerCtrl)
     {
-        WorkerTask taskWorking = workerCtrl.workerTasks.taskWorking;
-        if (this.NeedMoreTree()) taskWorking.TaskAdd(TaskType.plantTree);
+        if (this.NeedMoreTree()) workerCtrl.workerTasks.TaskAdd(TaskType.plantTree);
     }
 
     protected virtual bool NeedMoreTree()
@@ -84,8 +84,8 @@ public class ForestHutTask : BuildingTask
 
             if (!this.NeedMoreTree())
             {
-                workerCtrl.workerTasks.taskWorking.TaskCurrentDone();
-                workerCtrl.workerTasks.taskWorking.TaskAdd(TaskType.goToWorkStation);
+                workerCtrl.workerTasks.TaskCurrentDone();
+                workerCtrl.workerTasks.TaskAdd(TaskType.goToWorkStation);
             }
         }
     }
@@ -97,7 +97,7 @@ public class ForestHutTask : BuildingTask
         treeObj.transform.position = trans.position;
         treeObj.transform.rotation = trans.rotation;
         this.trees.Add(treeObj);
-
+        TreeManager.instance.TreeAdd(treeObj);
     }
 
     protected virtual GameObject GetTreePrefab()
