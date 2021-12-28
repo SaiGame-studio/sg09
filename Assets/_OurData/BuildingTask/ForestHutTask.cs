@@ -10,6 +10,8 @@ public class ForestHutTask : BuildingTask
     [SerializeField] protected int treeMax = 7;
     [SerializeField] protected float treeRange = 27f;
     [SerializeField] protected float treeDistance = 7f;
+    [SerializeField] protected int storeMax = 7;
+    [SerializeField] protected int storeCurrent = 0;
 
     protected override void Start()
     {
@@ -51,7 +53,7 @@ public class ForestHutTask : BuildingTask
                 this.PlantTree(workerCtrl);
                 break;
             case TaskType.chopTree:
-                //this.ChopTree(workerCtrl);
+                this.ChopTree(workerCtrl);
                 break;
             case TaskType.goToWorkStation:
                 this.BackToWorkStation(workerCtrl);
@@ -65,6 +67,7 @@ public class ForestHutTask : BuildingTask
     protected virtual void Planning(WorkerCtrl workerCtrl)
     {
         if (this.NeedMoreTree()) workerCtrl.workerTasks.TaskAdd(TaskType.plantTree);
+        if (!this.IsStoreFull()) workerCtrl.workerTasks.TaskAdd(TaskType.chopTree);
     }
 
     protected virtual bool NeedMoreTree()
@@ -141,7 +144,7 @@ public class ForestHutTask : BuildingTask
         foreach (GameObject tree in allTrees)
         {
             dis = Vector3.Distance(tree.transform.position, transform.position);
-            if (dis < this.treeDistance) continue;
+            if (dis > this.treeRange) continue;
             this.TreeAdd(tree);
         }
     }
@@ -149,7 +152,31 @@ public class ForestHutTask : BuildingTask
     public virtual void TreeAdd(GameObject tree)
     {
         if (this.trees.Contains(tree)) return;
-
         this.trees.Add(tree);
+    }
+
+    protected virtual void ChopTree(WorkerCtrl workerCtrl) {
+
+        WorkerTasks workerTasks  = workerCtrl.workerTasks;
+        if (workerTasks.inHouse) workerTasks.taskWorking.GoOutBuilding();
+
+        TreeCtrl treeCtrl = this.GetNearestTree();
+        workerCtrl.workerMovement.SetTarget(treeCtrl.transform);
+    }
+
+    protected virtual TreeCtrl GetNearestTree()
+    {
+        foreach(GameObject tree in this.trees)
+        {
+            TreeCtrl treeCtrl = tree.GetComponent<TreeCtrl>();//TODO: can make it faster
+            if (treeCtrl.treeLevel.IsMaxLevel()) return treeCtrl;
+        }
+
+        return null;
+    }
+
+    protected virtual bool IsStoreFull()
+    {
+        return this.storeCurrent >= this.storeMax;
     }
 }

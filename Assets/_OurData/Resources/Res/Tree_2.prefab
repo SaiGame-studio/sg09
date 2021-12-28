@@ -185,6 +185,7 @@ GameObject:
   - component: {fileID: 227756857801289065}
   - component: {fileID: 227756857801289066}
   - component: {fileID: 227756857801289079}
+  - component: {fileID: 2518324055930037387}
   m_Layer: 0
   m_Name: Tree_2
   m_TagString: Untagged
@@ -262,9 +263,23 @@ MonoBehaviour:
   - {fileID: 2234967195218727079}
   - {fileID: 191500852181356130}
   currentLevel: 0
+  isMaxLevel: 0
   tree: {fileID: 227756857801289066}
   treeTimer: 0
   treeDelay: 2.3333333
+--- !u!114 &2518324055930037387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227756857801289067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df924acd5a1b8dd4d9f9b832ad23a609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  treeLevel: {fileID: 227756857801289079}
 --- !u!1 &227756858589584613
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,7 +33,6 @@ public class TreeManager : SaiBehaviour
     public virtual void TreeAdd(GameObject tree)
     {
         if (this.trees.Contains(tree)) return;
-
         this.trees.Add(tree);
         tree.transform.parent = transform;
     }
