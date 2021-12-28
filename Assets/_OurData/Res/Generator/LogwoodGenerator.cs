@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tree : ResGenerator
+public class LogwoodGenerator : ResGenerator
 {
     protected override void LoadComponents()
     {
