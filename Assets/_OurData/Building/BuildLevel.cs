@@ -9,7 +9,6 @@ public class BuildLevel : SaiBehaviour
     protected override void OnEnable()
     {
         this.ShowBuilding();
-        //InvokeRepeating("ShowNextBuild", 3, 2);
     }
 
     protected override void LoadComponents()
@@ -26,6 +25,8 @@ public class BuildLevel : SaiBehaviour
             this.levels.Add(child);
             child.gameObject.SetActive(false);
         }
+
+        this.levels[0].gameObject.SetActive(true);
 
         Debug.Log(transform.name + ": LoadBuildings");
     }

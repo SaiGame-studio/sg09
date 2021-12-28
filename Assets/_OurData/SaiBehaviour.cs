@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class SaiBehaviour : MonoBehaviour
 {
+    protected virtual void Reset()
+    {
+        this.LoadComponents();
+    }
+
     protected virtual void Awake()
     {
         this.LoadComponents();
     }
 
-    protected virtual void Reset()
+    protected virtual void Start()
     {
-        this.LoadComponents();
+        //For Overide
     }
 
     protected virtual void FixedUpdate()

@@ -11,11 +11,17 @@ public class ForestHutTask : BuildingTask
     [SerializeField] protected float treeRange = 27f;
     [SerializeField] protected float treeDistance = 7f;
 
+    protected override void Start()
+    {
+        base.Start();
+        this.LoadNearByTrees();
+    }
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadObjects();
-        this.LoadTrees();
+        this.LoadTreePrefabs();
     }
 
     protected virtual void LoadObjects()
@@ -25,7 +31,7 @@ public class ForestHutTask : BuildingTask
         Debug.Log(transform.name + " LoadObjects", gameObject);
     }
 
-    protected virtual void LoadTrees()
+    protected virtual void LoadTreePrefabs()
     {
         if (this.treePrefabs.Count > 0) return;
         GameObject tree1 = Resources.Load<GameObject>("Res/Tree_1");
@@ -126,5 +132,24 @@ public class ForestHutTask : BuildingTask
         position.z += Random.Range(this.treeRange * -1, this.treeRange);
 
         return position;
+    }
+
+    protected virtual void LoadNearByTrees()
+    {
+        List<GameObject> allTrees = TreeManager.instance.Trees();
+        float dis;
+        foreach (GameObject tree in allTrees)
+        {
+            dis = Vector3.Distance(tree.transform.position, transform.position);
+            if (dis < this.treeDistance) continue;
+            this.TreeAdd(tree);
+        }
+    }
+
+    public virtual void TreeAdd(GameObject tree)
+    {
+        if (this.trees.Contains(tree)) return;
+
+        this.trees.Add(tree);
     }
 }
