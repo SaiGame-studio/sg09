@@ -9,6 +9,7 @@ public enum TaskType
     //Woodcutter
     plantTree = 100,
     chopTree = 101,
+    findTree2Chop = 102,
 
     //Smith
 }

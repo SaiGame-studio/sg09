@@ -469,6 +469,7 @@ MonoBehaviour:
   - name: 1001
     number: 1
   resRequire: []
+  canCreate: 1
   createTimer: 0
   createDelay: 7
 --- !u!114 &3761355089378600420
@@ -506,7 +507,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df924acd5a1b8dd4d9f9b832ad23a609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logwoodGenerator: {fileID: 3761355089378600441}
   treeLevel: {fileID: 3761355089378600420}
+  choper: {fileID: 0}
 --- !u!1 &3869289321019251409
 GameObject:
   m_ObjectHideFlags: 0

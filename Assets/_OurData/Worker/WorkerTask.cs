@@ -20,7 +20,7 @@ public class WorkerTask : SaiBehaviour
     protected override void OnDisable()
     {
         base.OnDisable();
-        this.GoOutBuilding();
+        //this.GoOutBuilding();
     }
 
     protected override void LoadComponents()

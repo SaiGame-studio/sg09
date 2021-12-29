@@ -105,7 +105,7 @@ MonoBehaviour:
     number: 1
   resRequire: []
   createTimer: 0
-  createDelay: 7
+  createDelay: 117
 --- !u!114 &405706141920207811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   isMaxLevel: 0
   tree: {fileID: 405706141920207838}
   treeTimer: 0
-  treeDelay: 2.3333333
+  treeDelay: 39
 --- !u!114 &7604185035503491756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +141,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df924acd5a1b8dd4d9f9b832ad23a609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logwoodGenerator: {fileID: 405706141920207838}
   treeLevel: {fileID: 405706141920207811}
+  choper: {fileID: 0}
 --- !u!1 &405706142591823093
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ public class ResHolder : SaiBehaviour
         return this.resourceName;
     }
 
-    public virtual float Add(int number)
+    public virtual float Add(float number)
     {
         this.resCurrent += number;
 
@@ -35,8 +35,25 @@ public class ResHolder : SaiBehaviour
         return this.resCurrent;
     }
 
+    public virtual float Current()
+    {
+        return this.resCurrent;
+    }
+
+    public virtual float TakeAll()
+    {
+        float take = this.resCurrent;
+        this.resCurrent = 0;
+        return take;
+    }
+
     public virtual void SetLimit(float max)
     {
         this.resMax = max;
+    }
+
+    public virtual bool IsMax()
+    {
+        return this.resCurrent == this.resMax;
     }
 }
