@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class ResGenerator : Warehouse
 {
+    [Header("ResGenerator")]
     [SerializeField] protected List<Resource> resCreate;
     [SerializeField] protected List<Resource> resRequire;
+    public bool canCreate = true;
     [SerializeField] protected float createTimer = 0f;
     [SerializeField] protected float createDelay = 7f;
 
@@ -16,6 +18,8 @@ public class ResGenerator : Warehouse
 
     protected virtual void Creating()
     {
+        if (!this.canCreate) return;
+
         this.createTimer += Time.fixedDeltaTime;
         if (this.createTimer < this.createDelay) return;
         this.createTimer = 0;
@@ -40,5 +44,32 @@ public class ResGenerator : Warehouse
     public virtual float GetCreateDelay()
     {
         return this.createDelay;
+    }
+
+    public virtual bool IsAllResMax()
+    {
+        foreach (ResHolder resHolder in this.resHolders)
+        {
+            if (resHolder.IsMax() == false) return false;
+        }
+
+        return true;
+    }
+
+    public virtual List<Resource> TakeAll(ResourceName resourceName)
+    {
+        List<Resource> resources = new List<Resource>();
+        foreach (ResHolder resHolder in this.resHolders)
+        {
+            Resource newResource = new Resource
+            {
+                name = resHolder.Name(),
+                number = resHolder.TakeAll()
+            };
+
+            resources.Add(newResource);
+        }
+
+        return resources;
     }
 }

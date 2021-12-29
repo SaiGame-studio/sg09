@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LogwoodGenerator : ResGenerator
 {
+    //[Header("LogwoodGenerator")]
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -27,5 +29,11 @@ public class LogwoodGenerator : ResGenerator
     {
         ResHolder resHolder = this.GetHolder(ResourceName.logwood);
         resHolder.SetLimit(1);
+    }
+
+    protected override void Creating()
+    {
+        if (this.IsAllResMax()) this.canCreate = false;
+        base.Creating();
     }
 }

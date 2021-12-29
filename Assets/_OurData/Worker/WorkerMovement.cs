@@ -5,8 +5,8 @@ public class WorkerMovement : SaiBehaviour
 {
     public WorkerCtrl workerCtrl;
     [SerializeField] protected Transform target;
-    [SerializeField] protected bool isWalking = false;
-    [SerializeField] protected bool isWorking = false;
+    public bool isWalking = false;
+    public bool isWorking = false;
     [SerializeField] protected float walkLimit = 0.7f;
     [SerializeField] protected float targetDistance = 0f;
 
@@ -38,6 +38,7 @@ public class WorkerMovement : SaiBehaviour
     public virtual void SetTarget(Transform trans)
     {
         this.target = trans;
+        this.IsClose2Target();
     }
 
     protected virtual void Moving()
@@ -69,5 +70,10 @@ public class WorkerMovement : SaiBehaviour
     {
         this.workerCtrl.animator.SetBool("isWalking", this.isWalking);
         this.workerCtrl.animator.SetBool("isWorking", this.isWorking);
+    }
+
+    public virtual float TargetDistance()
+    {
+        return this.targetDistance;
     }
 }

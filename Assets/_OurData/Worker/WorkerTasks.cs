@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,9 @@ public class WorkerTasks : SaiBehaviour
     public bool readyForTask = false;
     public TaskWorking taskWorking;
     public TaskGoHome taskGoHome;
+    public Transform taskTarget;
     [SerializeField] protected List<TaskType> tasks;
+
 
     protected override void Awake()
     {
@@ -24,7 +27,6 @@ public class WorkerTasks : SaiBehaviour
         if (this.isNightTime) this.GoHome();
         else this.GoWork();
     }
-
 
     protected override void LoadComponents()
     {
@@ -76,6 +78,7 @@ public class WorkerTasks : SaiBehaviour
 
     public virtual void TaskCurrentDone()
     {
+        if (this.tasks.Count <= 0) return;
         this.tasks.RemoveAt(this.tasks.Count - 1);
     }
 

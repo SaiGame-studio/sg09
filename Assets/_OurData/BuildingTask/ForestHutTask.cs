@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class ForestHutTask : BuildingTask
     [SerializeField] protected float treeDistance = 7f;
     [SerializeField] protected int storeMax = 7;
     [SerializeField] protected int storeCurrent = 0;
+    [SerializeField] protected float chopSpeed = 7;
 
     protected override void Start()
     {
@@ -52,6 +54,9 @@ public class ForestHutTask : BuildingTask
             case TaskType.plantTree:
                 this.PlantTree(workerCtrl);
                 break;
+            case TaskType.findTree2Chop:
+                this.FindTree2Chop(workerCtrl);
+                break;
             case TaskType.chopTree:
                 this.ChopTree(workerCtrl);
                 break;
@@ -67,7 +72,11 @@ public class ForestHutTask : BuildingTask
     protected virtual void Planning(WorkerCtrl workerCtrl)
     {
         if (this.NeedMoreTree()) workerCtrl.workerTasks.TaskAdd(TaskType.plantTree);
-        if (!this.IsStoreFull()) workerCtrl.workerTasks.TaskAdd(TaskType.chopTree);
+        if (!this.IsStoreFull())
+        {
+            workerCtrl.workerTasks.TaskAdd(TaskType.chopTree);
+            workerCtrl.workerTasks.TaskAdd(TaskType.findTree2Chop);
+        }
     }
 
     protected virtual bool NeedMoreTree()
@@ -155,24 +164,62 @@ public class ForestHutTask : BuildingTask
         this.trees.Add(tree);
     }
 
-    protected virtual void ChopTree(WorkerCtrl workerCtrl) {
+    protected virtual void ChopTree(WorkerCtrl workerCtrl)
+    {
+        if (workerCtrl.workerMovement.isWorking) return;
 
-        WorkerTasks workerTasks  = workerCtrl.workerTasks;
-        if (workerTasks.inHouse) workerTasks.taskWorking.GoOutBuilding();
-
-        TreeCtrl treeCtrl = this.GetNearestTree();
-        workerCtrl.workerMovement.SetTarget(treeCtrl.transform);
+        workerCtrl.workerMovement.isWorking = true;
+        StartCoroutine(Chopping(workerCtrl, workerCtrl.workerTasks.taskTarget));
     }
 
-    protected virtual TreeCtrl GetNearestTree()
+    IEnumerator Chopping(WorkerCtrl workerCtrl, Transform tree)
     {
-        foreach(GameObject tree in this.trees)
+        Debug.Log("Chopping");
+        yield return new WaitForSeconds(this.chopSpeed);
+        Debug.Log("Chopping yield");
+
+        TreeCtrl treeCtrl = tree.GetComponent<TreeCtrl>();
+        treeCtrl.treeLevel.ShowLastBuild();
+        treeCtrl.logwoodGenerator.TakeAll(ResourceName.logwood);
+        treeCtrl.choper = null;
+        this.trees.Remove(treeCtrl.gameObject);
+        TreeManager.instance.Trees().Remove(treeCtrl.gameObject);
+
+        workerCtrl.workerMovement.isWorking = false;
+        workerCtrl.workerTasks.taskTarget = null;
+        workerCtrl.workerTasks.TaskCurrentDone();
+    }
+
+    protected virtual void FindTree2Chop(WorkerCtrl workerCtrl)
+    {
+        WorkerTasks workerTasks = workerCtrl.workerTasks;
+        if (workerTasks.inHouse) workerTasks.taskWorking.GoOutBuilding();
+
+        if (workerCtrl.workerTasks.taskTarget == null)
+        {
+            this.FindNearestTree(workerCtrl);
+        }
+        else if (workerCtrl.workerMovement.TargetDistance() <= 1.5f)
+        {
+            workerCtrl.workerMovement.SetTarget(null);
+            workerCtrl.workerTasks.TaskCurrentDone();
+        }
+    }
+
+    protected virtual void FindNearestTree(WorkerCtrl workerCtrl)
+    {
+        foreach (GameObject tree in this.trees)
         {
             TreeCtrl treeCtrl = tree.GetComponent<TreeCtrl>();//TODO: can make it faster
-            if (treeCtrl.treeLevel.IsMaxLevel()) return treeCtrl;
-        }
+            if (treeCtrl == null) continue;
+            if (!treeCtrl.logwoodGenerator.IsAllResMax()) continue;
+            if (treeCtrl.choper != null) continue;
 
-        return null;
+            treeCtrl.choper = workerCtrl;
+            workerCtrl.workerTasks.taskTarget = treeCtrl.transform;
+            workerCtrl.workerMovement.SetTarget(treeCtrl.transform);
+            return;
+        }
     }
 
     protected virtual bool IsStoreFull()
