@@ -6,14 +6,14 @@ public class ForestHutTask : BuildingTask
 {
     [Header("Forest Hut")]
     [SerializeField] protected GameObject plantTreeObj;
-    [SerializeField] protected List<GameObject> treePrefabs;
-    [SerializeField] protected List<GameObject> trees;
     [SerializeField] protected int treeMax = 7;
     [SerializeField] protected float treeRange = 27f;
     [SerializeField] protected float treeDistance = 7f;
     [SerializeField] protected int storeMax = 7;
     [SerializeField] protected int storeCurrent = 0;
     [SerializeField] protected float chopSpeed = 7;
+    [SerializeField] protected List<GameObject> treePrefabs;
+    [SerializeField] protected List<GameObject> trees;
 
     protected override void Start()
     {
@@ -167,20 +167,17 @@ public class ForestHutTask : BuildingTask
     protected virtual void ChopTree(WorkerCtrl workerCtrl)
     {
         if (workerCtrl.workerMovement.isWorking) return;
-
-        workerCtrl.workerMovement.isWorking = true;
         StartCoroutine(Chopping(workerCtrl, workerCtrl.workerTasks.taskTarget));
     }
 
     IEnumerator Chopping(WorkerCtrl workerCtrl, Transform tree)
     {
-        Debug.Log("Chopping");
+        workerCtrl.workerMovement.isWorking = true;
         yield return new WaitForSeconds(this.chopSpeed);
-        Debug.Log("Chopping yield");
 
         TreeCtrl treeCtrl = tree.GetComponent<TreeCtrl>();
         treeCtrl.treeLevel.ShowLastBuild();
-        treeCtrl.logwoodGenerator.TakeAll(ResourceName.logwood);
+        List<Resource> resources = treeCtrl.logwoodGenerator.TakeAll(); //TODO: put resources into worker
         treeCtrl.choper = null;
         this.trees.Remove(treeCtrl.gameObject);
         TreeManager.instance.Trees().Remove(treeCtrl.gameObject);
