@@ -56,7 +56,7 @@ public class ResGenerator : Warehouse
         return true;
     }
 
-    public virtual List<Resource> TakeAll(ResourceName resourceName)
+    public virtual List<Resource> TakeAll()
     {
         List<Resource> resources = new List<Resource>();
         foreach (ResHolder resHolder in this.resHolders)
