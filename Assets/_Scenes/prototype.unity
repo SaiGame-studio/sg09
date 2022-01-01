@@ -1553,7 +1553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5619846799886748481, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.6
+      value: 16.522
       objectReference: {fileID: 0}
     - target: {fileID: 5619846799886748481, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1561,7 +1561,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5619846799886748481, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 52.9
+      value: 55.811
       objectReference: {fileID: 0}
     - target: {fileID: 5619846799886748481, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5070,7 +5070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5619846799886748481, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.6
+      value: 16.27
       objectReference: {fileID: 0}
     - target: {fileID: 5619846799886748481, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5078,7 +5078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5619846799886748481, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 52.9
+      value: 55.01
       objectReference: {fileID: 0}
     - target: {fileID: 5619846799886748481, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7814,6 +7814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingType: 0
+  isFull: 0
   resHolders:
   - {fileID: 1157940032}
   resCreate:
@@ -8621,7 +8622,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5619846799886748481, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.6
+      value: 15.93
       objectReference: {fileID: 0}
     - target: {fileID: 5619846799886748481, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8629,7 +8630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5619846799886748481, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 52.9
+      value: 53.94
       objectReference: {fileID: 0}
     - target: {fileID: 5619846799886748481, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9058,10 +9059,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2050567618}
     m_Modifications:
-    - target: {fileID: 6413864487901155771, guid: be9b70cc4f45692438811b563712b076, type: 3}
-      propertyPath: maxWorker
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 6413864487901155772, guid: be9b70cc4f45692438811b563712b076, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -9109,10 +9106,6 @@ PrefabInstance:
     - target: {fileID: 6413864487901155775, guid: be9b70cc4f45692438811b563712b076, type: 3}
       propertyPath: m_Name
       value: ForestHut
-      objectReference: {fileID: 0}
-    - target: {fileID: 9142610252589916622, guid: be9b70cc4f45692438811b563712b076, type: 3}
-      propertyPath: treeMax
-      value: 27
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be9b70cc4f45692438811b563712b076, type: 3}

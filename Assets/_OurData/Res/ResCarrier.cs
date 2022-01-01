@@ -2,22 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceManager : MonoBehaviour
+public class ResCarrier : MonoBehaviour
 {
-    public static ResourceManager instance;
     [SerializeField] protected List<Resource> resources;
 
-    protected void Awake()
-    {
-        //if (ResourceManager.instance != null) Debug.LogError("On 1 ResourceManager allow");
-        //ResourceManager.instance = this;
-    }
-
-    public virtual Resource AddResource(ResourceName resourceName, int number)
+    public virtual Resource AddResource(ResourceName resourceName, float number)
     {
         Resource res = this.GetResByName(resourceName);
         res.number += number;
         return res;
+    }
+
+    public virtual void AddByList(List<Resource> addResources)
+    {
+        foreach(Resource addResource in addResources)
+        {
+            this.AddResource(addResource.name, addResource.number);
+        }
+    }
+
+    public virtual List<Resource> TakeAll()
+    {
+        List<Resource> resources = new List<Resource>(this.resources);
+        this.resources = new List<Resource>();
+
+        return resources;
     }
 
     public virtual Resource GetResByName(ResourceName resourceName)

@@ -10,6 +10,7 @@ public enum TaskType
     plantTree = 100,
     chopTree = 101,
     findTree2Chop = 102,
+    bringTreeBack = 103,
 
     //Smith
 }

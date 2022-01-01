@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class Warehouse : SaiBehaviour
 {
+    [Header("Warehouse")]
     public BuildingType buildingType;
+    [SerializeField] protected bool isFull = false;
     [SerializeField] protected List<ResHolder> resHolders;
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        this.isFull = this.IsFull();
+    }
 
     protected override void LoadComponents()
     {
@@ -31,5 +39,30 @@ public class Warehouse : SaiBehaviour
     public virtual ResHolder GetHolder(ResourceName name)
     {
         return this.resHolders.Find((holder) => holder.Name() == name);
+    }
+
+    public virtual void AddByList(List<Resource> addResources)
+    {
+        foreach (Resource addResource in addResources)
+        {
+            this.AddResource(addResource.name, addResource.number);
+        }
+    }
+
+    public virtual ResHolder AddResource(ResourceName resourceName, float number)
+    {
+        ResHolder res = this.GetHolder(resourceName);
+        res.Add(number);
+        return res;
+    }
+
+    public virtual bool IsFull()
+    {
+        foreach(ResHolder resHolder in this.resHolders)
+        {
+            if (!resHolder.IsMax()) return false;
+        }
+
+        return true;
     }
 }

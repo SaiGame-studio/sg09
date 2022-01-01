@@ -9,6 +9,7 @@ public class WorkerCtrl : SaiBehaviour
     public Animator animator;
     public Transform workerModel;
     public NavMeshAgent navMeshAgent;
+    public ResCarrier resCarrier;
 
     protected override void LoadComponents()
     {
@@ -18,6 +19,7 @@ public class WorkerCtrl : SaiBehaviour
         this.LoadAnimator();
         this.LoadWorkerTasks();
         this.LoadAgent();
+        this.LoadResCarrier();
     }
 
     protected virtual void LoadWorkerTasks()
@@ -55,5 +57,12 @@ public class WorkerCtrl : SaiBehaviour
         this.navMeshAgent = GetComponent<NavMeshAgent>();
         this.navMeshAgent.speed = 2f;
         Debug.Log(transform.name + ": LoadAgent", gameObject);
+    }
+
+    protected virtual void LoadResCarrier()
+    {
+        if (this.resCarrier != null) return;
+        this.resCarrier = GetComponent<ResCarrier>();
+        Debug.Log(transform.name + ": ResCarrier", gameObject);
     }
 }
