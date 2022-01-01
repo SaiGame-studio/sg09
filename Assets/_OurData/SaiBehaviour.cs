@@ -7,6 +7,7 @@ public class SaiBehaviour : MonoBehaviour
     protected virtual void Reset()
     {
         this.LoadComponents();
+        this.ResetValues();
     }
 
     protected virtual void Awake()
@@ -35,6 +36,11 @@ public class SaiBehaviour : MonoBehaviour
     }
 
     protected virtual void LoadComponents()
+    {
+        //For Overide
+    }
+
+    protected virtual void ResetValues()
     {
         //For Overide
     }

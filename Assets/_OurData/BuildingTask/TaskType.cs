@@ -11,5 +11,7 @@ public enum TaskType
     chopTree = 101,
     findTree2Chop = 102,
 
+    bringResourceBack = 103,
+
     //Smith
 }
