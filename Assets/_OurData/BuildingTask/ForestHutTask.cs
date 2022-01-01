@@ -59,7 +59,7 @@ public class ForestHutTask : BuildingTask
             case TaskType.chopTree:
                 this.ChopTree(workerCtrl);
                 break;
-            case TaskType.bringTreeBack:
+            case TaskType.bringResourceBack:
                 this.BringTreeBack(workerCtrl);
                 break;
             case TaskType.goToWorkStation:
@@ -76,7 +76,7 @@ public class ForestHutTask : BuildingTask
 
         if (!this.buildingCtrl.warehouse.IsFull())
         {
-            workerCtrl.workerTasks.TaskAdd(TaskType.bringTreeBack);
+            workerCtrl.workerTasks.TaskAdd(TaskType.bringResourceBack);
             workerCtrl.workerTasks.TaskAdd(TaskType.chopTree);
             workerCtrl.workerTasks.TaskAdd(TaskType.findTree2Chop);
         }
@@ -193,8 +193,9 @@ public class ForestHutTask : BuildingTask
 
         workerCtrl.workerMovement.isWorking = false;
         workerCtrl.workerTasks.taskTarget = null;
-        workerCtrl.workerTasks.TaskCurrentDone();
         workerCtrl.resCarrier.AddByList(resources);
+
+        workerCtrl.workerTasks.TaskCurrentDone();
 
         StartCoroutine(RemoveTree(tree));
     }

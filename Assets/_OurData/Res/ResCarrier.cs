@@ -23,9 +23,8 @@ public class ResCarrier : MonoBehaviour
 
     public virtual List<Resource> TakeAll()
     {
-        List<Resource> resources = new List<Resource>(this.resources);
+        List<Resource> resources = new List<Resource>(this.resources); //Clone
         this.resources = new List<Resource>();
-
         return resources;
     }
 
