@@ -1,22 +1,11 @@
 using UnityEngine;
 
-public class SawmillTask : BuildingTask
+public class BaseBuildingTask : BuildingTask
 {
-    [Header("Sawmill")]
-    [SerializeField] protected Transform workingPoint;
-    [SerializeField] protected float workingSpeed = 7;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadWorkingPoint();
-    }
-
-    protected virtual void LoadWorkingPoint()
-    {
-        if (this.workingPoint != null) return;
-        this.workingPoint = transform.Find("WorkingPoint");
-        Debug.Log(transform.name + " LoadObjects", gameObject);
     }
 
     public override void DoingTask(WorkerCtrl workerCtrl)
