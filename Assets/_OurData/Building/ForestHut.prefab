@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3e80d28e03c754a9651b7ed573dc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWorker: 7
+  maxWorker: 1
   workers: []
 --- !u!114 &6413864487901155770
 MonoBehaviour:
