@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BuildingCtrl : SaiBehaviour
 {
+    [Header("Building")]
     public Transform door;
     public Workers workers;
     public Warehouse warehouse;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HomeSmall : Warehouse
+public class HomeSmallWarehouse : Warehouse
 {
     protected override void LoadComponents()
     {

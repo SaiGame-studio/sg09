@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6413864487901155773}
   - component: {fileID: 6413864487901155769}
   - component: {fileID: 6413864487901155771}
-  - component: {fileID: 6413864487901155770}
+  - component: {fileID: 168228985568062643}
   - component: {fileID: 9142610252589916622}
   m_Layer: 0
   m_Name: ForestHut
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 6413864488622051989}
   workers: {fileID: 6413864487901155771}
-  warehouse: {fileID: 6413864487901155770}
+  warehouse: {fileID: 168228985568062643}
   buildingTask: {fileID: 9142610252589916622}
 --- !u!114 &6413864487901155771
 MonoBehaviour:
@@ -97,9 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3e80d28e03c754a9651b7ed573dc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWorker: 7
+  maxWorker: 1
   workers: []
---- !u!114 &6413864487901155770
+--- !u!114 &168228985568062643
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6413864487901155775}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b75cd4439bdc27c43b70ff525660281d, type: 3}
+  m_Script: {fileID: 11500000, guid: 22e49f37b1e69ba41bb403b4203fb0d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buildingType: 1
