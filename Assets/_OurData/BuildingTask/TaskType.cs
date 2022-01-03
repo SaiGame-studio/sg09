@@ -8,6 +8,7 @@ public enum TaskType
 
     //General
     makingResource = 104,
+    gotoWorkingPoint = 105,
     bringResourceBack = 103,
 
     //Woodcutter
