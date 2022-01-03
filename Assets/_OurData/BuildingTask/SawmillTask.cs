@@ -1,10 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
 public class SawmillTask : BuildingTask
 {
     [Header("Sawmill")]
     [SerializeField] protected Transform workingPoint;
-    [SerializeField] protected float workingSpeed = 7;
+    [SerializeField] protected float logwoodCost = 1;
+    [SerializeField] protected float blankReceive = 2;
 
     protected override void LoadComponents()
     {
@@ -24,7 +26,7 @@ public class SawmillTask : BuildingTask
         switch (workerCtrl.workerTasks.TaskCurrent())
         {
             case TaskType.makingResource:
-                Debug.Log("makingResource");
+                this.MakingResource(workerCtrl);
                 break;
             case TaskType.gotoWorkingPoint:
                 this.GotoWorkingPoint(workerCtrl);
@@ -42,10 +44,31 @@ public class SawmillTask : BuildingTask
     {
         if (!this.IsStoreMax() && this.HasLogwood())
         {
+            workerCtrl.workerTasks.TaskAdd(TaskType.goToWorkStation);
             workerCtrl.workerTasks.TaskAdd(TaskType.makingResource);
             workerCtrl.workerTasks.TaskAdd(TaskType.gotoWorkingPoint);
         }
     }
+
+    protected virtual void MakingResource(WorkerCtrl workerCtrl)
+    {
+        if (workerCtrl.workerMovement.isWorking) return;
+        StartCoroutine(Sawing(workerCtrl));
+    }
+
+    private IEnumerator Sawing(WorkerCtrl workerCtrl)
+    {
+        workerCtrl.workerMovement.isWorking = true;
+        workerCtrl.workerMovement.workingType = WorkingType.sawing;
+        yield return new WaitForSeconds(this.workingSpeed);
+
+        this.buildingCtrl.warehouse.RemoveResource(ResourceName.logwood, this.logwoodCost);
+        this.buildingCtrl.warehouse.AddResource(ResourceName.blank, this.blankReceive);
+
+        workerCtrl.workerMovement.isWorking = false;
+        workerCtrl.workerTasks.TaskCurrentDone();
+    }
+
 
     protected virtual void GotoWorkingPoint(WorkerCtrl workerCtrl)
     {
@@ -63,11 +86,13 @@ public class SawmillTask : BuildingTask
 
     protected virtual bool IsStoreMax()
     {
-        return false;
+        ResHolder blank= this.buildingCtrl.warehouse.GetResource(ResourceName.blank);
+        return blank.IsMax();
     }
 
     protected virtual bool HasLogwood()
     {
-        return true;
+        ResHolder logwood = this.buildingCtrl.warehouse.GetResource(ResourceName.logwood);
+        return logwood.Current() > 0;
     }
 }

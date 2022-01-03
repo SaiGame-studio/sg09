@@ -6,6 +6,7 @@ public class BuildingTask : SaiBehaviour
     public BuildingCtrl buildingCtrl;
     [SerializeField] protected float taskTimer = 0;
     [SerializeField] protected float taskDelay = 5f;
+    [SerializeField] protected float workingSpeed = 7;
 
     protected override void LoadComponents()
     {

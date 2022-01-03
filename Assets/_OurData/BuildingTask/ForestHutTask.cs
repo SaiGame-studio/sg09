@@ -9,7 +9,6 @@ public class ForestHutTask : BuildingTask
     [SerializeField] protected int treeMax = 7;
     [SerializeField] protected float treeRange = 27f;
     [SerializeField] protected float treeDistance = 7f;
-    [SerializeField] protected float chopSpeed = 7;
     [SerializeField] protected float treeRemoveSpeed = 16;
     [SerializeField] protected List<GameObject> treePrefabs;
     [SerializeField] protected List<GameObject> trees;
@@ -182,7 +181,7 @@ public class ForestHutTask : BuildingTask
     private IEnumerator Chopping(WorkerCtrl workerCtrl, Transform tree)
     {
         workerCtrl.workerMovement.isWorking = true;
-        yield return new WaitForSeconds(this.chopSpeed);
+        yield return new WaitForSeconds(this.workingSpeed);
 
         TreeCtrl treeCtrl = tree.GetComponent<TreeCtrl>();
         treeCtrl.treeLevel.ShowLastBuild();

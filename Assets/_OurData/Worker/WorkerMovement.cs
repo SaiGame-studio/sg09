@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class WorkerMovement : SaiBehaviour
 {
@@ -7,6 +6,7 @@ public class WorkerMovement : SaiBehaviour
     [SerializeField] protected Transform target;
     public bool isWalking = false;
     public bool isWorking = false;
+    public WorkingType workingType = WorkingType.chopTree;
     [SerializeField] protected float walkLimit = 0.7f;
     [SerializeField] protected float targetDistance = 0f;
 
@@ -54,7 +54,7 @@ public class WorkerMovement : SaiBehaviour
         this.workerCtrl.navMeshAgent.isStopped = false;
         this.workerCtrl.navMeshAgent.SetDestination(this.target.position);
     }
-        
+
     public virtual bool IsClose2Target()
     {
         if (this.target == null) return false;
@@ -70,6 +70,7 @@ public class WorkerMovement : SaiBehaviour
     {
         this.workerCtrl.animator.SetBool("isWalking", this.isWalking);
         this.workerCtrl.animator.SetBool("isWorking", this.isWorking);
+        this.workerCtrl.animator.SetFloat("workingType", (float)this.workingType);
     }
 
     public virtual float TargetDistance()
