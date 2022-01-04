@@ -56,7 +56,7 @@ public class SawmillTask : BuildingTask
         StartCoroutine(Sawing(workerCtrl));
     }
 
-    private IEnumerator Sawing(WorkerCtrl workerCtrl)
+    IEnumerator Sawing(WorkerCtrl workerCtrl)
     {
         workerCtrl.workerMovement.isWorking = true;
         workerCtrl.workerMovement.workingType = WorkingType.sawing;
