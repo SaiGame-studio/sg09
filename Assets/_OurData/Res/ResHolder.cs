@@ -35,6 +35,11 @@ public class ResHolder : SaiBehaviour
         return this.resCurrent;
     }
 
+    public virtual float Deduct(float number)
+    {
+        return this.Add(-number);
+    }
+
     public virtual float Current()
     {
         return this.resCurrent;
