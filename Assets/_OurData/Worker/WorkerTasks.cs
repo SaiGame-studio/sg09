@@ -11,6 +11,7 @@ public class WorkerTasks : SaiBehaviour
     public TaskWorking taskWorking;
     public TaskGoHome taskGoHome;
     public Transform taskTarget;
+    public BuildingCtrl taskBuildingCtrl;
     [SerializeField] protected List<TaskType> tasks;
 
 

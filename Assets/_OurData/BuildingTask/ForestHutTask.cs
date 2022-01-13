@@ -19,6 +19,12 @@ public class ForestHutTask : BuildingTask
         this.LoadNearByTrees();
     }
 
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        this.RemoveDeadTrees();
+    }
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -43,6 +49,16 @@ public class ForestHutTask : BuildingTask
         this.treePrefabs.Add(tree2);
         this.treePrefabs.Add(tree3);
         Debug.Log(transform.name + " LoadObjects", gameObject);
+    }
+
+    protected virtual void RemoveDeadTrees()
+    {
+        GameObject tree;
+        for(int i = 0; i < this.trees.Count; i++)
+        {
+            tree = this.trees[i];
+            if (tree == null) this.trees.RemoveAt(i);
+        }
     }
 
     public override void DoingTask(WorkerCtrl workerCtrl)
@@ -225,6 +241,7 @@ public class ForestHutTask : BuildingTask
     {
         foreach (GameObject tree in this.trees)
         {
+            if (tree == null) continue;
             TreeCtrl treeCtrl = tree.GetComponent<TreeCtrl>();//TODO: can make it faster
             if (treeCtrl == null) continue;
             if (!treeCtrl.logwoodGenerator.IsAllResMax()) continue;

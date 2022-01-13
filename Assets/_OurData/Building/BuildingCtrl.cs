@@ -44,6 +44,6 @@ public class BuildingCtrl : SaiBehaviour
     {
         if (this.buildingTask != null) return;
         this.buildingTask = GetComponent<BuildingTask>();
-        Debug.Log(transform.name + " LoadBuldingTask", gameObject);
+        Debug.Log(transform.name + ": LoadBuldingTask", gameObject);
     }
 }

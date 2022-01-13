@@ -32,23 +32,8 @@ public class BuildingManager : SaiBehaviour
         Debug.Log(transform.name + "LoadBuildingCtrls", gameObject);
     }
 
-    public virtual BuildingCtrl FindBuilding(Transform worker)
+    public virtual BuildingCtrl FindBuilding(BuildingType buildingType)
     {
-        BuildingCtrl buildingCtrl;
-        for (int i = 0; i < this.buildingCtrls.Count; i++)
-        {
-            buildingCtrl = this.buildingCtrls[i];
-            if (!buildingCtrl.workers.IsNeedWorker()) continue;
-
-            buildingCtrl.workers.AddWorker(worker);
-            return buildingCtrl;
-        }
-        return null;
-    }
-
-    public virtual BuildingCtrl FindBuilding(Transform worker, BuildingType buildingType)
-    {
-        //TODO: e30
         BuildingCtrl buildingCtrl;
         for (int i = 0; i < this.buildingCtrls.Count; i++)
         {
@@ -56,9 +41,13 @@ public class BuildingManager : SaiBehaviour
             if (!buildingCtrl.workers.IsNeedWorker()) continue;
             if (buildingCtrl.warehouse.buildingType != buildingType) continue;
 
-            buildingCtrl.workers.AddWorker(worker);
             return buildingCtrl;
         }
         return null;
+    }
+
+    public virtual List<BuildingCtrl> BuildingCtrls()
+    {
+        return this.buildingCtrls;
     }
 }

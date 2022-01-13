@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceName: 2001
-  resCurrent: 0
+  resCurrent: 2
   resMax: 6
 --- !u!1 &1792137077305627623
 GameObject:
@@ -852,10 +852,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1792137077537248374}
   - component: {fileID: 1792137077537248368}
-  - component: {fileID: 1792137077537248369}
   - component: {fileID: 1792137077537248370}
   - component: {fileID: 1792137077537248371}
-  - component: {fileID: 1792137077537248372}
+  - component: {fileID: 7111106606662555303}
   - component: {fileID: 1792137077537248373}
   m_Layer: 0
   m_Name: Sawmill
@@ -871,7 +870,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792137077537248375}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 30.76, y: 0.73, z: 47.911}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -894,23 +893,10 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 4, y: 1.5, z: 3.5}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: -1, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!65 &1792137077537248369
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1792137077537248375}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 6.63694, y: 3, z: 5.0327873}
-  m_Center: {x: -1.18153, y: 0, z: 0.52963066}
 --- !u!114 &1792137077537248370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,7 +911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   door: {fileID: 1792137077884909597}
   workers: {fileID: 1792137077537248371}
-  warehouse: {fileID: 1792137077537248372}
+  warehouse: {fileID: 7111106606662555303}
   buildingTask: {fileID: 1792137077537248373}
 --- !u!114 &1792137077537248371
 MonoBehaviour:
@@ -941,7 +927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxWorker: 1
   workers: []
---- !u!114 &1792137077537248372
+--- !u!114 &7111106606662555303
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -950,7 +936,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1792137077537248375}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22e49f37b1e69ba41bb403b4203fb0d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 840c014765fd45d40b7485206c3ac0a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buildingType: 1

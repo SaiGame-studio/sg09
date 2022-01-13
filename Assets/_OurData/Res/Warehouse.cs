@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,7 +32,7 @@ public class Warehouse : SaiBehaviour
             this.resHolders.Add(resHolder);
         }
 
-        Debug.Log(transform.name + ": LoadHolders");
+        Debug.Log(transform.name + ": LoadHolders", gameObject);
     }
 
     public virtual ResHolder GetResource(ResourceName name)
@@ -65,11 +64,22 @@ public class Warehouse : SaiBehaviour
 
     public virtual bool IsFull()
     {
-        foreach(ResHolder resHolder in this.resHolders)
+        foreach (ResHolder resHolder in this.resHolders)
         {
             if (!resHolder.IsMax()) return false;
         }
 
         return true;
+    }
+
+    public virtual ResHolder ResNeed2Move()
+    {
+        return null;
+    }
+
+
+    public virtual ResHolder IsNeedRes(Resource res)
+    {
+        return null;
     }
 }

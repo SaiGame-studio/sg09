@@ -2,20 +2,19 @@ public enum TaskType
 {
     none = 0,
 
-    //Going to
-    goToWorkStation = 1,
-    goToHome = 2,
-
     //General
-    makingResource = 104,
-    gotoWorkingPoint = 105,
-    bringResourceBack = 103,
+    goToHome = 100,
+    goToWorkStation = 101,
+    gotoWorkingPoint = 102,
+    makingResource = 103,
+    bringResourceBack = 104,
 
     //Woodcutter
-    plantTree = 100,
-    chopTree = 101,
+    plantTree = 200,
+    chopTree = 201,
     findTree2Chop = 102,
 
-
-    //Smith
+    //Warehouse
+    getResNeed2Move = 300,
+    findBuildingNeedRes = 301,
 }

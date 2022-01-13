@@ -44,4 +44,9 @@ public class ResCarrier : MonoBehaviour
 
         return res;
     }
+
+    public virtual List<Resource> Resources()
+    {
+        return this.resources;
+    }
 }
