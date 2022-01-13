@@ -980,6 +980,7 @@ MonoBehaviour:
   taskWorking: {fileID: 5619846799963758742}
   taskGoHome: {fileID: 5619846801034840653}
   taskTarget: {fileID: 0}
+  taskBuildingCtrl: {fileID: 0}
   tasks: 
 --- !u!114 &2291046728651006809
 MonoBehaviour:

@@ -77,7 +77,8 @@ public class Warehouse : SaiBehaviour
         return null;
     }
 
-    public virtual ResHolder IsNeedRes()
+
+    public virtual ResHolder IsNeedRes(Resource res)
     {
         return null;
     }

@@ -7,9 +7,12 @@ public class SawmillWH : Warehouse
         return null;
     }
 
-    public override ResHolder IsNeedRes()
+    public override ResHolder IsNeedRes(Resource res)
     {
-        ResHolder resHolder = this.GetResource(ResourceName.logwood);
+        if (res.name != ResourceName.logwood) return null;
+
+        ResHolder resHolder = this.GetResource(res.name);
+        if (resHolder == null) return null;
         if (resHolder.IsMax()) return null;
         return resHolder;
     }

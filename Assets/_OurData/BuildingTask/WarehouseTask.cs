@@ -98,7 +98,7 @@ public class WarehouseTask : BuildingTask
         foreach (BuildingCtrl buildingCtrl in BuildingManager.instance.BuildingCtrls())
         {
             if (buildingCtrl.warehouse.buildingType != BuildingType.workStation) continue;
-            ResHolder resHolder = buildingCtrl.warehouse.IsNeedRes();
+            ResHolder resHolder = buildingCtrl.warehouse.IsNeedRes(res);
             if (resHolder == null) continue;
             if (resHolder.Name() != res.name) continue;
             return buildingCtrl;
@@ -128,6 +128,5 @@ public class WarehouseTask : BuildingTask
         if (resHolder == null) return;
         workerTasks.taskBuildingCtrl = taskBuildingCtrl;
         workerTasks.TaskAdd(TaskType.getResNeed2Move);
-        //Debug.LogError("error");
     }
 }
