@@ -12,7 +12,6 @@ public class SawmillWH : Warehouse
         if (res.name != ResourceName.logwood) return null;
 
         ResHolder resHolder = this.GetResource(res.name);
-        if (resHolder == null) return null;
         if (resHolder.IsMax()) return null;
         return resHolder;
     }

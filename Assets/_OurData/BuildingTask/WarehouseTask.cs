@@ -66,8 +66,6 @@ public class WarehouseTask : BuildingTask
         foreach(Resource res in workerCtrl.resCarrier.Resources())
         {
             BuildingCtrl buildingCtrl = this.FindBuildingNeedRes(res);
-            if (buildingCtrl == null) continue;
-
             workerTasks.taskBuildingCtrl = buildingCtrl;
             workerTasks.TaskAdd(TaskType.bringResourceBack);
         }
@@ -100,7 +98,6 @@ public class WarehouseTask : BuildingTask
             if (buildingCtrl.warehouse.buildingType != BuildingType.workStation) continue;
             ResHolder resHolder = buildingCtrl.warehouse.IsNeedRes(res);
             if (resHolder == null) continue;
-            if (resHolder.Name() != res.name) continue;
             return buildingCtrl;
         }
 
