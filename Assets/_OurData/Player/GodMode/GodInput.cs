@@ -33,8 +33,6 @@ public class GodInput : SaiBehaviour
         float z = Input.GetAxis("Vertical");
         float y = Input.mouseScrollDelta.y * -1;
         bool leftShift = Input.GetKey(KeyCode.LeftShift);
-        this.isMouseRotating = Input.GetKey(KeyCode.Mouse1);
-        if (Input.GetKeyDown(KeyCode.Mouse1)) this.mouseReference = Input.mousePosition;
 
         this.godModeCtrl.godMovement.camMovement.x = x;
         this.godModeCtrl.godMovement.camMovement.z = z;
@@ -44,6 +42,9 @@ public class GodInput : SaiBehaviour
 
     protected virtual void MouseRotation()
     {
+        this.isMouseRotating = Input.GetKey(KeyCode.Mouse1);
+        if (Input.GetKeyDown(KeyCode.Mouse1)) this.mouseReference = Input.mousePosition;
+
         if (this.isMouseRotating)
         {
             this.mouseRotation = (Input.mousePosition - this.mouseReference);

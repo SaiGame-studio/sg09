@@ -40,23 +40,13 @@ public class GodMovement : SaiBehaviour
         movement.z *= speed;
         movement.y *= speed * 7;
 
-        Vector3 oldPos = transform.position;
         transform.Translate(movement * Time.deltaTime);
         Vector3 newPos = transform.position;
 
-        if (newPos.y < this.minY)
-        {
-            newPos.y = this.minY;
-            transform.position = newPos;
-        }
-
-        if (newPos.y > this.maxY)
-        {
-            newPos.y = this.maxY;
-            transform.position = newPos;
-        }
+        if (newPos.y < this.minY) newPos.y = this.minY;
+        if (newPos.y > this.maxY) newPos.y = this.maxY;
+        transform.position = newPos;
 
         transform.Rotate(this.camRotation);
-
     }
 }
