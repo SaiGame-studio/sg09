@@ -63,15 +63,7 @@ public class WarehouseTask : BuildingTask
         this.DoneGetResNeed2Move(workerCtrl);
 
         //Find what building need these Resources
-        //foreach(Resource res in workerCtrl.resCarrier.Resources())
-        //{
-        //    BuildingCtrl buildingCtrl = this.FindBuildingNeedRes(res);
-        //    workerTasks.taskBuildingCtrl = buildingCtrl;
-        //    workerTasks.TaskAdd(TaskType.bringResourceBack);
-        //}
-
-        Resource res = workerCtrl.resCarrier.Resources()[0];
-        BuildingCtrl buildingCtrl = this.FindBuildingNeedRes(res);
+        BuildingCtrl buildingCtrl = this.FindBuildingNeedRes(resHolder.Name());
         workerTasks.taskBuildingCtrl = buildingCtrl;
         workerTasks.TaskAdd(TaskType.bringResourceBack);
     }
@@ -96,12 +88,12 @@ public class WarehouseTask : BuildingTask
         return null;
     }
 
-    protected virtual BuildingCtrl FindBuildingNeedRes(Resource res)
+    protected virtual BuildingCtrl FindBuildingNeedRes(ResourceName resName)
     {
         foreach (BuildingCtrl buildingCtrl in BuildingManager.instance.BuildingCtrls())
         {
             if (buildingCtrl.warehouse.buildingType != BuildingType.workStation) continue;
-            ResHolder resHolder = buildingCtrl.warehouse.IsNeedRes(res);
+            ResHolder resHolder = buildingCtrl.warehouse.IsNeedRes(resName);
             if (resHolder == null) continue;
             return buildingCtrl;
         }
@@ -123,8 +115,6 @@ public class WarehouseTask : BuildingTask
         workerTasks.taskBuildingCtrl = null;
         workerTasks.TaskCurrentDone();
 
-        //List<Resource> resources = workerCtrl.resCarrier.TakeAll();
-        //taskBuildingCtrl.warehouse.AddByList(resources);
         Resource res = workerCtrl.resCarrier.TakeFirst();
         taskBuildingCtrl.warehouse.AddResource(res.name,res.number);
 

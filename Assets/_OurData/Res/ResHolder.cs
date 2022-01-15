@@ -31,12 +31,14 @@ public class ResHolder : SaiBehaviour
     {
         this.resCurrent += number;
 
-        if (this.resCurrent > this.resMax) this.resCurrent = this.resMax;
+        //Greater then Max? it is oki
+        //if (this.resCurrent > this.resMax) this.resCurrent = this.resMax;
         return this.resCurrent;
     }
 
     public virtual float Deduct(float number)
     {
+        //TODO: fix issue less than 0 
         return this.Add(-number);
     }
 
@@ -59,6 +61,6 @@ public class ResHolder : SaiBehaviour
 
     public virtual bool IsMax()
     {
-        return this.resCurrent == this.resMax;
+        return this.resCurrent >= this.resMax;
     }
 }

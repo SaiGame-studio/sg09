@@ -20,6 +20,11 @@ public class SaiBehaviour : MonoBehaviour
         //For Overide
     }
 
+    protected virtual void Update()
+    {
+        //For Overide
+    }
+
     protected virtual void FixedUpdate()
     {
         //For Overide
