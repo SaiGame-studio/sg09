@@ -38,20 +38,27 @@ public class WorkerMovement : SaiBehaviour
     public virtual void SetTarget(Transform trans)
     {
         this.target = trans;
-        this.IsClose2Target();
+
+        if(this.target == null)
+        {
+            this.workerCtrl.navMeshAgent.enabled = false;
+        }
+        else
+        {
+            this.workerCtrl.navMeshAgent.enabled = true;
+            this.IsClose2Target();
+        }
     }
 
     protected virtual void Moving()
     {
         if (this.target == null || this.IsClose2Target())
         {
-            this.workerCtrl.navMeshAgent.isStopped = true;
             this.isWalking = false;
             return;
         }
 
         this.isWalking = true;
-        this.workerCtrl.navMeshAgent.isStopped = false;
         this.workerCtrl.navMeshAgent.SetDestination(this.target.position);
     }
 
