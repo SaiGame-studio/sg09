@@ -3480,6 +3480,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForestHut_1
       objectReference: {fileID: 0}
+    - target: {fileID: 6413864489172851547, guid: be9b70cc4f45692438811b563712b076, type: 3}
+      propertyPath: resCurrent
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9142610252589916622, guid: be9b70cc4f45692438811b563712b076, type: 3}
       propertyPath: treeMax
       value: 17
@@ -4236,6 +4240,10 @@ PrefabInstance:
     - target: {fileID: 1792137077537248375, guid: dea3fbe7fa5298c4b96b1093ff639814, type: 3}
       propertyPath: m_Name
       value: Sawmill_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1792137077885554009, guid: dea3fbe7fa5298c4b96b1093ff639814, type: 3}
+      propertyPath: resCurrent
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1792137077537248369, guid: dea3fbe7fa5298c4b96b1093ff639814, type: 3}
@@ -5094,6 +5102,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2050567618}
     m_Modifications:
+    - target: {fileID: 7861573742202763443, guid: 89d787b1391e33143b7b890d661f339a, type: 3}
+      propertyPath: resCurrent
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7861573742559650204, guid: 89d787b1391e33143b7b890d661f339a, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -9923,6 +9935,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sawmill
       objectReference: {fileID: 0}
+    - target: {fileID: 1792137077885554009, guid: dea3fbe7fa5298c4b96b1093ff639814, type: 3}
+      propertyPath: resCurrent
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dea3fbe7fa5298c4b96b1093ff639814, type: 3}
 --- !u!1001 &4092104471246233767
@@ -9932,6 +9948,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2050567618}
     m_Modifications:
+    - target: {fileID: 7861573742202763443, guid: 89d787b1391e33143b7b890d661f339a, type: 3}
+      propertyPath: resCurrent
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7861573742559650204, guid: 89d787b1391e33143b7b890d661f339a, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -10129,6 +10149,10 @@ PrefabInstance:
     - target: {fileID: 6413864487901155775, guid: be9b70cc4f45692438811b563712b076, type: 3}
       propertyPath: m_Name
       value: ForestHut
+      objectReference: {fileID: 0}
+    - target: {fileID: 6413864489172851547, guid: be9b70cc4f45692438811b563712b076, type: 3}
+      propertyPath: resCurrent
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be9b70cc4f45692438811b563712b076, type: 3}
