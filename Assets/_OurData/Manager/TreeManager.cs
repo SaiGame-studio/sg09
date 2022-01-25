@@ -35,6 +35,8 @@ public class TreeManager : SaiBehaviour
         if (this.trees.Contains(tree)) return;
         this.trees.Add(tree);
         tree.transform.parent = transform;
+
+        //TODO: new tree, need check with current Forest Hut
     }
 
     public virtual List<GameObject> Trees()

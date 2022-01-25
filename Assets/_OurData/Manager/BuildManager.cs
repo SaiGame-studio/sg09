@@ -65,7 +65,6 @@ public class BuildManager : SaiBehaviour
             this.currentBuild = build;
             this.currentBuild.gameObject.SetActive(true);
             Invoke("SetIsBuilding", 0.5f);
-            //this.isBuilding = true;
         }
     }
 
@@ -96,6 +95,7 @@ public class BuildManager : SaiBehaviour
     {
         GameObject newBuild = Instantiate(this.currentBuild.gameObject);
         newBuild.transform.position = this.buildPos;
+        newBuild.name = this.currentBuild.name;
 
         this.currentBuild.gameObject.SetActive(false);
         this.currentBuild = null;
