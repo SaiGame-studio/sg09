@@ -113,7 +113,6 @@ public class HouseBuilderTask : BuildingTask
         if (!workerCtrl.workerMovement.IsClose2Target()) return;
 
         workerCtrl.workerMovement.SetTarget(null);
-
         workerCtrl.workerTasks.TaskCurrentDone();
 
         Resource res = workerCtrl.resCarrier.TakeFirst();
