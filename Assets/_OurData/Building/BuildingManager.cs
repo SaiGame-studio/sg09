@@ -39,7 +39,7 @@ public class BuildingManager : SaiBehaviour
         {
             buildingCtrl = this.buildingCtrls[i];
             if (!buildingCtrl.workers.IsNeedWorker()) continue;
-            if (buildingCtrl.warehouse.buildingType != buildingType) continue;
+            if (buildingCtrl.buildingType != buildingType) continue;
 
             return buildingCtrl;
         }
@@ -49,5 +49,11 @@ public class BuildingManager : SaiBehaviour
     public virtual List<BuildingCtrl> BuildingCtrls()
     {
         return this.buildingCtrls;
+    }
+
+    public virtual void AddBuilding(BuildingCtrl buildingCtrl)
+    {
+        this.buildingCtrls.Add(buildingCtrl);
+        buildingCtrl.transform.parent = transform;
     }
 }

@@ -64,7 +64,7 @@ public class BuildManager : SaiBehaviour
 
             this.currentBuild = build;
             this.currentBuild.gameObject.SetActive(true);
-            Invoke("SetIsBuilding", 0.5f);
+            Invoke("SetIsBuilding", 0.2f);
         }
     }
 
@@ -100,6 +100,9 @@ public class BuildManager : SaiBehaviour
         this.currentBuild.gameObject.SetActive(false);
         this.currentBuild = null;
         this.isBuilding = false;
+
+        AbstractConstruction abstractConstruction = newBuild.GetComponent<AbstractConstruction>();
+        ConstructionManager.instance.AddConstruction(abstractConstruction);
     }
 
     private void OnDrawGizmosSelected()
