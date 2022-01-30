@@ -4,7 +4,7 @@ using UnityEngine;
 public class Warehouse : SaiBehaviour
 {
     [Header("Warehouse")]
-    public BuildingType buildingType = BuildingType.workStation;
+    //public BuildingType buildingType = BuildingType.workStation;
     [SerializeField] protected bool isFull = false;
     [SerializeField] protected List<ResHolder> resHolders;
 

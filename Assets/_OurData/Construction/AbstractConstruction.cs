@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildBuilding : SaiBehaviour
+public class AbstractConstruction : SaiBehaviour
 {
     [Header("Build")]
     [SerializeField] protected float percent = 0f;
     [SerializeField] protected float timer = 0f;
     [SerializeField] protected float delay = 0.05f;
     [SerializeField] protected List<string> buildNames;
+    [SerializeField] protected List<Resource> resRequires;
+    [SerializeField] protected List<Resource> resHave;
 
     protected override void FixedUpdate()
     {
@@ -27,14 +29,36 @@ public class BuildBuilding : SaiBehaviour
     {
         base.LoadComponents();
         this.LoadBuildNames();
+        this.LoadResRequires();
     }
 
     protected virtual void Building()
     {
+        if (!this.HasEnoughResource()) return;
+
         this.timer += Time.fixedDeltaTime;
         if (this.timer < this.delay) return;
         this.timer = 0;
         this.percent += 1;
+    }
+
+    protected virtual void LoadResRequires()
+    {
+        //For override
+    }
+
+    public virtual bool HasEnoughResource()
+    {
+        if (this.resRequires.Count < 1) return true;
+
+        foreach (Resource resRequire in this.resRequires)
+        {
+            Resource resHas = this.resHave.Find((x) => x.name == resRequire.name);
+            if (resHas == null) return false;
+            if (resRequire.number > resHas.number) return false;
+        }
+
+        return true;
     }
 
     protected virtual Transform FinishBuild()

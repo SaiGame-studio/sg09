@@ -5,6 +5,7 @@ using UnityEngine;
 public class BuildingCtrl : SaiBehaviour
 {
     [Header("Building")]
+    public BuildingType buildingType = BuildingType.workStation;
     public Transform door;
     public Workers workers;
     public Warehouse warehouse;

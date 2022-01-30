@@ -2,23 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildTree : BuildBuilding
+public class BuildWorker : AbstractConstruction
 {
-    //[Header("Tree")]
+    //[Header("Worker")]
 
     protected override void LoadBuildNames()
     {
         if (this.buildNames.Count > 0) return;
-        this.buildNames.Add("Tree_1");
-        this.buildNames.Add("Tree_2");
-        this.buildNames.Add("Tree_3");
+        this.buildNames.Add("Kachujin");
+        this.buildNames.Add("ErikaArcher");
+        this.buildNames.Add("AkaiEspiritu");
+        this.buildNames.Add("Arissa");
         Debug.Log(transform.name + ": LoadBuildNames", gameObject);
     }
 
     protected override Transform FinishBuild()
     {
         Transform newBuild = base.FinishBuild();
-        TreeManager.instance.TreeAdd(newBuild.gameObject);
+        newBuild.parent = WorkerManager.instance.transform;
         return newBuild;
     }
 }

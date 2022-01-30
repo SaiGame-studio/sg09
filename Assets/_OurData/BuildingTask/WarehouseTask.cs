@@ -79,7 +79,7 @@ public class WarehouseTask : BuildingTask
     {
         foreach (BuildingCtrl buildingCtrl in BuildingManager.instance.BuildingCtrls())
         {
-            if (buildingCtrl.warehouse.buildingType != BuildingType.workStation) continue;
+            if (buildingCtrl.buildingType != BuildingType.workStation) continue;
             ResHolder resHolder = buildingCtrl.warehouse.ResNeed2Move();
             if (resHolder == null) continue;
             return buildingCtrl;
@@ -92,7 +92,7 @@ public class WarehouseTask : BuildingTask
     {
         foreach (BuildingCtrl buildingCtrl in BuildingManager.instance.BuildingCtrls())
         {
-            if (buildingCtrl.warehouse.buildingType != BuildingType.workStation) continue;
+            if (buildingCtrl.buildingType != BuildingType.workStation) continue;
             ResHolder resHolder = buildingCtrl.warehouse.IsNeedRes(resName);
             if (resHolder == null) continue;
             return buildingCtrl;
