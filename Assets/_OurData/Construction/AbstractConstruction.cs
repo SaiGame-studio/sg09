@@ -61,6 +61,18 @@ public class AbstractConstruction : SaiBehaviour
         return true;
     }
 
+    public virtual ResourceName GetResRequireName()
+    {
+        foreach (Resource resRequire in this.resRequires)
+        {
+            Resource resHas = this.resHave.Find((x) => x.name == resRequire.name);
+            if (resHas == null) return resRequire.name;
+            if (resRequire.number > resHas.number) return resRequire.name;
+        }
+
+        return ResourceName.noResource;
+    }
+
     protected virtual Transform FinishBuild()
     {
         Transform newBuild = PrefabManager.instance.Instantiate(this.GetBuildName());
@@ -89,5 +101,22 @@ public class AbstractConstruction : SaiBehaviour
         string name = transform.name.Replace("Build", "");
         this.buildNames.Add(name);
         Debug.Log(transform.name + ": LoadBuildNames", gameObject);
+    }
+
+    public virtual void AddRes(ResourceName resourceName, float count)
+    {
+        Resource resource = this.resHave.Find((x) => x.name == resourceName);
+        if (resource != null)
+        {
+            resource.number += count;
+            return;
+        }
+
+        resource = new Resource
+        {
+            name = resourceName,
+            number = count
+        };
+        this.resHave.Add(resource);
     }
 }

@@ -20,5 +20,6 @@ public enum TaskType
     findBuildingNeedRes = 301,
 
     //House Builder
-
+    findWarehouseHasRes = 400,
+    buildConstruction = 401,
 }
