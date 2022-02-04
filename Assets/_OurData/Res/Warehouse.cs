@@ -58,6 +58,8 @@ public class Warehouse : SaiBehaviour
     public virtual ResHolder RemoveResource(ResourceName resourceName, float number)
     {
         ResHolder res = this.GetResource(resourceName);
+        if (res.Current() < number) return null;
+
         res.Deduct(number);
         return res;
     }

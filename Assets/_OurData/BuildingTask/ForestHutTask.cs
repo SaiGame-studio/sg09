@@ -120,7 +120,7 @@ public class ForestHutTask : BuildingTask
 
         if (workerCtrl.workerMovement.IsClose2Target())
         {
-            workerCtrl.workerMovement.SetTarget(null);
+            //workerCtrl.workerMovement.SetTarget(null);
             Destroy(target.gameObject);//TODO: not done yet
             this.Planting(workerCtrl.transform);
 
@@ -232,7 +232,7 @@ public class ForestHutTask : BuildingTask
         }
         else if (workerCtrl.workerMovement.TargetDistance() <= 1.5f)
         {
-            workerCtrl.workerMovement.SetTarget(null);
+            //workerCtrl.workerMovement.SetTarget(null);
             workerCtrl.workerTasks.TaskCurrentDone();
         }
     }
