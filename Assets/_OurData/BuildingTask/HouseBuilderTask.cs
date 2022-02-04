@@ -62,27 +62,14 @@ public class HouseBuilderTask : BuildingTask
 
     protected virtual void FindWarehouseHasRes(WorkerCtrl workerCtrl)
     {
-        if (this.IsConstructionFinish())
-        {
-            workerCtrl.workerTasks.TaskCurrentDone();
-            workerCtrl.workerTasks.TaskAdd(TaskType.goToWorkStation);
-            return;
-        }
-
-        //TODO: can we invoke this?
         ResourceName resRequireName = this.construction.GetResRequireName();
-        if (resRequireName == ResourceName.noResource)
-        {
-            workerCtrl.workerTasks.TaskCurrentDone();
-            workerCtrl.workerTasks.TaskAdd(TaskType.buildConstruction);
-            return;
-        }
 
         foreach (BuildingCtrl warehouse in this.warehouses)
         {
             ResHolder resHolder = warehouse.warehouse.GetResource(resRequireName);
             if (resHolder.Current() < 1) continue;
             workerCtrl.workerTasks.taskBuildingCtrl = warehouse;
+            workerCtrl.workerTasks.TaskCurrentDone();
             workerCtrl.workerTasks.TaskAdd(TaskType.getResNeed2Move);
             return;
         }
@@ -90,26 +77,14 @@ public class HouseBuilderTask : BuildingTask
 
     protected virtual void GetResNeed2Move(WorkerCtrl workerCtrl)
     {
-        if (this.IsConstructionFinish())
-        {
-            workerCtrl.workerTasks.TaskCurrentDone();
-            workerCtrl.workerTasks.TaskAdd(TaskType.goToWorkStation);
-            return;
-        }
-
         BuildingCtrl warehouseCtrl = workerCtrl.workerTasks.taskBuildingCtrl;
 
         ResourceName resRequireName = this.construction.GetResRequireName();
-        if (resRequireName == ResourceName.noResource)
-        {
-            workerCtrl.workerTasks.TaskCurrentDone();
-            return;
-        }
-
         ResHolder resHolder = warehouseCtrl.warehouse.GetResource(resRequireName);
-        if (resHolder.Current() < 1)
+        if (resHolder.Current() < 1)//Note: not relace with multi workers
         {
             workerCtrl.workerTasks.TaskCurrentDone();
+            workerCtrl.workerTasks.TaskAdd(TaskType.findWarehouseHasRes);
             return;
         }
 
@@ -121,56 +96,35 @@ public class HouseBuilderTask : BuildingTask
 
         if (!workerCtrl.workerMovement.IsClose2Target()) return;
 
+        workerCtrl.workerTasks.TaskCurrentDone();
         int carryCount = workerCtrl.resCarrier.carryCount;
         warehouseCtrl.warehouse.RemoveResource(resRequireName, carryCount);
         workerCtrl.resCarrier.AddResource(resRequireName, carryCount);
-
-        workerCtrl.workerTasks.TaskCurrentDone();
         workerCtrl.workerTasks.TaskAdd(TaskType.bringResourceBack);
     }
 
     protected virtual void BringResToConstruction(WorkerCtrl workerCtrl)
     {
-        if (this.IsConstructionFinish())
-        {
-            workerCtrl.workerMovement.SetTarget(null);
-            workerCtrl.workerTasks.ClearAllTasks();
-            workerCtrl.workerTasks.TaskAdd(TaskType.goToWorkStation);
-
-            workerCtrl.resCarrier.TakeFirst();
-            //TODO: or bring back to warehouse
-
-            return;
-        }
-
-        Resource resCurrent = workerCtrl.resCarrier.GetFirst();
-        ResourceName resRequireName = this.construction.GetResRequireName();
-        if (resRequireName != resCurrent.name)
-        {
-            workerCtrl.resCarrier.TakeFirst();
-            //TODO: or bring back to warehouse
-
-            workerCtrl.workerTasks.TaskCurrentDone();
-            return;
-        }
-
         Transform target = workerCtrl.workerMovement.GetTarget();
         if (target == null) workerCtrl.workerMovement.SetTarget(this.construction.transform);
-
         if (!workerCtrl.workerMovement.IsClose2Target()) return;
-
 
         workerCtrl.workerTasks.TaskCurrentDone();
         Resource res = workerCtrl.resCarrier.TakeFirst();
         this.construction.AddRes(res.name, res.number);
+
+        ResourceName resRequireName = this.construction.GetResRequireName();
+        if (resRequireName == ResourceName.noResource)
+        {
+            workerCtrl.workerTasks.TaskAdd(TaskType.buildConstruction);
+            return;
+        }
+
+        workerCtrl.workerTasks.TaskAdd(TaskType.findWarehouseHasRes);
     }
 
     protected virtual void BuildConstruction(WorkerCtrl workerCtrl)
     {
-        Transform target = workerCtrl.workerMovement.GetTarget();
-        if (target == null) workerCtrl.workerMovement.SetTarget(this.construction.transform);
-        if (!workerCtrl.workerMovement.IsClose2Target()) return;
-
         if (!this.IsConstructionFinish()) return;
 
         workerCtrl.workerTasks.TaskCurrentDone();

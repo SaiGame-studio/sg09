@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class BuildBuilding : AbstractConstruction
 {
-
-
     protected override Transform FinishBuild()
     {
         Transform newBuild = base.FinishBuild();
@@ -13,7 +11,6 @@ public class BuildBuilding : AbstractConstruction
         BuildingManager.instance.AddBuilding(buildingCtrl);
         return newBuild;
     }
-
 
     protected override void Building()
     {
