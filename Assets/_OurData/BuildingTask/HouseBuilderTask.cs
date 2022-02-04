@@ -129,11 +129,12 @@ public class HouseBuilderTask : BuildingTask
 
         workerCtrl.workerTasks.TaskCurrentDone();
         workerCtrl.workerTasks.TaskAdd(TaskType.goToWorkStation);
+        //TODO: add building animation
     }
 
     protected virtual bool IsConstructionFinish()
     {
-        if (this.construction == null) return true;
+        if (this.construction == null) return true;//TODO: untesting code
 
         float percent = this.construction.Percent();
         if (percent < 99) return false;

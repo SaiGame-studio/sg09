@@ -1273,7 +1273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7861573742559650204, guid: 89d787b1391e33143b7b890d661f339a, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7861573742559650204, guid: 89d787b1391e33143b7b890d661f339a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1285,7 +1285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7861573742559650204, guid: 89d787b1391e33143b7b890d661f339a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 31
+      value: 34.8
       objectReference: {fileID: 0}
     - target: {fileID: 7861573742559650204, guid: 89d787b1391e33143b7b890d661f339a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1321,7 +1321,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7861573743832563567, guid: 89d787b1391e33143b7b890d661f339a, type: 3}
       propertyPath: resCurrent
-      value: 700
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89d787b1391e33143b7b890d661f339a, type: 3}
@@ -4314,9 +4314,9 @@ MonoBehaviour:
   - ForestHut
   resRequires:
   - name: 2001
-    number: 1
+    number: 7
   - name: 1001
-    number: 1
+    number: 7
   resHave: []
 --- !u!23 &695125066
 MeshRenderer:
@@ -4576,6 +4576,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5440707293445741943, guid: 494f6d43e170e9145bc7865d243ee00b, type: 3}
   m_PrefabInstance: {fileID: 758815860}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &765173283 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7861573742559650200, guid: 89d787b1391e33143b7b890d661f339a, type: 3}
+  m_PrefabInstance: {fileID: 195615859}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a1d9b155d0fb24f96e6550d4511eb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &801047906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6262,7 +6273,7 @@ Transform:
   - {fileID: 1418292663}
   - {fileID: 126816509}
   m_Father: {fileID: 2050567618}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -91.01, z: 0}
 --- !u!114 &1111069689
 MonoBehaviour:
@@ -12545,9 +12556,9 @@ Transform:
   m_Children:
   - {fileID: 370456457}
   - {fileID: 6184560489232924987}
+  - {fileID: 195615860}
   - {fileID: 1015979668674601342}
   - {fileID: 1111069688}
-  - {fileID: 195615860}
   m_Father: {fileID: 907217178}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12566,6 +12577,7 @@ MonoBehaviour:
   buildingCtrls:
   - {fileID: 370456461}
   - {fileID: 6184560489232924991}
+  - {fileID: 765173283}
   - {fileID: 1015979668674601338}
   - {fileID: 1111069692}
 --- !u!1 &2052266010
@@ -12898,7 +12910,7 @@ Transform:
   - {fileID: 1015979668195623666}
   - {fileID: 1015979668518898965}
   m_Father: {fileID: 2050567618}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -91.01, z: 0}
 --- !u!1 &1015979668674601343
 GameObject:
@@ -13053,7 +13065,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7861573742202763443, guid: 89d787b1391e33143b7b890d661f339a, type: 3}
       propertyPath: resCurrent
-      value: 700
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7861573742559650204, guid: 89d787b1391e33143b7b890d661f339a, type: 3}
       propertyPath: m_RootOrder
