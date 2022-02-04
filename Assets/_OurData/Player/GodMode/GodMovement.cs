@@ -4,6 +4,7 @@ public class GodMovement : SaiBehaviour
 {
     public GodModeCtrl godModeCtrl;
     public float speed = 27f;
+    public float speedRotate = 0.1f;
     public bool speedShift = false;
     public float minY = 4f;
     public float maxY = 70f;
@@ -47,6 +48,7 @@ public class GodMovement : SaiBehaviour
         if (newPos.y > this.maxY) newPos.y = this.maxY;
         transform.position = newPos;
 
+        this.camRotation = this.camRotation * this.speedRotate;
         transform.Rotate(this.camRotation);
     }
 }

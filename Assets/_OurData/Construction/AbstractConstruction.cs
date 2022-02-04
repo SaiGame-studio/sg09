@@ -5,6 +5,7 @@ using UnityEngine;
 public class AbstractConstruction : SaiBehaviour
 {
     [Header("Build")]
+    public BuildingCtrl builder;
     [SerializeField] protected float percent = 0f;
     [SerializeField] protected float timer = 0f;
     [SerializeField] protected float delay = 0.05f;
@@ -118,5 +119,15 @@ public class AbstractConstruction : SaiBehaviour
             number = count
         };
         this.resHave.Add(resource);
+    }
+
+    public virtual float Percent()
+    {
+        return this.percent;
+    }
+
+    public virtual void Finish()
+    {
+        this.percent = 100;
     }
 }

@@ -81,6 +81,12 @@ public class WorkerTasks : SaiBehaviour
     {
         if (this.tasks.Count <= 0) return;
         this.tasks.RemoveAt(this.tasks.Count - 1);
+        this.workerCtrl.workerMovement.SetTarget(null);
+    }
+
+    public virtual void ClearAllTasks()
+    {
+        this.tasks.Clear();
     }
 
     public virtual TaskType TaskCurrent()

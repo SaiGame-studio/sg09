@@ -72,7 +72,7 @@ public class WarehouseTask : BuildingTask
     {
         workerCtrl.workerTasks.TaskCurrentDone();
         workerCtrl.workerTasks.taskBuildingCtrl = null;
-        workerCtrl.workerMovement.SetTarget(null);
+        //workerCtrl.workerMovement.SetTarget(null);
     }
 
     protected virtual BuildingCtrl GetWorkStationHasResNeed2Move()
@@ -111,7 +111,7 @@ public class WarehouseTask : BuildingTask
 
         if (!workerCtrl.workerMovement.IsClose2Target()) return;
 
-        workerCtrl.workerMovement.SetTarget(null);
+        //workerCtrl.workerMovement.SetTarget(null);
         workerTasks.taskBuildingCtrl = null;
         workerTasks.TaskCurrentDone();
 

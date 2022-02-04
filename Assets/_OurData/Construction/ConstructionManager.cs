@@ -23,6 +23,7 @@ public class ConstructionManager : SaiBehaviour
     {
         foreach (AbstractConstruction construction in this.constructions)
         {
+            if (construction.builder != null) continue;
             if (!construction.HasEnoughResource()) return construction;
         }
 
