@@ -58,13 +58,17 @@ public class BuildManager : SaiBehaviour
         this.isBuilding = false;
         if (this.currentBuild != null) this.currentBuild.gameObject.SetActive(false);
 
+        //Debug.Log(transform.name + ": " + buildName);
         foreach (Transform build in this.buildPrefabs)
         {
+            //Debug.Log("build.name: " + build.name);
             if (build.name != buildName) continue;
 
+            //Debug.Log("Found");
             this.currentBuild = build;
             this.currentBuild.gameObject.SetActive(true);
             Invoke("SetIsBuilding", 0.2f);
+            return;
         }
     }
 
@@ -75,6 +79,7 @@ public class BuildManager : SaiBehaviour
 
     public virtual void CurrentBuildClear()
     {
+        this.currentBuild.gameObject.SetActive(false);
         this.currentBuild = null;
     }
 
@@ -84,7 +89,8 @@ public class BuildManager : SaiBehaviour
 
         Ray ray = GodModeCtrl.instance._camera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        int mask = (1 << MyLayerManager.instance.layerGround);
+        if (Physics.Raycast(ray, out RaycastHit hit, 999, mask))
         {
             this.buildPos = hit.point;
             this.currentBuild.position = this.buildPos;
@@ -93,6 +99,15 @@ public class BuildManager : SaiBehaviour
 
     public virtual void CurrentBuildPlace()
     {
+        if (this.currentBuild == null) return;
+
+        ConstructionCtrl constructionCtrl = this.currentBuild.GetComponent<ConstructionCtrl>();
+        if (constructionCtrl && constructionCtrl.limitRadius.IsCollided())
+        {
+            Debug.LogWarning("Collided: " + constructionCtrl.limitRadius.collideObjects.Count);
+            return;
+        }
+
         GameObject newBuild = Instantiate(this.currentBuild.gameObject);
         newBuild.transform.position = this.buildPos;
         newBuild.name = this.currentBuild.name;
@@ -102,6 +117,7 @@ public class BuildManager : SaiBehaviour
         this.isBuilding = false;
 
         AbstractConstruction abstractConstruction = newBuild.GetComponent<AbstractConstruction>();
+        abstractConstruction.isPlaced = true;
         ConstructionManager.instance.AddConstruction(abstractConstruction);
     }
 

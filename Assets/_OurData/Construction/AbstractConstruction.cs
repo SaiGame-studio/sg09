@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class AbstractConstruction : SaiBehaviour
 {
     [Header("Build")]
     public BuildingCtrl builder;
+    public bool isPlaced= false;
     [SerializeField] protected float percent = 0f;
     [SerializeField] protected float timer = 0f;
     [SerializeField] protected float delay = 0.05f;
@@ -35,6 +37,7 @@ public class AbstractConstruction : SaiBehaviour
 
     protected virtual void Building()
     {
+        if (!this.isPlaced) return;
         if (!this.HasEnoughResource()) return;
 
         this.timer += Time.fixedDeltaTime;
@@ -94,13 +97,18 @@ public class AbstractConstruction : SaiBehaviour
     {
         this.percent = 0;
         this.timer = 0;
+        this.isPlaced = false;
     }
 
     protected virtual void LoadBuildNames()
     {
         if (this.buildNames.Count > 0) return;
-        string name = transform.name.Replace("Build", "");
-        this.buildNames.Add(name);
+        Regex regex = new Regex(Regex.Escape("Build"));
+        string newText = regex.Replace(transform.name, "", 1);
+        this.buildNames.Add(newText);
+
+        //string name = transform.name.Replace("Build", "");
+        //this.buildNames.Add(name);
         Debug.Log(transform.name + ": LoadBuildNames", gameObject);
     }
 

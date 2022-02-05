@@ -47,6 +47,7 @@ public class PrefabManager : SaiBehaviour
 
     public virtual Transform Instantiate(string prefabName)
     {
+        Debug.Log(transform.name + ": " + prefabName);
         Transform prefab = this.Get(prefabName);
         GameObject newObj = Instantiate(prefab.gameObject);
         newObj.name = prefab.name;

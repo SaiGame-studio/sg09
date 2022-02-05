@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6413864487901155772
 Transform:
   m_ObjectHideFlags: 0
@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73a1d9b155d0fb24f96e6550d4511eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingType: 1
   door: {fileID: 6413864488622051989}
   workers: {fileID: 6413864487901155771}
   warehouse: {fileID: 326698671611833975}
@@ -82,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3e80d28e03c754a9651b7ed573dc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWorker: 2
+  maxWorker: 1
   workers: []
 --- !u!114 &326698671611833975
 MonoBehaviour:
@@ -96,7 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75cd4439bdc27c43b70ff525660281d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingType: 1
   isFull: 0
   resHolders:
   - {fileID: 6413864489172851547}
