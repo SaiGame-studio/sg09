@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class AbstractConstruction : SaiBehaviour
@@ -99,8 +100,12 @@ public class AbstractConstruction : SaiBehaviour
     protected virtual void LoadBuildNames()
     {
         if (this.buildNames.Count > 0) return;
-        string name = transform.name.Replace("Build", "");
-        this.buildNames.Add(name);
+        Regex regex = new Regex(Regex.Escape("Build"));
+        string newText = regex.Replace(transform.name, "", 1);
+        this.buildNames.Add(newText);
+
+        //string name = transform.name.Replace("Build", "");
+        //this.buildNames.Add(name);
         Debug.Log(transform.name + ": LoadBuildNames", gameObject);
     }
 
