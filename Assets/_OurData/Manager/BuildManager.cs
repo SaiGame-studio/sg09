@@ -102,7 +102,7 @@ public class BuildManager : SaiBehaviour
         if (this.currentBuild == null) return;
 
         ConstructionCtrl constructionCtrl = this.currentBuild.GetComponent<ConstructionCtrl>();
-        if (constructionCtrl.limitRadius.IsCollided())
+        if (constructionCtrl && constructionCtrl.limitRadius.IsCollided())
         {
             Debug.LogWarning("Collided: " + constructionCtrl.limitRadius.collideObjects.Count);
             return;

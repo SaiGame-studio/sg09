@@ -4476,7 +4476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d74a65554f597488fdc45c9e1a4bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerGround: 7
+  layerGround: 10
   layerBuilding: 9
   layerTree: 8
 --- !u!4 &716428947 stripped
