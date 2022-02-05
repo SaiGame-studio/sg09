@@ -7,6 +7,7 @@ public class AbstractConstruction : SaiBehaviour
 {
     [Header("Build")]
     public BuildingCtrl builder;
+    public bool isPlaced= false;
     [SerializeField] protected float percent = 0f;
     [SerializeField] protected float timer = 0f;
     [SerializeField] protected float delay = 0.05f;
@@ -36,6 +37,7 @@ public class AbstractConstruction : SaiBehaviour
 
     protected virtual void Building()
     {
+        if (!this.isPlaced) return;
         if (!this.HasEnoughResource()) return;
 
         this.timer += Time.fixedDeltaTime;
@@ -95,6 +97,7 @@ public class AbstractConstruction : SaiBehaviour
     {
         this.percent = 0;
         this.timer = 0;
+        this.isPlaced = false;
     }
 
     protected virtual void LoadBuildNames()

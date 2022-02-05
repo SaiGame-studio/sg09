@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 405706141920207838}
   - component: {fileID: 405706141920207811}
   - component: {fileID: 7604185035503491756}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tree_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63828e01cc9f313479513ac59c2010d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingType: 0
   isFull: 0
   resHolders:
   - {fileID: 405706142912314044}
