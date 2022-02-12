@@ -120,8 +120,7 @@ public class ForestHutTask : BuildingTask
 
         if (workerCtrl.workerMovement.IsClose2Target())
         {
-            //workerCtrl.workerMovement.SetTarget(null);
-            Destroy(target.gameObject);//TODO: not done yet
+            PrefabManager.instance.Destroy(target);
             this.Planting(workerCtrl.transform);
 
             if (!this.NeedMoreTree())
@@ -204,7 +203,7 @@ public class ForestHutTask : BuildingTask
         List<Resource> resources = treeCtrl.logwoodGenerator.TakeAll();
         treeCtrl.choper = null;
         this.trees.Remove(treeCtrl.gameObject);
-        TreeManager.instance.Trees().Remove(treeCtrl.gameObject);
+        TreeManager.instance.TreeRemove(treeCtrl.gameObject);
 
         workerCtrl.workerMovement.isWorking = false;
         workerCtrl.workerTasks.taskTarget = null;
@@ -212,13 +211,13 @@ public class ForestHutTask : BuildingTask
 
         workerCtrl.workerTasks.TaskCurrentDone();
 
-        StartCoroutine(RemoveTree(tree));
+        StartCoroutine(this.RemoveTree(tree));
     }
 
     private IEnumerator RemoveTree(Transform tree)
     {
         yield return new WaitForSeconds(this.treeRemoveSpeed);
-        Destroy(tree.gameObject);
+        PrefabManager.instance.Destroy(tree);
     }
 
     protected virtual void FindTree2Chop(WorkerCtrl workerCtrl)

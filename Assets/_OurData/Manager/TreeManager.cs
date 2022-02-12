@@ -39,6 +39,11 @@ public class TreeManager : SaiBehaviour
         //TODO: new tree, need check with current Forest Hut
     }
 
+    public virtual bool TreeRemove(GameObject tree)
+    {
+        return this.trees.Remove(tree);
+    }
+
     public virtual List<GameObject> Trees()
     {
         return this.trees;
