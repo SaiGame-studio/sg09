@@ -108,17 +108,22 @@ public class BuildManager : SaiBehaviour
             return;
         }
 
-        GameObject newBuild = Instantiate(this.currentBuild.gameObject);
-        newBuild.transform.position = this.buildPos;
-        newBuild.name = this.currentBuild.name;
+        string constructioName = constructionCtrl.abstractConstruction.GetConstructionName();
+        if (constructioName != null)
+        {
+            Transform newBuild = PrefabManager.instance.Instantiate(constructioName);
+            newBuild.position = this.buildPos;
+            newBuild.name = this.currentBuild.name;
+            newBuild.gameObject.SetActive(true);
+
+            AbstractConstruction abstractConstruction = newBuild.GetComponent<AbstractConstruction>();
+            abstractConstruction.isPlaced = true;
+            ConstructionManager.instance.AddConstruction(abstractConstruction);
+        }
 
         this.currentBuild.gameObject.SetActive(false);
         this.currentBuild = null;
         this.isBuilding = false;
-
-        AbstractConstruction abstractConstruction = newBuild.GetComponent<AbstractConstruction>();
-        abstractConstruction.isPlaced = true;
-        ConstructionManager.instance.AddConstruction(abstractConstruction);
     }
 
     private void OnDrawGizmosSelected()

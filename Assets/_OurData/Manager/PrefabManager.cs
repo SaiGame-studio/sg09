@@ -31,7 +31,7 @@ public class PrefabManager : SaiBehaviour
         foreach (Transform child in transform)
         {
             this.prefabs.Add(child);
-            child.gameObject.SetActive(false);
+            //child.gameObject.SetActive(false);
         }
 
         Debug.Log(transform.name + ": LoadPrefabs", gameObject);

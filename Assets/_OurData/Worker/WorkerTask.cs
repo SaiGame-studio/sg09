@@ -41,7 +41,7 @@ public class WorkerTask : SaiBehaviour
         BuildingCtrl buildingCtrl = BuildingManager.instance.FindBuilding(this.GetBuildingType());
         if (buildingCtrl == null) return;
 
-        buildingCtrl.workers.AddWorker(transform);
+        buildingCtrl.workers.AddWorker(this.workerCtrl);
         this.AssignBuilding(buildingCtrl);
     }
 

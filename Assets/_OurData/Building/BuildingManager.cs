@@ -56,4 +56,9 @@ public class BuildingManager : SaiBehaviour
         this.buildingCtrls.Add(buildingCtrl);
         buildingCtrl.transform.parent = transform;
     }
+
+    public virtual void RemoveBuilding(BuildingCtrl buildingCtrl)
+    {
+        this.buildingCtrls.Remove(buildingCtrl);
+    }
 }

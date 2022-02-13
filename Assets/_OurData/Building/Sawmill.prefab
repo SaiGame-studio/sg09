@@ -560,7 +560,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1792137077195344518}
-  - component: {fileID: 1792137077195344517}
+  - component: {fileID: 2882812120664075393}
   m_Layer: 0
   m_Name: blank
   m_TagString: Untagged
@@ -582,7 +582,7 @@ Transform:
   m_Father: {fileID: 1792137077444106691}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1792137077195344517
+--- !u!114 &2882812120664075393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -591,12 +591,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1792137077195344519}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3edd0456117487428cc0bb34edd2174, type: 3}
+  m_Script: {fileID: 11500000, guid: f0bfb539a82135346bb5dbd3ab82f898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   resourceName: 2001
   resCurrent: 0
-  resMax: 6
+  resMax: 4
 --- !u!1 &1792137077305627623
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,17 +852,19 @@ GameObject:
   m_Component:
   - component: {fileID: 1792137077537248374}
   - component: {fileID: 1792137077537248368}
+  - component: {fileID: 4807377348956096575}
   - component: {fileID: 1792137077537248370}
   - component: {fileID: 1792137077537248371}
   - component: {fileID: 7111106606662555303}
   - component: {fileID: 1792137077537248373}
-  m_Layer: 0
+  - component: {fileID: 1557040200}
+  m_Layer: 9
   m_Name: Sawmill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1792137077537248374
 Transform:
   m_ObjectHideFlags: 0
@@ -897,6 +899,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: -1, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &4807377348956096575
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792137077537248375}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6, y: 2, z: 6}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1792137077537248370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -942,8 +957,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFull: 0
   resHolders:
-  - {fileID: 1792137077885554009}
-  - {fileID: 1792137077195344517}
+  - {fileID: 2377267441536401593}
+  - {fileID: 2882812120664075393}
 --- !u!114 &1792137077537248373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,6 +978,19 @@ MonoBehaviour:
   workingPoint: {fileID: 1792137076977262338}
   logwoodCost: 1
   blankReceive: 2
+--- !u!114 &1557040200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792137077537248375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4783ed3689984a4fa73d5cf1318a2b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingCtrl: {fileID: 1792137077537248370}
 --- !u!1 &1792137077553118293
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,7 +1404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1792137077885554010}
-  - component: {fileID: 1792137077885554009}
+  - component: {fileID: 2377267441536401593}
   m_Layer: 0
   m_Name: logwood
   m_TagString: Untagged
@@ -1398,7 +1426,7 @@ Transform:
   m_Father: {fileID: 1792137077444106691}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1792137077885554009
+--- !u!114 &2377267441536401593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1407,12 +1435,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1792137077885554011}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3edd0456117487428cc0bb34edd2174, type: 3}
+  m_Script: {fileID: 11500000, guid: 3442f911a8897cf4f9fedf25d08fc7e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   resourceName: 1001
   resCurrent: 0
-  resMax: 4
+  resMax: 1
 --- !u!1 &1792137077964781563
 GameObject:
   m_ObjectHideFlags: 0

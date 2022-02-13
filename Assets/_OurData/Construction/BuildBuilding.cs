@@ -16,4 +16,5 @@ public class BuildBuilding : AbstractConstruction
     {
         if (this.percent < 99) base.Building();
     }
+
 }

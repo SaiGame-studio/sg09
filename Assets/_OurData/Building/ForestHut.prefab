@@ -10,17 +10,19 @@ GameObject:
   m_Component:
   - component: {fileID: 6413864487901155772}
   - component: {fileID: 6413864487901155768}
+  - component: {fileID: 2220607811254091017}
   - component: {fileID: 6413864487901155769}
   - component: {fileID: 6413864487901155771}
   - component: {fileID: 326698671611833975}
   - component: {fileID: 9142610252589916622}
-  m_Layer: 0
+  - component: {fileID: 1418692019}
+  m_Layer: 9
   m_Name: ForestHut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6413864487901155772
 Transform:
   m_ObjectHideFlags: 0
@@ -54,6 +56,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &2220607811254091017
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6413864487901155775}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6, y: 3, z: 6}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &6413864487901155769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +141,19 @@ MonoBehaviour:
   - {fileID: 227756857801289067, guid: ae02eacbba542344db1c3a37063ed2ba, type: 3}
   - {fileID: 3761355089378600440, guid: 73ee29e5ad8dd3d4591711bbb5df33c1, type: 3}
   trees: []
+--- !u!114 &1418692019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6413864487901155775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4783ed3689984a4fa73d5cf1318a2b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingCtrl: {fileID: 6413864487901155769}
 --- !u!1 &6413864488128703817
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceName: 1001
   resCurrent: 0
-  resMax: 7
+  resMax: Infinity
 --- !u!1001 &6413864487984426752
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -65,4 +65,11 @@ public class WorkerCtrl : SaiBehaviour
         this.resCarrier = GetComponent<ResCarrier>();
         Debug.Log(transform.name + ": ResCarrier", gameObject);
     }
+
+    public virtual void WorkerReleased()
+    {
+        this.workerTasks.readyForTask = false;
+        this.workerTasks.taskWorking.GoOutBuilding();
+        this.workerBuildings.WorkerReleased();
+    }
 }

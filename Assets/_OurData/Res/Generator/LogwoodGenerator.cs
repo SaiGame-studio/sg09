@@ -6,6 +6,12 @@ public class LogwoodGenerator : ResGenerator
 {
     //[Header("LogwoodGenerator")]
 
+    protected override void ResetValues()
+    {
+        base.ResetValues();
+        this.createDelay = 60f;
+    }
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
