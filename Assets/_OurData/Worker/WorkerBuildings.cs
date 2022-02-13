@@ -28,4 +28,10 @@ public class WorkerBuildings : SaiBehaviour
     {
         this.homeBuilding = buildingCtrl;
     }
+
+    public virtual void WorkerReleased()
+    {
+        this.workBuilding = null;
+        this.homeBuilding = null;
+    }
 }

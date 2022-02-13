@@ -5,25 +5,8 @@ using UnityEngine;
 public class Workers : SaiBehaviour
 {
     [SerializeField] protected int maxWorker = 1;
-    [SerializeField] protected List<Transform> workers;
-
-    protected override void LoadComponents()
-    {
-        //this.LoadWorkers();
-    }
-
-    protected virtual void LoadWorkers()
-    {
-        if (this.workers.Count > 0) return;
-
-        Transform workers = transform.Find("Workers");
-        foreach (Transform worker in workers)
-        {
-            this.workers.Add(worker);
-        }
-
-        Debug.Log(transform.name + ": LoadWorkers", gameObject);
-    }
+    [SerializeField] protected List<WorkerCtrl> workers;
+    //[SerializeField] protected List<Transform> workers;
 
     public virtual bool IsNeedWorker()
     {
@@ -31,8 +14,18 @@ public class Workers : SaiBehaviour
         return true;
     }
 
-    public virtual void AddWorker(Transform worker)
+    public virtual void AddWorker(WorkerCtrl worker)
     {
         this.workers.Add(worker);
+    }
+
+    public virtual void ReleaseWorkers()
+    {
+        foreach(WorkerCtrl workerCtrl in this.workers)
+        {
+            workerCtrl.WorkerReleased();
+        }
+
+        this.workers.Clear();
     }
 }

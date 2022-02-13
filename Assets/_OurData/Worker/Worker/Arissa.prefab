@@ -199,8 +199,8 @@ MonoBehaviour:
   workerBuildings: {fileID: 7067463468954360818}
   workerMovement: {fileID: 7067463468954360819}
   workerTasks: {fileID: 850789177903552927}
-  animator: {fileID: 0}
-  workerModel: {fileID: 0}
+  animator: {fileID: 5892466932440963146}
+  workerModel: {fileID: 515120785625236016}
   navMeshAgent: {fileID: 7067463468954360817}
   resCarrier: {fileID: 3468465142674463048}
 --- !u!114 &7067463468954360819
@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c21bc64b38b8db47bf98ba31774b227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carryCount: 1
   resources: []
 --- !u!1001 &48601563989648859
 PrefabInstance:
@@ -340,6 +341,11 @@ PrefabInstance:
 --- !u!4 &515120785625236016 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 427c4fa1890406342b4f4f014be34233, type: 3}
+  m_PrefabInstance: {fileID: 48601563989648859}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5892466932440963146 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 427c4fa1890406342b4f4f014be34233, type: 3}
   m_PrefabInstance: {fileID: 48601563989648859}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1288812029207014490 stripped

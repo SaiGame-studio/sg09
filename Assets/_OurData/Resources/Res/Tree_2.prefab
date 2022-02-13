@@ -186,10 +186,11 @@ GameObject:
   - component: {fileID: 227756857801289066}
   - component: {fileID: 227756857801289079}
   - component: {fileID: 2518324055930037387}
+  - component: {fileID: 1314007728}
   m_Layer: 8
   m_Name: Tree_2
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -244,7 +245,7 @@ MonoBehaviour:
   resRequire: []
   canCreate: 1
   createTimer: 0
-  createDelay: 7
+  createDelay: 60
 --- !u!114 &227756857801289079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +268,7 @@ MonoBehaviour:
   isMaxLevel: 0
   tree: {fileID: 227756857801289066}
   treeTimer: 0
-  treeDelay: 2.3333333
+  treeDelay: 20
 --- !u!114 &2518324055930037387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +284,18 @@ MonoBehaviour:
   logwoodGenerator: {fileID: 227756857801289066}
   treeLevel: {fileID: 227756857801289079}
   choper: {fileID: 0}
+--- !u!114 &1314007728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227756857801289067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abdea9176037264ebc453a6f4964238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &227756858589584613
 GameObject:
   m_ObjectHideFlags: 0

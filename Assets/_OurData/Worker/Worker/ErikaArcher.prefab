@@ -75,8 +75,8 @@ MonoBehaviour:
   workerBuildings: {fileID: 2381019282413766326}
   workerMovement: {fileID: 2381019282413766327}
   workerTasks: {fileID: 5247015480363042011}
-  animator: {fileID: 0}
-  workerModel: {fileID: 0}
+  animator: {fileID: 4668743662049004193}
+  workerModel: {fileID: 4161091701192028524}
   navMeshAgent: {fileID: 2381019282413766325}
   resCarrier: {fileID: 8304020147062719500}
 --- !u!114 &2381019282413766327
@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c21bc64b38b8db47bf98ba31774b227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carryCount: 1
   resources: []
 --- !u!1 &2381019282415323072
 GameObject:

@@ -45,18 +45,55 @@ public class LimitRadius : SaiBehaviour
     {
         if (collideObjects.Count < 1) return false;
 
+        if (this.IsCollidedWithBuilding()) return true;
+
+        List<int> layers = new List<int>
+        {
+            MyLayerManager.instance.layerTree
+        };
+        this.CleanByLayers(layers);
+
         //Check if building collided
+        //foreach (GameObject colliderObj in this.collideObjects)
+        //{
+        //    if (colliderObj.layer == MyLayerManager.instance.layerBuilding) return true;
+        //}
+
+        //GameObject colObj;
+        //int i = 0;
+        //do
+        //{
+        //    colObj = this.collideObjects[i];
+        //    if (colObj.layer == MyLayerManager.instance.layerTree)
+        //    {
+        //        this.collideObjects.RemoveAt(i);
+        //        this.CleanObject(colObj);
+        //        i = 0;
+        //        continue;
+        //    }
+        //    i++;
+        //} while (i < this.collideObjects.Count);
+
+        return false;
+    }
+
+    public virtual bool IsCollidedWithBuilding()
+    {
         foreach (GameObject colliderObj in this.collideObjects)
         {
             if (colliderObj.layer == MyLayerManager.instance.layerBuilding) return true;
         }
+        return false;
+    }
 
+    public virtual void CleanByLayers(List<int> layers)
+    {
         GameObject colObj;
         int i = 0;
         do
         {
             colObj = this.collideObjects[i];
-            if (colObj.layer == MyLayerManager.instance.layerTree)
+            if(layers.Contains(colObj.layer))
             {
                 this.collideObjects.RemoveAt(i);
                 this.CleanObject(colObj);
@@ -65,8 +102,6 @@ public class LimitRadius : SaiBehaviour
             }
             i++;
         } while (i < this.collideObjects.Count);
-
-        return false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -87,10 +122,12 @@ public class LimitRadius : SaiBehaviour
         this.collideObjects.Remove(other.gameObject);
     }
 
-    protected virtual void CleanObject(GameObject other)
+    protected virtual void CleanObject(GameObject obj)
     {
-        TreeManager.instance.TreeRemove(other);
-        PrefabManager.instance.Destroy(other.transform);
+        BuildDestroyable buildDestroyable = obj.GetComponent<BuildDestroyable>();
+        if (buildDestroyable == null) return;
+
+        buildDestroyable.Destroy();
     }
 
     protected virtual void ResetColliderObjects()
