@@ -40,6 +40,11 @@ public class Warehouse : SaiBehaviour
         return this.resHolders.Find((holder) => holder.Name() == name);
     }
 
+    public virtual List<ResHolder> GetStockedResources()
+    {
+        return this.resHolders.FindAll((holder) => holder.resCurrent > 0);
+    }
+
     public virtual void AddByList(List<Resource> addResources)
     {
         foreach (Resource addResource in addResources)
@@ -59,7 +64,6 @@ public class Warehouse : SaiBehaviour
     {
         ResHolder res = this.GetResource(resourceName);
         if (res.Current() < number) return null;
-
         res.Deduct(number);
         return res;
     }
@@ -79,9 +83,8 @@ public class Warehouse : SaiBehaviour
         return null;
     }
 
-
-    public virtual ResHolder IsNeedRes(ResourceName resName)
+    public virtual List<Resource> NeedResoures()
     {
-        return null;
+        return new List<Resource>();//Do not return null
     }
 }

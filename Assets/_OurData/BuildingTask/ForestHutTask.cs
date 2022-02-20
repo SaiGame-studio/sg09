@@ -78,7 +78,7 @@ public class ForestHutTask : BuildingTask
                 this.BringTreeBack(workerCtrl);
                 break;
             case TaskType.goToWorkStation:
-                this.BackToWorkStation(workerCtrl);
+                this.GoToWorkStation(workerCtrl);
                 break;
             default:
                 if (this.IsTime2Work()) this.Planning(workerCtrl);

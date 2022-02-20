@@ -32,7 +32,7 @@ public class SawmillTask : BuildingTask
                 this.GotoWorkingPoint(workerCtrl);
                 break;
             case TaskType.goToWorkStation:
-                this.BackToWorkStation(workerCtrl);
+                this.GoToWorkStation(workerCtrl);
                 break;
             default:
                 if (this.IsTime2Work()) this.Planning(workerCtrl);

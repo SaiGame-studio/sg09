@@ -6,8 +6,8 @@ public class ResHolder : SaiBehaviour
 {
     [Header("Res Holder")]
     [SerializeField] protected ResourceName resourceName;
-    [SerializeField] protected float resCurrent = 0;
-    [SerializeField] protected float resMax = Mathf.Infinity;
+    [SerializeField] public float resCurrent = 0;
+    [SerializeField] public float resMax = Mathf.Infinity;
 
     protected override void LoadComponents()
     {
