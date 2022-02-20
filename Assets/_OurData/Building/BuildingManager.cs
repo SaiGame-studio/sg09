@@ -55,10 +55,19 @@ public class BuildingManager : SaiBehaviour
     {
         this.buildingCtrls.Add(buildingCtrl);
         buildingCtrl.transform.parent = transform;
+        this.NearBuildingRecheck();
     }
 
     public virtual void RemoveBuilding(BuildingCtrl buildingCtrl)
     {
         this.buildingCtrls.Remove(buildingCtrl);
+    }
+
+    protected virtual void NearBuildingRecheck()
+    {
+        foreach(BuildingCtrl buildingCtrl in this.buildingCtrls)
+        {
+            buildingCtrl.buildingTask.FindNearBuildings();
+        }
     }
 }
