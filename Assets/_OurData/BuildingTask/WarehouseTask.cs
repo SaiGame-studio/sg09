@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WarehouseTask : BuildingTask
@@ -31,7 +30,8 @@ public class WarehouseTask : BuildingTask
 
     protected virtual void Planning(WorkerCtrl workerCtrl)
     {
-        BuildingCtrl buildingCtrl = this.GetWorkStationHasResNeed2Move();
+        //BuildingCtrl buildingCtrl = this.GetWorkStationHasResNeed2Move();
+        BuildingCtrl buildingCtrl = this.GetNextBuilding2Work();
         if (buildingCtrl != null)
         {
             workerCtrl.workerTasks.taskBuildingCtrl = buildingCtrl;
@@ -88,6 +88,33 @@ public class WarehouseTask : BuildingTask
         return null;
     }
 
+    protected virtual BuildingCtrl GetNextBuilding2Work()
+    {
+        int tryCount = 99;
+        do
+        {
+            tryCount--;
+
+            this.lastBuildingWorked++;
+            if (lastBuildingWorked >= this.nearBuildings.Count)
+            {
+                this.lastBuildingWorked = 0;
+                break;
+            }
+
+            BuildingCtrl nextBuilding = this.nearBuildings[this.lastBuildingWorked];
+            if (nextBuilding.buildingType != BuildingType.workStation) continue;
+
+            ResHolder resHolder = nextBuilding.warehouse.ResNeed2Move();
+            if (resHolder == null) continue;
+
+            return nextBuilding;
+
+        } while (tryCount > 0);
+
+        return null;
+    }
+
     protected virtual BuildingCtrl FindBuildingNeedRes(ResourceName resName)
     {
         foreach (BuildingCtrl buildingCtrl in BuildingManager.instance.BuildingCtrls())
@@ -116,7 +143,7 @@ public class WarehouseTask : BuildingTask
         workerTasks.TaskCurrentDone();
 
         Resource res = workerCtrl.resCarrier.TakeFirst();
-        taskBuildingCtrl.warehouse.AddResource(res.name,res.number);
+        taskBuildingCtrl.warehouse.AddResource(res.name, res.number);
 
         ResHolder resHolder = taskBuildingCtrl.warehouse.ResNeed2Move();
         if (resHolder == null) return;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MyLayerManager : SaiBehaviour
@@ -39,6 +37,6 @@ public class MyLayerManager : SaiBehaviour
         if (this.layerBuilding < 0) Debug.LogError("Layer Building is mising");
         if (this.layerTree < 0) Debug.LogError("Layer Tree is mising");
 
-        Debug.Log(transform.name + ": GetPlayers");
+        //Debug.Log(transform.name + ": GetPlayers", gameObject);
     }
 }

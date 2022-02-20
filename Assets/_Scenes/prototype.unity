@@ -13460,6 +13460,8 @@ MonoBehaviour:
   taskTimer: 0
   taskDelay: 5
   workingSpeed: 7
+  lastBuildingWorked: 0
+  nearBuildings: []
   construction: {fileID: 0}
   warehouses: []
 --- !u!114 &1015979668674601345
@@ -14213,6 +14215,8 @@ MonoBehaviour:
   taskTimer: 0
   taskDelay: 5
   workingSpeed: 7
+  lastBuildingWorked: 0
+  nearBuildings: []
 --- !u!208 &7861573742468972009
 NavMeshObstacle:
   m_ObjectHideFlags: 0
