@@ -38,7 +38,7 @@ public class BuildingTask : SaiBehaviour
         return true;
     }
 
-    protected virtual void BackToWorkStation(WorkerCtrl workerCtrl)
+    protected virtual void GoToWorkStation(WorkerCtrl workerCtrl)
     {
         WorkerTask taskWorking = workerCtrl.workerTasks.taskWorking;
         taskWorking.GotoBuilding();

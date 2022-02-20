@@ -114,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFull: 0
   resHolders:
-  - {fileID: 6413864489172851547}
+  - {fileID: 8357642742091433316}
 --- !u!114 &9142610252589916622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +131,8 @@ MonoBehaviour:
   taskTimer: 0
   taskDelay: 5
   workingSpeed: 7
+  lastBuildingWorked: 0
+  nearBuildings: []
   plantTreeObj: {fileID: 5276937730439446297, guid: 5a29edc65d00e8b43969c0fbc9656818, type: 3}
   treeMax: 17
   treeRange: 27
@@ -287,7 +289,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6413864489172851546}
-  - component: {fileID: 6413864489172851547}
+  - component: {fileID: 8357642742091433316}
   m_Layer: 0
   m_Name: logwood
   m_TagString: Untagged
@@ -309,7 +311,7 @@ Transform:
   m_Father: {fileID: 6413864488471782140}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6413864489172851547
+--- !u!114 &8357642742091433316
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -318,12 +320,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6413864489172851549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3edd0456117487428cc0bb34edd2174, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b37e044ff8e9d043a2c455d16f21b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   resourceName: 1001
   resCurrent: 0
-  resMax: Infinity
+  resMax: 7
 --- !u!1001 &6413864487984426752
 PrefabInstance:
   m_ObjectHideFlags: 0

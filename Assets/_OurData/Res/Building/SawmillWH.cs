@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public class SawmillWH : Warehouse
 {
     public override ResHolder ResNeed2Move()
@@ -7,12 +9,19 @@ public class SawmillWH : Warehouse
         return null;
     }
 
-    public override ResHolder IsNeedRes(ResourceName resName)
+    public override List<Resource> NeedResoures()
     {
-        if (resName != ResourceName.logwood) return null;
+        List<Resource> resources = new List<Resource>();
 
-        ResHolder resHolder = this.GetResource(resName);
-        if (resHolder.IsMax()) return null;
-        return resHolder;
+        ResHolder logwood = this.GetResource(ResourceName.logwood);
+        Resource resLogwood = new Resource
+        {
+            name = logwood.Name(),
+            number = logwood.resMax - logwood.resCurrent
+        };
+
+        if(resLogwood.number > 0) resources.Add(resLogwood);
+
+        return resources;
     }
 }
