@@ -6,15 +6,23 @@ public class WarehouseTask : BuildingTask
     [Header("Warehouse")]
     [SerializeField] protected int takeProductCount = 0;
     [SerializeField] protected int takeProductMax = 7;
+    [SerializeField] protected float takeProductTimer = 0;
+    [SerializeField] protected float takeProductDelay = 7f;
 
     [SerializeField] protected int bringMaterialCount = 0;
     [SerializeField] protected int bringMaterialMax = 2;
+    [SerializeField] protected float bringMaterialTimer = 0;
+    [SerializeField] protected float bringMaterialDelay = 7f;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
     }
 
+    /// <summary>
+    /// Called in FixedUpdate
+    /// </summary>
+    /// <param name="workerCtrl"></param>
     public override void DoingTask(WorkerCtrl workerCtrl)
     {
         switch (workerCtrl.workerTasks.TaskCurrent())
@@ -56,7 +64,13 @@ public class WarehouseTask : BuildingTask
 
     protected virtual void FindBuildingHasProduct(WorkerCtrl workerCtrl)
     {
-        this.takeProductCount--;
+        this.takeProductTimer += Time.fixedDeltaTime;
+        if (this.takeProductTimer > this.takeProductDelay)
+        {
+            this.takeProductCount--;
+            this.takeProductTimer = 0;
+        }
+
         if (this.takeProductCount < 0)
         {
             workerCtrl.workerTasks.TaskCurrentDone();
@@ -64,12 +78,23 @@ public class WarehouseTask : BuildingTask
         }
 
         BuildingCtrl buildingCtrl = this.FindBuildingHasProductOld(workerCtrl);
-        if (buildingCtrl != null) workerCtrl.workerTasks.TaskAdd(TaskType.gotoGetProduct);
+        if (buildingCtrl != null)
+        {
+            workerCtrl.workerTasks.TaskAdd(TaskType.gotoGetProduct);
+            this.takeProductTimer = 0;
+            this.takeProductCount--;
+        }
     }
 
     protected virtual void FindBuildingNeedMaterial(WorkerCtrl workerCtrl)
     {
-        this.bringMaterialCount--;
+        this.bringMaterialTimer += Time.fixedDeltaTime;
+        if (this.bringMaterialTimer > this.bringMaterialDelay)
+        {
+            this.bringMaterialCount--;
+            this.bringMaterialTimer = 0;
+        }
+
         if (this.bringMaterialCount < 0)
         {
             workerCtrl.workerTasks.TaskCurrentDone();
@@ -94,6 +119,9 @@ public class WarehouseTask : BuildingTask
 
                 workerCtrl.workerTasks.taskBuildingCtrl = buildingCtrl;
                 workerCtrl.workerTasks.TaskAdd(TaskType.bringMatetiral2Building);
+
+                this.bringMaterialCount--;
+                this.bringMaterialTimer = 0;
                 return;
             }
         }
