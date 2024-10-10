@@ -8,7 +8,7 @@ public class GodInput : SaiBehaviour
     public Vector3 mouseReference = new Vector3();
     public Vector3 mouseRotation = new Vector3();
 
-    protected override void Update()
+    protected virtual void Update()
     {
         this.InputHandle();
         this.MouseRotation();
@@ -43,6 +43,7 @@ public class GodInput : SaiBehaviour
 
     protected virtual void MouseRotation()
     {
+        //TODO: move to InputManager
         this.isMouseRotating = Input.GetKey(KeyCode.Mouse1);
         if (Input.GetKeyDown(KeyCode.Mouse1)) this.mouseReference = Input.mousePosition;
 
@@ -62,8 +63,8 @@ public class GodInput : SaiBehaviour
 
     protected virtual void ChoosePlace2Build()
     {
-        if (!BuildManager.instance.isBuilding) return;
-        if (!Input.GetKeyUp(KeyCode.Mouse0)) return;
-        BuildManager.instance.CurrentBuildPlace();
+        if (!ConstructionSpawnerCtrl.Instance.Creator.isBuilding) return;
+        if (!Input.GetKeyUp(KeyCode.Mouse0)) return; //TODO: move to InputManager
+        ConstructionSpawnerCtrl.Instance.Creator.CurrentBuildPlace();
     }
 }

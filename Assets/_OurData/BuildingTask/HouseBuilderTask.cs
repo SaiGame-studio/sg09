@@ -39,7 +39,7 @@ public class HouseBuilderTask : BuildingTask
 
     protected virtual void Planning(WorkerCtrl workerCtrl)
     {
-        if (this.construction == null) this.construction = ConstructionManager.instance.GetConstruction();
+        if (this.construction == null) this.construction = ConstructionManager.Instance.GetConstruction();
 
         if (this.construction)
         {

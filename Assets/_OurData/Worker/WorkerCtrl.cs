@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class WorkerCtrl : SaiBehaviour
+public class WorkerCtrl : PoolObj
 {
     public WorkerBuildings workerBuildings;
     public WorkerMovement workerMovement;
@@ -10,6 +10,11 @@ public class WorkerCtrl : SaiBehaviour
     public Transform workerModel;
     public NavMeshAgent navMeshAgent;
     public ResCarrier resCarrier;
+
+    public override string GetName()
+    {
+        return "Worker";
+    }
 
     protected override void LoadComponents()
     {
@@ -72,4 +77,6 @@ public class WorkerCtrl : SaiBehaviour
         this.workerTasks.taskWorking.GoOutBuilding();
         this.workerBuildings.WorkerReleased();
     }
+
+
 }

@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-public class AbstractConstruction : SaiBehaviour
+public abstract class AbstractConstruction : SaiBehaviour
 {
-    [Header("Build")]
+    [Header("AbstractConstruction")]
     public BuildingCtrl builder;
+    [SerializeField] protected ConstructionCtrl constructionCtrl;
     public bool isPlaced= false;
     [SerializeField] protected float percent = 0f;
     [SerializeField] protected float timer = 0f;
     [SerializeField] protected float delay = 0.05f;
-    [SerializeField] protected List<string> buildNames;
     [SerializeField] protected List<Resource> resRequires;
     [SerializeField] protected List<Resource> resHave;
 
-    protected override void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        base.FixedUpdate();
         this.Building();
         if (this.percent >= 100f)  this.FinishBuild();
     }
@@ -28,12 +27,23 @@ public class AbstractConstruction : SaiBehaviour
         this.BuildReset();
     }
 
+    protected abstract Transform CreateBuild();
+    protected abstract string GetBuildName();
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadBuildNames();
+        this.LoadConstructionCtrl();
         this.LoadResRequires();
     }
+
+    protected virtual void LoadConstructionCtrl()
+    {
+        if (this.constructionCtrl != null) return;
+        this.constructionCtrl = GetComponent<ConstructionCtrl>();
+        Debug.Log(transform.name + ": LoadConstructionCtrl", gameObject);
+    }
+
 
     protected virtual void Building()
     {
@@ -79,18 +89,16 @@ public class AbstractConstruction : SaiBehaviour
 
     protected virtual Transform FinishBuild()
     {
-        Transform newBuild = PrefabManager.instance.Instantiate(this.GetBuildName());
-        newBuild.position = transform.position;
-        newBuild.gameObject.SetActive(true);
+        Transform newBuild = this.CreateBuild();
 
-        PrefabManager.instance.Destroy(transform);
+        this.DestroyContruction();
         return newBuild;
     }
 
-    protected virtual string GetBuildName()
+    protected virtual void DestroyContruction()
     {
-        int rand = Random.Range(0, this.buildNames.Count);
-        return this.buildNames[rand];
+        ConstructionManager.Instance.Remove(this);
+        this.constructionCtrl.Despawn.DoDespawn();
     }
 
     protected virtual void BuildReset()
@@ -98,15 +106,6 @@ public class AbstractConstruction : SaiBehaviour
         this.percent = 0;
         this.timer = 0;
         this.isPlaced = false;
-    }
-
-    protected virtual void LoadBuildNames()
-    {
-        if (this.buildNames.Count > 0) return;
-        Regex regex = new Regex(Regex.Escape("Build"));
-        string newText = regex.Replace(transform.name, "", 1);
-        this.buildNames.Add(newText);
-        Debug.Log(transform.name + ": LoadBuildNames", gameObject);
     }
 
     public virtual void AddRes(ResourceName resourceName, float count)

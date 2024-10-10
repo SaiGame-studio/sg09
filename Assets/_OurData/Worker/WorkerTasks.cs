@@ -21,10 +21,8 @@ public class WorkerTasks : SaiBehaviour
         this.DisableTasks();
     }
 
-    protected override void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        base.FixedUpdate();
-
         if (this.isNightTime) this.GoHome();
         else this.GoWork();
     }

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-public class ConstructionCtrl : SaiBehaviour
+public abstract class ConstructionCtrl : PoolObj
 {
+    [Header("Construction")]
     public LimitRadius limitRadius;
     public AbstractConstruction abstractConstruction;
 

@@ -7,10 +7,8 @@ public class WorkerTask : SaiBehaviour
     [SerializeField] protected float buildingDistance = 0;
     [SerializeField] protected float buildDisLimit = 0.7f;
 
-    protected override void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        base.FixedUpdate();
-
         if (this.GetBuilding()) this.GettingReadyForWork();
         else this.FindBuilding();
 
