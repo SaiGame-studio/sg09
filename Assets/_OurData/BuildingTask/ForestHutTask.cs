@@ -15,7 +15,7 @@ public class ForestHutTask : BuildingTask
     protected override void Start()
     {
         base.Start();
-        this.LoadNearByTrees();
+        InvokeRepeating(nameof(this.LoadNearByTrees), 7f, 7f);
     }
 
     protected virtual void FixedUpdate()
@@ -73,18 +73,18 @@ public class ForestHutTask : BuildingTask
 
     protected virtual void Planning(WorkerCtrl workerCtrl)
     {
+        if (this.NeedMoreTree())
+        {
+            workerCtrl.workerMovement.SetTarget(null);
+            workerCtrl.workerTasks.TaskAdd(TaskType.plantTree);
+            return;
+        }
 
         if (!this.buildingCtrl.warehouse.IsFull())
         {
             workerCtrl.workerTasks.TaskAdd(TaskType.bringResourceBack);
             workerCtrl.workerTasks.TaskAdd(TaskType.chopTree);
             workerCtrl.workerTasks.TaskAdd(TaskType.findTree2Chop);
-        }
-
-        if (this.NeedMoreTree())
-        {
-            workerCtrl.workerMovement.SetTarget(null);
-            workerCtrl.workerTasks.TaskAdd(TaskType.plantTree);
         }
     }
 
@@ -105,8 +105,8 @@ public class ForestHutTask : BuildingTask
 
         if (workerCtrl.workerMovement.IsClose2Target())
         {
-            PrefabManager.instance.Destroy(target);
-            this.Planting(workerCtrl.transform);
+            this.Planting(workerCtrl);
+            workerCtrl.workerMovement.SetTarget(null);
 
             if (!this.NeedMoreTree())
             {
@@ -116,11 +116,14 @@ public class ForestHutTask : BuildingTask
         }
     }
 
-    protected virtual void Planting(Transform trans)
+    protected virtual void Planting(WorkerCtrl workerCtrl)
     {
         TreeCtrl treePrefab = this.GetTreePrefab();
-        TreeCtrl treeObj = TreeSpawnerCtrl.Instance.Spawner.Spawn(treePrefab, trans.position);
-        treeObj.transform.rotation = trans.rotation;
+        Vector3 plantPos = workerCtrl.transform.position;
+        plantPos.y -= 0.1f;
+        TreeCtrl treeObj = TreeSpawnerCtrl.Instance.Spawner.Spawn(treePrefab, plantPos);
+        treeObj.transform.rotation = workerCtrl.transform.rotation;
+        treeObj.gameObject.SetActive(true);
         this.trees.Add(treeObj);
     }
 
@@ -155,9 +158,8 @@ public class ForestHutTask : BuildingTask
 
     protected virtual void LoadNearByTrees()
     {
-        List<TreeCtrl> allTrees = TreeSpawnerCtrl.Instance.Spawner.PoolObjects;
         float dis;
-        foreach (TreeCtrl tree in allTrees)
+        foreach (TreeCtrl tree in TreeSpawnerCtrl.Instance.Manager.Trees)
         {
             dis = Vector3.Distance(tree.transform.position, transform.position);
             if (dis > this.treeRange) continue;
@@ -174,34 +176,33 @@ public class ForestHutTask : BuildingTask
     protected virtual void ChopTree(WorkerCtrl workerCtrl)
     {
         if (workerCtrl.workerMovement.isWorking) return;
-        StartCoroutine(Chopping(workerCtrl, workerCtrl.workerTasks.taskTarget));
+        StartCoroutine(Chopping(workerCtrl, (TreeCtrl)workerCtrl.workerTasks.TaskTarget));
     }
 
-    private IEnumerator Chopping(WorkerCtrl workerCtrl, Transform tree)
+    private IEnumerator Chopping(WorkerCtrl workerCtrl, TreeCtrl treeCtrl)
     {
         workerCtrl.workerMovement.isWorking = true;
         yield return new WaitForSeconds(this.workingSpeed);
 
-        TreeCtrl treeCtrl = tree.GetComponent<TreeCtrl>();
         treeCtrl.treeLevel.ShowLastBuild();
         List<Resource> resources = treeCtrl.logwoodGenerator.TakeAll();
         treeCtrl.choper = null;
         this.trees.Remove(treeCtrl);
-        treeCtrl.Despawn.DoDespawn();
+        TreeSpawnerCtrl.Instance.Manager.Remove(treeCtrl);
 
         workerCtrl.workerMovement.isWorking = false;
-        workerCtrl.workerTasks.taskTarget = null;
+        workerCtrl.workerTasks.SetTaskTarget(null);
         workerCtrl.resCarrier.AddByList(resources);
 
         workerCtrl.workerTasks.TaskCurrentDone();
 
-        StartCoroutine(this.RemoveTree(tree));
+        StartCoroutine(this.DespawnTree(treeCtrl));
     }
 
-    private IEnumerator RemoveTree(Transform tree)
+    private IEnumerator DespawnTree(TreeCtrl treeCtrl)
     {
         yield return new WaitForSeconds(this.treeRemoveSpeed);
-        PrefabManager.instance.Destroy(tree);
+        treeCtrl.Despawn.DoDespawn();
     }
 
     protected virtual void FindTree2Chop(WorkerCtrl workerCtrl)
@@ -209,7 +210,7 @@ public class ForestHutTask : BuildingTask
         WorkerTasks workerTasks = workerCtrl.workerTasks;
         if (workerTasks.inHouse) workerTasks.taskWorking.GoOutBuilding();
 
-        if (workerCtrl.workerTasks.taskTarget == null)
+        if (workerCtrl.workerTasks.TaskTarget == null)
         {
             this.FindNearestTree(workerCtrl);
         }
@@ -222,15 +223,19 @@ public class ForestHutTask : BuildingTask
 
     protected virtual void FindNearestTree(WorkerCtrl workerCtrl)
     {
+
         foreach (TreeCtrl tree in this.trees)
         {
+            Debug.Log("FindNearestTree: " + tree.name, tree.gameObject);
+
             if (tree == null) continue;
             if (!tree.logwoodGenerator.IsAllResMax()) continue;
             if (tree.choper != null) continue;
 
             tree.choper = workerCtrl;
-            workerCtrl.workerTasks.taskTarget = tree.transform;
+            workerCtrl.workerTasks.SetTaskTarget(tree);
             workerCtrl.workerMovement.SetTarget(tree.transform);
+            Debug.Log("FOUND: " + tree.name, tree.gameObject);
             return;
         }
     }

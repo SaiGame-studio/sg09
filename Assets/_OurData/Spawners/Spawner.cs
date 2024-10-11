@@ -12,7 +12,7 @@ public abstract class Spawner<T> : SaiBehaviour where T : PoolObj
     public PoolPrefabs<T> PoolPrefabs => poolPrefabs;
 
     [SerializeField] protected List<T> inPoolObjs = new();
-    public List<T> PoolObjects => inPoolObjs;
+    public List<T> InPoolObjs => inPoolObjs;
 
     protected override void LoadComponents()
     {

@@ -1,5 +1,3 @@
-
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BuildingSpawnerCtrl : SaiSingleton<BuildingSpawnerCtrl>
@@ -9,7 +7,6 @@ public class BuildingSpawnerCtrl : SaiSingleton<BuildingSpawnerCtrl>
 
     [SerializeField] protected BuildingSpawner spawner;
     public BuildingSpawner Spawner => spawner;
-
 
     protected override void LoadComponents()
     {

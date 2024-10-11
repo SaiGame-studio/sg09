@@ -124,7 +124,7 @@ public class LimitRadius : SaiBehaviour
 
     protected virtual void CleanObject(GameObject obj)
     {
-        Debug.LogWarning("TODO");
+        Debug.LogWarning("TODO: LimitRadius CleanObject");
         //BuildDestroyable buildDestroyable = obj.GetComponent<BuildDestroyable>();
         //if (buildDestroyable == null) return;
 

@@ -1,10 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeSpawner : Spawner<TreeCtrl>
+public class TreeManager : SaiBehaviour
 {
     [SerializeField] protected TreeSpawnerCtrl ctrl;
+    [SerializeField] protected List<TreeCtrl> trees = new();
+    public List<TreeCtrl> Trees => trees;
 
     protected override void LoadComponents()
     {
@@ -19,10 +20,13 @@ public class TreeSpawner : Spawner<TreeCtrl>
         Debug.Log(transform.name + ": LoadBuildingSpawnerCtrl", gameObject);
     }
 
-    public override TreeCtrl Spawn(TreeCtrl prefab)
+    public virtual void Add(TreeCtrl treeCtrl)
     {
-        TreeCtrl newTree = base.Spawn(prefab);
-        this.ctrl.Manager.Add(newTree);
-        return newTree;
+        this.trees.Add(treeCtrl);
+    }
+
+    public virtual void Remove(TreeCtrl treeCtrl)
+    {
+        this.trees.Remove(treeCtrl);
     }
 }

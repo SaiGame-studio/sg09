@@ -62,7 +62,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4016775355674257637}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -82,7 +82,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 3.5, y: 1, z: 3.5}
+  m_Extents: {x: 0.2, y: 0.5, z: 0.2}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -150,19 +150,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d432e5ce4632ff045900fa4f9e881228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingCtrl: {fileID: 0}
+  buildingCtrl: {fileID: 7534548200789594517}
   taskTimer: 0
   taskDelay: 5
   workingSpeed: 7
   lastBuildingWorked: 0
   nearBuildings: []
   plantTreeObj: {fileID: 5276937730439446297, guid: 5a29edc65d00e8b43969c0fbc9656818, type: 3}
-  treeMax: 17
+  treeMax: 7
   treeRange: 27
   treeDistance: 7
   treeRemoveSpeed: 16
-  treePrefabs:
-  - {fileID: 405706141920207839, guid: efb194f9f66def849ba7b270603dc368, type: 3}
   trees: []
 --- !u!114 &7534548200789594517
 MonoBehaviour:
@@ -286,7 +284,7 @@ Transform:
   m_GameObject: {fileID: 6498439803517054929}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4, y: 0, z: 4}
+  m_LocalPosition: {x: 0, y: 0, z: 1.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

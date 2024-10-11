@@ -1,5 +1,5 @@
 public enum WorkingType
 {
-    chopTree = 0,
-    sawing = 1,
+    lumberjack = 0,
+    sawing = 2,
 }

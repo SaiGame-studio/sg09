@@ -6,7 +6,6 @@ public class BuildingManager : SaiBehaviour
     [SerializeField] protected BuildingSpawnerCtrl ctrl;
     [SerializeField] protected List<BuildingCtrl> buildings;
 
-
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -29,7 +28,6 @@ public class BuildingManager : SaiBehaviour
         Debug.Log(transform.name + ": LoadBuildingSpawnerCtrl", gameObject);
     }
 
-
     public virtual BuildingCtrl FindBuilding(BuildingType buildingType)
     {
         BuildingCtrl buildingCtrl;
@@ -49,13 +47,13 @@ public class BuildingManager : SaiBehaviour
         return this.buildings;
     }
 
-    public virtual void AddBuilding(BuildingCtrl buildingCtrl)
+    public virtual void Add(BuildingCtrl buildingCtrl)
     {
         this.BuildingCtrls().Add(buildingCtrl);
         this.NearBuildingRecheck();
     }
 
-    public virtual void RemoveBuilding(BuildingCtrl buildingCtrl)
+    public virtual void Remove(BuildingCtrl buildingCtrl)
     {
         this.BuildingCtrls().Remove(buildingCtrl);
     }

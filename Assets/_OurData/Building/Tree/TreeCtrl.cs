@@ -1,14 +1,10 @@
 using UnityEngine;
 
-public class TreeCtrl : PoolObj
+public abstract class TreeCtrl : PoolObj
 {
     public LogwoodGenerator logwoodGenerator;
     public TreeLevel treeLevel;
     public WorkerCtrl choper;
-    public override string GetName()
-    {
-        return "Tree";
-    }
 
     protected override void LoadComponents()
     {

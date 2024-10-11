@@ -48,6 +48,7 @@ public class ConstructionCreator : SaiBehaviour
 
     public virtual void CurrentBuildClear()
     {
+        if (this.currentBuild == null) return;
         this.currentBuild.gameObject.SetActive(false);
         this.currentBuild = null;
     }
