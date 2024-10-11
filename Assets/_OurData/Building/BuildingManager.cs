@@ -4,11 +4,22 @@ using UnityEngine;
 public class BuildingManager : SaiBehaviour
 {
     [SerializeField] protected BuildingSpawnerCtrl ctrl;
+    [SerializeField] protected List<BuildingCtrl> buildings;
+
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadBuildingSpawnerCtrl();
+        this.LoadPoolObjects();
+    }
+
+    protected virtual void LoadPoolObjects()
+    {
+        if (this.buildings.Count > 0) return;
+        BuildingCtrl[] components = this.ctrl.Spawner.PoolHolder.GetComponentsInChildren<BuildingCtrl>();
+        this.buildings = new List<BuildingCtrl>(components);
+        //Debug.Log(transform.name + ": LoadPoolObjects", gameObject);
     }
 
     protected virtual void LoadBuildingSpawnerCtrl()
@@ -35,7 +46,7 @@ public class BuildingManager : SaiBehaviour
 
     public virtual List<BuildingCtrl> BuildingCtrls()
     {
-        return this.ctrl.Spawner.PoolObjects;
+        return this.buildings;
     }
 
     public virtual void AddBuilding(BuildingCtrl buildingCtrl)

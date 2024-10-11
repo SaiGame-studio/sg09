@@ -10,7 +10,6 @@ public class ForestHutTask : BuildingTask
     [SerializeField] protected float treeRange = 27f;
     [SerializeField] protected float treeDistance = 7f;
     [SerializeField] protected float treeRemoveSpeed = 16;
-    [SerializeField] protected List<GameObject> treePrefabs;
     [SerializeField] protected List<TreeCtrl> trees;
 
     protected override void Start()
@@ -28,25 +27,12 @@ public class ForestHutTask : BuildingTask
     {
         base.LoadComponents();
         this.LoadObjects();
-        this.LoadTreePrefabs();
     }
 
     protected virtual void LoadObjects()
     {
         if (this.plantTreeObj != null) return;
         this.plantTreeObj = Resources.Load<GameObject>("Building/MaskPositionObject");
-        Debug.Log(transform.name + " LoadObjects", gameObject);
-    }
-
-    protected virtual void LoadTreePrefabs()
-    {
-        if (this.treePrefabs.Count > 0) return;
-        GameObject tree1 = Resources.Load<GameObject>("Res/Tree_1");
-        GameObject tree2 = Resources.Load<GameObject>("Res/Tree_2");
-        GameObject tree3 = Resources.Load<GameObject>("Res/Tree_3");
-        this.treePrefabs.Add(tree1);
-        this.treePrefabs.Add(tree2);
-        this.treePrefabs.Add(tree3);
         Debug.Log(transform.name + " LoadObjects", gameObject);
     }
 
@@ -140,8 +126,9 @@ public class ForestHutTask : BuildingTask
 
     protected virtual TreeCtrl GetTreePrefab()
     {
-        int rand = Random.Range(0, this.treePrefabs.Count);
-        return TreeSpawnerCtrl.Instance.Spawner.PoolObjects[rand];
+        List<TreeCtrl> treePrefab = TreeSpawnerCtrl.Instance.Spawner.PoolPrefabs.Prefabs;
+        int rand = Random.Range(0, treePrefab.Count);
+        return treePrefab[rand];
     }
 
     protected virtual Transform GetPlantPlace()

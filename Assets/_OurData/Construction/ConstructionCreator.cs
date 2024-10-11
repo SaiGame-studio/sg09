@@ -80,7 +80,7 @@ public class ConstructionCreator : SaiBehaviour
         newBuild.name = this.currentBuild.name;
         newBuild.gameObject.SetActive(true);
 
-        newBuild.abstractConstruction.isPlaced = true;
+        newBuild.abstractConstruction.SetIsPlaced(true);
         ConstructionManager.Instance.Add(newBuild.abstractConstruction);
 
         if (InputManager.Instance.IsHoldingShift) return;

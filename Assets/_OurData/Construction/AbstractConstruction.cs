@@ -8,7 +8,7 @@ public abstract class AbstractConstruction : SaiBehaviour
     [Header("AbstractConstruction")]
     public BuildingCtrl builder;
     [SerializeField] protected ConstructionCtrl constructionCtrl;
-    public bool isPlaced= false;
+    [SerializeField] protected bool isPlaced = false;
     [SerializeField] protected float percent = 0f;
     [SerializeField] protected float timer = 0f;
     [SerializeField] protected float delay = 0.001f;
@@ -18,7 +18,7 @@ public abstract class AbstractConstruction : SaiBehaviour
     protected virtual void FixedUpdate()
     {
         this.Building();
-        if (this.percent >= 100f)  this.FinishBuild();
+        this.FinishBuild();
     }
 
     protected override void OnEnable()
@@ -89,8 +89,8 @@ public abstract class AbstractConstruction : SaiBehaviour
 
     protected virtual Transform FinishBuild()
     {
+        if (this.percent < 100f) return null;
         Transform newBuild = this.CreateBuild();
-
         this.DestroyContruction();
         return newBuild;
     }
@@ -138,5 +138,10 @@ public abstract class AbstractConstruction : SaiBehaviour
     public virtual string GetConstructionName()
     {
         return transform.name;
+    }
+
+    public virtual void SetIsPlaced(bool status)
+    {
+        this.isPlaced = status;
     }
 }

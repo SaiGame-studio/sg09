@@ -1,16 +1,12 @@
 using UnityEngine;
 
-public class BuildForestHut : BuildBuilding
+public class ConstructionForestHut : AbstractConstructBuilding
 {
-    protected override Transform CreateBuild()
-    {
-        throw new System.NotImplementedException();
-    }
-
     protected override string GetBuildName()
     {
-        throw new System.NotImplementedException();
+        return BuildingName.ForestHut.ToString();
     }
+
     protected override void LoadResRequires()
     {
         if (this.resRequires.Count > 0) return;
