@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ConstructionForestHut : AbstractConstructBuilding
+public class ConstructionForestHut : AbsConstructionIsBuilding
 {
     protected override string GetBuildName()
     {

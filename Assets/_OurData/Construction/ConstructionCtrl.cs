@@ -7,7 +7,7 @@ public abstract class ConstructionCtrl : PoolObj
 {
     [Header("Construction")]
     public LimitRadius limitRadius;
-    public AbstractConstruction abstractConstruction;
+    public AbsConstruction abstractConstruction;
 
     protected override void LoadComponents()
     {
@@ -26,7 +26,7 @@ public abstract class ConstructionCtrl : PoolObj
     protected virtual void LoadAbstractConstruction()
     {
         if (this.abstractConstruction != null) return;
-        this.abstractConstruction = GetComponent<AbstractConstruction>();
+        this.abstractConstruction = GetComponent<AbsConstruction>();
         Debug.Log(transform.name + ": LoadAbstractConstruction", gameObject);
     }
 }

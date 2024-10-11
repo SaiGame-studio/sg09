@@ -1,11 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using UnityEngine;
 
-public abstract class AbstractConstruction : SaiBehaviour
+public abstract class AbsConstruction : SaiBehaviour
 {
-    [Header("AbstractConstruction")]
+    [Header("Abs Construction")]
     public BuildingCtrl builder;
     [SerializeField] protected ConstructionCtrl constructionCtrl;
     [SerializeField] protected bool isPlaced = false;
@@ -27,7 +25,7 @@ public abstract class AbstractConstruction : SaiBehaviour
         this.BuildReset();
     }
 
-    protected abstract Transform CreateBuild();
+    protected abstract void CreateBuild();
     protected abstract string GetBuildName();
 
     protected override void LoadComponents()
@@ -87,12 +85,11 @@ public abstract class AbstractConstruction : SaiBehaviour
         return ResourceName.noResource;
     }
 
-    protected virtual Transform FinishBuild()
+    protected virtual void FinishBuild()
     {
-        if (this.percent < 100f) return null;
-        Transform newBuild = this.CreateBuild();
+        if (this.percent < 100f) return;
+        this.CreateBuild();
         this.DestroyContruction();
-        return newBuild;
     }
 
     protected virtual void DestroyContruction()
@@ -133,11 +130,6 @@ public abstract class AbstractConstruction : SaiBehaviour
     public virtual void Finish()
     {
         this.percent = 100;
-    }
-
-    public virtual string GetConstructionName()
-    {
-        return transform.name;
     }
 
     public virtual void SetIsPlaced(bool status)

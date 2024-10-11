@@ -1,17 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ConstructionWorker : AbstractPoolConstruct<WorkerCtrl>
+public class ConstructionWorker : AbsConstructFromPool<WorkerCtrl>
 {
-    //[Header("Worker")]
-
-    protected override void ResetValues()
-    {
-        base.ResetValues();
-        this.delay = 0.005f;
-    }
-
     protected override void LoadSpawner()
     {
         if (this.spawner != null) return;

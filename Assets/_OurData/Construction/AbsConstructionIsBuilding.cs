@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class AbstractConstructBuilding : AbstractPoolConstruct<BuildingCtrl>
+public abstract class AbsConstructionIsBuilding : AbsConstructFromPool<BuildingCtrl>
 {
     protected override void LoadSpawner()
     {
@@ -9,11 +9,11 @@ public abstract class AbstractConstructBuilding : AbstractPoolConstruct<Building
         Debug.LogWarning(transform.name + ": Load ForestHut Spawner", gameObject);
     }
 
-    protected override Transform FinishBuild()
+    protected override void FinishBuild()
     {
-        Transform newBuild = base.FinishBuild();
-        BuildingCtrl buildingCtrl = newBuild.GetComponent<BuildingCtrl>();
+        base.FinishBuild();
+        if (this.newObject == null) return;
+        BuildingCtrl buildingCtrl = (BuildingCtrl) this.newObject;
         BuildingSpawnerCtrl.Instance.Manager.AddBuilding(buildingCtrl);
-        return newBuild;
     }
 }

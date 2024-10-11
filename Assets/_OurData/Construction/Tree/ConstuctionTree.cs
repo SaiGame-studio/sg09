@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConstuctionTree : AbstractPoolConstruct<TreeCtrl>
+public class ConstuctionTree : AbsConstructFromPool<TreeCtrl>
 {
     protected override void LoadSpawner()
     {

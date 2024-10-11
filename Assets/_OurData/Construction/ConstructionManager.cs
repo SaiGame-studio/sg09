@@ -3,19 +3,19 @@ using UnityEngine;
 
 public class ConstructionManager : SaiSingleton<ConstructionManager>
 {
-    [SerializeField] protected List<AbstractConstruction> constructions;
+    [SerializeField] protected List<AbsConstruction> constructions;
 
     protected virtual void FixedUpdate()
     {
         this.ConstructionCleaning();
     }
 
-    public virtual void Add(AbstractConstruction abstractConstruction)
+    public virtual void Add(AbsConstruction abstractConstruction)
     {
         this.constructions.Add(abstractConstruction);
     }
 
-    public virtual void Remove(AbstractConstruction abstractConstruction)
+    public virtual void Remove(AbsConstruction abstractConstruction)
     {
         this.constructions.Remove(abstractConstruction);
     }
@@ -24,7 +24,7 @@ public class ConstructionManager : SaiSingleton<ConstructionManager>
     {
         if (this.constructions.Count < 1) return;
 
-        AbstractConstruction abstractConstruction;
+        AbsConstruction abstractConstruction;
         for (int i = 0;i<this.constructions.Count;i++)
         {
             abstractConstruction = this.constructions[i];
@@ -32,9 +32,9 @@ public class ConstructionManager : SaiSingleton<ConstructionManager>
         }
     }
 
-    public virtual AbstractConstruction GetConstruction()
+    public virtual AbsConstruction GetConstruction()
     {
-        foreach (AbstractConstruction construction in this.constructions)
+        foreach (AbsConstruction construction in this.constructions)
         {
             if (construction.builder != null) continue;
             if (!construction.HasEnoughResource()) return construction;

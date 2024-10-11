@@ -52,7 +52,6 @@ public class BuildingManager : SaiBehaviour
     public virtual void AddBuilding(BuildingCtrl buildingCtrl)
     {
         this.BuildingCtrls().Add(buildingCtrl);
-        buildingCtrl.transform.parent = transform;
         this.NearBuildingRecheck();
     }
 

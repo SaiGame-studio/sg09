@@ -4,7 +4,7 @@ using UnityEngine;
 public class HouseBuilderTask : BuildingTask
 {
     [Header("House Builder")]
-    [SerializeField] protected AbstractConstruction construction;
+    [SerializeField] protected AbsConstruction construction;
     [SerializeField] protected List<BuildingCtrl> warehouses;
 
     protected override void LoadComponents()

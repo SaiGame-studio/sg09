@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public abstract class AbstractPoolConstruct<T> : AbstractConstruction where T : PoolObj
+public abstract class AbsConstructFromPool<T> : AbsConstruction where T : PoolObj
 {
-    [Header("AbstractPoolConstruct")]
+    [Header("Abs Construct From Pool")]
     [SerializeField] protected Spawner<T> spawner;
+    [SerializeField] protected PoolObj newObject;
 
     protected abstract void LoadSpawner();
 
@@ -19,11 +20,16 @@ public abstract class AbstractPoolConstruct<T> : AbstractConstruction where T : 
         return this.spawner.PoolPrefabs.Prefabs[rand].name;
     }
 
-    protected override Transform CreateBuild()
+    protected override void CreateBuild()
     {
         PoolObj prefab = this.spawner.PoolPrefabs.GetByName(this.GetBuildName());
-        PoolObj newObject = this.spawner.Spawn((T)prefab, transform.position);
-        newObject.gameObject.SetActive(true);
-        return newObject.transform;
+        this.newObject = this.spawner.Spawn((T)prefab, transform.position);
+        this.newObject.gameObject.SetActive(true);
+    }
+
+    protected override void BuildReset()
+    {
+        base.BuildReset();
+        this.newObject = null;
     }
 }
