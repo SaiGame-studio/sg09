@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingCtrl : SaiBehaviour
+public abstract class BuildingCtrl : PoolObj
 {
     [Header("Building")]
     public BuildingType buildingType = BuildingType.workStation;

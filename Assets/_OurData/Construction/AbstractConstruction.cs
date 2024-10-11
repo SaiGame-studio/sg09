@@ -11,7 +11,7 @@ public abstract class AbstractConstruction : SaiBehaviour
     public bool isPlaced= false;
     [SerializeField] protected float percent = 0f;
     [SerializeField] protected float timer = 0f;
-    [SerializeField] protected float delay = 0.05f;
+    [SerializeField] protected float delay = 0.001f;
     [SerializeField] protected List<Resource> resRequires;
     [SerializeField] protected List<Resource> resHave;
 

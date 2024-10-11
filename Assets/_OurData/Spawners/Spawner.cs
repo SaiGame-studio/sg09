@@ -18,6 +18,7 @@ public abstract class Spawner<T> : SaiBehaviour where T : PoolObj
         base.LoadComponents();
         this.LoadPoolHolder();
         this.LoadPoolPrefabs();
+        this.LoadPoolObjects();
     }
 
     protected virtual void LoadPoolHolder()
@@ -30,6 +31,15 @@ public abstract class Spawner<T> : SaiBehaviour where T : PoolObj
             this.poolHolder.parent = transform;
         }
         Debug.Log(transform.name + ": LoadPoolHolder", gameObject);
+    }
+
+
+    protected virtual void LoadPoolObjects()
+    {
+        if (this.inPoolObjs.Count > 0) return;
+        T[] components = transform.GetComponentsInChildren<T>();
+        this.inPoolObjs = new List<T>(components);
+        //Debug.Log(transform.name + ": LoadPoolObjects", gameObject);
     }
 
     protected virtual void LoadPoolPrefabs()

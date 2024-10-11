@@ -5,7 +5,6 @@ public class ConstructionManager : SaiSingleton<ConstructionManager>
 {
     [SerializeField] protected List<AbstractConstruction> constructions;
 
-
     protected virtual void FixedUpdate()
     {
         this.ConstructionCleaning();

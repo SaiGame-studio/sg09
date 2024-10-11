@@ -51,7 +51,7 @@ public class HouseBuilderTask : BuildingTask
 
     protected virtual void FindWarehouse()
     {
-        List<BuildingCtrl> buildingCtrls = BuildingManager.instance.BuildingCtrls();
+        List<BuildingCtrl> buildingCtrls = BuildingSpawnerCtrl.Instance.Manager.BuildingCtrls();
         foreach (BuildingCtrl buildingCtrl in buildingCtrls)
         {
             if (buildingCtrl.buildingTask.GetType() != typeof(WarehouseTask)) continue;

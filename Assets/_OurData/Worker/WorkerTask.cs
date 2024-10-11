@@ -36,7 +36,7 @@ public class WorkerTask : SaiBehaviour
 
     protected virtual void FindBuilding()
     {
-        BuildingCtrl buildingCtrl = BuildingManager.instance.FindBuilding(this.GetBuildingType());
+        BuildingCtrl buildingCtrl = BuildingSpawnerCtrl.Instance.Manager.FindBuilding(this.GetBuildingType());
         if (buildingCtrl == null) return;
 
         buildingCtrl.workers.AddWorker(this.workerCtrl);

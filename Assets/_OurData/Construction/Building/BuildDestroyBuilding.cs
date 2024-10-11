@@ -1,5 +1,3 @@
-
-
 using UnityEngine;
 
 public class BuildDestroyBuilding : BuildDestroyable
@@ -22,7 +20,7 @@ public class BuildDestroyBuilding : BuildDestroyable
     public override void Destroy()
     {
         this.buildingCtrl.workers.ReleaseWorkers();
-        BuildingManager.instance.RemoveBuilding(this.buildingCtrl);
+        BuildingSpawnerCtrl.Instance.Manager.RemoveBuilding(this.buildingCtrl);
         base.Destroy();
     }
 }

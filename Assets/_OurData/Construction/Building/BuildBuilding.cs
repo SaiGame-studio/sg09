@@ -8,7 +8,7 @@ public abstract class BuildBuilding : AbstractConstruction
     {
         Transform newBuild = base.FinishBuild();
         BuildingCtrl buildingCtrl = newBuild.GetComponent<BuildingCtrl>();
-        BuildingManager.instance.AddBuilding(buildingCtrl);
+        BuildingSpawnerCtrl.Instance.Manager.AddBuilding(buildingCtrl);
         return newBuild;
     }
 
