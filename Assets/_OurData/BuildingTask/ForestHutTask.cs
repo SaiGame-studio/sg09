@@ -5,7 +5,6 @@ using UnityEngine;
 public class ForestHutTask : BuildingTask
 {
     [Header("Forest Hut")]
-    [SerializeField] protected GameObject plantTreeObj;
     [SerializeField] protected int treeMax = 7;
     [SerializeField] protected float treeRange = 27f;
     [SerializeField] protected float treeDistance = 7f;
@@ -21,19 +20,6 @@ public class ForestHutTask : BuildingTask
     protected virtual void FixedUpdate()
     {
         this.RemoveDeadTrees();
-    }
-
-    protected override void LoadComponents()
-    {
-        base.LoadComponents();
-        this.LoadObjects();
-    }
-
-    protected virtual void LoadObjects()
-    {
-        if (this.plantTreeObj != null) return;
-        this.plantTreeObj = Resources.Load<GameObject>("Building/MaskPositionObject");
-        Debug.Log(transform.name + " LoadObjects", gameObject);
     }
 
     protected virtual void RemoveDeadTrees()
@@ -97,7 +83,7 @@ public class ForestHutTask : BuildingTask
     {
         Transform target = workerCtrl.workerMovement.GetTarget();
 
-        if (target == null) target = this.GetPlantPlace();
+        if (target == null) target = this.GetPlantPosition().transform;
         if (target == null) return;
 
         workerCtrl.workerTasks.taskWorking.GoOutBuilding();
@@ -134,18 +120,6 @@ public class ForestHutTask : BuildingTask
         return treePrefab[rand];
     }
 
-    protected virtual Transform GetPlantPlace()
-    {
-        Vector3 newTreePos = this.RandomPlaceForTree(); ;
-        float dis = Vector3.Distance(transform.position, newTreePos);
-        if (dis < this.treeDistance) return null;
-
-        GameObject treePlace = Instantiate(this.plantTreeObj);
-        treePlace.transform.position = newTreePos;
-
-        return treePlace.transform;
-    }
-
     protected virtual TreePlantPositionCtrl GetPlantPosition()
     {
         Vector3 newTreePos = this.RandomPlaceForTree(); ;
@@ -153,6 +127,7 @@ public class ForestHutTask : BuildingTask
         if (dis < this.treeDistance) return null;
 
         EffectCtrl newObj = EffectSpawnerCtrl.Instance.Spawner.Spawn(EffectName.TreePlantPosition, newTreePos);
+        newObj.gameObject.SetActive(true);
 
         return (TreePlantPositionCtrl) newObj;
     }

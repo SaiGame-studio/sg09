@@ -51,4 +51,9 @@ public abstract class Despawn<T> : DespawnBase where T : PoolObj
     {
         this.spawner.Despawn(this.parent);
     }
+
+    public virtual void SetDespawnByTime(bool status)
+    {
+        this.isDespawnByTime = status;
+    }
 }
