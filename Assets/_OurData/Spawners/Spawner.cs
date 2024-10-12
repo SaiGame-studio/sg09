@@ -59,9 +59,9 @@ public abstract class Spawner<T> : SaiBehaviour where T : PoolObj
 
     public virtual T Spawn(T prefab, Vector3 postion)
     {
-        T newBullet = this.Spawn(prefab);
-        newBullet.transform.position = postion;
-        return newBullet;
+        T newObject = this.Spawn(prefab);
+        newObject.transform.position = postion;
+        return newObject;
     }
 
     public virtual void Despawn(Transform obj)

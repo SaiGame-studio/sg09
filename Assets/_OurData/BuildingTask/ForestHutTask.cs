@@ -146,6 +146,17 @@ public class ForestHutTask : BuildingTask
         return treePlace.transform;
     }
 
+    protected virtual TreePlantPositionCtrl GetPlantPosition()
+    {
+        Vector3 newTreePos = this.RandomPlaceForTree(); ;
+        float dis = Vector3.Distance(transform.position, newTreePos);
+        if (dis < this.treeDistance) return null;
+
+        EffectCtrl newObj = EffectSpawnerCtrl.Instance.Spawner.Spawn(EffectName.TreePlantPosition, newTreePos);
+
+        return (TreePlantPositionCtrl) newObj;
+    }
+
     protected virtual Vector3 RandomPlaceForTree()
     {
         Vector3 position = transform.position;
@@ -226,7 +237,7 @@ public class ForestHutTask : BuildingTask
 
         foreach (TreeCtrl tree in this.trees)
         {
-            Debug.Log("FindNearestTree: " + tree.name, tree.gameObject);
+            //Debug.Log("FindNearestTree: " + tree.name, tree.gameObject);
 
             if (tree == null) continue;
             if (!tree.logwoodGenerator.IsAllResMax()) continue;
@@ -235,7 +246,7 @@ public class ForestHutTask : BuildingTask
             tree.choper = workerCtrl;
             workerCtrl.workerTasks.SetTaskTarget(tree);
             workerCtrl.workerMovement.SetTarget(tree.transform);
-            Debug.Log("FOUND: " + tree.name, tree.gameObject);
+            //Debug.Log("FOUND: " + tree.name, tree.gameObject);
             return;
         }
     }
