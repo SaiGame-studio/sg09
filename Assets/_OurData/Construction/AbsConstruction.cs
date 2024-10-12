@@ -103,6 +103,7 @@ public abstract class AbsConstruction : SaiBehaviour
         this.percent = 0;
         this.timer = 0;
         this.isPlaced = false;
+        this.resHave = new();
     }
 
     public virtual void AddRes(ResourceName resourceName, float count)

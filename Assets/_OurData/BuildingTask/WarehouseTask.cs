@@ -19,10 +19,6 @@ public class WarehouseTask : BuildingTask
         base.LoadComponents();
     }
 
-    /// <summary>
-    /// Called in FixedUpdate
-    /// </summary>
-    /// <param name="workerCtrl"></param>
     public override void DoingTask(WorkerCtrl workerCtrl)
     {
         switch (workerCtrl.workerTasks.TaskCurrent())

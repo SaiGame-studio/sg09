@@ -5,7 +5,7 @@ using UnityEngine;
 public class ForestHutTask : BuildingTask
 {
     [Header("Forest Hut")]
-    [SerializeField] protected int treeMax = 7;
+    [SerializeField] protected int treeMax = 700;
     [SerializeField] protected float treeRange = 27f;
     [SerializeField] protected float treeDistance = 7f;
     [SerializeField] protected float treeRemoveSpeed = 16;
@@ -59,18 +59,45 @@ public class ForestHutTask : BuildingTask
 
     protected virtual void Planning(WorkerCtrl workerCtrl)
     {
-        if (this.NeedMoreTree())
-        {
-            workerCtrl.workerMovement.SetTarget(null);
-            workerCtrl.workerTasks.TaskAdd(TaskType.plantTree);
-            return;
-        }
-
-        if (!this.buildingCtrl.warehouse.IsFull())
+        if (this.HasTreeFullLevel() && !this.buildingCtrl.warehouse.IsFull())
         {
             workerCtrl.workerTasks.TaskAdd(TaskType.bringResourceBack);
             workerCtrl.workerTasks.TaskAdd(TaskType.chopTree);
             workerCtrl.workerTasks.TaskAdd(TaskType.findTree2Chop);
+        }else if (this.NeedMoreTree())
+        {
+            workerCtrl.workerMovement.SetTarget(null);
+            workerCtrl.workerTasks.TaskAdd(TaskType.plantTree);
+        }
+    }
+
+    protected virtual bool HasTreeFullLevel()
+    {
+        foreach (TreeCtrl tree in this.trees)
+        {
+            if (tree == null) continue;
+            if (!tree.logwoodGenerator.IsAllResMax()) continue;
+            if (tree.choper != null) continue;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    protected virtual void FindNearestTree(WorkerCtrl workerCtrl)
+    {
+
+        foreach (TreeCtrl tree in this.trees)
+        {
+            if (tree == null) continue;
+            if (!tree.logwoodGenerator.IsAllResMax()) continue;
+            if (tree.choper != null) continue;
+
+            tree.choper = workerCtrl;
+            workerCtrl.workerTasks.SetTaskTarget(tree);
+            workerCtrl.workerMovement.SetTarget(tree.transform);
+            return;
         }
     }
 
@@ -83,8 +110,20 @@ public class ForestHutTask : BuildingTask
     {
         Transform target = workerCtrl.workerMovement.GetTarget();
 
-        if (target == null) target = this.GetPlantPosition().transform;
-        if (target == null) return;
+        if (target == null)
+        {
+            TreePlantPositionCtrl treePlant = this.GetPlantPosition();
+            if (treePlant == null) return;
+
+            if (!workerCtrl.workerMovement.CanReachDestination(treePlant.transform.position))
+            {
+                //Debug.LogError("Cant go to " + treePlant.transform.position, treePlant.gameObject);
+                treePlant.Despawn.DoDespawn();
+                return;
+            }
+
+            target = treePlant.transform;
+        }
 
         workerCtrl.workerTasks.taskWorking.GoOutBuilding();
         workerCtrl.workerMovement.SetTarget(target);
@@ -94,11 +133,12 @@ public class ForestHutTask : BuildingTask
             this.Planting(workerCtrl);
             workerCtrl.workerMovement.SetTarget(null);
 
-            if (!this.NeedMoreTree())
-            {
-                workerCtrl.workerTasks.TaskCurrentDone();
-                workerCtrl.workerTasks.TaskAdd(TaskType.goToWorkStation);
-            }
+            //if (!this.NeedMoreTree())
+            //{
+            //    workerCtrl.workerTasks.TaskCurrentDone();
+            //    workerCtrl.workerTasks.TaskAdd(TaskType.goToWorkStation);
+            //}
+            workerCtrl.workerTasks.TaskCurrentDone();
         }
     }
 
@@ -122,14 +162,14 @@ public class ForestHutTask : BuildingTask
 
     protected virtual TreePlantPositionCtrl GetPlantPosition()
     {
-        Vector3 newTreePos = this.RandomPlaceForTree(); ;
+        Vector3 newTreePos = this.RandomPlaceForTree();
         float dis = Vector3.Distance(transform.position, newTreePos);
         if (dis < this.treeDistance) return null;
 
         EffectCtrl newObj = EffectSpawnerCtrl.Instance.Spawner.Spawn(EffectName.TreePlantPosition, newTreePos);
         newObj.gameObject.SetActive(true);
 
-        return (TreePlantPositionCtrl) newObj;
+        return (TreePlantPositionCtrl)newObj;
     }
 
     protected virtual Vector3 RandomPlaceForTree()
@@ -202,27 +242,7 @@ public class ForestHutTask : BuildingTask
         }
         else if (workerCtrl.workerMovement.TargetDistance() <= 1.5f)
         {
-            //workerCtrl.workerMovement.SetTarget(null);
             workerCtrl.workerTasks.TaskCurrentDone();
-        }
-    }
-
-    protected virtual void FindNearestTree(WorkerCtrl workerCtrl)
-    {
-
-        foreach (TreeCtrl tree in this.trees)
-        {
-            //Debug.Log("FindNearestTree: " + tree.name, tree.gameObject);
-
-            if (tree == null) continue;
-            if (!tree.logwoodGenerator.IsAllResMax()) continue;
-            if (tree.choper != null) continue;
-
-            tree.choper = workerCtrl;
-            workerCtrl.workerTasks.SetTaskTarget(tree);
-            workerCtrl.workerMovement.SetTarget(tree.transform);
-            //Debug.Log("FOUND: " + tree.name, tree.gameObject);
-            return;
         }
     }
 
