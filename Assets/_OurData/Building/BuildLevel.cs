@@ -8,7 +8,14 @@ public class BuildLevel : SaiBehaviour
 
     protected override void OnEnable()
     {
+        this.Reborn();
         this.ShowBuilding();
+    }
+
+    protected virtual void Reborn()
+    {
+        this.currentLevel = 0;
+        this.HideAllBuildings();
     }
 
     protected override void LoadComponents()
@@ -31,9 +38,6 @@ public class BuildLevel : SaiBehaviour
         Debug.Log(transform.name + ": LoadBuildings");
     }
 
-    /// <summary>
-    /// Call from InvokeRepeating
-    /// </summary>
     protected virtual void ShowNextBuild()
     {
         if (this.currentLevel >= this.levels.Count - 2) return;
@@ -61,5 +65,13 @@ public class BuildLevel : SaiBehaviour
         if (lastBuildIndex < 0) return;
         Transform lastBuild = this.levels[lastBuildIndex];
         lastBuild.gameObject.SetActive(false);
+    }
+
+    protected virtual void HideAllBuildings()
+    {
+        foreach(Transform build in this.levels)
+        {
+            build.gameObject.SetActive(false);
+        }
     }
 }

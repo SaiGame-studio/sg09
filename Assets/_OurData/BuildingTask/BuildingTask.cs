@@ -57,7 +57,7 @@ public class BuildingTask : SaiBehaviour
     public virtual void FindNearBuildings()
     {
         this.nearBuildings.Clear();
-        this.nearBuildings = new List<BuildingCtrl>(BuildingManager.instance.BuildingCtrls());
+        this.nearBuildings = new List<BuildingCtrl>(BuildingSpawnerCtrl.Instance.Manager.BuildingCtrls());
         this.nearBuildings.Sort(delegate (BuildingCtrl a, BuildingCtrl b)
         {
             Vector3 aPos = a.transform.position;

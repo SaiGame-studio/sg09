@@ -4,7 +4,7 @@ using UnityEngine;
 public class HouseBuilderTask : BuildingTask
 {
     [Header("House Builder")]
-    [SerializeField] protected AbstractConstruction construction;
+    [SerializeField] protected AbsConstruction construction;
     [SerializeField] protected List<BuildingCtrl> warehouses;
 
     protected override void LoadComponents()
@@ -39,7 +39,7 @@ public class HouseBuilderTask : BuildingTask
 
     protected virtual void Planning(WorkerCtrl workerCtrl)
     {
-        if (this.construction == null) this.construction = ConstructionManager.instance.GetConstruction();
+        if (this.construction == null) this.construction = ConstructionManager.Instance.GetConstruction();
 
         if (this.construction)
         {
@@ -51,7 +51,7 @@ public class HouseBuilderTask : BuildingTask
 
     protected virtual void FindWarehouse()
     {
-        List<BuildingCtrl> buildingCtrls = BuildingManager.instance.BuildingCtrls();
+        List<BuildingCtrl> buildingCtrls = BuildingSpawnerCtrl.Instance.Manager.BuildingCtrls();
         foreach (BuildingCtrl buildingCtrl in buildingCtrls)
         {
             if (buildingCtrl.buildingTask.GetType() != typeof(WarehouseTask)) continue;

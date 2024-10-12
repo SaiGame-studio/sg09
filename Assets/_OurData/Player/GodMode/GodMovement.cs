@@ -12,9 +12,8 @@ public class GodMovement : SaiBehaviour
     public Vector3 camMovement = new Vector3(0, 0, 0);
     public Vector3 camView = new Vector3(45f, 0, 0);
 
-    protected override void Update()
+    protected virtual void Update()
     {
-        base.Update();
         this.Moving();
     }
 

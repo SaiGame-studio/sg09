@@ -8,9 +8,8 @@ public class Warehouse : SaiBehaviour
     [SerializeField] protected bool isFull = false;
     [SerializeField] protected List<ResHolder> resHolders;
 
-    protected override void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        base.FixedUpdate();
         this.isFull = this.IsFull();
     }
 

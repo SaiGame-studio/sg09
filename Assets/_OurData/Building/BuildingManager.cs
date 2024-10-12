@@ -3,41 +3,37 @@ using UnityEngine;
 
 public class BuildingManager : SaiBehaviour
 {
-    public static BuildingManager instance;
-    [SerializeField] protected List<BuildingCtrl> buildingCtrls;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (BuildingManager.instance != null) Debug.LogError("Only 1 BuildingManager allow");
-        BuildingManager.instance = this;
-    }
+    [SerializeField] protected BuildingSpawnerCtrl ctrl;
+    [SerializeField] protected List<BuildingCtrl> buildings;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadBuildingCtrls();
+        this.LoadBuildingSpawnerCtrl();
+        this.LoadPoolObjects();
     }
 
-    protected virtual void LoadBuildingCtrls()
+    protected virtual void LoadPoolObjects()
     {
-        if (this.buildingCtrls.Count > 0) return;
-        foreach (Transform child in transform)
-        {
-            BuildingCtrl ctrl = child.GetComponent<BuildingCtrl>();
-            if (ctrl == null) continue;
-            this.buildingCtrls.Add(ctrl);
-        }
+        if (this.buildings.Count > 0) return;
+        BuildingCtrl[] components = this.ctrl.Spawner.PoolHolder.GetComponentsInChildren<BuildingCtrl>();
+        this.buildings = new List<BuildingCtrl>(components);
+        //Debug.Log(transform.name + ": LoadPoolObjects", gameObject);
+    }
 
-        Debug.Log(transform.name + "LoadBuildingCtrls", gameObject);
+    protected virtual void LoadBuildingSpawnerCtrl()
+    {
+        if (this.ctrl != null) return;
+        this.ctrl = GetComponent<BuildingSpawnerCtrl>();
+        Debug.Log(transform.name + ": LoadBuildingSpawnerCtrl", gameObject);
     }
 
     public virtual BuildingCtrl FindBuilding(BuildingType buildingType)
     {
         BuildingCtrl buildingCtrl;
-        for (int i = 0; i < this.buildingCtrls.Count; i++)
+        for (int i = 0; i < this.BuildingCtrls().Count; i++)
         {
-            buildingCtrl = this.buildingCtrls[i];
+            buildingCtrl = this.BuildingCtrls()[i];
             if (!buildingCtrl.workers.IsNeedWorker()) continue;
             if (buildingCtrl.buildingType != buildingType) continue;
 
@@ -48,26 +44,26 @@ public class BuildingManager : SaiBehaviour
 
     public virtual List<BuildingCtrl> BuildingCtrls()
     {
-        return this.buildingCtrls;
+        return this.buildings;
     }
 
-    public virtual void AddBuilding(BuildingCtrl buildingCtrl)
+    public virtual void Add(BuildingCtrl buildingCtrl)
     {
-        this.buildingCtrls.Add(buildingCtrl);
-        buildingCtrl.transform.parent = transform;
+        this.BuildingCtrls().Add(buildingCtrl);
         this.NearBuildingRecheck();
     }
 
-    public virtual void RemoveBuilding(BuildingCtrl buildingCtrl)
+    public virtual void Remove(BuildingCtrl buildingCtrl)
     {
-        this.buildingCtrls.Remove(buildingCtrl);
+        this.BuildingCtrls().Remove(buildingCtrl);
     }
 
     protected virtual void NearBuildingRecheck()
     {
-        foreach(BuildingCtrl buildingCtrl in this.buildingCtrls)
+        foreach (BuildingCtrl buildingCtrl in this.BuildingCtrls())
         {
             buildingCtrl.buildingTask.FindNearBuildings();
         }
     }
 }
+

@@ -6,20 +6,20 @@ public class WorkerMovement : SaiBehaviour
     [SerializeField] protected Transform target;
     public bool isWalking = false;
     public bool isWorking = false;
-    public WorkingType workingType = WorkingType.chopTree;
+    public WorkingType workingType = WorkingType.lumberjack;
     [SerializeField] protected float walkLimit = 0.7f;
     [SerializeField] protected float targetDistance = 0f;
+
+    protected virtual void FixedUpdate()
+    {
+        this.Moving();
+        this.Animating();
+    }
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadWorkerCtrl();
-    }
-
-    protected override void FixedUpdate()
-    {
-        this.Moving();
-        this.Animating();
     }
 
     protected virtual void LoadWorkerCtrl()

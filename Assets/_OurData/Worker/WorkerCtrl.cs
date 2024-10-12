@@ -1,8 +1,12 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class WorkerCtrl : SaiBehaviour
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CapsuleCollider))]
+public class WorkerCtrl : PoolObj
 {
+    public CapsuleCollider _collider;
+    public Rigidbody _rigidbody;
     public WorkerBuildings workerBuildings;
     public WorkerMovement workerMovement;
     public WorkerTasks workerTasks;
@@ -10,6 +14,11 @@ public class WorkerCtrl : SaiBehaviour
     public Transform workerModel;
     public NavMeshAgent navMeshAgent;
     public ResCarrier resCarrier;
+
+    public override string GetName()
+    {
+        return "Worker";
+    }
 
     protected override void LoadComponents()
     {
@@ -20,13 +29,34 @@ public class WorkerCtrl : SaiBehaviour
         this.LoadWorkerTasks();
         this.LoadAgent();
         this.LoadResCarrier();
+        this.LoadCapsuleCollider();
+        this.LoadRigidbody();
+    }
+
+    protected virtual void LoadCapsuleCollider()
+    {
+        if (this._collider != null) return;
+        this._collider = GetComponent<CapsuleCollider>();
+        this._collider.isTrigger = true;
+        this._collider.height = 2f;
+        this._collider.radius = 0.3f;
+        this._collider.center = new Vector3(0, 0.8f, 0);
+        Debug.LogWarning(transform.name + ": LoadCapsuleCollider", gameObject);
+    }
+
+    protected virtual void LoadRigidbody()
+    {
+        if (this._rigidbody != null) return;
+        this._rigidbody = GetComponent<Rigidbody>();
+        this._rigidbody.useGravity = false;
+        Debug.LogWarning(transform.name + ": LoadCapsuleCollider", gameObject);
     }
 
     protected virtual void LoadWorkerTasks()
     {
         if (this.workerTasks != null) return;
         this.workerTasks = GetComponent<WorkerTasks>();
-        Debug.Log(transform.name + ": LoadWorkerTasks", gameObject);
+        Debug.LogWarning(transform.name + ": LoadWorkerTasks", gameObject);
     }
 
     protected virtual void LoadAnimator()
@@ -34,21 +64,21 @@ public class WorkerCtrl : SaiBehaviour
         if (this.animator != null) return;
         this.animator = GetComponentInChildren<Animator>();
         this.workerModel = this.animator.transform;
-        Debug.Log(transform.name + ": LoadAnimator", gameObject);
+        Debug.LogWarning(transform.name + ": LoadAnimator", gameObject);
     }
 
     protected virtual void LoadWorkerBuildings()
     {
         if (this.workerBuildings != null) return;
         this.workerBuildings = GetComponent<WorkerBuildings>();
-        Debug.Log(transform.name + ": LoadWorkerBuildings", gameObject);
+        Debug.LogWarning(transform.name + ": LoadWorkerBuildings", gameObject);
     }
 
     protected virtual void LoadWorkerMovement()
     {
         if (this.workerMovement != null) return;
         this.workerMovement = GetComponent<WorkerMovement>();
-        Debug.Log(transform.name + ": LoadWorkerMovement", gameObject);
+        Debug.LogWarning(transform.name + ": LoadWorkerMovement", gameObject);
     }
 
     protected virtual void LoadAgent()
@@ -56,14 +86,14 @@ public class WorkerCtrl : SaiBehaviour
         if (this.navMeshAgent != null) return;
         this.navMeshAgent = GetComponent<NavMeshAgent>();
         this.navMeshAgent.speed = 2f;
-        Debug.Log(transform.name + ": LoadAgent", gameObject);
+        Debug.LogWarning(transform.name + ": LoadAgent", gameObject);
     }
 
     protected virtual void LoadResCarrier()
     {
         if (this.resCarrier != null) return;
         this.resCarrier = GetComponent<ResCarrier>();
-        Debug.Log(transform.name + ": ResCarrier", gameObject);
+        Debug.LogWarning(transform.name + ": ResCarrier", gameObject);
     }
 
     public virtual void WorkerReleased()
@@ -72,4 +102,6 @@ public class WorkerCtrl : SaiBehaviour
         this.workerTasks.taskWorking.GoOutBuilding();
         this.workerBuildings.WorkerReleased();
     }
+
+
 }

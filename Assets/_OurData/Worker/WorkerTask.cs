@@ -7,10 +7,8 @@ public class WorkerTask : SaiBehaviour
     [SerializeField] protected float buildingDistance = 0;
     [SerializeField] protected float buildDisLimit = 0.7f;
 
-    protected override void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        base.FixedUpdate();
-
         if (this.GetBuilding()) this.GettingReadyForWork();
         else this.FindBuilding();
 
@@ -38,7 +36,7 @@ public class WorkerTask : SaiBehaviour
 
     protected virtual void FindBuilding()
     {
-        BuildingCtrl buildingCtrl = BuildingManager.instance.FindBuilding(this.GetBuildingType());
+        BuildingCtrl buildingCtrl = BuildingSpawnerCtrl.Instance.Manager.FindBuilding(this.GetBuildingType());
         if (buildingCtrl == null) return;
 
         buildingCtrl.workers.AddWorker(this.workerCtrl);

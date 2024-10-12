@@ -1,35 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConstructionManager : SaiBehaviour
+public class ConstructionManager : SaiSingleton<ConstructionManager>
 {
-    public static ConstructionManager instance;
-    [SerializeField] protected List<AbstractConstruction> constructions;
+    [SerializeField] protected List<AbsConstruction> constructions;
 
-    protected override void Awake()
+    protected virtual void FixedUpdate()
     {
-        base.Awake();
-        if (ConstructionManager.instance != null) Debug.LogError("Only 1 ConstructionManager allow");
-        ConstructionManager.instance = this;
-    }
-
-    protected override void FixedUpdate()
-    {
-        base.FixedUpdate();
         this.ConstructionCleaning();
     }
 
-    public virtual void AddConstruction(AbstractConstruction abstractConstruction)
+    public virtual void Add(AbsConstruction abstractConstruction)
     {
         this.constructions.Add(abstractConstruction);
-        abstractConstruction.transform.parent = transform;
+    }
+
+    public virtual void Remove(AbsConstruction abstractConstruction)
+    {
+        this.constructions.Remove(abstractConstruction);
     }
 
     protected virtual void ConstructionCleaning()
     {
         if (this.constructions.Count < 1) return;
 
-        AbstractConstruction abstractConstruction;
+        AbsConstruction abstractConstruction;
         for (int i = 0;i<this.constructions.Count;i++)
         {
             abstractConstruction = this.constructions[i];
@@ -37,9 +32,9 @@ public class ConstructionManager : SaiBehaviour
         }
     }
 
-    public virtual AbstractConstruction GetConstruction()
+    public virtual AbsConstruction GetConstruction()
     {
-        foreach (AbstractConstruction construction in this.constructions)
+        foreach (AbsConstruction construction in this.constructions)
         {
             if (construction.builder != null) continue;
             if (!construction.HasEnoughResource()) return construction;

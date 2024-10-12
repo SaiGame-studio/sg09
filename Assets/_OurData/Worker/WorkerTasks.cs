@@ -10,10 +10,10 @@ public class WorkerTasks : SaiBehaviour
     public bool readyForTask = false;
     public TaskWorking taskWorking;
     public TaskGoHome taskGoHome;
-    public Transform taskTarget;
+    [SerializeField] protected PoolObj taskTarget;
+    public PoolObj TaskTarget => taskTarget;
     public BuildingCtrl taskBuildingCtrl;
     [SerializeField] protected List<TaskType> tasks;
-
 
     protected override void Awake()
     {
@@ -21,10 +21,8 @@ public class WorkerTasks : SaiBehaviour
         this.DisableTasks();
     }
 
-    protected override void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        base.FixedUpdate();
-
         if (this.isNightTime) this.GoHome();
         else this.GoWork();
     }
@@ -93,5 +91,10 @@ public class WorkerTasks : SaiBehaviour
     {
         if (this.tasks.Count <= 0) return TaskType.none;
         return this.tasks[this.tasks.Count - 1];
+    }
+
+    public virtual void SetTaskTarget(PoolObj target)
+    {
+        this.taskTarget = target;
     }
 }
