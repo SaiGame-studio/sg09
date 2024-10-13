@@ -1,23 +1,12 @@
 using UnityEngine;
 
-public class MyLayerManager : SaiBehaviour
+public class MyLayerManager : SaiSingleton<MyLayerManager>
 {
-    public static MyLayerManager instance;
-
     [Header("Layers")]
     public int layerWorker;
     public int layerGround;
     public int layerBuilding;
     public int layerTree;
-
-    protected override void Awake()
-    {
-        if (MyLayerManager.instance != null) Debug.LogError("Only 1 MyLayerManager allow");
-        MyLayerManager.instance = this;
-
-        this.LoadComponents();
-        //Physics.IgnoreLayerCollision(this.layerBullet, this.layerGround, true);
-    }
 
     protected override void LoadComponents()
     {

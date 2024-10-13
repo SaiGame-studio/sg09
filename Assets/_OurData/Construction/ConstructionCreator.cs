@@ -59,7 +59,7 @@ public class ConstructionCreator : SaiBehaviour
 
         Ray ray = GodModeCtrl.instance._camera.ScreenPointToRay(Input.mousePosition);
 
-        int mask = (1 << MyLayerManager.instance.layerGround);
+        int mask = (1 << MyLayerManager.Instance.layerGround);
         if (Physics.Raycast(ray, out RaycastHit hit, 999, mask))
         {
             this.buildPos = hit.point;

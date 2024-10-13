@@ -21,7 +21,7 @@ public class LogwoodGenerator : ResGenerator
 
     protected virtual void LoadResCreate()
     {
-        Resource res = new Resource
+        Resource res = new()
         {
             name = ResourceName.logwood,
             number = 1

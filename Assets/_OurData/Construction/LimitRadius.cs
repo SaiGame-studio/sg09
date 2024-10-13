@@ -47,32 +47,11 @@ public class LimitRadius : SaiBehaviour
 
         if (this.IsCollidedWithBuilding()) return true;
 
-        List<int> layers = new List<int>
+        List<int> layers = new()
         {
-            MyLayerManager.instance.layerTree
+            MyLayerManager.Instance.layerTree
         };
         this.CleanByLayers(layers);
-
-        //Check if building collided
-        //foreach (GameObject colliderObj in this.collideObjects)
-        //{
-        //    if (colliderObj.layer == MyLayerManager.instance.layerBuilding) return true;
-        //}
-
-        //GameObject colObj;
-        //int i = 0;
-        //do
-        //{
-        //    colObj = this.collideObjects[i];
-        //    if (colObj.layer == MyLayerManager.instance.layerTree)
-        //    {
-        //        this.collideObjects.RemoveAt(i);
-        //        this.CleanObject(colObj);
-        //        i = 0;
-        //        continue;
-        //    }
-        //    i++;
-        //} while (i < this.collideObjects.Count);
 
         return false;
     }
@@ -81,7 +60,7 @@ public class LimitRadius : SaiBehaviour
     {
         foreach (GameObject colliderObj in this.collideObjects)
         {
-            if (colliderObj.layer == MyLayerManager.instance.layerBuilding) return true;
+            if (colliderObj.layer == MyLayerManager.Instance.layerBuilding) return true;
         }
         return false;
     }
@@ -109,8 +88,8 @@ public class LimitRadius : SaiBehaviour
         bool canCollide = false;
         int coliderLayer = other.gameObject.layer;
 
-        if (coliderLayer == MyLayerManager.instance.layerBuilding) canCollide = true;
-        if (coliderLayer == MyLayerManager.instance.layerTree) canCollide = true;
+        if (coliderLayer == MyLayerManager.Instance.layerBuilding) canCollide = true;
+        if (coliderLayer == MyLayerManager.Instance.layerTree) canCollide = true;
 
         if (!canCollide) return;
 

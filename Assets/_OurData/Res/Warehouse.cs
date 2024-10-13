@@ -74,6 +74,7 @@ public class Warehouse : SaiBehaviour
             if (!resHolder.IsMax()) return false;
         }
 
+        //Debug.Log("Warehouse IsFull", gameObject);
         return true;
     }
 

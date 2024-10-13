@@ -64,10 +64,16 @@ public class ForestHutTask : BuildingTask
             workerCtrl.workerTasks.TaskAdd(TaskType.bringResourceBack);
             workerCtrl.workerTasks.TaskAdd(TaskType.chopTree);
             workerCtrl.workerTasks.TaskAdd(TaskType.findTree2Chop);
-        }else if (this.NeedMoreTree())
+        }
+        else if (this.NeedMoreTree())
         {
             workerCtrl.workerMovement.SetTarget(null);
             workerCtrl.workerTasks.TaskAdd(TaskType.plantTree);
+        }
+        else
+        {
+            //Debug.Log("Nothing to do: " + workerCtrl.name, workerCtrl.gameObject);
+            if(!workerCtrl.workerTasks.inHouse) workerCtrl.workerTasks.TaskAdd(TaskType.goToWorkStation);
         }
     }
 
@@ -79,6 +85,7 @@ public class ForestHutTask : BuildingTask
             if (!tree.logwoodGenerator.IsAllResMax()) continue;
             if (tree.choper != null) continue;
 
+            //Debug.Log("HasTreeFullLevel: " + tree.name, gameObject);
             return true;
         }
 
