@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3e80d28e03c754a9651b7ed573dc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWorker: 15
+  maxWorker: 7
   workers: []
 --- !u!114 &9131238185020776235
 MonoBehaviour:
@@ -134,7 +134,7 @@ MonoBehaviour:
   workingSpeed: 7
   lastBuildingWorked: 0
   nearBuildings: []
-  treeMax: 700
+  treeMax: 20
   treeRange: 27
   treeDistance: 7
   treeRemoveSpeed: 16

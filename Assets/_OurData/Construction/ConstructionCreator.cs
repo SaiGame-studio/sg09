@@ -28,6 +28,7 @@ public class ConstructionCreator : SaiBehaviour
 
     public virtual void CurrentBuildSet(string buildName)
     {
+        Debug.Log("CurrentBuildSet: " + buildName);
         this.isBuilding = false;
         if (this.currentBuild != null) this.currentBuild.gameObject.SetActive(false);
 

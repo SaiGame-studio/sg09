@@ -4,7 +4,7 @@ public abstract class AbsConstructFromPool<T> : AbsConstruction where T : PoolOb
 {
     [Header("Abs Construct From Pool")]
     [SerializeField] protected Spawner<T> spawner;
-    [SerializeField] protected PoolObj newObject;
+    [SerializeField] protected PoolObj newBuilding;
 
     protected abstract void LoadSpawner();
 
@@ -23,13 +23,13 @@ public abstract class AbsConstructFromPool<T> : AbsConstruction where T : PoolOb
     protected override void CreateBuild()
     {
         PoolObj prefab = this.spawner.PoolPrefabs.GetByName(this.GetBuildName());
-        this.newObject = this.spawner.Spawn((T)prefab, transform.position);
-        this.newObject.gameObject.SetActive(true);
+        this.newBuilding = this.spawner.Spawn((T)prefab, transform.position);
+        this.newBuilding.gameObject.SetActive(true);
     }
 
     protected override void BuildReset()
     {
         base.BuildReset();
-        this.newObject = null;
+        this.newBuilding = null;
     }
 }
