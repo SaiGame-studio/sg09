@@ -11,12 +11,21 @@ public class TreeManager : SaiBehaviour
     {
         base.LoadComponents();
         this.LoadTreeSpawnerCtrl();
+        this.LoadTrees();
     }
 
     protected virtual void LoadTreeSpawnerCtrl()
     {
         if (this.ctrl != null) return;
         this.ctrl = GetComponent<TreeSpawnerCtrl>();
+        Debug.Log(transform.name + ": LoadBuildingSpawnerCtrl", gameObject);
+    }
+
+    protected virtual void LoadTrees()
+    {
+        if (this.trees.Count > 0) return;
+        TreeCtrl[] trees = this.ctrl.Spawner.PoolHolder.GetComponentsInChildren<TreeCtrl>();
+        this.trees = new List<TreeCtrl>(trees);
         Debug.Log(transform.name + ": LoadBuildingSpawnerCtrl", gameObject);
     }
 

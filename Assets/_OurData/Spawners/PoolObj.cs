@@ -18,6 +18,6 @@ public abstract class PoolObj : SaiBehaviour
     {
         if (this.despawn != null) return;
         this.despawn = transform.GetComponentInChildren<DespawnBase>();
-        Debug.LogWarning(transform.name + ": LoadDespawn", gameObject);
+        //Debug.LogWarning(transform.name + ": LoadDespawn", gameObject);
     }
 }

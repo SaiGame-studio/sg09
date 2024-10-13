@@ -17,10 +17,10 @@ public class LimitRadiusDestroy : LimitRadius
     {
         if (collideObjects.Count < 1) return false;
 
-        List<int> layers = new List<int>
+        List<int> layers = new()
         {
-            MyLayerManager.instance.layerTree,
-            MyLayerManager.instance.layerBuilding,
+            MyLayerManager.Instance.layerTree,
+            MyLayerManager.Instance.layerBuilding,
         };
         this.CleanByLayers(layers);
 

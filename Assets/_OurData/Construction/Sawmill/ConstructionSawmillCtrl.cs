@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConstructionWorkerCtrl : ConstructionCtrl
+public class ConstructionSawmillCtrl : ConstructionCtrl
 {
     public override string GetName()
     {
-        return BuildingName.Worker.ToString();
+        return BuildingName.Sawmill.ToString();
     }
 }

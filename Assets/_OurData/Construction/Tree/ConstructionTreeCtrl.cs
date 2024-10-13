@@ -6,6 +6,6 @@ public class ConstructionTreeCtrl : ConstructionCtrl
 {
     public override string GetName()
     {
-        return "ContructionTree";
+        return BuildingName.Tree.ToString();
     }
 }

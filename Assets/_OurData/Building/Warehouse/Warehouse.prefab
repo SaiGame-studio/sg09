@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceName: 1001
-  resCurrent: 0
+  resCurrent: 100
   resMax: Infinity
 --- !u!1 &3699486807572707636
 GameObject:
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceName: 2001
-  resCurrent: 0
+  resCurrent: 110
   resMax: Infinity
 --- !u!1 &4704484539157280951
 GameObject:
@@ -769,7 +769,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 6, y: 1.5, z: 3.5}
+  m_Extents: {x: 6, y: 1.5, z: 4.5}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1

@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/prototype.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/_Scenes/test/test_forest_hut.unity
+    guid: 3c079cf7f78a3084297ead820f820946
   m_configObjects: {}

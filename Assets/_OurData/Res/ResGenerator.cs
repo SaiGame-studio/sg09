@@ -16,6 +16,12 @@ public class ResGenerator : Warehouse
         this.Creating();
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        this.Reborn();
+    }
+
     protected virtual void Creating()
     {
         if (!this.canCreate) return;
@@ -58,10 +64,10 @@ public class ResGenerator : Warehouse
 
     public virtual List<Resource> TakeAll()
     {
-        List<Resource> resources = new List<Resource>();
+        List<Resource> resources = new();
         foreach (ResHolder resHolder in this.resHolders)
         {
-            Resource newResource = new Resource
+            Resource newResource = new()
             {
                 name = resHolder.Name(),
                 number = resHolder.TakeAll()
@@ -71,5 +77,10 @@ public class ResGenerator : Warehouse
         }
 
         return resources;
+    }
+
+    protected virtual void Reborn()
+    {
+        this.canCreate = true;
     }
 }

@@ -42,7 +42,6 @@ GameObject:
   m_Component:
   - component: {fileID: 336289611099128194}
   - component: {fileID: 6904783798783882647}
-  - component: {fileID: 8716078712919641637}
   - component: {fileID: 1671324916961737812}
   - component: {fileID: 9131238185020776235}
   - component: {fileID: 7198834449041495102}
@@ -86,29 +85,8 @@ NavMeshObstacle:
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
---- !u!65 &8716078712919641637
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4016775355674257637}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6, y: 3, z: 6}
   m_Center: {x: 0, y: 1, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!114 &1671324916961737812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3e80d28e03c754a9651b7ed573dc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWorker: 1
+  maxWorker: 7
   workers: []
 --- !u!114 &9131238185020776235
 MonoBehaviour:
@@ -156,8 +134,7 @@ MonoBehaviour:
   workingSpeed: 7
   lastBuildingWorked: 0
   nearBuildings: []
-  plantTreeObj: {fileID: 5276937730439446297, guid: 5a29edc65d00e8b43969c0fbc9656818, type: 3}
-  treeMax: 7
+  treeMax: 20
   treeRange: 27
   treeDistance: 7
   treeRemoveSpeed: 16

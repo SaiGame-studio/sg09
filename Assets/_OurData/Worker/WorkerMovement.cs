@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class WorkerMovement : SaiBehaviour
 {
@@ -41,13 +42,18 @@ public class WorkerMovement : SaiBehaviour
 
         if(this.target == null)
         {
-            this.workerCtrl.navMeshAgent.enabled = false;
+           this.ActiveAgent(false);
         }
         else
         {
-            this.workerCtrl.navMeshAgent.enabled = true;
+            this.ActiveAgent(true);
             this.IsClose2Target();
         }
+    }
+
+    public virtual void ActiveAgent(bool status)
+    {
+        this.workerCtrl.navMeshAgent.enabled = status;
     }
 
     protected virtual void Moving()
@@ -60,6 +66,16 @@ public class WorkerMovement : SaiBehaviour
 
         this.isWalking = true;
         this.workerCtrl.navMeshAgent.SetDestination(this.target.position);
+    }
+
+    public virtual bool CanReachDestination(Vector3 targetPosition)
+    {
+        NavMeshPath path = new();
+        this.workerCtrl.workerMovement.ActiveAgent(true);
+        this.workerCtrl.navMeshAgent.CalculatePath(targetPosition, path);
+        this.workerCtrl.workerMovement.ActiveAgent(false);
+
+        return path.status == NavMeshPathStatus.PathComplete;
     }
 
     public virtual bool IsClose2Target()

@@ -28,6 +28,7 @@ public class ConstructionCreator : SaiBehaviour
 
     public virtual void CurrentBuildSet(string buildName)
     {
+        Debug.Log("CurrentBuildSet: " + buildName);
         this.isBuilding = false;
         if (this.currentBuild != null) this.currentBuild.gameObject.SetActive(false);
 
@@ -59,7 +60,7 @@ public class ConstructionCreator : SaiBehaviour
 
         Ray ray = GodModeCtrl.instance._camera.ScreenPointToRay(Input.mousePosition);
 
-        int mask = (1 << MyLayerManager.instance.layerGround);
+        int mask = (1 << MyLayerManager.Instance.layerGround);
         if (Physics.Raycast(ray, out RaycastHit hit, 999, mask))
         {
             this.buildPos = hit.point;

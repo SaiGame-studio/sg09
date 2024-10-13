@@ -25,7 +25,7 @@ public class GodInput : SaiBehaviour
     {
         if (this.godModeCtrl != null) return;
         this.godModeCtrl = GetComponent<GodModeCtrl>();
-        Debug.Log(transform.name + ": LoadGetModeCtrl", gameObject);
+        Debug.LogWarning(transform.name + ": LoadGetModeCtrl", gameObject);
     }
 
     protected virtual void InputHandle()
