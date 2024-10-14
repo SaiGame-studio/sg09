@@ -422,12 +422,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8feecb12d38007a4c943ee3a126c8104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingCtrl: {fileID: 824086674702599442}
+  ctrl: {fileID: 824086674702599442}
   taskTimer: 0
   taskDelay: 5
   workingSpeed: 7
   lastBuildingWorked: 0
-  nearBuildings: []
   workingPoint: {fileID: 7469727300263456865}
   logwoodCost: 1
   blankReceive: 2
@@ -449,6 +448,7 @@ MonoBehaviour:
   workers: {fileID: 1382446902579324557}
   warehouse: {fileID: 6578692487959159802}
   buildingTask: {fileID: 3967924512409181747}
+  nearBuildings: []
 --- !u!1 &5839837787821177778
 GameObject:
   m_ObjectHideFlags: 0

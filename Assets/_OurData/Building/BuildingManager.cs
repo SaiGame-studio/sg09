@@ -53,16 +53,16 @@ public class BuildingManager : SaiBehaviour
         this.NearBuildingRecheck();
     }
 
-    public virtual void Remove(BuildingHasWorkersCtrl buildingCtrl)
+    public virtual void Remove(BuildingCtrl buildingCtrl)
     {
         this.BuildingCtrls().Remove(buildingCtrl);
     }
 
     protected virtual void NearBuildingRecheck()
     {
-        foreach (BuildingHasWorkersCtrl buildingCtrl in this.BuildingCtrls())
+        foreach (BuildingCtrl buildingCtrl in this.BuildingCtrls())
         {
-            if(buildingCtrl.buildingTask) buildingCtrl.buildingTask.FindNearBuildings();
+             buildingCtrl.FindNearBuildings();
         }
     }
 }

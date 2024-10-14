@@ -8930,12 +8930,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b447c3b326090174e957b7f9c59d5c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingCtrl: {fileID: 7609276059284651310}
+  ctrl: {fileID: 7609276059284651310}
   taskTimer: 0
   taskDelay: 5
   workingSpeed: 7
   lastBuildingWorked: 0
-  nearBuildings: []
   takeProductCount: 0
   takeProductMax: 7
   takeProductTimer: 0
@@ -8962,6 +8961,7 @@ MonoBehaviour:
   workers: {fileID: 5393667160655441675}
   warehouse: {fileID: 6881666041980663967}
   buildingTask: {fileID: 7808193131999152703}
+  nearBuildings: []
 --- !u!1 &7815406619181800962
 GameObject:
   m_ObjectHideFlags: 0

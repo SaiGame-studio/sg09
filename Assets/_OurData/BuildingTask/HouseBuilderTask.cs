@@ -43,7 +43,7 @@ public class HouseBuilderTask : BuildingTask
 
         if (this.construction)
         {
-            this.construction.SetBuilder(this.buildingCtrl);
+            this.construction.SetBuilder(this.ctrl);
             workerCtrl.workerTasks.TaskAdd(TaskType.findWarehouseHasRes);
             this.FindWarehouse();
         }

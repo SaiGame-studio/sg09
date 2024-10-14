@@ -6984,14 +6984,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 579250437}
     m_Modifications:
-    - target: {fileID: 1611910408846302498, guid: e1d08bd9faa25b34ca24240c160d5b92, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1611910408846302498, guid: e1d08bd9faa25b34ca24240c160d5b92, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 2425781374845253243, guid: e1d08bd9faa25b34ca24240c160d5b92, type: 3}
       propertyPath: m_LocalPosition.x
       value: 55.699997
@@ -7035,18 +7027,6 @@ PrefabInstance:
     - target: {fileID: 3204146601408374820, guid: e1d08bd9faa25b34ca24240c160d5b92, type: 3}
       propertyPath: m_Name
       value: HouseBuilder_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5321700458634904264, guid: e1d08bd9faa25b34ca24240c160d5b92, type: 3}
-      propertyPath: m_Center.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5321700458634904264, guid: e1d08bd9faa25b34ca24240c160d5b92, type: 3}
-      propertyPath: m_Extents.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8009360514325338141, guid: e1d08bd9faa25b34ca24240c160d5b92, type: 3}
-      propertyPath: maxWorker
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7215,27 +7195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ctrl: {fileID: 825033800}
-  trees:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  trees: []
 --- !u!1001 &839513706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15751,17 +15711,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2113897567076944419, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
-      propertyPath: buildingType
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6426223654924797735, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
       propertyPath: m_Name
       value: Well
-      objectReference: {fileID: 0}
-    - target: {fileID: 6426223654924797735, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15836,10 +15788,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseBuilder
       objectReference: {fileID: 0}
-    - target: {fileID: 3204146601408374820, guid: e1d08bd9faa25b34ca24240c160d5b92, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15912,10 +15860,6 @@ PrefabInstance:
     - target: {fileID: 7810715455346133273, guid: 27d485023463b704794795066d12c905, type: 3}
       propertyPath: m_Name
       value: Warehouse
-      objectReference: {fileID: 0}
-    - target: {fileID: 7810715455346133273, guid: 27d485023463b704794795066d12c905, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16031,25 +15975,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3819442426406736195, guid: 4d7aa984146ac4340a4e160e1767bac2, type: 3}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5280383970912549399, guid: 4d7aa984146ac4340a4e160e1767bac2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5280383970912549399, guid: 4d7aa984146ac4340a4e160e1767bac2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 5740674323905844377, guid: 4d7aa984146ac4340a4e160e1767bac2, type: 3}
       propertyPath: m_Name
       value: Sawmill
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740674323905844377, guid: 4d7aa984146ac4340a4e160e1767bac2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16107,10 +16035,6 @@ PrefabInstance:
     - target: {fileID: 4016775355674257637, guid: bd0011abfac53c64495e826144754197, type: 3}
       propertyPath: m_Name
       value: ForestHut
-      objectReference: {fileID: 0}
-    - target: {fileID: 4016775355674257637, guid: bd0011abfac53c64495e826144754197, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class TreeCtrl : PoolObj
+public abstract class TreeCtrl : ResourceCtrl
 {
     [Header("Tree")]
     public LogwoodGenerator logwoodGenerator;

@@ -26,7 +26,7 @@ public class TreeManager : SaiBehaviour
         if (this.trees.Count > 0) return;
         TreeCtrl[] trees = this.ctrl.Spawner.PoolHolder.GetComponentsInChildren<TreeCtrl>();
         this.trees = new List<TreeCtrl>(trees);
-        Debug.Log(transform.name + ": LoadBuildingSpawnerCtrl", gameObject);
+        //Debug.Log(transform.name + ": LoadBuildingSpawnerCtrl", gameObject);
     }
 
     public virtual void Add(TreeCtrl treeCtrl)

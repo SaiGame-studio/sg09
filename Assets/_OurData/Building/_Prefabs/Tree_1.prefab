@@ -1096,10 +1096,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   despawn: {fileID: 2632856197293449777}
   buildingType: 3
-  door: {fileID: 0}
-  workers: {fileID: 0}
-  warehouse: {fileID: 371047856493902984}
-  buildingTask: {fileID: 0}
   logwoodGenerator: {fileID: 371047856493902984}
   treeLevel: {fileID: 7184507257606256109}
   choper: {fileID: 0}

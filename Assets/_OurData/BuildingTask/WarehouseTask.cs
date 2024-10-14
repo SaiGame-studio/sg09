@@ -101,16 +101,16 @@ public class WarehouseTask : BuildingTask
         ResHolder resHolder;
         int carryCount = workerCtrl.resCarrier.carryCount;
 
-        foreach (BuildingCtrl buildingCtrl in this.nearBuildings)
+        foreach (BuildingCtrl buildingCtrl in this.ctrl.NearBuildings)
         {
             if (buildingCtrl.buildingType != BuildingType.workStation) continue;
             resources = buildingCtrl.warehouse.NeedResoures();
             foreach (Resource resource in resources)
             {
-                resHolder = this.buildingCtrl.warehouse.GetResource(resource.name);
+                resHolder = this.ctrl.warehouse.GetResource(resource.name);
                 if (resHolder.Current() < 1) continue;
 
-                this.buildingCtrl.warehouse.RemoveResource(resource.name, carryCount);
+                this.ctrl.warehouse.RemoveResource(resource.name, carryCount);
                 workerCtrl.resCarrier.AddResource(resource.name, carryCount);
 
                 workerCtrl.workerTasks.taskBuildingCtrl = buildingCtrl;
@@ -145,7 +145,7 @@ public class WarehouseTask : BuildingTask
         this.DoneGetResNeed2Move(workerCtrl);
 
         //Find what building need these Resources
-        workerTasks.taskBuildingCtrl = this.buildingCtrl;
+        workerTasks.taskBuildingCtrl = this.ctrl;
         workerTasks.TaskAdd(TaskType.takingProductBack);
     }
 
@@ -163,13 +163,13 @@ public class WarehouseTask : BuildingTask
             tryCount--;
 
             this.lastBuildingWorked++;
-            if (lastBuildingWorked >= this.nearBuildings.Count)
+            if (lastBuildingWorked >= this.ctrl.NearBuildings.Count)
             {
                 this.lastBuildingWorked = 0;
                 break;
             }
 
-            BuildingCtrl nextBuilding = this.nearBuildings[this.lastBuildingWorked];
+            BuildingCtrl nextBuilding = this.ctrl.NearBuildings[this.lastBuildingWorked];
             if (nextBuilding.buildingType != BuildingType.workStation) continue;
 
             ResHolder resHolder = nextBuilding.warehouse.ResNeed2Move();

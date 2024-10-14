@@ -62,8 +62,8 @@ public class SawmillTask : BuildingTask
         workerCtrl.workerMovement.workingType = WorkingType.sawing;
         yield return new WaitForSeconds(this.workingSpeed);
 
-        this.buildingCtrl.warehouse.RemoveResource(ResourceName.logwood, this.logwoodCost);
-        this.buildingCtrl.warehouse.AddResource(ResourceName.blank, this.blankReceive);
+        this.ctrl.warehouse.RemoveResource(ResourceName.logwood, this.logwoodCost);
+        this.ctrl.warehouse.AddResource(ResourceName.blank, this.blankReceive);
 
         workerCtrl.workerMovement.isWorking = false;
         workerCtrl.workerTasks.TaskCurrentDone();
@@ -86,13 +86,13 @@ public class SawmillTask : BuildingTask
 
     protected virtual bool IsStoreMax()
     {
-        ResHolder blank= this.buildingCtrl.warehouse.GetResource(ResourceName.blank);
+        ResHolder blank= this.ctrl.warehouse.GetResource(ResourceName.blank);
         return blank.IsMax();
     }
 
     protected virtual bool HasLogwood()
     {
-        ResHolder logwood = this.buildingCtrl.warehouse.GetResource(ResourceName.logwood);
+        ResHolder logwood = this.ctrl.warehouse.GetResource(ResourceName.logwood);
         return logwood.Current() > 0;
     }
 }

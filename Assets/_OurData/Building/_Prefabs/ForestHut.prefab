@@ -1954,13 +1954,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d432e5ce4632ff045900fa4f9e881228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingCtrl: {fileID: 7534548200789594517}
+  ctrl: {fileID: 7534548200789594517}
   taskTimer: 0
   taskDelay: 5
   workingSpeed: 7
   lastBuildingWorked: 0
-  nearBuildings: []
-  treeMax: 20
+  treeMax: 700
   treeRange: 27
   treeDistance: 7
   treeRemoveSpeed: 16
@@ -1983,6 +1982,7 @@ MonoBehaviour:
   workers: {fileID: 1671324916961737812}
   warehouse: {fileID: 9131238185020776235}
   buildingTask: {fileID: 7198834449041495102}
+  nearBuildings: []
 --- !u!1 &4119485721705082358
 GameObject:
   m_ObjectHideFlags: 0

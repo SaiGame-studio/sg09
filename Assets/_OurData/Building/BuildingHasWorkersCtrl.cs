@@ -10,8 +10,6 @@ public abstract class BuildingHasWorkersCtrl: BuildingCtrl
     {
         base.LoadComponents();
         this.LoadWorkers();
-        this.LoadDoor();
-        this.LoadWarehouse();
         this.LoadBuldingTask();
     }
 
