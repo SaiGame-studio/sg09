@@ -27,9 +27,9 @@ public abstract class AbsConstructFromPool<T> : AbsConstruction where T : PoolOb
         this.newBuilding.gameObject.SetActive(true);
     }
 
-    protected override void BuildReset()
+    protected override void Reborn()
     {
-        base.BuildReset();
+        base.Reborn();
         this.newBuilding = null;
     }
 }

@@ -1,12 +1,9 @@
 using UnityEngine;
 
-public abstract class BuildingCtrl : PoolObj
+public abstract class BuildingHasWorkersCtrl: BuildingCtrl
 {
-    [Header("Building")]
-    public BuildingType buildingType = BuildingType.workStation;
-    public Transform door;
+    [Header("Has Workers")]
     public Workers workers;
-    public Warehouse warehouse;
     public BuildingTask buildingTask;
 
     protected override void LoadComponents()
@@ -23,20 +20,6 @@ public abstract class BuildingCtrl : PoolObj
         if (this.workers != null) return;
         this.workers = GetComponent<Workers>();
         Debug.Log(transform.name + ": LoadWorkers", gameObject);
-    }
-
-    protected virtual void LoadDoor()
-    {
-        if (this.door != null) return;
-        this.door = transform.Find("Door");
-        Debug.Log(transform.name + " LoadDoor", gameObject);
-    }
-
-    protected virtual void LoadWarehouse()
-    {
-        if (this.warehouse != null) return;
-        this.warehouse = GetComponent<Warehouse>();
-        Debug.Log(transform.name + " LoadWarehouse", gameObject);
     }
 
     protected virtual void LoadBuldingTask()

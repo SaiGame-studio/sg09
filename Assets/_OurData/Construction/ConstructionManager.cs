@@ -36,7 +36,7 @@ public class ConstructionManager : SaiSingleton<ConstructionManager>
     {
         foreach (AbsConstruction construction in this.constructions)
         {
-            if (construction.builder != null) continue;
+            if (construction.Builder != null) continue;
             if (!construction.HasEnoughResource()) return construction;
         }
 

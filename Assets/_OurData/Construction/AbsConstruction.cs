@@ -4,9 +4,11 @@ using UnityEngine;
 public abstract class AbsConstruction : SaiBehaviour
 {
     [Header("Abs Construction")]
-    public BuildingCtrl builder;
+    [SerializeField] protected BuildingCtrl builder;
+    public BuildingCtrl Builder => builder;
     [SerializeField] protected ConstructionCtrl constructionCtrl;
     [SerializeField] protected bool isPlaced = false;
+    [SerializeField] protected bool isFinish = false;
     [SerializeField] protected float percent = 0f;
     [SerializeField] protected float timer = 0f;
     [SerializeField] protected float delay = 0.001f;
@@ -22,7 +24,7 @@ public abstract class AbsConstruction : SaiBehaviour
     protected override void OnEnable()
     {
         base.OnEnable();
-        this.BuildReset();
+        this.Reborn();
     }
 
     protected abstract void CreateBuild();
@@ -87,9 +89,11 @@ public abstract class AbsConstruction : SaiBehaviour
 
     protected virtual void FinishBuild()
     {
+        if (this.isFinish) return;
         if (this.percent < 100f) return;
         this.CreateBuild();
         this.DestroyContruction();
+        this.isFinish = true;
     }
 
     protected virtual void DestroyContruction()
@@ -98,11 +102,13 @@ public abstract class AbsConstruction : SaiBehaviour
         this.constructionCtrl.Despawn.DoDespawn();
     }
 
-    protected virtual void BuildReset()
+    protected virtual void Reborn()
     {
+        this.builder = null;
         this.percent = 0;
         this.timer = 0;
         this.isPlaced = false;
+        this.isFinish = false;
         this.resHave = new();
     }
 
@@ -136,5 +142,10 @@ public abstract class AbsConstruction : SaiBehaviour
     public virtual void SetIsPlaced(bool status)
     {
         this.isPlaced = status;
+    }
+
+    public virtual void SetBuilder(BuildingCtrl builder)
+    {
+        this.builder = builder;
     }
 }

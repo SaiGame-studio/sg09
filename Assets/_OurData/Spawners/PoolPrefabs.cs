@@ -7,11 +7,17 @@ public abstract class PoolPrefabs<T> : SaiBehaviour where T : MonoBehaviour
     [SerializeField] protected List<T> prefabs = new();
     public List<T> Prefabs => prefabs;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        this.HidePrefabs();
+    }
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadPrefabs();
-        this.HidePrefabs();
+        //this.HidePrefabs();
     }
 
     protected virtual void LoadPrefabs()

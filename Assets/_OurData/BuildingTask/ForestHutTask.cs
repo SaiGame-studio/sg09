@@ -28,7 +28,7 @@ public class ForestHutTask : BuildingTask
         for (int i = 0; i < this.trees.Count; i++)
         {
             tree = this.trees[i];
-            if (tree == null) this.trees.RemoveAt(i);
+            if (tree == null || !tree.gameObject.activeSelf) this.trees.RemoveAt(i);
         }
     }
 
@@ -139,12 +139,6 @@ public class ForestHutTask : BuildingTask
         {
             this.Planting(workerCtrl);
             workerCtrl.workerMovement.SetTarget(null);
-
-            //if (!this.NeedMoreTree())
-            //{
-            //    workerCtrl.workerTasks.TaskCurrentDone();
-            //    workerCtrl.workerTasks.TaskAdd(TaskType.goToWorkStation);
-            //}
             workerCtrl.workerTasks.TaskCurrentDone();
         }
     }
