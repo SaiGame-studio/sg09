@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ForestHutWH : Warehouse
+public class WarehouseWH : Warehouse
 {
     protected override void LoadComponents()
     {
@@ -11,14 +11,7 @@ public class ForestHutWH : Warehouse
     protected virtual void LoadResources()
     {
         if (this.resources.Count > 0) return;
-        this.resources.Add(new Resource(ResourceName.logwood, 0, 7));
+        this.resources.Add(new Resource(ResourceName.water, 0, 70));
         Debug.LogWarning(transform.name + ": LoadResources", gameObject);
-    }
-
-    public override Resource ResNeed2Move()
-    {
-        Resource logwood = this.GetResource(ResourceName.logwood);
-        if (logwood.Number > 0) return logwood;
-        return null;
     }
 }

@@ -1,18 +1,37 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public class Resource
 {
     public string name;
-    public ResourceName codeName;
-    public int number = 0;
+    [SerializeField] protected ResourceName codeName;
+    public ResourceName CodeName => codeName;
+    [SerializeField] protected int number = 0;
+    public int Number => number;
     public int adding = 0;
     public int deducting = 0;
-    public int max = int.MaxValue;
+    [SerializeField] protected int max = int.MaxValue;
+    public int Max => max;
+
+    public Resource(ResourceName codeName)
+    {
+        this.codeName = codeName;
+        this.name = this.codeName.ToString();
+    }
+
     public Resource(ResourceName codeName, int number)
     {
         this.codeName = codeName;
         this.number = number;
+        this.name = this.codeName.ToString();
+    }
+
+    public Resource(ResourceName codeName, int number, int max)
+    {
+        this.codeName = codeName;
+        this.number = number;
+        this.max = max;
         this.name = this.codeName.ToString();
     }
 
@@ -42,6 +61,28 @@ public class Resource
         int newNumber = this.number - number;
         if (newNumber < 0) return false;
         return true;
+    }
+
+    public bool IsMax()
+    {
+        return this.number >= this.max;
+    }
+
+    public void SetMax(int max)
+    {
+        this.max = max;
+    }
+
+    public void SetNumber(int number)
+    {
+        this.number = number;
+    }
+
+    public int TakeAll()
+    {
+        int all = this.number;
+        this.number = 0;
+        return all;
     }
 
 }

@@ -18,7 +18,14 @@ public class WaterGenerator : ResGenerator
 
     protected virtual void SetLimit()
     {
-        ResHolder resHolder = this.GetRes(ResourceName.water);
-        resHolder.SetLimit(7);
+        Resource water = this.GetResource(ResourceName.water);
+        water.SetMax(7);
+    }
+
+    public override Resource ResNeed2Move()
+    {
+        Resource res = this.GetResource(ResourceName.water);
+        if (res.Number > 2) return res;
+        return null;
     }
 }

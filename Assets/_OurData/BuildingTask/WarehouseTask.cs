@@ -97,7 +97,7 @@ public class WarehouseTask : BuildingTask
         }
 
         List<Resource> resources;
-        ResHolder resHolder;
+        Resource currentRes;
         int carryCount = workerCtrl.resCarrier.carryCount;
 
         foreach (BuildingCtrl buildingCtrl in this.ctrl.NearBuildings)
@@ -106,12 +106,11 @@ public class WarehouseTask : BuildingTask
             resources = buildingCtrl.warehouse.NeedResoures();
             foreach (Resource resource in resources)
             {
-                Debug.Log(resource.name + ": " + resource.number, buildingCtrl.gameObject);
-                resHolder = this.ctrl.warehouse.GetRes(resource.codeName);
-                if (resHolder.Current() < 1) continue;
+                currentRes = this.ctrl.warehouse.GetResource(resource.CodeName);
+                if (currentRes.Number < 1) continue;
 
-                this.ctrl.warehouse.RemoveResource(resource.codeName, carryCount);
-                workerCtrl.resCarrier.AddResource(resource.codeName, carryCount);
+                this.ctrl.warehouse.RemoveResource(resource.CodeName, carryCount);
+                workerCtrl.resCarrier.AddResource(resource.CodeName, carryCount);
 
                 workerCtrl.workerTasks.taskBuildingCtrl = buildingCtrl;
                 workerCtrl.workerTasks.TaskAdd(TaskType.bringMatetiral2Building);
@@ -129,8 +128,8 @@ public class WarehouseTask : BuildingTask
         if (workerTasks.InHouse) workerTasks.TaskWorking.GoOutBuilding();
 
         BuildingCtrl taskBuildingCtrl = workerTasks.taskBuildingCtrl;
-        ResHolder resHolder = taskBuildingCtrl.warehouse.ResNeed2Move();
-        if (resHolder == null)
+        Resource res = taskBuildingCtrl.warehouse.ResNeed2Move();
+        if (res == null)
         {
             this.DoneGetResNeed2Move(workerCtrl);
             return;
@@ -140,8 +139,8 @@ public class WarehouseTask : BuildingTask
         if (!workerCtrl.workerMovement.IsClose2Target()) return;
 
         int count = workerCtrl.resCarrier.carryCount;
-        resHolder.Deduct(count);
-        workerCtrl.resCarrier.AddResource(resHolder.Name(), count);
+        res.Remove(count);
+        workerCtrl.resCarrier.AddResource(res.CodeName, count);
         this.DoneGetResNeed2Move(workerCtrl);
 
         //Find what building need these Resources
@@ -172,8 +171,8 @@ public class WarehouseTask : BuildingTask
             BuildingCtrl nextBuilding = this.ctrl.NearBuildings[this.lastBuildingWorked];
             if (nextBuilding.BuildingType != BuildingType.workStation) continue;
 
-            ResHolder resHolder = nextBuilding.warehouse.ResNeed2Move();
-            if (resHolder == null) continue;
+            Resource resource = nextBuilding.warehouse.ResNeed2Move();
+            if (resource == null) continue;
 
             workerCtrl.workerTasks.taskBuildingCtrl = nextBuilding;
             return nextBuilding;
@@ -196,7 +195,7 @@ public class WarehouseTask : BuildingTask
         workerTasks.TaskCurrentDone();
 
         Resource res = workerCtrl.resCarrier.TakeFirst();
-        taskBuildingCtrl.warehouse.AddResource(res.codeName, res.number);
+        taskBuildingCtrl.warehouse.AddResource(res.CodeName, res.Number);
 
         workerTasks.TaskAdd(TaskType.goToWorkStation);
     }
@@ -212,7 +211,7 @@ public class WarehouseTask : BuildingTask
         if (!workerCtrl.workerMovement.IsClose2Target()) return;
 
         Resource res = workerCtrl.resCarrier.TakeFirst();
-        taskBuildingCtrl.warehouse.AddResource(res.codeName, res.number);
+        taskBuildingCtrl.warehouse.AddResource(res.CodeName, res.Number);
 
         workerTasks.taskBuildingCtrl = null;
         workerTasks.TaskCurrentDone();

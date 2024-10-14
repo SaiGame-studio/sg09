@@ -31,11 +31,11 @@ public class ResGenerator : Warehouse
 
         if (this.IsAllResMax()) return;
         if (!this.IsRequireEnough()) return;
-        
-        foreach(Resource res in this.resCreate)
+
+        foreach (Resource res in this.resCreate)
         {
-            ResHolder resHolder = this.GetRes(res.codeName);
-            resHolder.Add(res.number);
+            Resource resource = this.GetResource(res.CodeName);
+            resource.Add(res.Number);
         }
     }
 
@@ -54,9 +54,9 @@ public class ResGenerator : Warehouse
 
     public virtual bool IsAllResMax()
     {
-        foreach (ResHolder resHolder in this.resHolders)
+        foreach (Resource resource in this.resources)
         {
-            if (resHolder.IsMax() == false) return false;
+            if (resource.IsMax() == false) return false;
         }
 
         return true;
@@ -65,9 +65,9 @@ public class ResGenerator : Warehouse
     public virtual List<Resource> TakeAll()
     {
         List<Resource> resources = new();
-        foreach (ResHolder resHolder in this.resHolders)
+        foreach (Resource res in this.resources)
         {
-            Resource newResource = new(resHolder.Name(), resHolder.TakeAll());
+            Resource newResource = new(res.CodeName, res.TakeAll());
             resources.Add(newResource);
         }
 

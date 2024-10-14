@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TextResourceData : TextAbstact
 {
-    [SerializeField] protected ResHolder resHolder;
+    [SerializeField] protected ResourceName resourceName;
 
     protected virtual void FixedUpdate()
     {
@@ -13,6 +13,7 @@ public class TextResourceData : TextAbstact
 
     protected virtual void ShowTestData()
     {
-        this.textPro.text = resHolder.resCurrent.ToString();
+        Resource resource = ResourceManager.Instance.GetResource(this.resourceName);
+        this.textPro.text = resource.Number.ToString();
     }
 }

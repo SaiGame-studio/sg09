@@ -86,13 +86,13 @@ public class SawmillTask : BuildingTask
 
     protected virtual bool IsStoreMax()
     {
-        ResHolder blank= this.ctrl.warehouse.GetRes(ResourceName.blank);
-        return blank.IsMax();
+        Resource resource = this.ctrl.warehouse.GetResource(ResourceName.blank);
+        return resource.IsMax();
     }
 
     protected virtual bool HasLogwood()
     {
-        ResHolder logwood = this.ctrl.warehouse.GetRes(ResourceName.logwood);
-        return logwood.Current() > 0;
+        Resource logwood = this.ctrl.warehouse.GetResource(ResourceName.logwood);
+        return logwood.Number > 0;
     }
 }

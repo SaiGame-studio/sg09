@@ -10,7 +10,7 @@ public class ResCarrier : MonoBehaviour
     public virtual Resource AddResource(ResourceName resourceName, int number)
     {
         Resource res = this.GetResByName(resourceName);
-        res.number += number;
+        res.Add(number);
         return res;
     }
 
@@ -18,13 +18,13 @@ public class ResCarrier : MonoBehaviour
     {
         foreach (Resource addResource in addResources)
         {
-            this.AddResource(addResource.codeName, addResource.number);
+            this.AddResource(addResource.CodeName, addResource.Number);
         }
     }
 
     public virtual List<Resource> TakeAll()
     {
-        List<Resource> resources = new List<Resource>(this.resources); //Clone
+        List<Resource> resources = new(this.resources); //Clone
         this.resources = new List<Resource>();
         return resources;
     }
@@ -43,7 +43,7 @@ public class ResCarrier : MonoBehaviour
 
     public virtual Resource GetResByName(ResourceName resourceName)
     {
-        Resource res = this.resources.Find((x) => x.codeName == resourceName);
+        Resource res = this.resources.Find((x) => x.CodeName == resourceName);
 
         if (res == null)
         {

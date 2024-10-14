@@ -12,15 +12,15 @@ public class SawmillWH : Warehouse
     protected virtual void LoadResources()
     {
         if (this.resources.Count > 0) return;
-        this.resources.Add(new Resource(ResourceName.logwood, 0));
-        this.resources.Add(new Resource(ResourceName.blank, 0));
+        this.resources.Add(new Resource(ResourceName.logwood, 0, 4));
+        this.resources.Add(new Resource(ResourceName.blank, 0, 8));
         Debug.LogWarning(transform.name + ": LoadResources", gameObject);
     }
 
-    public override ResHolder ResNeed2Move()
+    public override Resource ResNeed2Move()
     {
-        ResHolder resHolder = this.GetRes(ResourceName.blank);
-        if (resHolder.Current() > 0) return resHolder;
+        Resource blank = this.GetResource(ResourceName.blank);
+        if (blank.Number > 0) return blank;
         return null;
     }
 
@@ -28,11 +28,11 @@ public class SawmillWH : Warehouse
     {
         List<Resource> resources = new();
 
-        ResHolder logwood = this.GetRes(ResourceName.logwood);
-        int number = logwood.resMax - logwood.resCurrent;
+        Resource logwood = this.GetResource(ResourceName.logwood);
+        int number = logwood.Max - logwood.Number;
         Resource resLogwood = new(ResourceName.logwood, number);
 
-        if (resLogwood.number > 0) resources.Add(resLogwood);
+        if (resLogwood.Number > 0) resources.Add(resLogwood);
 
         return resources;
     }

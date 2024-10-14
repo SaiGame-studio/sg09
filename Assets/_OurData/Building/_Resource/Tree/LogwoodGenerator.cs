@@ -28,8 +28,8 @@ public class LogwoodGenerator : ResGenerator
 
     protected virtual void SetLimit()
     {
-        ResHolder resHolder = this.GetRes(ResourceName.logwood);
-        resHolder.SetLimit(1);
+        Resource logwood = this.GetResource(ResourceName.logwood);
+        logwood.SetMax(1);
     }
 
     protected override void Creating()
