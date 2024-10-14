@@ -73,7 +73,7 @@ public class SawmillTask : BuildingTask
     protected virtual void GotoWorkingPoint(WorkerCtrl workerCtrl)
     {
         WorkerTasks workerTasks = workerCtrl.workerTasks;
-        if (workerTasks.inHouse) workerTasks.taskWorking.GoOutBuilding();
+        if (workerTasks.InHouse) workerTasks.TaskWorking.GoOutBuilding();
 
         Transform target = workerCtrl.workerMovement.GetTarget();
         if (target == null) workerCtrl.workerMovement.SetTarget(this.workingPoint);

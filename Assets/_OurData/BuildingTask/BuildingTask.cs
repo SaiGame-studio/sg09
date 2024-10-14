@@ -18,7 +18,7 @@ public class BuildingTask : BuildingAbstract
 
     protected virtual void GoToWorkStation(WorkerCtrl workerCtrl)
     {
-        WorkerTask taskWorking = workerCtrl.workerTasks.taskWorking;
+        WorkerTask taskWorking = workerCtrl.workerTasks.TaskWorking;
         taskWorking.GotoBuilding();
         if (workerCtrl.workerMovement.IsClose2Target())
         {

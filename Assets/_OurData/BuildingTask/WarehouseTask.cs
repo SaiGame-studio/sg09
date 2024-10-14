@@ -8,7 +8,6 @@ public class WarehouseTask : BuildingTask
     [SerializeField] protected int takeProductMax = 7;
     [SerializeField] protected float takeProductTimer = 0;
     [SerializeField] protected float takeProductDelay = 7f;
-
     [SerializeField] protected int bringMaterialCount = 0;
     [SerializeField] protected int bringMaterialMax = 2;
     [SerializeField] protected float bringMaterialTimer = 0;
@@ -126,7 +125,7 @@ public class WarehouseTask : BuildingTask
     protected virtual void GotoGetProduct(WorkerCtrl workerCtrl)
     {
         WorkerTasks workerTasks = workerCtrl.workerTasks;
-        if (workerTasks.inHouse) workerTasks.taskWorking.GoOutBuilding();
+        if (workerTasks.InHouse) workerTasks.TaskWorking.GoOutBuilding();
 
         BuildingCtrl taskBuildingCtrl = workerTasks.taskBuildingCtrl;
         ResHolder resHolder = taskBuildingCtrl.warehouse.ResNeed2Move();
@@ -186,7 +185,7 @@ public class WarehouseTask : BuildingTask
     protected virtual void BringResourceBack(WorkerCtrl workerCtrl)
     {
         WorkerTasks workerTasks = workerCtrl.workerTasks;
-        if (workerTasks.inHouse) workerTasks.taskWorking.GoOutBuilding();
+        if (workerTasks.InHouse) workerTasks.TaskWorking.GoOutBuilding();
 
         BuildingCtrl taskBuildingCtrl = workerTasks.taskBuildingCtrl;
         if (workerCtrl.workerMovement.GetTarget() == null) workerCtrl.workerMovement.SetTarget(taskBuildingCtrl.door);
@@ -204,7 +203,7 @@ public class WarehouseTask : BuildingTask
     protected virtual void BringMatetiral2Building(WorkerCtrl workerCtrl)
     {
         WorkerTasks workerTasks = workerCtrl.workerTasks;
-        if (workerTasks.inHouse) workerTasks.taskWorking.GoOutBuilding();
+        if (workerTasks.InHouse) workerTasks.TaskWorking.GoOutBuilding();
 
         BuildingCtrl taskBuildingCtrl = workerTasks.taskBuildingCtrl;
 

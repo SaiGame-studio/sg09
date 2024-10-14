@@ -11,7 +11,7 @@ public abstract class WorkerTask : SaiBehaviour
         if (this.GetBuilding()) this.GettingReadyForWork();
         else this.FindBuildingForWorkder();
 
-        if (workerCtrl.workerTasks.readyForTask) this.Working();
+        if (workerCtrl.workerTasks.ReadyForTask) this.Working();
     }
 
     protected override void OnDisable()
@@ -63,7 +63,7 @@ public abstract class WorkerTask : SaiBehaviour
 
     protected virtual void GettingReadyForWork()
     {
-        if (this.workerCtrl.workerTasks.readyForTask) return;
+        if (this.workerCtrl.workerTasks.ReadyForTask) return;
 
         if (!this.workerCtrl.workerMovement.IsClose2Target())
         {
@@ -71,24 +71,24 @@ public abstract class WorkerTask : SaiBehaviour
             return;
         }
 
-        this.workerCtrl.workerTasks.readyForTask = true;
+        this.workerCtrl.workerTasks.SetReadyForTask(true);
         this.GoIntoBuilding();
     }
 
     public virtual void GoIntoBuilding()
     {
-        if (this.workerCtrl.workerTasks.inHouse) return;
+        if (this.workerCtrl.workerTasks.InHouse) return;
 
         this.workerCtrl.workerMovement.SetTarget(null);
-        this.workerCtrl.workerTasks.inHouse = true;
+        this.workerCtrl.workerTasks.SetInHouse(true);
         this.workerCtrl.workerModel.gameObject.SetActive(false);
     }
 
     public virtual void GoOutBuilding()
     {
-        if (!this.workerCtrl.workerTasks.inHouse) return;
+        if (!this.workerCtrl.workerTasks.InHouse) return;
 
-        this.workerCtrl.workerTasks.inHouse = false;
+        this.workerCtrl.workerTasks.SetInHouse(false);
         this.workerCtrl.workerModel.gameObject.SetActive(true);
     }
 
