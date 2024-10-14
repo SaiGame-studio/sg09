@@ -443,12 +443,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   despawn: {fileID: 0}
-  buildingType: 1
   door: {fileID: 9163982768230682588}
-  workers: {fileID: 1382446902579324557}
   warehouse: {fileID: 6578692487959159802}
-  buildingTask: {fileID: 3967924512409181747}
+  buildingType: 1
   nearBuildings: []
+  workers: {fileID: 1382446902579324557}
+  buildingTask: {fileID: 3967924512409181747}
 --- !u!1 &5839837787821177778
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,7 +474,7 @@ Transform:
   m_GameObject: {fileID: 5839837787821177778}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.93, y: 0, z: 0.67}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

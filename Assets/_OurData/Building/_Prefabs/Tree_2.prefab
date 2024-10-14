@@ -1014,6 +1014,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6337111228414974734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8167398109198841567}
+  m_Layer: 0
+  m_Name: Door
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8167398109198841567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6337111228414974734}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7366331605773958041}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6923150239919869917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,6 +1269,7 @@ Transform:
   - {fileID: 3513128968053702733}
   - {fileID: 3897951741070604009}
   - {fileID: 580715500879549012}
+  - {fileID: 8167398109198841567}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &2640954779127015667
@@ -1321,11 +1353,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   despawn: {fileID: 756924662058502640}
-  buildingType: 3
-  door: {fileID: 0}
-  workers: {fileID: 0}
+  door: {fileID: 8167398109198841567}
   warehouse: {fileID: 2346115004652997585}
-  buildingTask: {fileID: 0}
+  buildingType: 3
+  nearBuildings: []
   logwoodGenerator: {fileID: 2346115004652997585}
   treeLevel: {fileID: 1029930028567499053}
   choper: {fileID: 0}

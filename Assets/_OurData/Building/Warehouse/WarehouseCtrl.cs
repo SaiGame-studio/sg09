@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WarehouseCtrl : BuildingCtrl
+public class WarehouseCtrl : BuildingHasWorkersCtrl
 {
     public override string GetName()
     {

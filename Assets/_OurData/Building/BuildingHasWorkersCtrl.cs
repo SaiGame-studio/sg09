@@ -3,8 +3,11 @@ using UnityEngine;
 public abstract class BuildingHasWorkersCtrl: BuildingCtrl
 {
     [Header("Has Workers")]
-    public Workers workers;
-    public BuildingTask buildingTask;
+    [SerializeField] protected Workers workers;
+    public Workers Workers => workers;
+
+    [SerializeField] protected BuildingTask buildingTask;
+    public BuildingTask BuildingTask => buildingTask;
 
     protected override void LoadComponents()
     {

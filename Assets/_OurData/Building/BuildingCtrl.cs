@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BuildingCtrl : ResourceCtrl
+public abstract class BuildingCtrl : PoolObj
 {
     [Header("Building")]
     public Transform door;
-    public Workers workers;
     public Warehouse warehouse;
-    public BuildingTask buildingTask;
+    [SerializeField] protected BuildingType buildingType = BuildingType.workStation;
+    public BuildingType BuildingType => buildingType;
     [SerializeField] protected List<BuildingCtrl> nearBuildings;
     public List<BuildingCtrl> NearBuildings => nearBuildings;
 
@@ -26,17 +26,8 @@ public abstract class BuildingCtrl : ResourceCtrl
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadWorkers();
         this.LoadDoor();
         this.LoadWarehouse();
-        this.LoadBuldingTask();
-    }
-
-    protected virtual void LoadWorkers()
-    {
-        if (this.workers != null) return;
-        this.workers = GetComponent<Workers>();
-        //Debug.LogWarning(transform.name + ": LoadWorkers", gameObject);
     }
 
     protected virtual void LoadDoor()
@@ -51,13 +42,6 @@ public abstract class BuildingCtrl : ResourceCtrl
         if (this.warehouse != null) return;
         this.warehouse = GetComponent<Warehouse>();
         Debug.LogWarning(transform.name + " LoadWarehouse", gameObject);
-    }
-
-    protected virtual void LoadBuldingTask()
-    {
-        if (this.buildingTask != null) return;
-        this.buildingTask = GetComponent<BuildingTask>();
-        //Debug.LogWarning(transform.name + ": LoadBuldingTask", gameObject);
     }
 
     public virtual void FindNearBuildings()

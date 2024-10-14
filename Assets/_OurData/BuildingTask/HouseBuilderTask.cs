@@ -54,7 +54,7 @@ public class HouseBuilderTask : BuildingTask
         List<BuildingCtrl> buildingCtrls = BuildingSpawnerCtrl.Instance.Manager.BuildingCtrls();
         foreach (BuildingCtrl buildingCtrl in buildingCtrls)
         {
-            if (buildingCtrl.buildingTask.GetType() != typeof(WarehouseTask)) continue;
+            if (buildingCtrl.GetName() != BuildingName.Warehouse.ToString()) continue;
             if (this.warehouses.Contains(buildingCtrl)) continue;
             this.warehouses.Add(buildingCtrl);
         }

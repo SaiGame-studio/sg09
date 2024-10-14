@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public abstract class ResourceCtrl : PoolObj
+public abstract class ResourceCtrl : BuildingCtrl
 {
-    [Header("Resource")]
-    public BuildingType buildingType = BuildingType.resource;
+    protected override void ResetValues()
+    {
+        base.ResetValues();
+        this.buildingType = BuildingType.resource;
+    }
 }

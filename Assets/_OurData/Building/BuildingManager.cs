@@ -30,17 +30,19 @@ public class BuildingManager : SaiBehaviour
 
     public virtual BuildingCtrl FindBuilding(BuildingType buildingType)
     {
-        BuildingCtrl buildingCtrl;
-        for (int i = 0; i < this.BuildingCtrls().Count; i++)
+        foreach (BuildingCtrl buildingCtrl in this.BuildingCtrls())
         {
-            buildingCtrl = this.BuildingCtrls()[i];
-            if (!buildingCtrl.workers.IsNeedWorker()) continue;
-            if (buildingCtrl.buildingType != buildingType) continue;
-
+            if (buildingCtrl.BuildingType != buildingType) continue;
+            if (buildingType == BuildingType.workStation)
+            {
+                BuildingHasWorkersCtrl buildingHasWorkers = (BuildingHasWorkersCtrl)buildingCtrl;
+                if (!buildingHasWorkers.Workers.IsNeedWorker()) continue;
+            }
             return buildingCtrl;
         }
         return null;
     }
+
 
     public virtual List<BuildingCtrl> BuildingCtrls()
     {

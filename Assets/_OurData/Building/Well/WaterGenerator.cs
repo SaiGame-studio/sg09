@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WaterGenerator : ResGenerator
@@ -13,7 +11,7 @@ public class WaterGenerator : ResGenerator
 
     protected virtual void LoadResCreate()
     {
-        Resource res = new Resource
+        Resource res = new()
         {
             name = ResourceName.water,
             number = 1

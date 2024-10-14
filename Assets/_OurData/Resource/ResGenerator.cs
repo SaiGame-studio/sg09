@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +6,7 @@ public class ResGenerator : Warehouse
     [Header("ResGenerator")]
     [SerializeField] protected List<Resource> resCreate;
     [SerializeField] protected List<Resource> resRequire;
-    public bool canCreate = true;
+    [SerializeField] protected bool canCreate = true;
     [SerializeField] protected float createTimer = 0f;
     [SerializeField] protected float createDelay = 7f;
 
@@ -30,6 +29,7 @@ public class ResGenerator : Warehouse
         if (this.createTimer < this.createDelay) return;
         this.createTimer = 0;
 
+        if (this.IsAllResMax()) return;
         if (!this.IsRequireEnough()) return;
         
         foreach(Resource res in this.resCreate)
@@ -43,7 +43,7 @@ public class ResGenerator : Warehouse
     {
         if (this.resRequire.Count < 1) return true;
 
-        //TODO: this is not done yet
+        //TODO: need to check require for each resource
         return false;
     }
 

@@ -103,7 +103,7 @@ public class WarehouseTask : BuildingTask
 
         foreach (BuildingCtrl buildingCtrl in this.ctrl.NearBuildings)
         {
-            if (buildingCtrl.buildingType != BuildingType.workStation) continue;
+            if (buildingCtrl.BuildingType != BuildingType.workStation) continue;
             resources = buildingCtrl.warehouse.NeedResoures();
             foreach (Resource resource in resources)
             {
@@ -170,7 +170,7 @@ public class WarehouseTask : BuildingTask
             }
 
             BuildingCtrl nextBuilding = this.ctrl.NearBuildings[this.lastBuildingWorked];
-            if (nextBuilding.buildingType != BuildingType.workStation) continue;
+            if (nextBuilding.BuildingType != BuildingType.workStation) continue;
 
             ResHolder resHolder = nextBuilding.warehouse.ResNeed2Move();
             if (resHolder == null) continue;

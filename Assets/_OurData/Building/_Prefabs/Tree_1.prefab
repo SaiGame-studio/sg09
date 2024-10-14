@@ -824,6 +824,37 @@ LODGroup:
     renderers:
     - renderer: {fileID: 7176488516552996971}
   m_Enabled: 1
+--- !u!1 &5465365324449998598
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5143656705316254314}
+  m_Layer: 0
+  m_Name: Door
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5143656705316254314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5465365324449998598}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4125881084843606203}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5536045657243081900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,6 +1043,7 @@ Transform:
   - {fileID: 7166615161084826276}
   - {fileID: 2546412413047156173}
   - {fileID: 1458514574243162588}
+  - {fileID: 5143656705316254314}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &983431785781790858
@@ -1095,7 +1127,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   despawn: {fileID: 2632856197293449777}
+  door: {fileID: 5143656705316254314}
+  warehouse: {fileID: 371047856493902984}
   buildingType: 3
+  nearBuildings: []
   logwoodGenerator: {fileID: 371047856493902984}
   treeLevel: {fileID: 7184507257606256109}
   choper: {fileID: 0}
