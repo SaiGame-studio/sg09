@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class BuildingTask : BuildingAbstract
+public abstract class BuildingTask : BuildingAbstract
 {
     [Header("Building Task")]
     [SerializeField] protected float taskTimer = 0;
     [SerializeField] protected float taskDelay = 5f;
     [SerializeField] protected float workingSpeed = 7;
     [SerializeField] protected int lastBuildingWorked = 0;
+    public abstract void DoingTask(WorkerCtrl workerCtrl);
 
     protected virtual bool IsTime2Work()
     {
@@ -27,8 +28,5 @@ public class BuildingTask : BuildingAbstract
         }
     }
 
-    public virtual void DoingTask(WorkerCtrl workerCtrl)
-    {
-        //For override
-    }
+    
 }

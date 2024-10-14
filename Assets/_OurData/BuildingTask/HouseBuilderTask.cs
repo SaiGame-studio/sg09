@@ -7,11 +7,6 @@ public class HouseBuilderTask : BuildingTask
     [SerializeField] protected AbsConstruction construction;
     [SerializeField] protected List<BuildingCtrl> warehouses;
 
-    protected override void LoadComponents()
-    {
-        base.LoadComponents();
-    }
-
     public override void DoingTask(WorkerCtrl workerCtrl)
     {
         switch (workerCtrl.workerTasks.TaskCurrent())
