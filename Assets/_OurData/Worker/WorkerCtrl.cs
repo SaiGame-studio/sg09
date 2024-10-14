@@ -98,8 +98,8 @@ public class WorkerCtrl : PoolObj
 
     public virtual void WorkerReleased()
     {
-        this.workerTasks.readyForTask = false;
-        this.workerTasks.taskWorking.GoOutBuilding();
+        this.workerTasks.SetReadyForTask(false);
+        this.workerTasks.TaskWorking.GoOutBuilding();
         this.workerBuildings.WorkerReleased();
     }
 

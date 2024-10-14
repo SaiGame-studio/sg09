@@ -80,7 +80,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8483008389110006093}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.44, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -222,10 +222,18 @@ MonoBehaviour:
   timer: 0
   delay: 0.001
   resRequires:
-  - name: 1001
+  - name: logwood
+    codeName: 1001
     number: 1
-  - name: 2001
+    adding: 0
+    deducting: 0
+    max: 2147483647
+  - name: blank
+    codeName: 2001
     number: 1
+    adding: 0
+    deducting: 0
+    max: 2147483647
   resHave: []
   spawner: {fileID: 0}
   newBuilding: {fileID: 0}

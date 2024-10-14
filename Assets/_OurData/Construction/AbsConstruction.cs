@@ -67,9 +67,9 @@ public abstract class AbsConstruction : SaiBehaviour
 
         foreach (Resource resRequire in this.resRequires)
         {
-            Resource resHas = this.resHave.Find((x) => x.name == resRequire.name);
+            Resource resHas = this.resHave.Find((x) => x.CodeName == resRequire.CodeName);
             if (resHas == null) return false;
-            if (resRequire.number > resHas.number) return false;
+            if (resRequire.Number > resHas.Number) return false;
         }
 
         return true;
@@ -79,9 +79,9 @@ public abstract class AbsConstruction : SaiBehaviour
     {
         foreach (Resource resRequire in this.resRequires)
         {
-            Resource resHas = this.resHave.Find((x) => x.name == resRequire.name);
-            if (resHas == null) return resRequire.name;
-            if (resRequire.number > resHas.number) return resRequire.name;
+            Resource resHas = this.resHave.Find((resource) => resource.CodeName == resRequire.CodeName);
+            if (resHas == null) return resRequire.CodeName;
+            if (resRequire.Number > resHas.Number) return resRequire.CodeName;
         }
 
         return ResourceName.noResource;
@@ -112,20 +112,16 @@ public abstract class AbsConstruction : SaiBehaviour
         this.resHave = new();
     }
 
-    public virtual void AddRes(ResourceName resourceName, float count)
+    public virtual void AddRes(ResourceName resourceName, int count)
     {
-        Resource resource = this.resHave.Find((x) => x.name == resourceName);
+        Resource resource = this.resHave.Find((x) => x.CodeName == resourceName);
         if (resource != null)
         {
-            resource.number += count;
+            resource.Add(count);
             return;
         }
 
-        resource = new Resource
-        {
-            name = resourceName,
-            number = count
-        };
+        resource = new Resource(resourceName, count);
         this.resHave.Add(resource);
     }
 

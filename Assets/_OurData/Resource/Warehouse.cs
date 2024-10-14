@@ -4,81 +4,59 @@ using UnityEngine;
 public class Warehouse : SaiBehaviour
 {
     [Header("Warehouse")]
-    //public BuildingType buildingType = BuildingType.workStation;
     [SerializeField] protected bool isFull = false;
-    [SerializeField] protected List<ResHolder> resHolders;
+    [SerializeField] protected List<Resource> resources;
 
     protected virtual void FixedUpdate()
     {
         this.isFull = this.IsFull();
     }
 
-    protected override void LoadComponents()
-    {
-        this.LoadHolders();
-    }
-
-    protected virtual void LoadHolders()
-    {
-        if (this.resHolders.Count > 0) return;
-
-        Transform res = transform.Find("Res");
-        foreach (Transform resTran in res)
-        {
-            Debug.Log(resTran.name);
-            ResHolder resHolder = resTran.GetComponent<ResHolder>();
-            if (resHolder == null) continue;
-            this.resHolders.Add(resHolder);
-        }
-
-        Debug.Log(transform.name + ": LoadHolders", gameObject);
-    }
-
-    public virtual ResHolder GetResource(ResourceName name)
-    {
-        return this.resHolders.Find((holder) => holder.Name() == name);
-    }
-
-    public virtual List<ResHolder> GetStockedResources()
-    {
-        return this.resHolders.FindAll((holder) => holder.resCurrent > 0);
-    }
-
     public virtual void AddByList(List<Resource> addResources)
     {
         foreach (Resource addResource in addResources)
         {
-            this.AddResource(addResource.name, addResource.number);
+            this.AddResource(addResource.CodeName, addResource.Number);
         }
     }
 
-    public virtual ResHolder AddResource(ResourceName resourceName, float number)
+    public virtual bool AddResource(ResourceName resourceName, int number)
     {
-        ResHolder res = this.GetResource(resourceName);
-        res.Add(number);
-        return res;
+        Resource resource = this.GetResource(resourceName);
+        if (!resource.TryToAdd(number)) return false;
+        resource.Add(number);
+        return true;
     }
 
-    public virtual ResHolder RemoveResource(ResourceName resourceName, float number)
+    public virtual bool RemoveResource(ResourceName resourceName, int number)
     {
-        ResHolder res = this.GetResource(resourceName);
-        if (res.Current() < number) return null;
-        res.Deduct(number);
-        return res;
+        Resource resource = this.GetResource(resourceName);
+        if (!resource.TryToRemove(number)) return false;
+        resource.Remove(number);
+        return true;
+    }
+
+    public virtual Resource GetResource(ResourceName resourceName)
+    {
+        Resource resource = this.resources.Find((resource) => resource.CodeName == resourceName);
+        if (resource == null)
+        {
+            resource = new Resource(resourceName, 0);
+            this.resources.Add(resource);
+        }
+        return resource;
     }
 
     public virtual bool IsFull()
     {
-        foreach (ResHolder resHolder in this.resHolders)
+        foreach (Resource resource in this.resources)
         {
-            if (!resHolder.IsMax()) return false;
+            if (!resource.IsMax()) return false;
         }
-
-        //Debug.Log("Warehouse IsFull", gameObject);
         return true;
     }
 
-    public virtual ResHolder ResNeed2Move()
+    public virtual Resource ResNeed2Move()
     {
         return null;
     }

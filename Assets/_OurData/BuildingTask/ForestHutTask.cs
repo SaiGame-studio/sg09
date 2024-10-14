@@ -73,7 +73,7 @@ public class ForestHutTask : BuildingTask
         else
         {
             //Debug.Log("Nothing to do: " + workerCtrl.name, workerCtrl.gameObject);
-            if(!workerCtrl.workerTasks.inHouse) workerCtrl.workerTasks.TaskAdd(TaskType.goToWorkStation);
+            if(!workerCtrl.workerTasks.InHouse) workerCtrl.workerTasks.TaskAdd(TaskType.goToWorkStation);
         }
     }
 
@@ -132,7 +132,7 @@ public class ForestHutTask : BuildingTask
             target = treePlant.transform;
         }
 
-        workerCtrl.workerTasks.taskWorking.GoOutBuilding();
+        workerCtrl.workerTasks.TaskWorking.GoOutBuilding();
         workerCtrl.workerMovement.SetTarget(target);
 
         if (workerCtrl.workerMovement.IsClose2Target())
@@ -235,7 +235,7 @@ public class ForestHutTask : BuildingTask
     protected virtual void FindTree2Chop(WorkerCtrl workerCtrl)
     {
         WorkerTasks workerTasks = workerCtrl.workerTasks;
-        if (workerTasks.inHouse) workerTasks.taskWorking.GoOutBuilding();
+        if (workerTasks.InHouse) workerTasks.TaskWorking.GoOutBuilding();
 
         if (workerCtrl.workerTasks.TaskTarget == null)
         {
@@ -249,7 +249,7 @@ public class ForestHutTask : BuildingTask
 
     protected virtual void BringTreeBack(WorkerCtrl workerCtrl)
     {
-        WorkerTask taskWorking = workerCtrl.workerTasks.taskWorking;
+        WorkerTask taskWorking = workerCtrl.workerTasks.TaskWorking;
         taskWorking.GotoBuilding();
         if (!workerCtrl.workerMovement.IsClose2Target()) return;
 

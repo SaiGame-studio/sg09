@@ -21,20 +21,15 @@ public class LogwoodGenerator : ResGenerator
 
     protected virtual void LoadResCreate()
     {
-        Resource res = new()
-        {
-            name = ResourceName.logwood,
-            number = 1
-        };
-
+        Resource res = new(ResourceName.logwood, 1);
         this.resCreate.Clear();
         this.resCreate.Add(res);
     }
 
     protected virtual void SetLimit()
     {
-        ResHolder resHolder = this.GetResource(ResourceName.logwood);
-        resHolder.SetLimit(1);
+        Resource logwood = this.GetResource(ResourceName.logwood);
+        logwood.SetMax(1);
     }
 
     protected override void Creating()

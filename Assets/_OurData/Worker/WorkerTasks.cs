@@ -5,11 +5,14 @@ using UnityEngine;
 public class WorkerTasks : SaiBehaviour
 {
     public WorkerCtrl workerCtrl;
-    public bool isNightTime = false;//TODO: it should not be here
-    public bool inHouse = false;
-    public bool readyForTask = false;
-    public TaskWorking taskWorking;
-    public TaskGoHome taskGoHome;
+    [SerializeField] protected bool isNightTime = false;//TODO: it should not be here
+    [SerializeField] protected bool inHouse = false;
+    public bool InHouse => inHouse;
+    [SerializeField] protected bool readyForTask = false;
+    public bool ReadyForTask => readyForTask;
+    [SerializeField] protected TaskWorking taskWorking;
+    public TaskWorking TaskWorking => taskWorking;
+    [SerializeField] protected TaskGoHome taskGoHome;
     [SerializeField] protected PoolObj taskTarget;
     public PoolObj TaskTarget => taskTarget;
     public BuildingCtrl taskBuildingCtrl;
@@ -96,5 +99,15 @@ public class WorkerTasks : SaiBehaviour
     public virtual void SetTaskTarget(PoolObj target)
     {
         this.taskTarget = target;
+    }
+
+    public virtual void SetReadyForTask(bool status)
+    {
+        this.readyForTask = status;
+    }
+
+    public virtual void SetInHouse(bool status)
+    {
+        this.inHouse = status;
     }
 }

@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ResHolder : SaiBehaviour
 {
     [Header("Res Holder")]
     [SerializeField] protected ResourceName resourceName;
-    [SerializeField] public float resCurrent = 0;
-    [SerializeField] public float resMax = Mathf.Infinity;
+    [SerializeField] public int resCurrent = 0;
+    [SerializeField] public int resMax = int.MaxValue;
 
     protected override void LoadComponents()
     {
@@ -28,7 +26,7 @@ public class ResHolder : SaiBehaviour
         return this.resourceName;
     }
 
-    public virtual float Add(float number)
+    public virtual float Add(int number)
     {
         this.resCurrent += number;
 
@@ -37,7 +35,7 @@ public class ResHolder : SaiBehaviour
         return this.resCurrent;
     }
 
-    public virtual float Deduct(float number)
+    public virtual float Deduct(int number)
     {
         //TODO: fix issue less than 0 
         return this.Add(-number);
@@ -48,14 +46,14 @@ public class ResHolder : SaiBehaviour
         return this.resCurrent;
     }
 
-    public virtual float TakeAll()
+    public virtual int TakeAll()
     {
-        float take = this.resCurrent;
+        int take = this.resCurrent;
         this.resCurrent = 0;
         return take;
     }
 
-    public virtual void SetLimit(float max)
+    public virtual void SetLimit(int max)
     {
         this.resMax = max;
     }

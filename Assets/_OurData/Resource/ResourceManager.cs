@@ -1,39 +1,53 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceManager : MonoBehaviour
+public class ResourceManager : SaiSingleton<ResourceManager>
 {
-    public static ResourceManager instance;
-    [SerializeField] protected List<Resource> resources;
+    [SerializeField] protected List<Resource> resources = new();
+    [SerializeField] protected List<WarehouseCtrl> warehouses = new();
 
-    protected void Awake()
+    protected virtual void FixedUpdate()
     {
-        //if (ResourceManager.instance != null) Debug.LogError("On 1 ResourceManager allow");
-        //ResourceManager.instance = this;
+        this.AllResourceUpdate();
     }
 
-    public virtual Resource AddResource(ResourceName resourceName, int number)
+    protected override void LoadComponents()
     {
-        Resource res = this.GetResByName(resourceName);
-        res.number += number;
-        return res;
+        base.LoadComponents();
+        this.LoadAllResources();
     }
 
-    public virtual Resource GetResByName(ResourceName resourceName)
+    protected virtual void LoadAllResources()
     {
-        Resource res = this.resources.Find((x) => x.name == resourceName);
-
-        if (res == null)
+        if (this.resources.Count > 0) return;
+        Resource resource;
+        foreach (ResourceName resName in Enum.GetValues(typeof(ResourceName)))
         {
-            res = new Resource
-            {
-                name = resourceName
-            };
-
-            this.resources.Add(res);
+            if (resName == ResourceName.noResource) continue;
+            resource = new Resource(resName);
+            this.resources.Add(resource);
         }
+        Debug.LogWarning(transform.name + ": LoadAllResources", gameObject);
+    }
 
-        return res;
+    public virtual Resource GetResource(ResourceName resName)
+    {
+        return this.resources.Find(resource => resource.CodeName == resName);
+    }
+
+    protected virtual void AllResourceUpdate()
+    {
+        this.warehouses = BuildingManager.Instance.Warehouses();
+        Resource resInWareHouse;
+        foreach (Resource resource in this.resources)
+        {
+            resource.SetNumber(0);
+            foreach (WarehouseCtrl warehouseCtrl in this.warehouses)
+            {
+                resInWareHouse = warehouseCtrl.warehouse.GetResource(resource.CodeName);
+                resource.Add(resInWareHouse.Number);
+            }
+        }
     }
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingManager : SaiBehaviour
+public class BuildingManager : SaiSingleton<BuildingManager>
 {
     [SerializeField] protected BuildingSpawnerCtrl ctrl;
     [SerializeField] protected List<BuildingCtrl> buildings;
@@ -18,7 +18,7 @@ public class BuildingManager : SaiBehaviour
         if (this.buildings.Count > 0) return;
         BuildingCtrl[] components = this.ctrl.Spawner.PoolHolder.GetComponentsInChildren<BuildingCtrl>();
         this.buildings = new List<BuildingCtrl>(components);
-        //Debug.Log(transform.name + ": LoadPoolObjects", gameObject);
+        Debug.Log(transform.name + ": LoadPoolObjects", gameObject);
     }
 
     protected virtual void LoadBuildingSpawnerCtrl()
@@ -49,6 +49,16 @@ public class BuildingManager : SaiBehaviour
         return this.buildings;
     }
 
+    public virtual List<WarehouseCtrl> Warehouses()
+    {
+        List<WarehouseCtrl> warehouses = new();
+        foreach (BuildingCtrl buildingCtrl in this.buildings)
+        {
+            if (buildingCtrl.GetName() == BuildingName.Warehouse.ToString()) warehouses.Add((WarehouseCtrl)buildingCtrl);
+        }
+        return warehouses;
+    }
+
     public virtual void Add(BuildingCtrl buildingCtrl)
     {
         this.BuildingCtrls().Add(buildingCtrl);
@@ -64,7 +74,7 @@ public class BuildingManager : SaiBehaviour
     {
         foreach (BuildingCtrl buildingCtrl in this.BuildingCtrls())
         {
-             buildingCtrl.FindNearBuildings();
+            buildingCtrl.FindNearBuildings();
         }
     }
 }

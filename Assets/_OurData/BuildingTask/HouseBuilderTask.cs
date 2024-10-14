@@ -7,11 +7,6 @@ public class HouseBuilderTask : BuildingTask
     [SerializeField] protected AbsConstruction construction;
     [SerializeField] protected List<BuildingCtrl> warehouses;
 
-    protected override void LoadComponents()
-    {
-        base.LoadComponents();
-    }
-
     public override void DoingTask(WorkerCtrl workerCtrl)
     {
         switch (workerCtrl.workerTasks.TaskCurrent())
@@ -66,8 +61,8 @@ public class HouseBuilderTask : BuildingTask
 
         foreach (BuildingCtrl warehouse in this.warehouses)
         {
-            ResHolder resHolder = warehouse.warehouse.GetResource(resRequireName);
-            if (resHolder.Current() < 1) continue;
+            Resource resource = warehouse.warehouse.GetResource(resRequireName);
+            if (resource.Number < 1) continue;
             workerCtrl.workerTasks.taskBuildingCtrl = warehouse;
             workerCtrl.workerTasks.TaskCurrentDone();
             workerCtrl.workerTasks.TaskAdd(TaskType.getResNeed2Move);
@@ -80,8 +75,8 @@ public class HouseBuilderTask : BuildingTask
         BuildingCtrl warehouseCtrl = workerCtrl.workerTasks.taskBuildingCtrl;
 
         ResourceName resRequireName = this.construction.GetResRequireName();
-        ResHolder resHolder = warehouseCtrl.warehouse.GetResource(resRequireName);
-        if (resHolder.Current() < 1)//TODO: not work with multi workers
+        Resource resource = warehouseCtrl.warehouse.GetResource(resRequireName);
+        if (resource.Number < 1)//TODO: not work with multi workers
         {
             workerCtrl.workerTasks.TaskCurrentDone();
             workerCtrl.workerTasks.TaskAdd(TaskType.findWarehouseHasRes);
@@ -89,7 +84,7 @@ public class HouseBuilderTask : BuildingTask
         }
 
         WorkerTasks workerTasks = workerCtrl.workerTasks;
-        if (workerTasks.inHouse) workerTasks.taskWorking.GoOutBuilding();
+        if (workerTasks.InHouse) workerTasks.TaskWorking.GoOutBuilding();
 
         Transform target = workerCtrl.workerMovement.GetTarget();
         if (target == null) workerCtrl.workerMovement.SetTarget(warehouseCtrl.door);
@@ -111,7 +106,7 @@ public class HouseBuilderTask : BuildingTask
 
         workerCtrl.workerTasks.TaskCurrentDone();
         Resource res = workerCtrl.resCarrier.TakeFirst();
-        this.construction.AddRes(res.name, res.number);
+        this.construction.AddRes(res.CodeName, res.Number);
 
         ResourceName resRequireName = this.construction.GetResRequireName();
         if (resRequireName == ResourceName.noResource)
