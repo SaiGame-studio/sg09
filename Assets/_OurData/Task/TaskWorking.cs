@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class TaskWorking : WorkerTask
 {
-    protected override BuildingCtrl GetBuilding()
+    protected override BuildingHasWorkersCtrl GetBuilding()
     {
         return this.workerCtrl.workerBuildings.GetWork();
     }
 
-    protected override void AssignBuilding(BuildingCtrl buildingCtrl)
+    protected override void AssignBuilding(BuildingHasWorkersCtrl buildingCtrl)
     {
         this.workerCtrl.workerBuildings.AssignWork(buildingCtrl);
     }

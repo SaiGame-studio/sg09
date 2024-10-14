@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class WarehouseCtrl : BuildingCtrl
+public class WarehouseCtrl : BuildingHasWorkersCtrl
 {
     public override string GetName()
     {
-        return "Warehouse";
+        return BuildingName.Warehouse.ToString();
     }
 }

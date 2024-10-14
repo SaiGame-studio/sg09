@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class TaskGoHome : WorkerTask
 {
-    protected override BuildingCtrl GetBuilding()
+    protected override BuildingHasWorkersCtrl GetBuilding()
     {
         return this.workerCtrl.workerBuildings.GetHome();
     }
 
-    protected override void AssignBuilding(BuildingCtrl buildingCtrl)
+    protected override void AssignBuilding(BuildingHasWorkersCtrl buildingCtrl)
     {
         this.workerCtrl.workerBuildings.AssignHome(buildingCtrl);
     }

@@ -8,4 +8,5 @@ public enum BuildingName
     Warehouse = 11,
     ForestHut = 12,
     Sawmill = 13,
+    Well = 14,
 }

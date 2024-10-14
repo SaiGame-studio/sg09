@@ -1,16 +1,15 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-public class WorkerTask : SaiBehaviour
+public abstract class WorkerTask : SaiBehaviour
 {
-    public WorkerCtrl workerCtrl;
+    [SerializeField] protected WorkerCtrl workerCtrl;
     [SerializeField] protected float buildingDistance = 0;
     [SerializeField] protected float buildDisLimit = 0.7f;
 
     protected virtual void FixedUpdate()
     {
         if (this.GetBuilding()) this.GettingReadyForWork();
-        else this.FindBuilding();
+        else this.FindBuildingForWorkder();
 
         if (workerCtrl.workerTasks.readyForTask) this.Working();
     }
@@ -34,13 +33,14 @@ public class WorkerTask : SaiBehaviour
         Debug.Log(transform.name + ": LoadWorkerCtrl", gameObject);
     }
 
-    protected virtual void FindBuilding()
+    protected virtual void FindBuildingForWorkder()
     {
         BuildingCtrl buildingCtrl = BuildingSpawnerCtrl.Instance.Manager.FindBuilding(this.GetBuildingType());
         if (buildingCtrl == null) return;
 
-        buildingCtrl.workers.AddWorker(this.workerCtrl);
-        this.AssignBuilding(buildingCtrl);
+        BuildingHasWorkersCtrl buildingHasWorker = (BuildingHasWorkersCtrl)buildingCtrl;
+        buildingHasWorker.Workers.AddWorker(this.workerCtrl);
+        this.AssignBuilding(buildingHasWorker);
     }
 
     public virtual void GotoBuilding()
@@ -94,16 +94,16 @@ public class WorkerTask : SaiBehaviour
 
     protected virtual void Working()
     {
-        this.GetBuilding().buildingTask.DoingTask(this.workerCtrl);
+        this.GetBuilding().BuildingTask.DoingTask(this.workerCtrl);
     }
 
-    protected virtual BuildingCtrl GetBuilding()
+    protected virtual BuildingHasWorkersCtrl GetBuilding()
     {
         //For overide
         return null;
     }
 
-    protected virtual void AssignBuilding(BuildingCtrl buildingCtrl)
+    protected virtual void AssignBuilding(BuildingHasWorkersCtrl buildingCtrl)
     {
         //For overide
     }

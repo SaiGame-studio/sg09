@@ -1,30 +1,29 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class WorkerBuildings : SaiBehaviour
 {
-    [SerializeField] protected BuildingCtrl workBuilding;
-    [SerializeField] protected BuildingCtrl homeBuilding;
+    [SerializeField] protected BuildingHasWorkersCtrl workBuilding;
+    [SerializeField] protected BuildingHasWorkersCtrl homeBuilding;
     [SerializeField] protected List<BuildingCtrl> innBuildings;
     [SerializeField] protected List<BuildingCtrl> relaxBuildings;
 
-    public virtual void AssignWork(BuildingCtrl buildingCtrl)
+    public virtual void AssignWork(BuildingHasWorkersCtrl buildingCtrl)
     {
         this.workBuilding = buildingCtrl;
     }
 
-    public virtual BuildingCtrl GetWork()
+    public virtual BuildingHasWorkersCtrl GetWork()
     {
         return this.workBuilding;
     }
 
-    public virtual BuildingCtrl GetHome()
+    public virtual BuildingHasWorkersCtrl GetHome()
     {
         return this.homeBuilding;
     }
 
-    public virtual void AssignHome(BuildingCtrl buildingCtrl)
+    public virtual void AssignHome(BuildingHasWorkersCtrl buildingCtrl)
     {
         this.homeBuilding = buildingCtrl;
     }

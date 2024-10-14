@@ -28,7 +28,7 @@ public class ForestHutTask : BuildingTask
         for (int i = 0; i < this.trees.Count; i++)
         {
             tree = this.trees[i];
-            if (tree == null) this.trees.RemoveAt(i);
+            if (tree == null || !tree.gameObject.activeSelf) this.trees.RemoveAt(i);
         }
     }
 
@@ -59,7 +59,7 @@ public class ForestHutTask : BuildingTask
 
     protected virtual void Planning(WorkerCtrl workerCtrl)
     {
-        if (this.HasTreeFullLevel() && !this.buildingCtrl.warehouse.IsFull())
+        if (this.HasTreeFullLevel() && !this.ctrl.warehouse.IsFull())
         {
             workerCtrl.workerTasks.TaskAdd(TaskType.bringResourceBack);
             workerCtrl.workerTasks.TaskAdd(TaskType.chopTree);
@@ -139,12 +139,6 @@ public class ForestHutTask : BuildingTask
         {
             this.Planting(workerCtrl);
             workerCtrl.workerMovement.SetTarget(null);
-
-            //if (!this.NeedMoreTree())
-            //{
-            //    workerCtrl.workerTasks.TaskCurrentDone();
-            //    workerCtrl.workerTasks.TaskAdd(TaskType.goToWorkStation);
-            //}
             workerCtrl.workerTasks.TaskCurrentDone();
         }
     }
@@ -260,7 +254,7 @@ public class ForestHutTask : BuildingTask
         if (!workerCtrl.workerMovement.IsClose2Target()) return;
 
         List<Resource> resources = workerCtrl.resCarrier.TakeAll();
-        this.buildingCtrl.warehouse.AddByList(resources);
+        this.ctrl.warehouse.AddByList(resources);
         taskWorking.GoIntoBuilding();
 
         workerCtrl.workerTasks.TaskCurrentDone();
