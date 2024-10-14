@@ -2130,17 +2130,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5619846799886748481, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
   m_PrefabInstance: {fileID: 233883300}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &243149361 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8048713054778173314, guid: 27d485023463b704794795066d12c905, type: 3}
-  m_PrefabInstance: {fileID: 1098352870}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3edd0456117487428cc0bb34edd2174, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &252618635
 GameObject:
   m_ObjectHideFlags: 0
@@ -2805,6 +2794,18 @@ PrefabInstance:
     - target: {fileID: 1200102609302812542, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691822510747548957, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
+      propertyPath: resCreate.Array.data[0].max
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691822510747548957, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
+      propertyPath: resCreate.Array.data[0].name
+      value: water
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691822510747548957, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
+      propertyPath: resCreate.Array.data[0].codeName
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6426223654924797735, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
       propertyPath: m_Name
@@ -7222,14 +7223,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 579250437}
     m_Modifications:
-    - target: {fileID: 6881666041980663967, guid: 27d485023463b704794795066d12c905, type: 3}
-      propertyPath: resHolders.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6881666041980663967, guid: 27d485023463b704794795066d12c905, type: 3}
-      propertyPath: resHolders.Array.data[2]
-      value: 
-      objectReference: {fileID: 243149361}
     - target: {fileID: 7543891847978012942, guid: 27d485023463b704794795066d12c905, type: 3}
       propertyPath: m_LocalPosition.x
       value: 56.199993
@@ -14264,6 +14257,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1801253724}
     m_Modifications:
+    - target: {fileID: 371047856493902984, guid: 2f8b48482a70c454080caad91a813f65, type: 3}
+      propertyPath: resCreate.Array.data[0].max
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 371047856493902984, guid: 2f8b48482a70c454080caad91a813f65, type: 3}
+      propertyPath: resCreate.Array.data[0].name
+      value: logwood
+      objectReference: {fileID: 0}
+    - target: {fileID: 371047856493902984, guid: 2f8b48482a70c454080caad91a813f65, type: 3}
+      propertyPath: resCreate.Array.data[0].codeName
+      value: 1001
+      objectReference: {fileID: 0}
     - target: {fileID: 2632856197293449777, guid: 2f8b48482a70c454080caad91a813f65, type: 3}
       propertyPath: spawner
       value: 
@@ -14816,6 +14821,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1818469971}
     m_Modifications:
+    - target: {fileID: 6881666041980663967, guid: 27d485023463b704794795066d12c905, type: 3}
+      propertyPath: resources.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881666041980663967, guid: 27d485023463b704794795066d12c905, type: 3}
+      propertyPath: resources.Array.data[0].name
+      value: Aasd
+      objectReference: {fileID: 0}
     - target: {fileID: 7543891847978012942, guid: 27d485023463b704794795066d12c905, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.05
@@ -14877,6 +14890,18 @@ PrefabInstance:
       propertyPath: spawner
       value: 
       objectReference: {fileID: 825033799}
+    - target: {fileID: 2346115004652997585, guid: 34ee9baf75949814f8eca025966754a6, type: 3}
+      propertyPath: resCreate.Array.data[0].max
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2346115004652997585, guid: 34ee9baf75949814f8eca025966754a6, type: 3}
+      propertyPath: resCreate.Array.data[0].name
+      value: logwood
+      objectReference: {fileID: 0}
+    - target: {fileID: 2346115004652997585, guid: 34ee9baf75949814f8eca025966754a6, type: 3}
+      propertyPath: resCreate.Array.data[0].codeName
+      value: 1001
+      objectReference: {fileID: 0}
     - target: {fileID: 7366331605773958041, guid: 34ee9baf75949814f8eca025966754a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1

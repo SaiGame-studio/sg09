@@ -7,7 +7,7 @@ public class ResCarrier : MonoBehaviour
     public int carryCount = 1;
     [SerializeField] protected List<Resource> resources;
 
-    public virtual Resource AddResource(ResourceName resourceName, float number)
+    public virtual Resource AddResource(ResourceName resourceName, int number)
     {
         Resource res = this.GetResByName(resourceName);
         res.number += number;
@@ -16,9 +16,9 @@ public class ResCarrier : MonoBehaviour
 
     public virtual void AddByList(List<Resource> addResources)
     {
-        foreach(Resource addResource in addResources)
+        foreach (Resource addResource in addResources)
         {
-            this.AddResource(addResource.name, addResource.number);
+            this.AddResource(addResource.codeName, addResource.number);
         }
     }
 
@@ -43,15 +43,11 @@ public class ResCarrier : MonoBehaviour
 
     public virtual Resource GetResByName(ResourceName resourceName)
     {
-        Resource res = this.resources.Find((x) => x.name == resourceName);
+        Resource res = this.resources.Find((x) => x.codeName == resourceName);
 
         if (res == null)
         {
-            res = new Resource
-            {
-                name = resourceName
-            };
-
+            res = new Resource(resourceName, 0);
             this.resources.Add(res);
         }
 

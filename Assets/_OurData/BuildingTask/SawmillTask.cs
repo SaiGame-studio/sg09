@@ -5,8 +5,8 @@ public class SawmillTask : BuildingTask
 {
     [Header("Sawmill")]
     [SerializeField] protected Transform workingPoint;
-    [SerializeField] protected float logwoodCost = 1;
-    [SerializeField] protected float blankReceive = 2;
+    [SerializeField] protected int logwoodCost = 1;
+    [SerializeField] protected int blankReceive = 2;
 
     protected override void LoadComponents()
     {
@@ -86,13 +86,13 @@ public class SawmillTask : BuildingTask
 
     protected virtual bool IsStoreMax()
     {
-        ResHolder blank= this.ctrl.warehouse.GetResource(ResourceName.blank);
+        ResHolder blank= this.ctrl.warehouse.GetRes(ResourceName.blank);
         return blank.IsMax();
     }
 
     protected virtual bool HasLogwood()
     {
-        ResHolder logwood = this.ctrl.warehouse.GetResource(ResourceName.logwood);
+        ResHolder logwood = this.ctrl.warehouse.GetRes(ResourceName.logwood);
         return logwood.Current() > 0;
     }
 }

@@ -8918,6 +8918,7 @@ MonoBehaviour:
   resHolders:
   - {fileID: 3924486755550595460}
   - {fileID: 1511076405069362170}
+  - {fileID: 8048713054778173314}
 --- !u!114 &7808193131999152703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8956,12 +8957,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   despawn: {fileID: 0}
-  buildingType: 1
   door: {fileID: 1698964140445144516}
-  workers: {fileID: 5393667160655441675}
   warehouse: {fileID: 6881666041980663967}
-  buildingTask: {fileID: 7808193131999152703}
+  buildingType: 1
   nearBuildings: []
+  workers: {fileID: 5393667160655441675}
+  buildingTask: {fileID: 7808193131999152703}
 --- !u!1 &7815406619181800962
 GameObject:
   m_ObjectHideFlags: 0

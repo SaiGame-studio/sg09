@@ -22,15 +22,11 @@ public class ResourceManager : MonoBehaviour
 
     public virtual Resource GetResByName(ResourceName resourceName)
     {
-        Resource res = this.resources.Find((x) => x.name == resourceName);
+        Resource res = this.resources.Find((x) => x.codeName == resourceName);
 
         if (res == null)
         {
-            res = new Resource
-            {
-                name = resourceName
-            };
-
+            res = new Resource(resourceName, 0);
             this.resources.Add(res);
         }
 

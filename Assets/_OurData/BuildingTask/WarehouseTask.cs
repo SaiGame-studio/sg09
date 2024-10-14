@@ -106,11 +106,12 @@ public class WarehouseTask : BuildingTask
             resources = buildingCtrl.warehouse.NeedResoures();
             foreach (Resource resource in resources)
             {
-                resHolder = this.ctrl.warehouse.GetResource(resource.name);
+                Debug.Log(resource.name + ": " + resource.number, buildingCtrl.gameObject);
+                resHolder = this.ctrl.warehouse.GetRes(resource.codeName);
                 if (resHolder.Current() < 1) continue;
 
-                this.ctrl.warehouse.RemoveResource(resource.name, carryCount);
-                workerCtrl.resCarrier.AddResource(resource.name, carryCount);
+                this.ctrl.warehouse.RemoveResource(resource.codeName, carryCount);
+                workerCtrl.resCarrier.AddResource(resource.codeName, carryCount);
 
                 workerCtrl.workerTasks.taskBuildingCtrl = buildingCtrl;
                 workerCtrl.workerTasks.TaskAdd(TaskType.bringMatetiral2Building);
@@ -138,7 +139,7 @@ public class WarehouseTask : BuildingTask
         if (workerCtrl.workerMovement.GetTarget() == null) workerCtrl.workerMovement.SetTarget(taskBuildingCtrl.door);
         if (!workerCtrl.workerMovement.IsClose2Target()) return;
 
-        float count = workerCtrl.resCarrier.carryCount;
+        int count = workerCtrl.resCarrier.carryCount;
         resHolder.Deduct(count);
         workerCtrl.resCarrier.AddResource(resHolder.Name(), count);
         this.DoneGetResNeed2Move(workerCtrl);
@@ -195,7 +196,7 @@ public class WarehouseTask : BuildingTask
         workerTasks.TaskCurrentDone();
 
         Resource res = workerCtrl.resCarrier.TakeFirst();
-        taskBuildingCtrl.warehouse.AddResource(res.name, res.number);
+        taskBuildingCtrl.warehouse.AddResource(res.codeName, res.number);
 
         workerTasks.TaskAdd(TaskType.goToWorkStation);
     }
@@ -211,7 +212,7 @@ public class WarehouseTask : BuildingTask
         if (!workerCtrl.workerMovement.IsClose2Target()) return;
 
         Resource res = workerCtrl.resCarrier.TakeFirst();
-        taskBuildingCtrl.warehouse.AddResource(res.name, res.number);
+        taskBuildingCtrl.warehouse.AddResource(res.codeName, res.number);
 
         workerTasks.taskBuildingCtrl = null;
         workerTasks.TaskCurrentDone();

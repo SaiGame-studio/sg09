@@ -11,19 +11,14 @@ public class WaterGenerator : ResGenerator
 
     protected virtual void LoadResCreate()
     {
-        Resource res = new()
-        {
-            name = ResourceName.water,
-            number = 1
-        };
-
+        Resource res = new(ResourceName.water, 1);
         this.resCreate.Clear();
         this.resCreate.Add(res);
     }
 
     protected virtual void SetLimit()
     {
-        ResHolder resHolder = this.GetResource(ResourceName.water);
+        ResHolder resHolder = this.GetRes(ResourceName.water);
         resHolder.SetLimit(7);
     }
 }

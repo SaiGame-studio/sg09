@@ -34,7 +34,7 @@ public class ResGenerator : Warehouse
         
         foreach(Resource res in this.resCreate)
         {
-            ResHolder resHolder = this.GetResource(res.name);
+            ResHolder resHolder = this.GetRes(res.codeName);
             resHolder.Add(res.number);
         }
     }
@@ -67,12 +67,7 @@ public class ResGenerator : Warehouse
         List<Resource> resources = new();
         foreach (ResHolder resHolder in this.resHolders)
         {
-            Resource newResource = new()
-            {
-                name = resHolder.Name(),
-                number = resHolder.TakeAll()
-            };
-
+            Resource newResource = new(resHolder.Name(), resHolder.TakeAll());
             resources.Add(newResource);
         }
 
