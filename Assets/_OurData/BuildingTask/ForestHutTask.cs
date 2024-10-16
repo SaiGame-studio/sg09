@@ -254,7 +254,7 @@ public class ForestHutTask : BuildingTask
         if (!workerCtrl.workerMovement.IsCloseToTarget()) return;
 
         List<Resource> resources = workerCtrl.resCarrier.TakeAll();
-        this.ctrl.warehouse.AddByList(resources);
+        this.ctrl.warehouse.AddByList(resources, true);
         taskWorking.GoIntoBuilding();
 
         workerCtrl.workerTasks.TaskCurrentDone();

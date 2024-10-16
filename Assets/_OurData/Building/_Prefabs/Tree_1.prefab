@@ -735,38 +735,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 5.5617986, z: 1}
   m_Center: {x: 0, y: 2.7809107, z: 0}
---- !u!1 &4767776979459876627
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7166615161084826276}
-  m_Layer: 0
-  m_Name: Res
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7166615161084826276
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4767776979459876627}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1513262714358478493}
-  m_Father: {fileID: 4125881084843606203}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5239212269095725642
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,53 +928,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.45, y: 0.8131511, z: 0.45}
   m_Center: {x: 0, y: 0.4065755, z: 0}
---- !u!1 &5764612152233354265
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1513262714358478493}
-  - component: {fileID: 2152617963235928367}
-  m_Layer: 0
-  m_Name: logwood
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1513262714358478493
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5764612152233354265}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7166615161084826276}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2152617963235928367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5764612152233354265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3edd0456117487428cc0bb34edd2174, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceName: 1001
-  resCurrent: 0
-  resMax: 1
 --- !u!1 &6330001217400141391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,7 +961,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7166615161084826276}
   - {fileID: 2546412413047156173}
   - {fileID: 1458514574243162588}
   - {fileID: 5143656705316254314}
@@ -1087,9 +1007,9 @@ MonoBehaviour:
   - name: logwood
     codeName: 1001
     number: 1
+    max: 2147483647
     adding: 0
     deducting: 0
-    max: 2147483647
   resRequire: []
   canCreate: 1
   createTimer: 0

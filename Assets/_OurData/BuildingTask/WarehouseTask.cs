@@ -191,7 +191,7 @@ public class WarehouseTask : BuildingTask
         List<Resource> resources = workerCtrl.resCarrier.TakeAll();
         foreach (Resource resource in resources)
         {
-            taskBuildingCtrl.warehouse.AddResource(resource.CodeName, resource.Number);
+            taskBuildingCtrl.warehouse.AddResource(resource.CodeName, resource.Number, false);
         }
 
         workerTasks.TaskAdd(TaskType.goToWorkStation);
@@ -210,7 +210,7 @@ public class WarehouseTask : BuildingTask
         List<Resource> resources = workerCtrl.resCarrier.TakeAll();
         foreach (Resource resource in resources)
         {
-            taskBuildingCtrl.warehouse.AddResource(resource.CodeName, resource.Number);
+            taskBuildingCtrl.warehouse.AddResource(resource.CodeName, resource.Number, false);
         }
 
         workerTasks.taskBuildingCtrl = null;

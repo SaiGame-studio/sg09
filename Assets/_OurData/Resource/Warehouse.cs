@@ -12,19 +12,20 @@ public class Warehouse : SaiBehaviour
         this.isFull = this.IsFull();
     }
 
-    public virtual void AddByList(List<Resource> addResources)
+    public virtual void AddByList(List<Resource> addResources, bool isGenerate)
     {
         foreach (Resource addResource in addResources)
         {
-            this.AddResource(addResource.CodeName, addResource.Number);
+            this.AddResource(addResource.CodeName, addResource.Number, isGenerate);
         }
     }
 
-    public virtual bool AddResource(ResourceName resourceName, int number)
+    public virtual bool AddResource(ResourceName resourceName, int number, bool isGenerate)
     {
         Resource resource = this.GetResource(resourceName);
         if (!resource.TryToAdd(number)) return false;
-        resource.Add(number);
+        if(isGenerate) resource.Generate(number);
+        else resource.Add(number);
         return true;
     }
 
