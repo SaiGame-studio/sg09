@@ -2220,7 +2220,6 @@ MonoBehaviour:
   - {fileID: 1303821044}
   - {fileID: 411911255}
   - {fileID: 497788653}
-  - {fileID: 1803700515}
 --- !u!1001 &260161009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2881,6 +2880,18 @@ PrefabInstance:
     - target: {fileID: 1200102609302812542, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691822510747548957, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
+      propertyPath: createDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691822510747548957, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
+      propertyPath: resources.Array.data[0].max
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2691822510747548957, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
+      propertyPath: resources.Array.data[0].number
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 6426223654924797735, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
       propertyPath: m_Name
@@ -4611,7 +4622,6 @@ Transform:
   - {fileID: 1303821043}
   - {fileID: 411911254}
   - {fileID: 319450144}
-  - {fileID: 1272832691}
   m_Father: {fileID: 252618636}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &584935844 stripped
@@ -7501,17 +7511,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 579250437}
     m_Modifications:
-    - target: {fileID: 5183253215037986451, guid: 27d485023463b704794795066d12c905, type: 3}
-      propertyPath: resources.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5183253215037986451, guid: 27d485023463b704794795066d12c905, type: 3}
-      propertyPath: resources.Array.data[0].max
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 5393667160655441675, guid: 27d485023463b704794795066d12c905, type: 3}
       propertyPath: maxWorker
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7543891847978012942, guid: 27d485023463b704794795066d12c905, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7552,10 +7554,6 @@ PrefabInstance:
     - target: {fileID: 7543891847978012942, guid: 27d485023463b704794795066d12c905, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7808193131999152703, guid: 27d485023463b704794795066d12c905, type: 3}
-      propertyPath: takeProductMax
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7810715455346133273, guid: 27d485023463b704794795066d12c905, type: 3}
       propertyPath: m_Name
@@ -9080,68 +9078,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5619846799886748481, guid: e8a831512562d7d449a2ec6e3425c6c1, type: 3}
   m_PrefabInstance: {fileID: 1271447476}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1272832690
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 579250437}
-    m_Modifications:
-    - target: {fileID: 1200102609302812542, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 36.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200102609302812542, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200102609302812542, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 66.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200102609302812542, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200102609302812542, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200102609302812542, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200102609302812542, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200102609302812542, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200102609302812542, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1200102609302812542, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6426223654924797735, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
-      propertyPath: m_Name
-      value: Well_2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
---- !u!4 &1272832691 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1200102609302812542, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
-  m_PrefabInstance: {fileID: 1272832690}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1280485125
 PrefabInstance:
@@ -10786,45 +10722,45 @@ MonoBehaviour:
   - name: gold
     codeName: 1
     number: 0
+    max: 2147483647
     adding: 0
     deducting: 0
-    max: 2147483647
   - name: diamond
     codeName: 2
     number: 0
+    max: 2147483647
     adding: 0
     deducting: 0
-    max: 2147483647
   - name: water
     codeName: 1000
     number: 0
+    max: 2147483647
     adding: 0
     deducting: 0
-    max: 2147483647
   - name: logwood
     codeName: 1001
     number: 0
+    max: 2147483647
     adding: 0
     deducting: 0
-    max: 2147483647
   - name: ironOre
     codeName: 1002
     number: 0
+    max: 2147483647
     adding: 0
     deducting: 0
-    max: 2147483647
   - name: blank
     codeName: 2001
     number: 0
+    max: 2147483647
     adding: 0
     deducting: 0
-    max: 2147483647
   - name: ironIgnot
     codeName: 2002
     number: 0
+    max: 2147483647
     adding: 0
     deducting: 0
-    max: 2147483647
   warehouses: []
 --- !u!1001 &1505683903
 PrefabInstance:
@@ -12671,17 +12607,6 @@ MonoBehaviour:
   prefabs:
   - {fileID: 405706142483841655}
   - {fileID: 1565490060}
---- !u!114 &1803700515 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2113897567076944419, guid: fcde9d0bf7cff16499ba2fc33d8aa3cf, type: 3}
-  m_PrefabInstance: {fileID: 1272832690}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 301462bb47f9456458831ec4f7f16419, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1817643097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14676,18 +14601,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1801253724}
     m_Modifications:
-    - target: {fileID: 371047856493902984, guid: 2f8b48482a70c454080caad91a813f65, type: 3}
-      propertyPath: resCreate.Array.data[0].max
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 371047856493902984, guid: 2f8b48482a70c454080caad91a813f65, type: 3}
-      propertyPath: resCreate.Array.data[0].name
-      value: logwood
-      objectReference: {fileID: 0}
-    - target: {fileID: 371047856493902984, guid: 2f8b48482a70c454080caad91a813f65, type: 3}
-      propertyPath: resCreate.Array.data[0].codeName
-      value: 1001
-      objectReference: {fileID: 0}
     - target: {fileID: 2632856197293449777, guid: 2f8b48482a70c454080caad91a813f65, type: 3}
       propertyPath: spawner
       value: 
@@ -15293,18 +15206,6 @@ PrefabInstance:
       propertyPath: spawner
       value: 
       objectReference: {fileID: 825033799}
-    - target: {fileID: 2346115004652997585, guid: 34ee9baf75949814f8eca025966754a6, type: 3}
-      propertyPath: resCreate.Array.data[0].max
-      value: 2147483647
-      objectReference: {fileID: 0}
-    - target: {fileID: 2346115004652997585, guid: 34ee9baf75949814f8eca025966754a6, type: 3}
-      propertyPath: resCreate.Array.data[0].name
-      value: logwood
-      objectReference: {fileID: 0}
-    - target: {fileID: 2346115004652997585, guid: 34ee9baf75949814f8eca025966754a6, type: 3}
-      propertyPath: resCreate.Array.data[0].codeName
-      value: 1001
-      objectReference: {fileID: 0}
     - target: {fileID: 7366331605773958041, guid: 34ee9baf75949814f8eca025966754a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1

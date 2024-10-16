@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -9,10 +10,11 @@ public class Resource
     public ResourceName CodeName => codeName;
     [SerializeField] protected int number = 0;
     public int Number => number;
-    public int adding = 0;
-    public int deducting = 0;
     [SerializeField] protected int max = int.MaxValue;
     public int Max => max;
+
+    [SerializeField] protected int adding = 0;
+    [SerializeField] protected int deducting = 0;
 
     public Resource(ResourceName codeName)
     {
@@ -35,10 +37,18 @@ public class Resource
         this.name = this.codeName.ToString();
     }
 
+    public bool Generate(int number)
+    {
+        if (!this.TryToAdd(number)) return false;
+        this.number += number;
+        return true;
+    }
+
     public bool Add(int number)
     {
         if (!this.TryToAdd(number)) return false;
         this.number += number;
+        this.adding -= number;
         return true;
     }
 
@@ -49,14 +59,15 @@ public class Resource
         return true;
     }
 
-    public bool Remove(int number)
+    public bool Deduct(int number)
     {
-        if (!this.TryToRemove(number)) return false;
+        if (!this.TryToDeduct(number)) return false;
         this.number -= number;
+        this.deducting -= number;
         return true;
     }
 
-    public bool TryToRemove(int number)
+    public bool TryToDeduct(int number)
     {
         int newNumber = this.number - number;
         if (newNumber < 0) return false;
@@ -65,7 +76,12 @@ public class Resource
 
     public bool IsMax()
     {
-        return this.number >= this.max;
+        return this.NumberFinal() >= this.max;
+    }
+
+    public bool IsEmplty()
+    {
+        return this.NumberFinal() == 0;
     }
 
     public void SetMax(int max)
@@ -85,4 +101,18 @@ public class Resource
         return all;
     }
 
+    public void Deducting(int number)
+    {
+        this.deducting += number;
+    }
+
+    public void Adding(int number)
+    {
+        this.adding += number;
+    }
+
+    public int NumberFinal()
+    {
+        return this.number - this.deducting + this.adding;
+    }
 }

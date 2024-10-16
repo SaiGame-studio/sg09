@@ -8724,7 +8724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3e80d28e03c754a9651b7ed573dc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWorker: 25
+  maxWorker: 2
   workers: []
 --- !u!114 &7808193131999152703
 MonoBehaviour:
@@ -8787,21 +8787,9 @@ MonoBehaviour:
   - name: water
     codeName: 1000
     number: 0
+    max: 9
     adding: 0
     deducting: 0
-    max: 70
-  - name: logwood
-    codeName: 1001
-    number: 7
-    adding: 0
-    deducting: 0
-    max: 7000
-  - name: blank
-    codeName: 2001
-    number: 7
-    adding: 0
-    deducting: 0
-    max: 7000
 --- !u!1 &7815406619181800962
 GameObject:
   m_ObjectHideFlags: 0

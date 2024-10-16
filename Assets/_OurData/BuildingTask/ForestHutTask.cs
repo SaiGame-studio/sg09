@@ -135,7 +135,7 @@ public class ForestHutTask : BuildingTask
         workerCtrl.workerTasks.TaskWorking.GoOutBuilding();
         workerCtrl.workerMovement.SetTarget(target);
 
-        if (workerCtrl.workerMovement.IsClose2Target())
+        if (workerCtrl.workerMovement.IsCloseToTarget())
         {
             this.Planting(workerCtrl);
             workerCtrl.workerMovement.SetTarget(null);
@@ -251,7 +251,7 @@ public class ForestHutTask : BuildingTask
     {
         WorkerTask taskWorking = workerCtrl.workerTasks.TaskWorking;
         taskWorking.GotoBuilding();
-        if (!workerCtrl.workerMovement.IsClose2Target()) return;
+        if (!workerCtrl.workerMovement.IsCloseToTarget()) return;
 
         List<Resource> resources = workerCtrl.resCarrier.TakeAll();
         this.ctrl.warehouse.AddByList(resources);

@@ -62,7 +62,7 @@ public class HouseBuilderTask : BuildingTask
         foreach (BuildingCtrl warehouse in this.warehouses)
         {
             Resource resource = warehouse.warehouse.GetResource(resRequireName);
-            if (resource.Number < 1) continue;
+            if (resource.NumberFinal() < 1) continue;
             workerCtrl.workerTasks.taskBuildingCtrl = warehouse;
             workerCtrl.workerTasks.TaskCurrentDone();
             workerCtrl.workerTasks.TaskAdd(TaskType.getResNeed2Move);
@@ -76,7 +76,7 @@ public class HouseBuilderTask : BuildingTask
 
         ResourceName resRequireName = this.construction.GetResRequireName();
         Resource resource = warehouseCtrl.warehouse.GetResource(resRequireName);
-        if (resource.Number < 1)//TODO: not work with multi workers
+        if (resource.NumberFinal() < 1)//TODO: not work with multi workers
         {
             workerCtrl.workerTasks.TaskCurrentDone();
             workerCtrl.workerTasks.TaskAdd(TaskType.findWarehouseHasRes);
@@ -89,10 +89,10 @@ public class HouseBuilderTask : BuildingTask
         Transform target = workerCtrl.workerMovement.GetTarget();
         if (target == null) workerCtrl.workerMovement.SetTarget(warehouseCtrl.door);
 
-        if (!workerCtrl.workerMovement.IsClose2Target()) return;
+        if (!workerCtrl.workerMovement.IsCloseToTarget()) return;
 
         workerCtrl.workerTasks.TaskCurrentDone();
-        int carryCount = workerCtrl.resCarrier.carryCount;
+        int carryCount = workerCtrl.resCarrier.CarryCount;
         warehouseCtrl.warehouse.RemoveResource(resRequireName, carryCount);
         workerCtrl.resCarrier.AddResource(resRequireName, carryCount);
         workerCtrl.workerTasks.TaskAdd(TaskType.bringResourceBack);
@@ -102,7 +102,7 @@ public class HouseBuilderTask : BuildingTask
     {
         Transform target = workerCtrl.workerMovement.GetTarget();
         if (target == null) workerCtrl.workerMovement.SetTarget(this.construction.transform);
-        if (!workerCtrl.workerMovement.IsClose2Target()) return;
+        if (!workerCtrl.workerMovement.IsCloseToTarget()) return;
 
         workerCtrl.workerTasks.TaskCurrentDone();
 

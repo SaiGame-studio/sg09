@@ -1026,7 +1026,7 @@ GameObject:
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
-  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1308,11 +1308,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFull: 0
-  resHolders:
-  - {fileID: 4637012613575835168}
+  resources: []
   resCreate:
-  - name: 1001
+  - name: logwood
+    codeName: 1001
     number: 1
+    adding: 0
+    deducting: 0
+    max: 2147483647
   resRequire: []
   canCreate: 1
   createTimer: 0

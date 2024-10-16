@@ -31,8 +31,8 @@ public class Warehouse : SaiBehaviour
     public virtual bool RemoveResource(ResourceName resourceName, int number)
     {
         Resource resource = this.GetResource(resourceName);
-        if (!resource.TryToRemove(number)) return false;
-        resource.Remove(number);
+        if (!resource.TryToDeduct(number)) return false;
+        resource.Deduct(number);
         return true;
     }
 
@@ -56,7 +56,8 @@ public class Warehouse : SaiBehaviour
         return true;
     }
 
-    public virtual List<Resource> ResNeed2Move()
+
+    public virtual List<Resource> ResNeedToMove(WorkerCtrl worker, bool getNumber)
     {
         return new List<Resource>();//Do not return null
     }
@@ -64,5 +65,33 @@ public class Warehouse : SaiBehaviour
     public virtual List<Resource> NeedResoures()
     {
         return new List<Resource>();//Do not return null
+    }
+
+    public virtual void Deducting(List<Resource> resources)
+    {
+        foreach (Resource resource in resources)
+        {
+            this.Deducting(resource.CodeName, resource.Number);
+        }
+    }
+
+    public virtual void Deducting(ResourceName resourceName, int number)
+    {
+        Resource resInWarehouse = this.GetResource(resourceName);
+        resInWarehouse.Deducting(number);
+    }
+
+    public virtual void Adding(List<Resource> resources)
+    {
+        foreach (Resource resource in resources)
+        {
+            this.Adding(resource.CodeName, resource.Number);
+        }
+    }
+
+    public virtual void Adding(ResourceName resourceName, int number)
+    {
+        Resource resInWarehouse = this.GetResource(resourceName);
+        resInWarehouse.Adding(number);
     }
 }

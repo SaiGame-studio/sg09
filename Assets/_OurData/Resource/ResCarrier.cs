@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ResCarrier : MonoBehaviour
 {
-    public int carryCount = 1;
+    [SerializeField] protected int carryCount = 1;
+    public int CarryCount => carryCount;
     [SerializeField] protected List<Resource> resources;
 
     public virtual Resource AddResource(ResourceName resourceName, int number)

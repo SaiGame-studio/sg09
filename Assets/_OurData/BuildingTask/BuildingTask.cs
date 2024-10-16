@@ -21,7 +21,7 @@ public abstract class BuildingTask : BuildingAbstract
     {
         WorkerTask taskWorking = workerCtrl.workerTasks.TaskWorking;
         taskWorking.GotoBuilding();
-        if (workerCtrl.workerMovement.IsClose2Target())
+        if (workerCtrl.workerMovement.IsCloseToTarget())
         {
             taskWorking.GoIntoBuilding();
             workerCtrl.workerTasks.TaskCurrentDone();
