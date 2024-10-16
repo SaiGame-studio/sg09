@@ -36,11 +36,6 @@ public class ResCarrier : MonoBehaviour
         return res;
     }
 
-    public virtual Resource GetFirst()
-    {
-        return this.resources[0];
-    }
-
     public virtual Resource GetResByName(ResourceName resourceName)
     {
         Resource res = this.resources.Find((x) => x.CodeName == resourceName);

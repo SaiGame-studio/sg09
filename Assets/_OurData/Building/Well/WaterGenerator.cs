@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WaterGenerator : ResGenerator
@@ -22,10 +23,11 @@ public class WaterGenerator : ResGenerator
         water.SetMax(7);
     }
 
-    public override Resource ResNeed2Move()
+    public override List<Resource> ResNeed2Move()
     {
+        List<Resource> resources = new();
         Resource res = this.GetResource(ResourceName.water);
-        if (res.Number > 2) return res;
-        return null;
+        if (res.Number > 0) resources.Add(res);
+        return resources;
     }
 }

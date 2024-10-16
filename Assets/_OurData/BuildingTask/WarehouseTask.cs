@@ -8,10 +8,10 @@ public class WarehouseTask : BuildingTask
     [SerializeField] protected int takeProductMax = 7;
     [SerializeField] protected float takeProductTimer = 0;
     [SerializeField] protected float takeProductDelay = 7f;
-    [SerializeField] protected int bringMaterialCount = 0;
-    [SerializeField] protected int bringMaterialMax = 2;
-    [SerializeField] protected float bringMaterialTimer = 0;
-    [SerializeField] protected float bringMaterialDelay = 7f;
+    [SerializeField] protected int giveMaterialCount = 0;
+    [SerializeField] protected int giveMaterialMax = 2;
+    [SerializeField] protected float giveMaterialTimer = 0;
+    [SerializeField] protected float giveMaterialDelay = 7f;
 
     protected override void LoadComponents()
     {
@@ -53,7 +53,7 @@ public class WarehouseTask : BuildingTask
         workerCtrl.workerTasks.TaskAdd(TaskType.findBuildingNeedMaterial);
         workerCtrl.workerTasks.TaskAdd(TaskType.findBuildingHasProduct);
 
-        this.bringMaterialCount = this.bringMaterialMax;
+        this.giveMaterialCount = this.giveMaterialMax;
         this.takeProductCount = this.takeProductMax;
     }
 
@@ -72,25 +72,48 @@ public class WarehouseTask : BuildingTask
             return;
         }
 
-        BuildingCtrl buildingCtrl = this.FindBuildingHasProductOld(workerCtrl);
-        if (buildingCtrl != null)
+        List<Resource> resources;
+        List<Resource> filterResources;
+        foreach (BuildingCtrl buildingCtrl in this.ctrl.NearBuildings)
         {
-            workerCtrl.workerTasks.TaskAdd(TaskType.gotoGetProduct);
-            this.takeProductTimer = 0;
-            this.takeProductCount--;
+            if (buildingCtrl.transform == transform) continue;
+            if (buildingCtrl.warehouse == null) continue;
+            resources = buildingCtrl.warehouse.ResNeed2Move();
+            filterResources = this.RemoveResourceAlreadyFull(resources);
+            if (filterResources.Count > 0)
+            {
+                workerCtrl.workerTasks.taskBuildingCtrl = buildingCtrl;
+                workerCtrl.workerTasks.TaskAdd(TaskType.gotoGetProduct);
+                this.takeProductTimer = 0;
+                this.takeProductCount--;
+                return;
+            }
         }
+    }
+
+    protected virtual List<Resource> RemoveResourceAlreadyFull(List<Resource> resources)
+    {
+        List<Resource> filterResources = new();
+        Resource resourceInWarehouse;
+        foreach (Resource resource in resources)
+        {
+            resourceInWarehouse = this.ctrl.warehouse.GetResource(resource.CodeName);
+            if (resourceInWarehouse.IsMax()) continue;
+            filterResources.Add(resource);
+        }
+        return filterResources;
     }
 
     protected virtual void FindBuildingNeedMaterial(WorkerCtrl workerCtrl)
     {
-        this.bringMaterialTimer += Time.fixedDeltaTime;
-        if (this.bringMaterialTimer > this.bringMaterialDelay)
+        this.giveMaterialTimer += Time.fixedDeltaTime;
+        if (this.giveMaterialTimer > this.giveMaterialDelay)
         {
-            this.bringMaterialCount--;
-            this.bringMaterialTimer = 0;
+            this.giveMaterialCount--;
+            this.giveMaterialTimer = 0;
         }
 
-        if (this.bringMaterialCount < 0)
+        if (this.giveMaterialCount < 0)
         {
             workerCtrl.workerTasks.TaskCurrentDone();
             return;
@@ -115,8 +138,8 @@ public class WarehouseTask : BuildingTask
                 workerCtrl.workerTasks.taskBuildingCtrl = buildingCtrl;
                 workerCtrl.workerTasks.TaskAdd(TaskType.bringMatetiral2Building);
 
-                this.bringMaterialCount--;
-                this.bringMaterialTimer = 0;
+                this.giveMaterialCount--;
+                this.giveMaterialTimer = 0;
                 return;
             }
         }
@@ -128,8 +151,8 @@ public class WarehouseTask : BuildingTask
         if (workerTasks.InHouse) workerTasks.TaskWorking.GoOutBuilding();
 
         BuildingCtrl taskBuildingCtrl = workerTasks.taskBuildingCtrl;
-        Resource res = taskBuildingCtrl.warehouse.ResNeed2Move();
-        if (res == null)
+        List<Resource> resourcesNeed2Move = taskBuildingCtrl.warehouse.ResNeed2Move();
+        if (resourcesNeed2Move.Count == 0)
         {
             this.DoneGetResNeed2Move(workerCtrl);
             return;
@@ -138,9 +161,20 @@ public class WarehouseTask : BuildingTask
         if (workerCtrl.workerMovement.GetTarget() == null) workerCtrl.workerMovement.SetTarget(taskBuildingCtrl.door);
         if (!workerCtrl.workerMovement.IsClose2Target()) return;
 
-        int count = workerCtrl.resCarrier.carryCount;
-        res.Remove(count);
-        workerCtrl.resCarrier.AddResource(res.CodeName, count);
+        int canCarry = workerCtrl.resCarrier.carryCount;
+        Resource resInWarehouse;
+        foreach (Resource resourceNeed2Move in resourcesNeed2Move)
+        {
+            resInWarehouse = this.ctrl.warehouse.GetResource(resourceNeed2Move.CodeName);
+            if (resInWarehouse.IsMax()) continue;
+
+            int taking = resourceNeed2Move.Number;
+            if (taking > canCarry) taking = canCarry;
+            else canCarry -= taking;
+
+            resourceNeed2Move.Remove(taking);
+            workerCtrl.resCarrier.AddResource(resourceNeed2Move.CodeName, taking);
+        }
         this.DoneGetResNeed2Move(workerCtrl);
 
         //Find what building need these Resources
@@ -148,39 +182,13 @@ public class WarehouseTask : BuildingTask
         workerTasks.TaskAdd(TaskType.takingProductBack);
     }
 
+
     protected virtual void DoneGetResNeed2Move(WorkerCtrl workerCtrl)
     {
         workerCtrl.workerTasks.TaskCurrentDone();
         workerCtrl.workerTasks.taskBuildingCtrl = null;
     }
 
-    protected virtual BuildingCtrl FindBuildingHasProductOld(WorkerCtrl workerCtrl)
-    {
-        int tryCount = 999;
-        do
-        {
-            tryCount--;
-
-            this.lastBuildingWorked++;
-            if (lastBuildingWorked >= this.ctrl.NearBuildings.Count)
-            {
-                this.lastBuildingWorked = 0;
-                break;
-            }
-
-            BuildingCtrl nextBuilding = this.ctrl.NearBuildings[this.lastBuildingWorked];
-            if (nextBuilding.BuildingType != BuildingType.workStation) continue;
-
-            Resource resource = nextBuilding.warehouse.ResNeed2Move();
-            if (resource == null) continue;
-
-            workerCtrl.workerTasks.taskBuildingCtrl = nextBuilding;
-            return nextBuilding;
-
-        } while (tryCount > 0);
-
-        return null;
-    }
 
     protected virtual void BringResourceBack(WorkerCtrl workerCtrl)
     {
@@ -194,8 +202,11 @@ public class WarehouseTask : BuildingTask
         workerTasks.taskBuildingCtrl = null;
         workerTasks.TaskCurrentDone();
 
-        Resource res = workerCtrl.resCarrier.TakeFirst();
-        taskBuildingCtrl.warehouse.AddResource(res.CodeName, res.Number);
+        List<Resource> resources = workerCtrl.resCarrier.TakeAll();
+        foreach (Resource resource in resources)
+        {
+            taskBuildingCtrl.warehouse.AddResource(resource.CodeName, resource.Number);
+        }
 
         workerTasks.TaskAdd(TaskType.goToWorkStation);
     }
@@ -210,8 +221,11 @@ public class WarehouseTask : BuildingTask
         if (workerCtrl.workerMovement.GetTarget() == null) workerCtrl.workerMovement.SetTarget(taskBuildingCtrl.door);
         if (!workerCtrl.workerMovement.IsClose2Target()) return;
 
-        Resource res = workerCtrl.resCarrier.TakeFirst();
-        taskBuildingCtrl.warehouse.AddResource(res.CodeName, res.Number);
+        List<Resource> resources = workerCtrl.resCarrier.TakeAll();
+        foreach (Resource resource in resources)
+        {
+            taskBuildingCtrl.warehouse.AddResource(resource.CodeName, resource.Number);
+        }
 
         workerTasks.taskBuildingCtrl = null;
         workerTasks.TaskCurrentDone();

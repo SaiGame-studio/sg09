@@ -105,8 +105,12 @@ public class HouseBuilderTask : BuildingTask
         if (!workerCtrl.workerMovement.IsClose2Target()) return;
 
         workerCtrl.workerTasks.TaskCurrentDone();
-        Resource res = workerCtrl.resCarrier.TakeFirst();
-        this.construction.AddRes(res.CodeName, res.Number);
+
+        List<Resource> resources = workerCtrl.resCarrier.TakeAll();
+        foreach (Resource resource in resources)
+        {
+            this.construction.AddRes(resource.CodeName, resource.Number);
+        }
 
         ResourceName resRequireName = this.construction.GetResRequireName();
         if (resRequireName == ResourceName.noResource)

@@ -56,9 +56,9 @@ public class Warehouse : SaiBehaviour
         return true;
     }
 
-    public virtual Resource ResNeed2Move()
+    public virtual List<Resource> ResNeed2Move()
     {
-        return null;
+        return new List<Resource>();//Do not return null
     }
 
     public virtual List<Resource> NeedResoures()

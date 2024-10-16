@@ -17,11 +17,12 @@ public class SawmillWH : Warehouse
         Debug.LogWarning(transform.name + ": LoadResources", gameObject);
     }
 
-    public override Resource ResNeed2Move()
+    public override List<Resource> ResNeed2Move()
     {
+        List<Resource> resources = new();
         Resource blank = this.GetResource(ResourceName.blank);
-        if (blank.Number > 0) return blank;
-        return null;
+        if (blank.Number > 0) resources.Add(blank);
+        return resources;
     }
 
     public override List<Resource> NeedResoures()

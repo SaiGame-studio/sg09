@@ -64,6 +64,7 @@ public class WorkerMovement : SaiBehaviour
             return;
         }
 
+        //TODO: only set new destination when target change
         this.isWalking = true;
         this.workerCtrl.navMeshAgent.SetDestination(this.target.position);
     }

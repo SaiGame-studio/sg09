@@ -8724,7 +8724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3e80d28e03c754a9651b7ed573dc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWorker: 5
+  maxWorker: 25
   workers: []
 --- !u!114 &7808193131999152703
 MonoBehaviour:
@@ -8747,10 +8747,10 @@ MonoBehaviour:
   takeProductMax: 7
   takeProductTimer: 0
   takeProductDelay: 7
-  bringMaterialCount: 0
-  bringMaterialMax: 2
-  bringMaterialTimer: 0
-  bringMaterialDelay: 7
+  giveMaterialCount: 0
+  giveMaterialMax: 2
+  giveMaterialTimer: 0
+  giveMaterialDelay: 7
 --- !u!114 &7609276059284651310
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class WarehouseWH : Warehouse
     protected virtual void LoadResources()
     {
         if (this.resources.Count > 0) return;
-        this.resources.Add(new Resource(ResourceName.water, 0, 70));
+        this.resources.Add(new Resource(ResourceName.water, 0, 9));
         Debug.LogWarning(transform.name + ": LoadResources", gameObject);
     }
 }
