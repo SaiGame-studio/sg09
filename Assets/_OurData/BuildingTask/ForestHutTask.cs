@@ -72,7 +72,6 @@ public class ForestHutTask : BuildingTask
         }
         else
         {
-            //Debug.Log("Nothing to do: " + workerCtrl.name, workerCtrl.gameObject);
             if(!workerCtrl.workerTasks.InHouse) workerCtrl.workerTasks.TaskAdd(TaskType.goToWorkStation);
         }
     }
@@ -84,8 +83,6 @@ public class ForestHutTask : BuildingTask
             if (tree == null) continue;
             if (!tree.logwoodGenerator.IsAllResMax()) continue;
             if (tree.choper != null) continue;
-
-            //Debug.Log("HasTreeFullLevel: " + tree.name, gameObject);
             return true;
         }
 
@@ -219,7 +216,9 @@ public class ForestHutTask : BuildingTask
 
         workerCtrl.workerMovement.isWorking = false;
         workerCtrl.workerTasks.SetTaskTarget(null);
-        workerCtrl.resCarrier.AddByList(resources);
+        workerCtrl.inventory.AddResources(resources);
+
+        workerCtrl.buildings.WorkBuilding.warehouse.WillAdd(resources);
 
         workerCtrl.workerTasks.TaskCurrentDone();
 
@@ -253,8 +252,9 @@ public class ForestHutTask : BuildingTask
         taskWorking.GotoBuilding();
         if (!workerCtrl.workerMovement.IsCloseToTarget()) return;
 
-        List<Resource> resources = workerCtrl.resCarrier.TakeAll();
-        this.ctrl.warehouse.AddByList(resources, true);
+        List<Resource> resources = workerCtrl.inventory.TakeAll();
+        this.ctrl.warehouse.AddResources(resources);
+        this.ctrl.warehouse.Added(resources);
         taskWorking.GoIntoBuilding();
 
         workerCtrl.workerTasks.TaskCurrentDone();

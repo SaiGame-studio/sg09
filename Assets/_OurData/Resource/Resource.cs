@@ -13,8 +13,8 @@ public class Resource
     [SerializeField] protected int max = int.MaxValue;
     public int Max => max;
 
-    [SerializeField] protected int adding = 0;
-    [SerializeField] protected int deducting = 0;
+    [SerializeField] protected int willAdd = 0;
+    [SerializeField] protected int willDeduct = 0;
 
     public Resource(ResourceName codeName)
     {
@@ -48,7 +48,6 @@ public class Resource
     {
         if (!this.TryToAdd(number)) return false;
         this.number += number;
-        this.adding -= number;
         return true;
     }
 
@@ -63,7 +62,6 @@ public class Resource
     {
         if (!this.TryToDeduct(number)) return false;
         this.number -= number;
-        this.deducting -= number;
         return true;
     }
 
@@ -101,18 +99,28 @@ public class Resource
         return all;
     }
 
-    public void Deducting(int number)
+    public void WillDeduct(int number)
     {
-        this.deducting += number;
+        this.willDeduct += number;
     }
 
-    public void Adding(int number)
+    public void Deducted(int number)
     {
-        this.adding += number;
+        this.willDeduct -= number;
+    }
+
+    public void WillAdd(int number)
+    {
+        this.willAdd += number;
+    }
+
+    public void Added(int number)
+    {
+        this.willAdd -= number;
     }
 
     public int NumberFinal()
     {
-        return this.number - this.deducting + this.adding;
+        return this.number - this.willDeduct + this.willAdd;
     }
 }

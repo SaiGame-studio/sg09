@@ -20,10 +20,10 @@ GameObject:
   m_Layer: 0
   m_Name: ErikaArcher
   m_TagString: Untagged
-  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2381019282605714452
 Transform:
   m_ObjectHideFlags: 0
@@ -48,7 +48,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2381019282413765963}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 2
@@ -78,13 +78,13 @@ MonoBehaviour:
   despawn: {fileID: 0}
   _collider: {fileID: 708041193888036643}
   _rigidbody: {fileID: 2393179194065196037}
-  workerBuildings: {fileID: 2381019282413766326}
+  buildings: {fileID: 2381019282413766326}
   workerMovement: {fileID: 2381019282413766327}
   workerTasks: {fileID: 5247015480363042011}
   animator: {fileID: 4668743662049004193}
   workerModel: {fileID: 4161091701192028524}
   navMeshAgent: {fileID: 2381019282413766325}
-  resCarrier: {fileID: 8304020147062719500}
+  inventory: {fileID: 8304020147062719500}
 --- !u!114 &2381019282413766327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,8 +153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c21bc64b38b8db47bf98ba31774b227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carryCount: 1
+  isFull: 0
   resources: []
+  carryCount: 1
 --- !u!54 &2393179194065196037
 Rigidbody:
   m_ObjectHideFlags: 0

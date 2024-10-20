@@ -7,6 +7,12 @@ public abstract class TreeCtrl : ResourceCtrl
     public TreeLevel treeLevel;
     public WorkerCtrl choper;
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        this.Reborn();
+    }
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -28,4 +34,8 @@ public abstract class TreeCtrl : ResourceCtrl
         Debug.Log(transform.name + " LoadLogwoodGenerator", gameObject);
     }
 
+    protected virtual void Reborn()
+    {
+        this.treeLevel.enabled = true;
+    }
 }

@@ -6,12 +6,12 @@ public class TaskGoHome : WorkerTask
 {
     protected override BuildingHasWorkersCtrl GetBuilding()
     {
-        return this.workerCtrl.workerBuildings.GetHome();
+        return this.workerCtrl.buildings.GetHome();
     }
 
     protected override void AssignBuilding(BuildingHasWorkersCtrl buildingCtrl)
     {
-        this.workerCtrl.workerBuildings.AssignHome(buildingCtrl);
+        this.workerCtrl.buildings.AssignHome(buildingCtrl);
     }
 
     protected override BuildingType GetBuildingType()

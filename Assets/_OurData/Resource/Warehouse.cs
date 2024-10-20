@@ -3,29 +3,29 @@ using UnityEngine;
 
 public class Warehouse : SaiBehaviour
 {
-    [Header("Warehouse")]
+    [Header("Inventory")]
     [SerializeField] protected bool isFull = false;
     [SerializeField] protected List<Resource> resources;
+    public List<Resource> Resources => resources;
 
     protected virtual void FixedUpdate()
     {
         this.isFull = this.IsFull();
     }
 
-    public virtual void AddByList(List<Resource> addResources, bool isGenerate)
+    public virtual void AddResources(List<Resource> addResources)
     {
         foreach (Resource addResource in addResources)
         {
-            this.AddResource(addResource.CodeName, addResource.Number, isGenerate);
+            this.AddResource(addResource.CodeName, addResource.Number);
         }
     }
 
-    public virtual bool AddResource(ResourceName resourceName, int number, bool isGenerate)
+    public virtual bool AddResource(ResourceName resourceName, int number)
     {
         Resource resource = this.GetResource(resourceName);
         if (!resource.TryToAdd(number)) return false;
-        if(isGenerate) resource.Generate(number);
-        else resource.Add(number);
+        resource.Add(number);
         return true;
     }
 
@@ -50,6 +50,7 @@ public class Warehouse : SaiBehaviour
 
     public virtual bool IsFull()
     {
+        if (this.resources.Count == 0) return false;
         foreach (Resource resource in this.resources)
         {
             if (!resource.IsMax()) return false;
@@ -68,31 +69,51 @@ public class Warehouse : SaiBehaviour
         return new List<Resource>();//Do not return null
     }
 
-    public virtual void Deducting(List<Resource> resources)
+    public virtual void WillDeduct(List<Resource> resources)
     {
         foreach (Resource resource in resources)
         {
-            this.Deducting(resource.CodeName, resource.Number);
+            this.WillDeduct(resource.CodeName, resource.Number);
         }
     }
 
-    public virtual void Deducting(ResourceName resourceName, int number)
+    public virtual void WillDeduct(ResourceName resourceName, int number)
     {
         Resource resInWarehouse = this.GetResource(resourceName);
-        resInWarehouse.Deducting(number);
+        resInWarehouse.WillDeduct(number);
     }
 
-    public virtual void Adding(List<Resource> resources)
+    public virtual void Deducted(ResourceName resourceName, int number)
+    {
+        Resource resInWarehouse = this.GetResource(resourceName);
+        resInWarehouse.Deducted(number);
+    }
+
+    public virtual void WillAdd(List<Resource> resources)
     {
         foreach (Resource resource in resources)
         {
-            this.Adding(resource.CodeName, resource.Number);
+            this.WillAdd(resource.CodeName, resource.Number);
         }
     }
 
-    public virtual void Adding(ResourceName resourceName, int number)
+    public virtual void WillAdd(ResourceName resourceName, int number)
     {
         Resource resInWarehouse = this.GetResource(resourceName);
-        resInWarehouse.Adding(number);
+        resInWarehouse.WillAdd(number);
+    }
+
+    public virtual void Added(List<Resource> resources)
+    {
+        foreach (Resource resource in resources)
+        {
+            this.Added(resource.CodeName, resource.Number);
+        }
+    }
+
+    public virtual void Added(ResourceName resourceName, int number)
+    {
+        Resource resInWarehouse = this.GetResource(resourceName);
+        resInWarehouse.Added(number);
     }
 }

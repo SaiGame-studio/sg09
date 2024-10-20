@@ -92,9 +92,9 @@ public class HouseBuilderTask : BuildingTask
         if (!workerCtrl.workerMovement.IsCloseToTarget()) return;
 
         workerCtrl.workerTasks.TaskCurrentDone();
-        int carryCount = workerCtrl.resCarrier.CarryCount;
+        int carryCount = workerCtrl.inventory.CarryCount;
         warehouseCtrl.warehouse.RemoveResource(resRequireName, carryCount);
-        workerCtrl.resCarrier.AddResource(resRequireName, carryCount);
+        workerCtrl.inventory.AddResource(resRequireName, carryCount);
         workerCtrl.workerTasks.TaskAdd(TaskType.bringResourceBack);
     }
 
@@ -106,7 +106,7 @@ public class HouseBuilderTask : BuildingTask
 
         workerCtrl.workerTasks.TaskCurrentDone();
 
-        List<Resource> resources = workerCtrl.resCarrier.TakeAll();
+        List<Resource> resources = workerCtrl.inventory.TakeAll();
         foreach (Resource resource in resources)
         {
             this.construction.AddRes(resource.CodeName, resource.Number);

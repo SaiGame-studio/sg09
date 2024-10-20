@@ -35,6 +35,7 @@ public class TreeLevel : BuildLevel
 
     protected virtual void Growing()
     {
+        if (this.IsMaxLevel()) this.enabled = false;
         this.treeTimer += Time.fixedDeltaTime;
         if (this.treeTimer < this.treeDelay) return;
         this.treeTimer = 0;

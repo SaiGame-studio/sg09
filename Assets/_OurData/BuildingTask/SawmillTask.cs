@@ -63,7 +63,7 @@ public class SawmillTask : BuildingTask
         yield return new WaitForSeconds(this.workingSpeed);
 
         this.ctrl.warehouse.RemoveResource(ResourceName.logwood, this.logwoodCost);
-        this.ctrl.warehouse.AddResource(ResourceName.blank, this.blankReceive, true);
+        this.ctrl.warehouse.AddResource(ResourceName.blank, this.blankReceive);
 
         workerCtrl.workerMovement.isWorking = false;
         workerCtrl.workerTasks.TaskCurrentDone();

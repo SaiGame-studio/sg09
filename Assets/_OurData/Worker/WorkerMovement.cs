@@ -30,7 +30,6 @@ public class WorkerMovement : SaiBehaviour
         Debug.Log(transform.name + ": LoadWorkerCtrl", gameObject);
     }
 
-
     public virtual Transform GetTarget()
     {
         return this.target;

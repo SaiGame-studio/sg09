@@ -35,7 +35,7 @@ public class ResGenerator : Warehouse
         foreach (Resource res in this.resCreate)
         {
             Resource resource = this.GetResource(res.CodeName);
-            resource.Generate(res.Number);
+            resource.Add(res.Number);
         }
     }
 
