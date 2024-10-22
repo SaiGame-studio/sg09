@@ -6,12 +6,7 @@ public class TreeLevel : BuildLevel
     [SerializeField] protected LogwoodGenerator tree;
     [SerializeField] protected float treeTimer = 0;
     [SerializeField] protected float treeDelay = Mathf.Infinity;
-
-    protected virtual void FixedUpdate()
-    {
-        this.Growing();
-        this.IsMaxLevel();
-    }
+    [SerializeField] protected float growingInvoke = 2f;
 
     protected override void LoadComponents()
     {
@@ -35,8 +30,10 @@ public class TreeLevel : BuildLevel
 
     protected virtual void Growing()
     {
+        Invoke(nameof(this.Growing), this.growingInvoke);
+
         if (this.IsMaxLevel()) this.enabled = false;
-        this.treeTimer += Time.fixedDeltaTime;
+        this.treeTimer += this.GetElapsedTime();
         if (this.treeTimer < this.treeDelay) return;
         this.treeTimer = 0;
 
@@ -48,5 +45,11 @@ public class TreeLevel : BuildLevel
         if (this.currentLevel == this.levels.Count - 2) this.isMaxLevel = true;
         else this.isMaxLevel = false;
         return this.isMaxLevel;
+    }
+
+    protected override void Reborn()
+    {
+        base.Reborn();
+        Invoke(nameof(this.Growing), this.growingInvoke);
     }
 }

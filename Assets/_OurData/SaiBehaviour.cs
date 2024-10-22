@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SaiBehaviour : MonoBehaviour
 {
+
+    protected float lastUpdateTime = 0f;
+
     protected virtual void Reset()
     {
         this.ResetValues();
@@ -17,12 +20,12 @@ public class SaiBehaviour : MonoBehaviour
 
     protected virtual void Start()
     {
-        //For Overide
+        this.lastUpdateTime = Time.time;
     }
 
     protected virtual void OnDisable()
     {
-        //For Overide
+        CancelInvoke();
     }
 
     protected virtual void OnEnable()
@@ -38,5 +41,13 @@ public class SaiBehaviour : MonoBehaviour
     protected virtual void ResetValues()
     {
         //For Overide
+    }
+
+    protected virtual float GetElapsedTime()
+    {
+        float currentTime = Time.time;
+        float elapsedTime = currentTime - this.lastUpdateTime;
+        this.lastUpdateTime = currentTime;
+        return elapsedTime;
     }
 }
