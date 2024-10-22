@@ -73,7 +73,6 @@ public abstract class AbsConstruction : SaiBehaviour
         {
             Resource resourceHas = this.resoursesHave.Find((x) => x.CodeName == resourceNeed.CodeName);
             if (resourceHas == null) return false;
-            Debug.Log("Has: " + resourceHas.CodeName + " " + resourceHas.Number + " / Need: " + resourceNeed.CodeName + " " + resourceNeed.Number);
             if (resourceNeed.Number > resourceHas.Number) return false;
         }
 

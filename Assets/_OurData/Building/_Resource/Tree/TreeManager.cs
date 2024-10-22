@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeManager : SaiBehaviour
+public class TreeManager : SaiSingleton<TreeManager>
 {
     [SerializeField] protected TreeSpawnerCtrl ctrl;
     [SerializeField] protected List<TreeCtrl> trees = new();

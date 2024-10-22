@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   despawn: {fileID: 8109037000572295478}
-  limitRadius: {fileID: 0}
+  limitRadius: {fileID: 3971845263465259458}
   abstractConstruction: {fileID: 1004720544121071282}
 --- !u!114 &3971845263465259458
 MonoBehaviour:
