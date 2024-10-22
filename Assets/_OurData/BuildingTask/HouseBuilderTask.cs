@@ -12,13 +12,13 @@ public class HouseBuilderTask : BuildingTask
         switch (workerCtrl.workerTasks.TaskCurrent())
         {
             case TaskType.findWarehouseHasRes:
-                this.FindWarehouseHasRes(workerCtrl);
+                this.FindWarehouseHasResource(workerCtrl);
                 break;
             case TaskType.getResNeed2Move:
                 this.GetResNeed2Move(workerCtrl);
                 break;
             case TaskType.bringResourceBack:
-                this.BringResToConstruction(workerCtrl);
+                this.BringResourceToConstruction(workerCtrl);
                 break;
             case TaskType.buildConstruction:
                 this.BuildConstruction(workerCtrl);
@@ -55,17 +55,32 @@ public class HouseBuilderTask : BuildingTask
         }
     }
 
-    protected virtual void FindWarehouseHasRes(WorkerCtrl workerCtrl)
+    protected virtual void FindWarehouseHasResource(WorkerCtrl workerCtrl)
     {
-        ResourceName resRequireName = this.construction.GetResRequireName();
+        Resource resourceRequired = this.construction.GetResourceRequired();
+
+        if (resourceRequired == null)
+        {
+            workerCtrl.workerTasks.TaskCurrentDone();
+            workerCtrl.workerTasks.TaskAdd(TaskType.buildConstruction);
+            return;
+        }
 
         foreach (BuildingCtrl warehouse in this.warehouses)
         {
-            Resource resource = warehouse.warehouse.GetResource(resRequireName);
-            if (resource.NumberFinal() < 1) continue;
+            Resource resourceInWarehouse = warehouse.warehouse.GetResource(resourceRequired.CodeName);
+            if (resourceInWarehouse.NumberFinal() < 1) continue;
+
             workerCtrl.workerTasks.taskBuildingCtrl = warehouse;
             workerCtrl.workerTasks.TaskCurrentDone();
             workerCtrl.workerTasks.TaskAdd(TaskType.getResNeed2Move);
+
+            int number = resourceRequired.Number;
+            if (number > resourceInWarehouse.NumberFinal()) number = resourceInWarehouse.NumberFinal();
+
+            int taking = workerCtrl.inventory.Taking(number);
+            resourceInWarehouse.WillDeduct(taking);
+            this.construction.WillAdd(resourceRequired.CodeName, taking);
             return;
         }
     }
@@ -73,15 +88,6 @@ public class HouseBuilderTask : BuildingTask
     protected virtual void GetResNeed2Move(WorkerCtrl workerCtrl)
     {
         BuildingCtrl warehouseCtrl = workerCtrl.workerTasks.taskBuildingCtrl;
-
-        ResourceName resRequireName = this.construction.GetResRequireName();
-        Resource resource = warehouseCtrl.warehouse.GetResource(resRequireName);
-        if (resource.NumberFinal() < 1)//TODO: not work with multi workers
-        {
-            workerCtrl.workerTasks.TaskCurrentDone();
-            workerCtrl.workerTasks.TaskAdd(TaskType.findWarehouseHasRes);
-            return;
-        }
 
         WorkerTasks workerTasks = workerCtrl.workerTasks;
         if (workerTasks.InHouse) workerTasks.TaskWorking.GoOutBuilding();
@@ -91,14 +97,19 @@ public class HouseBuilderTask : BuildingTask
 
         if (!workerCtrl.workerMovement.IsCloseToTarget()) return;
 
+        Resource requestResource = this.construction.GetResourceRequired();
+        int taking = workerCtrl.inventory.Taking(requestResource.Number);
+
+        warehouseCtrl.warehouse.RemoveResource(requestResource.CodeName, taking);
+        warehouseCtrl.warehouse.Deducted(requestResource.CodeName, taking);
+
+        workerCtrl.inventory.AddResource(requestResource.CodeName, taking);
+
         workerCtrl.workerTasks.TaskCurrentDone();
-        int carryCount = workerCtrl.inventory.CarryCount;
-        warehouseCtrl.warehouse.RemoveResource(resRequireName, carryCount);
-        workerCtrl.inventory.AddResource(resRequireName, carryCount);
         workerCtrl.workerTasks.TaskAdd(TaskType.bringResourceBack);
     }
 
-    protected virtual void BringResToConstruction(WorkerCtrl workerCtrl)
+    protected virtual void BringResourceToConstruction(WorkerCtrl workerCtrl)
     {
         Transform target = workerCtrl.workerMovement.GetTarget();
         if (target == null) workerCtrl.workerMovement.SetTarget(this.construction.transform);
@@ -110,13 +121,6 @@ public class HouseBuilderTask : BuildingTask
         foreach (Resource resource in resources)
         {
             this.construction.AddRes(resource.CodeName, resource.Number);
-        }
-
-        ResourceName resRequireName = this.construction.GetResRequireName();
-        if (resRequireName == ResourceName.noResource)
-        {
-            workerCtrl.workerTasks.TaskAdd(TaskType.buildConstruction);
-            return;
         }
 
         workerCtrl.workerTasks.TaskAdd(TaskType.findWarehouseHasRes);
@@ -133,7 +137,7 @@ public class HouseBuilderTask : BuildingTask
 
     protected virtual bool IsConstructionFinish()
     {
-        if (this.construction == null) return true;//TODO: untesting code
+        if (this.construction == null) return true;//TODO: not testing code
 
         float percent = this.construction.Percent();
         if (percent < 99) return false;

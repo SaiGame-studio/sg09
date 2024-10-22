@@ -104,6 +104,16 @@ public class Resource
         this.willDeduct += number;
     }
 
+    public void WillDeduct(int number, WorkerCtrl worker)
+    {
+        this.WillDeduct(worker.inventory.Taking(number));
+    }
+
+    public void Deducted(int number, WorkerCtrl worker)
+    {
+        this.Deducted(worker.inventory.Taking(number));
+    }
+
     public void Deducted(int number)
     {
         this.willDeduct -= number;

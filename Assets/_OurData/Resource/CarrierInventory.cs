@@ -14,4 +14,11 @@ public class CarrierInventory : Warehouse
         this.resources = new List<Resource>();
         return resources;
     }
+
+    public virtual int Taking(int number)
+    {
+        int taking = number;
+        if (taking > this.CarryCount) taking = this.CarryCount;
+        return taking;
+    }
 }
