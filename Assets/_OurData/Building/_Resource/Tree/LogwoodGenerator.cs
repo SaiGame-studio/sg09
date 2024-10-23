@@ -30,9 +30,9 @@ public class LogwoodGenerator : ResGenerator
         logwood.SetMax(1);
     }
 
-    protected override void Creating()
+    public override void Generating()
     {
         if (this.IsAllResMax()) this.canCreate = false;
-        base.Creating();
+        base.Generating();
     }
 }

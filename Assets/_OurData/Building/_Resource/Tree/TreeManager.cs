@@ -7,6 +7,11 @@ public class TreeManager : SaiSingleton<TreeManager>
     [SerializeField] protected List<TreeCtrl> trees = new();
     public List<TreeCtrl> Trees => trees;
 
+    protected virtual void FixedUpdate()
+    {
+        this.Growing();
+    }
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -37,5 +42,14 @@ public class TreeManager : SaiSingleton<TreeManager>
     public virtual void Remove(TreeCtrl treeCtrl)
     {
         this.trees.Remove(treeCtrl);
+    }
+
+    protected virtual void Growing()
+    {
+        foreach(TreeCtrl treeCtrl in this.trees)
+        {
+            treeCtrl.TreeLevel.Growing();
+            treeCtrl.LogwoodGenerator.Generating();
+        }
     }
 }

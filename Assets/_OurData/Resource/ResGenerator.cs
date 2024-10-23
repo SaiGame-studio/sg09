@@ -9,7 +9,6 @@ public class ResGenerator : Warehouse
     [SerializeField] protected bool canCreate = true;
     [SerializeField] protected float createTimer = 0f;
     [SerializeField] protected float createDelay = 7f;
-    [SerializeField] protected float creatingInvoke = 2f;
 
     protected override void OnEnable()
     {
@@ -17,10 +16,8 @@ public class ResGenerator : Warehouse
         this.Reborn();
     }
 
-    protected virtual void Creating()
+    public virtual void Generating()
     {
-        Invoke(nameof(this.Creating), this.creatingInvoke);
-
         if (!this.canCreate) return;
 
         this.createTimer += this.GetElapsedTime();
@@ -75,7 +72,5 @@ public class ResGenerator : Warehouse
     protected virtual void Reborn()
     {
         this.canCreate = true;
-
-        Invoke(nameof(this.Creating), this.creatingInvoke);
     }
 }

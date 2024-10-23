@@ -81,7 +81,7 @@ public class ForestHutTask : BuildingTask
         foreach (TreeCtrl tree in this.trees)
         {
             if (tree == null) continue;
-            if (!tree.logwoodGenerator.IsAllResMax()) continue;
+            if (!tree.LogwoodGenerator.IsAllResMax()) continue;
             if (tree.choper != null) continue;
             return true;
         }
@@ -95,7 +95,7 @@ public class ForestHutTask : BuildingTask
         foreach (TreeCtrl tree in this.trees)
         {
             if (tree == null) continue;
-            if (!tree.logwoodGenerator.IsAllResMax()) continue;
+            if (!tree.LogwoodGenerator.IsAllResMax()) continue;
             if (tree.choper != null) continue;
 
             tree.choper = workerCtrl;
@@ -208,8 +208,8 @@ public class ForestHutTask : BuildingTask
         workerCtrl.workerMovement.isWorking = true;
         yield return new WaitForSeconds(this.workingSpeed);
 
-        treeCtrl.treeLevel.ShowLastBuild();
-        List<Resource> resources = treeCtrl.logwoodGenerator.TakeAll();
+        treeCtrl.TreeLevel.ShowLastBuild();
+        List<Resource> resources = treeCtrl.LogwoodGenerator.TakeAll();
         treeCtrl.choper = null;
         this.trees.Remove(treeCtrl);
         TreeSpawnerCtrl.Instance.Manager.Remove(treeCtrl);

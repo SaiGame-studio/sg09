@@ -3,8 +3,13 @@ using UnityEngine;
 public abstract class TreeCtrl : ResourceCtrl
 {
     [Header("Tree")]
-    public LogwoodGenerator logwoodGenerator;
-    public TreeLevel treeLevel;
+    [SerializeField] protected LogwoodGenerator logwoodGenerator;
+
+    public LogwoodGenerator LogwoodGenerator => logwoodGenerator;
+
+    [SerializeField] protected TreeLevel treeLevel;
+    public TreeLevel TreeLevel => treeLevel;
+
     public WorkerCtrl choper;
 
     protected override void OnEnable()
