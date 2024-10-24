@@ -9,8 +9,8 @@ public class ConstructionSawmill : AbsConstructionIsBuilding
 
     protected override void LoadResRequires()
     {
-        if (this.resRequires.Count > 0) return;
-        this.resRequires.Add(new Resource(ResourceName.logwood, 5));
+        if (this.resourcesNeed.Count > 0) return;
+        this.resourcesNeed.Add(new Resource(ResourceName.logwood, 5));
         Debug.Log(transform.name + ": LoadResRequires", gameObject);
     }
 }

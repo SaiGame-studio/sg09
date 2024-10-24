@@ -17,11 +17,17 @@ public class SawmillWH : Warehouse
         Debug.LogWarning(transform.name + ": LoadResources", gameObject);
     }
 
-    public override Resource ResNeed2Move()
+    public override List<Resource> ResNeedToMove(WorkerCtrl worker, bool getNumber)
     {
-        Resource blank = this.GetResource(ResourceName.blank);
-        if (blank.Number > 0) return blank;
-        return null;
+        List<Resource> resources = new();
+        Resource res = this.GetResource(ResourceName.blank);
+        int number = res.NumberFinal();
+        if (getNumber) number = res.Number;
+
+        int carryCount = worker.inventory.CarryCount;
+        if (number > carryCount) number = carryCount;
+        if (number > 0) resources.Add(new Resource(res.CodeName, number));
+        return resources;
     }
 
     public override List<Resource> NeedResoures()
@@ -29,10 +35,10 @@ public class SawmillWH : Warehouse
         List<Resource> resources = new();
 
         Resource logwood = this.GetResource(ResourceName.logwood);
-        int number = logwood.Max - logwood.Number;
+        int number = logwood.Max - logwood.NumberFinal();
         Resource resLogwood = new(ResourceName.logwood, number);
 
-        if (resLogwood.Number > 0) resources.Add(resLogwood);
+        if (resLogwood.NumberFinal() > 0) resources.Add(resLogwood);
 
         return resources;
     }

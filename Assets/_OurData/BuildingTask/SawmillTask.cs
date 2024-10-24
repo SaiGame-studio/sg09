@@ -78,7 +78,7 @@ public class SawmillTask : BuildingTask
         Transform target = workerCtrl.workerMovement.GetTarget();
         if (target == null) workerCtrl.workerMovement.SetTarget(this.workingPoint);
 
-        if (!workerCtrl.workerMovement.IsClose2Target()) return;
+        if (!workerCtrl.workerMovement.IsCloseToTarget()) return;
 
         //workerCtrl.workerMovement.SetTarget(null);
         workerCtrl.workerTasks.TaskCurrentDone();
@@ -93,6 +93,6 @@ public class SawmillTask : BuildingTask
     protected virtual bool HasLogwood()
     {
         Resource logwood = this.ctrl.warehouse.GetResource(ResourceName.logwood);
-        return logwood.Number > 0;
+        return logwood.NumberFinal() > 0;
     }
 }

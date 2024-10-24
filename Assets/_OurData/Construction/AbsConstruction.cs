@@ -12,8 +12,12 @@ public abstract class AbsConstruction : SaiBehaviour
     [SerializeField] protected float percent = 0f;
     [SerializeField] protected float timer = 0f;
     [SerializeField] protected float delay = 0.001f;
-    [SerializeField] protected List<Resource> resRequires;
-    [SerializeField] protected List<Resource> resHave;
+
+    [SerializeField] protected List<Resource> resourcesNeed;
+    public List<Resource> ResourcesNeed => resourcesNeed;
+
+    [SerializeField] protected List<Resource> resoursesHave;
+    public List<Resource> ResoursesHave => resoursesHave;
 
     protected virtual void FixedUpdate()
     {
@@ -21,9 +25,9 @@ public abstract class AbsConstruction : SaiBehaviour
         this.FinishBuild();
     }
 
-    protected override void OnEnable()
+    protected override void OnDisable()
     {
-        base.OnEnable();
+        base.OnDisable();
         this.Reborn();
     }
 
@@ -63,28 +67,51 @@ public abstract class AbsConstruction : SaiBehaviour
 
     public virtual bool HasEnoughResource()
     {
-        if (this.resRequires.Count < 1) return true;
+        if (this.resourcesNeed.Count < 1) return true;
 
-        foreach (Resource resRequire in this.resRequires)
+        foreach (Resource resourceNeed in this.resourcesNeed)
         {
-            Resource resHas = this.resHave.Find((x) => x.CodeName == resRequire.CodeName);
-            if (resHas == null) return false;
-            if (resRequire.Number > resHas.Number) return false;
+            Resource resourceHas = this.resoursesHave.Find((x) => x.CodeName == resourceNeed.CodeName);
+            if (resourceHas == null) return false;
+            if (resourceNeed.Number > resourceHas.Number) return false;
         }
 
         return true;
     }
 
-    public virtual ResourceName GetResRequireName()
+    public virtual Resource GetResourceRequired()
     {
-        foreach (Resource resRequire in this.resRequires)
+        foreach (Resource resourceNeed in this.resourcesNeed)
         {
-            Resource resHas = this.resHave.Find((resource) => resource.CodeName == resRequire.CodeName);
-            if (resHas == null) return resRequire.CodeName;
-            if (resRequire.Number > resHas.Number) return resRequire.CodeName;
+            Resource resourceRequired = new(resourceNeed.CodeName);
+            Resource resourceHas = this.resoursesHave.Find((resource) => resource.CodeName == resourceNeed.CodeName);
+
+            if (resourceHas == null) resourceRequired.SetNumber(resourceNeed.Number);
+            else resourceRequired.SetNumber(resourceNeed.Number - resourceHas.Number);
+
+            if (resourceRequired.Number == 0) continue;
+
+            return resourceRequired;
         }
 
-        return ResourceName.noResource;
+        return null;
+    }
+
+    public virtual void WillAdd(ResourceName resourceName, int number)
+    {
+        this.GetResourceHas(resourceName).WillAdd(number);
+    }
+
+    public virtual Resource GetResourceHas(ResourceName codeName)
+    {
+        Resource resource = this.resoursesHave.Find((resource) => resource.CodeName == codeName);
+        if (resource == null)
+        {
+            resource = new Resource(codeName);
+            this.resoursesHave.Add(resource);
+        }
+
+        return resource;
     }
 
     protected virtual void FinishBuild()
@@ -109,20 +136,21 @@ public abstract class AbsConstruction : SaiBehaviour
         this.timer = 0;
         this.isPlaced = false;
         this.isFinish = false;
-        this.resHave = new();
+        this.resoursesHave = new();
     }
 
     public virtual void AddRes(ResourceName resourceName, int count)
     {
-        Resource resource = this.resHave.Find((x) => x.CodeName == resourceName);
+        Resource resource = this.resoursesHave.Find((x) => x.CodeName == resourceName);
         if (resource != null)
         {
             resource.Add(count);
+            resource.Added(count);
             return;
         }
 
         resource = new Resource(resourceName, count);
-        this.resHave.Add(resource);
+        this.resoursesHave.Add(resource);
     }
 
     public virtual float Percent()

@@ -1,11 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeManager : SaiBehaviour
+public class TreeManager : SaiSingleton<TreeManager>
 {
     [SerializeField] protected TreeSpawnerCtrl ctrl;
     [SerializeField] protected List<TreeCtrl> trees = new();
     public List<TreeCtrl> Trees => trees;
+
+    protected virtual void FixedUpdate()
+    {
+        this.Growing();
+    }
 
     protected override void LoadComponents()
     {
@@ -37,5 +42,14 @@ public class TreeManager : SaiBehaviour
     public virtual void Remove(TreeCtrl treeCtrl)
     {
         this.trees.Remove(treeCtrl);
+    }
+
+    protected virtual void Growing()
+    {
+        foreach(TreeCtrl treeCtrl in this.trees)
+        {
+            treeCtrl.TreeLevel.Growing();
+            treeCtrl.LogwoodGenerator.Generating();
+        }
     }
 }

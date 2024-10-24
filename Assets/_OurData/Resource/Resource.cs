@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -9,10 +10,11 @@ public class Resource
     public ResourceName CodeName => codeName;
     [SerializeField] protected int number = 0;
     public int Number => number;
-    public int adding = 0;
-    public int deducting = 0;
     [SerializeField] protected int max = int.MaxValue;
     public int Max => max;
+
+    [SerializeField] protected int willAdd = 0;
+    [SerializeField] protected int willDeduct = 0;
 
     public Resource(ResourceName codeName)
     {
@@ -35,6 +37,13 @@ public class Resource
         this.name = this.codeName.ToString();
     }
 
+    public bool Generate(int number)
+    {
+        if (!this.TryToAdd(number)) return false;
+        this.number += number;
+        return true;
+    }
+
     public bool Add(int number)
     {
         if (!this.TryToAdd(number)) return false;
@@ -49,14 +58,14 @@ public class Resource
         return true;
     }
 
-    public bool Remove(int number)
+    public bool Deduct(int number)
     {
-        if (!this.TryToRemove(number)) return false;
+        if (!this.TryToDeduct(number)) return false;
         this.number -= number;
         return true;
     }
 
-    public bool TryToRemove(int number)
+    public bool TryToDeduct(int number)
     {
         int newNumber = this.number - number;
         if (newNumber < 0) return false;
@@ -65,7 +74,12 @@ public class Resource
 
     public bool IsMax()
     {
-        return this.number >= this.max;
+        return this.NumberFinal() >= this.max;
+    }
+
+    public bool IsEmplty()
+    {
+        return this.NumberFinal() == 0;
     }
 
     public void SetMax(int max)
@@ -85,4 +99,38 @@ public class Resource
         return all;
     }
 
+    public void WillDeduct(int number)
+    {
+        this.willDeduct += number;
+    }
+
+    public void WillDeduct(int number, WorkerCtrl worker)
+    {
+        this.WillDeduct(worker.inventory.Taking(number));
+    }
+
+    public void Deducted(int number, WorkerCtrl worker)
+    {
+        this.Deducted(worker.inventory.Taking(number));
+    }
+
+    public void Deducted(int number)
+    {
+        this.willDeduct -= number;
+    }
+
+    public void WillAdd(int number)
+    {
+        this.willAdd += number;
+    }
+
+    public void Added(int number)
+    {
+        this.willAdd -= number;
+    }
+
+    public int NumberFinal()
+    {
+        return this.number - this.willDeduct + this.willAdd;
+    }
 }

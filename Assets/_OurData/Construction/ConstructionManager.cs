@@ -3,11 +3,34 @@ using UnityEngine;
 
 public class ConstructionManager : SaiSingleton<ConstructionManager>
 {
+    [SerializeField] protected ConstructionSpawnerCtrl ctrl;
     [SerializeField] protected List<AbsConstruction> constructions;
 
     protected virtual void FixedUpdate()
     {
         this.ConstructionCleaning();
+    }
+
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoadConstructionSpawnerCtrl();
+        this.LoadPoolObjects();
+    }
+
+    protected virtual void LoadConstructionSpawnerCtrl()
+    {
+        if (this.ctrl != null) return;
+        this.ctrl = GetComponent<ConstructionSpawnerCtrl>();
+        Debug.Log(transform.name + ": LoadConstructionSpawnerCtrl", gameObject);
+    }
+
+    protected virtual void LoadPoolObjects()
+    {
+        if (this.constructions.Count > 0) return;
+        AbsConstruction[] components = this.ctrl.Spawner.PoolHolder.GetComponentsInChildren<AbsConstruction>();
+        this.constructions = new List<AbsConstruction>(components);
+        Debug.Log(transform.name + ": LoadPoolObjects", gameObject);
     }
 
     public virtual void Add(AbsConstruction abstractConstruction)

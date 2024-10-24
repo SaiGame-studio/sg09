@@ -1924,7 +1924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3e80d28e03c754a9651b7ed573dc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWorker: 7
+  maxWorker: 1
   workers: []
 --- !u!114 &9131238185020776235
 MonoBehaviour:
@@ -1943,9 +1943,9 @@ MonoBehaviour:
   - name: logwood
     codeName: 1001
     number: 0
-    adding: 0
-    deducting: 0
     max: 7
+    willAdd: 0
+    willDeduct: 0
 --- !u!114 &7198834449041495102
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WaterGenerator : ResGenerator
@@ -22,10 +23,16 @@ public class WaterGenerator : ResGenerator
         water.SetMax(7);
     }
 
-    public override Resource ResNeed2Move()
+    public override List<Resource> ResNeedToMove(WorkerCtrl worker, bool getNumber)
     {
+        List<Resource> resources = new();
         Resource res = this.GetResource(ResourceName.water);
-        if (res.Number > 2) return res;
-        return null;
+        int number = res.NumberFinal();
+        if (getNumber) number = res.Number;
+
+        int carryCount = worker.inventory.CarryCount;
+        if (number > carryCount) number = carryCount;
+        if (number > 0) resources.Add(new Resource(res.CodeName, number));
+        return resources;
     }
 }

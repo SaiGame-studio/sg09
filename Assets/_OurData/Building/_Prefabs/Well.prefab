@@ -153,16 +153,16 @@ MonoBehaviour:
   - name: water
     codeName: 1000
     number: 0
-    adding: 0
-    deducting: 0
     max: 7
+    willAdd: 0
+    willDeduct: 0
   resCreate:
   - name: water
     codeName: 1000
     number: 1
-    adding: 0
-    deducting: 0
     max: 2147483647
+    willAdd: 0
+    willDeduct: 0
   resRequire: []
   canCreate: 1
   createTimer: 0

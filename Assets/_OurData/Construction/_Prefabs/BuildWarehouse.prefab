@@ -71,7 +71,7 @@ GameObject:
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2324592027525748517
 Transform:
   m_ObjectHideFlags: 0
@@ -221,20 +221,20 @@ MonoBehaviour:
   percent: 0
   timer: 0
   delay: 0.001
-  resRequires:
+  resourcesNeed:
   - name: logwood
     codeName: 1001
     number: 1
-    adding: 0
-    deducting: 0
     max: 2147483647
+    willAdd: 0
+    willDeduct: 0
   - name: blank
     codeName: 2001
     number: 1
-    adding: 0
-    deducting: 0
     max: 2147483647
-  resHave: []
+    willAdd: 0
+    willDeduct: 0
+  resoursesHave: []
   spawner: {fileID: 0}
   newBuilding: {fileID: 0}
 --- !u!114 &251599694334028313

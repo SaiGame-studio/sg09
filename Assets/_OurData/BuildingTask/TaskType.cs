@@ -21,7 +21,7 @@ public enum TaskType
     gotoGetProduct = 301,
     takingProductBack = 302,
     findBuildingNeedMaterial = 310,
-    bringMatetiral2Building = 311,
+    bringMatetiralToBuilding = 311,
 
     //House Builder
     findWarehouseHasRes = 400,

@@ -836,7 +836,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5619846799963251230}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.2
   m_Speed: 2
@@ -866,13 +866,13 @@ MonoBehaviour:
   despawn: {fileID: 0}
   _collider: {fileID: 4206510347120629234}
   _rigidbody: {fileID: 2269417259333913960}
-  workerBuildings: {fileID: 5619846799963251171}
+  buildings: {fileID: 5619846799963251171}
   workerMovement: {fileID: 5619846799963251170}
   workerTasks: {fileID: 2605196355140838286}
   animator: {fileID: 5619846800886907819}
   workerModel: {fileID: 5619846800886907820}
   navMeshAgent: {fileID: 5619846799963251168}
-  resCarrier: {fileID: 2291046728651006809}
+  inventory: {fileID: 2291046728651006809}
 --- !u!114 &5619846799963251170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -941,8 +941,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c21bc64b38b8db47bf98ba31774b227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carryCount: 1
+  isFull: 0
   resources: []
+  carryCount: 1
 --- !u!136 &4206510347120629234
 CapsuleCollider:
   m_ObjectHideFlags: 0

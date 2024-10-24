@@ -1,19 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Despawn<T> : DespawnBase where T : PoolObj
 {
     [SerializeField] protected T parent;
     [SerializeField] protected Spawner<T> spawner;
-    [SerializeField] protected bool isDespawnByTime = false;
-    [SerializeField] protected float timeLife = 7f;
-    [SerializeField] protected float currentTime = 7f;
-
-    protected virtual void FixedUpdate()
-    {
-        this.DespawnByTime();
-    }
 
     protected override void LoadComponents()
     {
@@ -36,24 +26,14 @@ public abstract class Despawn<T> : DespawnBase where T : PoolObj
         Debug.LogWarning(transform.name + ": LoadSpawner", gameObject);
     }
 
-    protected virtual void DespawnByTime()
-    {
-        if (!this.isDespawnByTime) return;
-
-        this.currentTime -= Time.fixedDeltaTime;
-        if (this.currentTime > 0) return;
-
-        this.DoDespawn();
-        this.currentTime = this.timeLife;
-    }
 
     public override void DoDespawn()
     {
         this.spawner.Despawn(this.parent);
     }
 
-    public virtual void SetDespawnByTime(bool status)
+    public virtual void DelayDespawn(float delay)
     {
-        this.isDespawnByTime = status;
+        Invoke(nameof(this.DoDespawn), delay);
     }
 }
