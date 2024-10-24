@@ -46,9 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 2344206397122825295}
   spawner: {fileID: 0}
-  isDespawnByTime: 0
-  timeLife: 7
-  currentTime: 7
 --- !u!1 &1867222724471567842
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +394,6 @@ GameObject:
   - component: {fileID: 6463493330837758206}
   - component: {fileID: 3851956847614940488}
   - component: {fileID: 7404926929046548217}
-  - component: {fileID: 855487902155754256}
   m_Layer: 0
   m_Name: Tree_02_LOD0
   m_TagString: Untagged
@@ -470,27 +466,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &855487902155754256
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2957880548694139978}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 4.2180724, z: 1}
-  m_Center: {x: 0, y: 2.092121, z: 0}
 --- !u!1 &3556296568753692243
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +570,6 @@ GameObject:
   - component: {fileID: 1640255326356108992}
   - component: {fileID: 7490488223245414188}
   - component: {fileID: 4672865392501290876}
-  - component: {fileID: 8121010549784662628}
   m_Layer: 0
   m_Name: Tree_02_LOD0
   m_TagString: Untagged
@@ -668,27 +642,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8121010549784662628
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3861502938214506150}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 4.2180724, z: 1}
-  m_Center: {x: 0, y: 2.092121, z: 0}
 --- !u!1 &4757613071334440878
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,7 +653,6 @@ GameObject:
   - component: {fileID: 7464184936388929843}
   - component: {fileID: 7368088400988565429}
   - component: {fileID: 3548032649072087744}
-  - component: {fileID: 65198446124892874}
   m_Layer: 0
   m_Name: Stump_01_LOD0
   m_TagString: Untagged
@@ -773,27 +725,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65198446124892874
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4757613071334440878}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.45, y: 0.8131511, z: 0.45}
-  m_Center: {x: 0, y: 0.4065755, z: 0}
 --- !u!1 &4971767258200966566
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +736,6 @@ GameObject:
   - component: {fileID: 6246176993641486856}
   - component: {fileID: 8100199637292341945}
   - component: {fileID: 7423783080983388691}
-  - component: {fileID: 3044579368839661613}
   m_Layer: 0
   m_Name: Tree_02_LOD0
   m_TagString: Untagged
@@ -878,27 +808,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3044579368839661613
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4971767258200966566}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 4.2180724, z: 1}
-  m_Center: {x: 0, y: 2.092121, z: 0}
 --- !u!1 &5324888164907368391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,7 +933,6 @@ GameObject:
   - component: {fileID: 5831007076094359208}
   - component: {fileID: 5929898456938528201}
   - component: {fileID: 621849191462233793}
-  - component: {fileID: 819953167030841567}
   m_Layer: 0
   m_Name: Tree_02_LOD0
   m_TagString: Untagged
@@ -1097,27 +1005,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &819953167030841567
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6923150239919869917}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 4.2180724, z: 1}
-  m_Center: {x: 0, y: 2.092121, z: 0}
 --- !u!1 &7465989912771622748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,8 +1168,8 @@ MonoBehaviour:
     codeName: 1001
     number: 1
     max: 2147483647
-    adding: 0
-    deducting: 0
+    willAdd: 0
+    willDeduct: 0
   resRequire: []
   canCreate: 1
   createTimer: 0

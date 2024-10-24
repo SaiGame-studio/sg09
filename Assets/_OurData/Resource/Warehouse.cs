@@ -8,10 +8,10 @@ public class Warehouse : SaiBehaviour
     [SerializeField] protected List<Resource> resources;
     public List<Resource> Resources => resources;
 
-    protected virtual void FixedUpdate()
-    {
-        this.isFull = this.IsFull();
-    }
+    //protected virtual void FixedUpdate()
+    //{
+    //    this.isFull = this.IsFull();
+    //}
 
     public virtual void AddResources(List<Resource> addResources)
     {
