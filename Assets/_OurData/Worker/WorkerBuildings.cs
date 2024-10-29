@@ -4,6 +4,7 @@ using UnityEngine;
 public class WorkerBuildings : SaiBehaviour
 {
     [SerializeField] protected BuildingHasWorkersCtrl workBuilding;
+    public BuildingHasWorkersCtrl WorkBuilding => workBuilding;
     [SerializeField] protected BuildingHasWorkersCtrl homeBuilding;
     [SerializeField] protected List<BuildingCtrl> innBuildings;
     [SerializeField] protected List<BuildingCtrl> relaxBuildings;

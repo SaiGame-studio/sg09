@@ -30,7 +30,6 @@ public class WorkerMovement : SaiBehaviour
         Debug.Log(transform.name + ": LoadWorkerCtrl", gameObject);
     }
 
-
     public virtual Transform GetTarget()
     {
         return this.target;
@@ -47,7 +46,7 @@ public class WorkerMovement : SaiBehaviour
         else
         {
             this.ActiveAgent(true);
-            this.IsClose2Target();
+            this.IsCloseToTarget();
         }
     }
 
@@ -58,12 +57,13 @@ public class WorkerMovement : SaiBehaviour
 
     protected virtual void Moving()
     {
-        if (this.target == null || this.IsClose2Target())
+        if (this.target == null || this.IsCloseToTarget())
         {
             this.isWalking = false;
             return;
         }
 
+        //TODO: only set new destination when target change
         this.isWalking = true;
         this.workerCtrl.navMeshAgent.SetDestination(this.target.position);
     }
@@ -78,7 +78,7 @@ public class WorkerMovement : SaiBehaviour
         return path.status == NavMeshPathStatus.PathComplete;
     }
 
-    public virtual bool IsClose2Target()
+    public virtual bool IsCloseToTarget()
     {
         if (this.target == null) return false;
 

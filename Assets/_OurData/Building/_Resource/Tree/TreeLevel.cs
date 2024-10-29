@@ -7,12 +7,6 @@ public class TreeLevel : BuildLevel
     [SerializeField] protected float treeTimer = 0;
     [SerializeField] protected float treeDelay = Mathf.Infinity;
 
-    protected virtual void FixedUpdate()
-    {
-        this.Growing();
-        this.IsMaxLevel();
-    }
-
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -33,9 +27,10 @@ public class TreeLevel : BuildLevel
         this.treeDelay = this.tree.GetCreateDelay() / levelCount;
     }
 
-    protected virtual void Growing()
+    public virtual void Growing()
     {
-        this.treeTimer += Time.fixedDeltaTime;
+        if (this.IsMaxLevel()) this.enabled = false;
+        this.treeTimer += this.GetElapsedTime();
         if (this.treeTimer < this.treeDelay) return;
         this.treeTimer = 0;
 

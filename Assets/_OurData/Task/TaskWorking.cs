@@ -6,12 +6,12 @@ public class TaskWorking : WorkerTask
 {
     protected override BuildingHasWorkersCtrl GetBuilding()
     {
-        return this.workerCtrl.workerBuildings.GetWork();
+        return this.workerCtrl.buildings.GetWork();
     }
 
     protected override void AssignBuilding(BuildingHasWorkersCtrl buildingCtrl)
     {
-        this.workerCtrl.workerBuildings.AssignWork(buildingCtrl);
+        this.workerCtrl.buildings.AssignWork(buildingCtrl);
     }
 
     protected override BuildingType GetBuildingType()

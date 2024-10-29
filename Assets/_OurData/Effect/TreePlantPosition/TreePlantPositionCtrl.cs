@@ -4,13 +4,6 @@ using UnityEngine;
 public class TreePlantPositionCtrl : EffectCtrl
 {
     [SerializeField] protected SphereCollider sphereCollider;
-
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        this.Reborn();
-    }
-
     public override string GetName()
     {
         return EffectName.TreePlantPosition.ToString();
@@ -35,12 +28,6 @@ public class TreePlantPositionCtrl : EffectCtrl
         WorkerCtrl workerCtrl = collider.GetComponent<WorkerCtrl>();
         if (workerCtrl == null) return;
         EffectDespawn effectDespawn = (EffectDespawn)this.Despawn;
-        effectDespawn.SetDespawnByTime(true);
-    }
-
-    protected virtual void Reborn()
-    {
-        EffectDespawn effectDespawn = (EffectDespawn)this.Despawn;
-        effectDespawn.SetDespawnByTime(false);
+        effectDespawn.DelayDespawn(7);
     }
 }

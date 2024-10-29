@@ -7,13 +7,13 @@ public class WorkerCtrl : PoolObj
 {
     public CapsuleCollider _collider;
     public Rigidbody _rigidbody;
-    public WorkerBuildings workerBuildings;
+    public WorkerBuildings buildings;
     public WorkerMovement workerMovement;
     public WorkerTasks workerTasks;
     public Animator animator;
     public Transform workerModel;
     public NavMeshAgent navMeshAgent;
-    public ResCarrier resCarrier;
+    public CarrierInventory inventory;
 
     public override string GetName()
     {
@@ -28,7 +28,7 @@ public class WorkerCtrl : PoolObj
         this.LoadAnimator();
         this.LoadWorkerTasks();
         this.LoadAgent();
-        this.LoadResCarrier();
+        this.LoadCarrierInventory();
         this.LoadCapsuleCollider();
         this.LoadRigidbody();
     }
@@ -69,8 +69,8 @@ public class WorkerCtrl : PoolObj
 
     protected virtual void LoadWorkerBuildings()
     {
-        if (this.workerBuildings != null) return;
-        this.workerBuildings = GetComponent<WorkerBuildings>();
+        if (this.buildings != null) return;
+        this.buildings = GetComponent<WorkerBuildings>();
         Debug.LogWarning(transform.name + ": LoadWorkerBuildings", gameObject);
     }
 
@@ -86,22 +86,21 @@ public class WorkerCtrl : PoolObj
         if (this.navMeshAgent != null) return;
         this.navMeshAgent = GetComponent<NavMeshAgent>();
         this.navMeshAgent.speed = 2f;
+        this.navMeshAgent.enabled = false;
         Debug.LogWarning(transform.name + ": LoadAgent", gameObject);
     }
 
-    protected virtual void LoadResCarrier()
+    protected virtual void LoadCarrierInventory()
     {
-        if (this.resCarrier != null) return;
-        this.resCarrier = GetComponent<ResCarrier>();
-        Debug.LogWarning(transform.name + ": ResCarrier", gameObject);
+        if (this.inventory != null) return;
+        this.inventory = GetComponent<CarrierInventory>();
+        Debug.LogWarning(transform.name + ": LoadCarrierInventory", gameObject);
     }
 
     public virtual void WorkerReleased()
     {
         this.workerTasks.SetReadyForTask(false);
         this.workerTasks.TaskWorking.GoOutBuilding();
-        this.workerBuildings.WorkerReleased();
+        this.buildings.WorkerReleased();
     }
-
-
 }

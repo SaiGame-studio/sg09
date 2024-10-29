@@ -72,7 +72,6 @@ public class ForestHutTask : BuildingTask
         }
         else
         {
-            //Debug.Log("Nothing to do: " + workerCtrl.name, workerCtrl.gameObject);
             if(!workerCtrl.workerTasks.InHouse) workerCtrl.workerTasks.TaskAdd(TaskType.goToWorkStation);
         }
     }
@@ -82,10 +81,8 @@ public class ForestHutTask : BuildingTask
         foreach (TreeCtrl tree in this.trees)
         {
             if (tree == null) continue;
-            if (!tree.logwoodGenerator.IsAllResMax()) continue;
+            if (!tree.LogwoodGenerator.IsAllResMax()) continue;
             if (tree.choper != null) continue;
-
-            //Debug.Log("HasTreeFullLevel: " + tree.name, gameObject);
             return true;
         }
 
@@ -98,7 +95,7 @@ public class ForestHutTask : BuildingTask
         foreach (TreeCtrl tree in this.trees)
         {
             if (tree == null) continue;
-            if (!tree.logwoodGenerator.IsAllResMax()) continue;
+            if (!tree.LogwoodGenerator.IsAllResMax()) continue;
             if (tree.choper != null) continue;
 
             tree.choper = workerCtrl;
@@ -135,7 +132,7 @@ public class ForestHutTask : BuildingTask
         workerCtrl.workerTasks.TaskWorking.GoOutBuilding();
         workerCtrl.workerMovement.SetTarget(target);
 
-        if (workerCtrl.workerMovement.IsClose2Target())
+        if (workerCtrl.workerMovement.IsCloseToTarget())
         {
             this.Planting(workerCtrl);
             workerCtrl.workerMovement.SetTarget(null);
@@ -211,15 +208,17 @@ public class ForestHutTask : BuildingTask
         workerCtrl.workerMovement.isWorking = true;
         yield return new WaitForSeconds(this.workingSpeed);
 
-        treeCtrl.treeLevel.ShowLastBuild();
-        List<Resource> resources = treeCtrl.logwoodGenerator.TakeAll();
+        treeCtrl.TreeLevel.ShowLastBuild();
+        List<Resource> resources = treeCtrl.LogwoodGenerator.TakeAll();
         treeCtrl.choper = null;
         this.trees.Remove(treeCtrl);
         TreeSpawnerCtrl.Instance.Manager.Remove(treeCtrl);
 
         workerCtrl.workerMovement.isWorking = false;
         workerCtrl.workerTasks.SetTaskTarget(null);
-        workerCtrl.resCarrier.AddByList(resources);
+        workerCtrl.inventory.AddResources(resources);
+
+        workerCtrl.buildings.WorkBuilding.warehouse.WillAdd(resources);
 
         workerCtrl.workerTasks.TaskCurrentDone();
 
@@ -251,10 +250,11 @@ public class ForestHutTask : BuildingTask
     {
         WorkerTask taskWorking = workerCtrl.workerTasks.TaskWorking;
         taskWorking.GotoBuilding();
-        if (!workerCtrl.workerMovement.IsClose2Target()) return;
+        if (!workerCtrl.workerMovement.IsCloseToTarget()) return;
 
-        List<Resource> resources = workerCtrl.resCarrier.TakeAll();
-        this.ctrl.warehouse.AddByList(resources);
+        List<Resource> resources = workerCtrl.inventory.TakeAll();
+        this.ctrl.warehouse.AddResources(resources);
+        this.ctrl.warehouse.Added(resources);
         taskWorking.GoIntoBuilding();
 
         workerCtrl.workerTasks.TaskCurrentDone();

@@ -10,22 +10,17 @@ public class ResGenerator : Warehouse
     [SerializeField] protected float createTimer = 0f;
     [SerializeField] protected float createDelay = 7f;
 
-    protected override void FixedUpdate()
-    {
-        this.Creating();
-    }
-
     protected override void OnEnable()
     {
         base.OnEnable();
         this.Reborn();
     }
 
-    protected virtual void Creating()
+    public virtual void Generating()
     {
         if (!this.canCreate) return;
 
-        this.createTimer += Time.fixedDeltaTime;
+        this.createTimer += this.GetElapsedTime();
         if (this.createTimer < this.createDelay) return;
         this.createTimer = 0;
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ForestHutWH : Warehouse
@@ -15,10 +16,16 @@ public class ForestHutWH : Warehouse
         Debug.LogWarning(transform.name + ": LoadResources", gameObject);
     }
 
-    public override Resource ResNeed2Move()
+    public override List<Resource> ResNeedToMove(WorkerCtrl worker, bool getNumber)
     {
-        Resource logwood = this.GetResource(ResourceName.logwood);
-        if (logwood.Number > 0) return logwood;
-        return null;
+        List<Resource> resources = new();
+        Resource res = this.GetResource(ResourceName.logwood);
+        int number = res.NumberFinal();
+        if (getNumber) number = res.Number;
+
+        int carryCount = worker.inventory.CarryCount;
+        if (number > carryCount) number = carryCount;
+        if (number > 0) resources.Add(new Resource(res.CodeName, number));
+        return resources;
     }
 }
