@@ -3,10 +3,16 @@ using UnityEngine;
 
 public class WaterGenerator : ResGenerator
 {
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadResCreate();
+    }
+
+    protected override void ResetValues()
+    {
+        base.ResetValues();
         this.SetLimit();
     }
 

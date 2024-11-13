@@ -5,6 +5,7 @@ public class ConstructionManager : SaiSingleton<ConstructionManager>
 {
     [SerializeField] protected ConstructionSpawnerCtrl ctrl;
     [SerializeField] protected List<AbsConstruction> constructions;
+    public List<AbsConstruction> Constructions => constructions;
 
     protected virtual void FixedUpdate()
     {
@@ -30,7 +31,7 @@ public class ConstructionManager : SaiSingleton<ConstructionManager>
         if (this.constructions.Count > 0) return;
         AbsConstruction[] components = this.ctrl.Spawner.PoolHolder.GetComponentsInChildren<AbsConstruction>();
         this.constructions = new List<AbsConstruction>(components);
-        Debug.Log(transform.name + ": LoadPoolObjects", gameObject);
+        //Debug.Log(transform.name + ": LoadPoolObjects", gameObject);
     }
 
     public virtual void Add(AbsConstruction abstractConstruction)

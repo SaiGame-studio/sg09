@@ -48,6 +48,7 @@ public class TreeManager : SaiSingleton<TreeManager>
 
     protected virtual void Growing()
     {
+        if (this.trees.Count <= 0) return;
         for (int i = 0; i < this.treeChunk; i++)
         {
             TreeCtrl treeCtrl = this.trees[this.treeIndex];

@@ -16,6 +16,10 @@ public class ResGenerator : Warehouse
         this.Reborn();
     }
 
+    protected virtual void FixedUpdate() {
+        this.Generating();
+    }
+
     public virtual void Generating()
     {
         if (!this.canCreate) return;

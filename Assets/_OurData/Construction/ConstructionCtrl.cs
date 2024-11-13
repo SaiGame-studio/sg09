@@ -26,4 +26,10 @@ public abstract class ConstructionCtrl : PoolObj
         this.abstractConstruction = GetComponent<AbsConstruction>();
         Debug.Log(transform.name + ": LoadAbstractConstruction", gameObject);
     }
+
+    public override void SetActive(bool status)
+    {
+        base.SetActive(status);
+        this.abstractConstruction.SetIsPlaced(true);
+    }
 }
