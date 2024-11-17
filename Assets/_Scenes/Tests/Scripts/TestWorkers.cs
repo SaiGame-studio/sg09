@@ -5,9 +5,8 @@ public class TestWorkers : SaiBehaviour
     [SerializeField] protected int spawnJunk = 5;
     [SerializeField] protected int spawnCount = 10000;
 
-    protected override void OnEnable()
+    protected virtual void OnEnable()
     {
-        base.OnEnable();
         InvokeRepeating(nameof(this.Spawning), 1, 1);
     }
 

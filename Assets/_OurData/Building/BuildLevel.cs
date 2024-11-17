@@ -6,7 +6,7 @@ public class BuildLevel : SaiBehaviour
     [SerializeField] protected List<Transform> levels;
     [SerializeField] protected int currentLevel = 0;
 
-    protected override void OnEnable()
+    protected virtual void OnEnable()
     {
         this.Reborn();
         this.ShowBuilding();

@@ -18,7 +18,7 @@ public class BuildingManager : SaiSingleton<BuildingManager>
         if (this.buildings.Count > 0) return;
         BuildingCtrl[] components = this.ctrl.Spawner.PoolHolder.GetComponentsInChildren<BuildingCtrl>();
         this.buildings = new List<BuildingCtrl>(components);
-        Debug.Log(transform.name + ": LoadPoolObjects", gameObject);
+        //Debug.Log(transform.name + ": LoadPoolObjects", gameObject);
     }
 
     protected virtual void LoadBuildingSpawnerCtrl()
@@ -51,6 +51,7 @@ public class BuildingManager : SaiSingleton<BuildingManager>
 
     public virtual List<WarehouseCtrl> Warehouses()
     {
+        //TODO: cached warehouses, create protected List<WarehouseCtrl> 
         List<WarehouseCtrl> warehouses = new();
         foreach (BuildingCtrl buildingCtrl in this.buildings)
         {

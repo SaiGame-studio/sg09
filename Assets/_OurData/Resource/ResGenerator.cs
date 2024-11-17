@@ -4,20 +4,35 @@ using UnityEngine;
 public class ResGenerator : Warehouse
 {
     [Header("ResGenerator")]
+    [SerializeField] protected ResourceManager resourceManager;
     [SerializeField] protected List<Resource> resCreate;
     [SerializeField] protected List<Resource> resRequire;
     [SerializeField] protected bool canCreate = true;
     [SerializeField] protected float createTimer = 0f;
     [SerializeField] protected float createDelay = 7f;
 
-    protected override void OnEnable()
+    protected override void Awake()
     {
-        base.OnEnable();
+        base.Awake();
+        this.resourceManager.AddGenerator(this);
+    }
+
+    protected virtual void OnEnable()
+    {
         this.Reborn();
     }
 
-    protected virtual void FixedUpdate() {
-        this.Generating();
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoadResourceManager();
+    }
+
+    protected virtual void LoadResourceManager()
+    {
+        if (this.resourceManager != null) return;
+        this.resourceManager = GameObject.FindAnyObjectByType<ResourceManager>();
+        Debug.Log(transform.name + ": LoadResourceManager", gameObject);
     }
 
     public virtual void Generating()

@@ -53,7 +53,6 @@ public class TreeManager : SaiSingleton<TreeManager>
         {
             TreeCtrl treeCtrl = this.trees[this.treeIndex];
             treeCtrl.TreeLevel.Growing();
-            treeCtrl.LogwoodGenerator.Generating();
             this.treeIndex++;
             if (this.treeIndex >= this.trees.Count) this.treeIndex = 0;
         }
