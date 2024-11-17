@@ -6,10 +6,15 @@ public class ResourceManager : SaiSingleton<ResourceManager>
 {
     [SerializeField] protected List<Resource> resources = new();
     [SerializeField] protected List<WarehouseCtrl> warehouses = new();
+    
+    [SerializeField] protected int generatorIndex = 10;
+    [SerializeField] protected int chunkCount = 70;
+    [SerializeField] protected List<ResGenerator> generators;
 
     protected virtual void FixedUpdate()
     {
-        this.AllResourceUpdate();
+        //this.AllResourceUpdate();
+        this.Generating();
     }
 
     protected override void LoadComponents()
@@ -36,6 +41,7 @@ public class ResourceManager : SaiSingleton<ResourceManager>
         return this.resources.Find(resource => resource.CodeName == resName);
     }
 
+    //TODO: remote this method after 6 months, 11.2024
     protected virtual void AllResourceUpdate()
     {
         this.warehouses = BuildingManager.Instance.Warehouses();
@@ -48,6 +54,24 @@ public class ResourceManager : SaiSingleton<ResourceManager>
                 resInWareHouse = warehouseCtrl.warehouse.GetResource(resource.CodeName);
                 resource.Add(resInWareHouse.Number);
             }
+        }
+    }
+
+    public virtual void AddGenerator(ResGenerator resGenerator)
+    {
+        if (this.generators.Contains(resGenerator)) return;
+        this.generators.Add(resGenerator);
+    }
+
+    protected virtual void Generating()
+    {
+        if (this.generators.Count <= 0) return;
+        for (int i = 0; i < this.chunkCount; i++)
+        {
+            ResGenerator generator = this.generators[this.generatorIndex];
+            generator.Generating();
+            this.generatorIndex++;
+            if (this.generatorIndex >= this.generators.Count) this.generatorIndex = 0;
         }
     }
 }

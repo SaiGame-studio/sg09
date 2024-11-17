@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SaiBehaviour : MonoBehaviour
@@ -21,16 +19,6 @@ public class SaiBehaviour : MonoBehaviour
     protected virtual void Start()
     {
         this.lastUpdateTime = Time.time;
-    }
-
-    protected virtual void OnDisable()
-    {
-        CancelInvoke();
-    }
-
-    protected virtual void OnEnable()
-    {
-        //For Overide
     }
 
     protected virtual void LoadComponents()

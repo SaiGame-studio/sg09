@@ -12,9 +12,8 @@ public abstract class TreeCtrl : ResourceCtrl
 
     public WorkerCtrl choper;
 
-    protected override void OnEnable()
+    protected virtual void OnEnable()
     {
-        base.OnEnable();
         this.Reborn();
     }
 

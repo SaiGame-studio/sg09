@@ -25,9 +25,8 @@ public abstract class AbsConstruction : SaiBehaviour
         this.FinishBuild();
     }
 
-    protected override void OnDisable()
+    protected virtual void OnEnable()
     {
-        base.OnDisable();
         this.Reborn();
     }
 

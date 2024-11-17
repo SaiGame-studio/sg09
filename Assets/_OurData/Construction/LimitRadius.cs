@@ -11,9 +11,8 @@ public class LimitRadius : SaiBehaviour
     [SerializeField] protected Rigidbody _rigidbody;
     public List<GameObject> collideObjects;
 
-    protected override void OnEnable()
+    protected virtual void OnEnable()
     {
-        base.OnEnable();
         this.ResetColliderObjects();
     }
 

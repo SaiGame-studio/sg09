@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -54,9 +53,9 @@ public class Resource
     public bool TryToAdd(int number)
     {
         int newNumber = this.number + number;
-        if (newNumber > this.max) return false;
-        return true;
+        return this.max <= 0 || newNumber <= this.max;
     }
+
 
     public bool Deduct(int number)
     {
@@ -74,6 +73,7 @@ public class Resource
 
     public bool IsMax()
     {
+        if (this.max == 0) return false;
         return this.NumberFinal() >= this.max;
     }
 

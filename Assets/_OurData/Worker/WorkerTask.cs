@@ -14,12 +14,6 @@ public abstract class WorkerTask : SaiBehaviour
         if (workerCtrl.workerTasks.ReadyForTask) this.Working();
     }
 
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-        //this.GoOutBuilding();
-    }
-
     protected override void LoadComponents()
     {
         base.LoadComponents();
