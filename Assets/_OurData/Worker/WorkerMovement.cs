@@ -11,11 +11,11 @@ public class WorkerMovement : SaiBehaviour
     [SerializeField] protected float walkLimit = 0.7f;
     [SerializeField] protected float targetDistance = 0f;
 
-    protected virtual void FixedUpdate()
-    {
-        this.Moving();
-        this.Animating();
-    }
+    //protected virtual void FixedUpdate()
+    //{
+    //    this.Moving();
+    //    this.Animating();
+    //}
 
     protected override void LoadComponents()
     {
@@ -55,8 +55,9 @@ public class WorkerMovement : SaiBehaviour
         this.workerCtrl.navMeshAgent.enabled = status;
     }
 
-    protected virtual void Moving()
+    public virtual void Moving()
     {
+        this.Animating();
         if (this.target == null || this.IsCloseToTarget())
         {
             this.isWalking = false;

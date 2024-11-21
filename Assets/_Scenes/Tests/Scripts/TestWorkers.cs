@@ -3,7 +3,8 @@ using UnityEngine;
 public class TestWorkers : SaiBehaviour
 {
     [SerializeField] protected int spawnJunk = 5;
-    [SerializeField] protected int spawnCount = 10000;
+    [SerializeField] protected int spawnCount = 0;
+    [SerializeField] protected int spawnMax = 10000;
 
     protected virtual void OnEnable()
     {
@@ -12,11 +13,12 @@ public class TestWorkers : SaiBehaviour
 
     protected virtual void Spawning()
     {
-        if (ConstructionManager.Instance.Constructions.Count >= this.spawnCount) return;
+        if (this.spawnCount >= this.spawnMax) return;
 
+        this.spawnCount += this.spawnJunk;
         ConstructionCtrl newObj;
         ConstructionCtrl  prefab = ConstructionSpawnerCtrl.Instance.Spawner.PoolPrefabs.GetByName("BuildWorker");
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < this.spawnJunk; i++)
         {
             newObj = ConstructionSpawnerCtrl.Instance.Spawner.Spawn(prefab, transform.position);
             newObj.SetActive(true);
