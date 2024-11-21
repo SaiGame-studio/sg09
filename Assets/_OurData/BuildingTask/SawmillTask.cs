@@ -52,20 +52,20 @@ public class SawmillTask : BuildingTask
 
     protected virtual void MakingResource(WorkerCtrl workerCtrl)
     {
-        if (workerCtrl.workerMovement.isWorking) return;
+        if (workerCtrl.workerMovement.IsWorking) return;
         StartCoroutine(Sawing(workerCtrl));
     }
 
     IEnumerator Sawing(WorkerCtrl workerCtrl)
     {
-        workerCtrl.workerMovement.isWorking = true;
-        workerCtrl.workerMovement.workingType = WorkingType.sawing;
+        workerCtrl.workerMovement.SetWorking(true);
+        workerCtrl.workerMovement.SetWorkingType(WorkingType.sawing);
         yield return new WaitForSeconds(this.workingSpeed);
 
         this.ctrl.warehouse.RemoveResource(ResourceName.logwood, this.logwoodCost);
         this.ctrl.warehouse.AddResource(ResourceName.blank, this.blankReceive);
 
-        workerCtrl.workerMovement.isWorking = false;
+        workerCtrl.workerMovement.SetWorking(false);
         workerCtrl.workerTasks.TaskCurrentDone();
     }
 
