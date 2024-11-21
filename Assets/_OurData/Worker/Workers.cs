@@ -28,4 +28,9 @@ public class Workers : SaiBehaviour
 
         this.workers.Clear();
     }
+
+    public virtual int Count()
+    {
+        return this.workers.Count;
+    }
 }

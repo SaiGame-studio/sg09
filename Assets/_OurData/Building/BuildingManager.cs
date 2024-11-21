@@ -33,14 +33,32 @@ public class BuildingManager : SaiSingleton<BuildingManager>
         foreach (BuildingCtrl buildingCtrl in this.BuildingCtrls())
         {
             if (buildingCtrl.BuildingType != buildingType) continue;
-            if (buildingType == BuildingType.workStation)
-            {
-                BuildingHasWorkersCtrl buildingHasWorkers = (BuildingHasWorkersCtrl)buildingCtrl;
-                if (!buildingHasWorkers.Workers.IsNeedWorker()) continue;
-            }
             return buildingCtrl;
         }
         return null;
+    }
+
+    public virtual List<BuildingCtrl> FindBuildings(BuildingType buildingType)
+    {
+        return this.buildings.FindAll(building => building.BuildingType == buildingType);
+    }
+
+    public virtual BuildingHasWorkersCtrl FindWorkStation()
+    {
+        List<BuildingCtrl> workStations = this.FindBuildings(BuildingType.workStation);
+        BuildingHasWorkersCtrl stationNeedWorker = null;
+        foreach (BuildingHasWorkersCtrl buildingHasWorker in workStations)
+        {
+            if (!buildingHasWorker.Workers.IsNeedWorker()) continue;
+            if (stationNeedWorker == null) stationNeedWorker = buildingHasWorker;
+
+            if (stationNeedWorker.Workers.Count() > buildingHasWorker.Workers.Count())
+            {
+                stationNeedWorker = buildingHasWorker;
+            }
+        }
+
+        return stationNeedWorker;
     }
 
 

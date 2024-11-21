@@ -199,13 +199,13 @@ public class ForestHutTask : BuildingTask
 
     protected virtual void ChopTree(WorkerCtrl workerCtrl)
     {
-        if (workerCtrl.workerMovement.isWorking) return;
+        if (workerCtrl.workerMovement.IsWorking) return;
         StartCoroutine(Chopping(workerCtrl, (TreeCtrl)workerCtrl.workerTasks.TaskTarget));
     }
 
     private IEnumerator Chopping(WorkerCtrl workerCtrl, TreeCtrl treeCtrl)
     {
-        workerCtrl.workerMovement.isWorking = true;
+        workerCtrl.workerMovement.SetWorking(true);
         yield return new WaitForSeconds(this.workingSpeed);
 
         treeCtrl.TreeLevel.ShowLastBuild();
@@ -214,7 +214,7 @@ public class ForestHutTask : BuildingTask
         this.trees.Remove(treeCtrl);
         TreeSpawnerCtrl.Instance.Manager.Remove(treeCtrl);
 
-        workerCtrl.workerMovement.isWorking = false;
+        workerCtrl.workerMovement.SetWorking(false);
         workerCtrl.workerTasks.SetTaskTarget(null);
         workerCtrl.inventory.AddResources(resources);
 

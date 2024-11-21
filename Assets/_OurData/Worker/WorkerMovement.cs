@@ -5,9 +5,12 @@ public class WorkerMovement : SaiBehaviour
 {
     public WorkerCtrl workerCtrl;
     [SerializeField] protected Transform target;
-    public bool isWalking = false;
-    public bool isWorking = false;
-    public WorkingType workingType = WorkingType.lumberjack;
+    [SerializeField] protected bool isWalking = false;
+    
+    [SerializeField] protected bool isWorking = false;
+    public bool IsWorking => isWorking;
+
+    [SerializeField] protected WorkingType workingType = WorkingType.lumberjack;
     [SerializeField] protected float walkLimit = 0.7f;
     [SerializeField] protected float targetDistance = 0f;
 
@@ -21,6 +24,24 @@ public class WorkerMovement : SaiBehaviour
     {
         base.LoadComponents();
         this.LoadWorkerCtrl();
+    }
+
+    public virtual void SetWorkingType(WorkingType workingType)
+    {
+        this.workingType = workingType;
+        this.workerCtrl.animator.SetFloat("workingType", (float)this.workingType);
+    }
+
+    public virtual void SetWalking(bool status)
+    {
+        this.isWalking = status;
+        this.workerCtrl.animator.SetBool("isWalking", this.isWalking);
+    }
+
+    public virtual void SetWorking(bool status)
+    {
+        this.isWorking = status;
+        this.workerCtrl.animator.SetBool("isWorking", this.isWorking);
     }
 
     protected virtual void LoadWorkerCtrl()
@@ -57,15 +78,15 @@ public class WorkerMovement : SaiBehaviour
 
     public virtual void Moving()
     {
-        this.Animating();
         if (this.target == null || this.IsCloseToTarget())
         {
-            this.isWalking = false;
+            this.SetWalking(false);
             return;
         }
 
+        this.SetWalking(true);
+
         //TODO: only set new destination when target change
-        this.isWalking = true;
         this.workerCtrl.navMeshAgent.SetDestination(this.target.position);
     }
 
@@ -88,13 +109,6 @@ public class WorkerMovement : SaiBehaviour
 
         this.targetDistance = Vector3.Distance(transform.position, targetPos);
         return this.targetDistance < this.walkLimit;
-    }
-
-    protected virtual void Animating()
-    {
-        this.workerCtrl.animator.SetBool("isWalking", this.isWalking);
-        this.workerCtrl.animator.SetBool("isWorking", this.isWorking);
-        this.workerCtrl.animator.SetFloat("workingType", (float)this.workingType);
     }
 
     public virtual float TargetDistance()
