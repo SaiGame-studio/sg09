@@ -7,7 +7,7 @@ public class ResourceManager : SaiSingleton<ResourceManager>
     [SerializeField] protected List<Resource> resources = new();
     [SerializeField] protected List<WarehouseCtrl> warehouses = new();
     
-    [SerializeField] protected int generatorIndex = 10;
+    [SerializeField] protected int generatorIndex = 0;
     [SerializeField] protected int chunkCount = 70;
     [SerializeField] protected List<ResGenerator> generators;
 

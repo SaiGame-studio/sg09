@@ -6,12 +6,17 @@ public abstract class WorkerTask : SaiBehaviour
     [SerializeField] protected float buildingDistance = 0;
     [SerializeField] protected float buildDisLimit = 0.7f;
 
-    protected virtual void FixedUpdate()
+    //protected virtual void FixedUpdate()
+    //{
+    //    this.Working();
+    //}
+
+    public virtual void Working()
     {
         if (this.GetBuilding()) this.GettingReadyForWork();
         else this.FindBuildingForWorkder();
 
-        if (workerCtrl.workerTasks.ReadyForTask) this.Working();
+        if (workerCtrl.workerTasks.ReadyForTask) this.DoingTask();
     }
 
     protected override void LoadComponents()
@@ -86,7 +91,7 @@ public abstract class WorkerTask : SaiBehaviour
         this.workerCtrl.workerModel.gameObject.SetActive(true);
     }
 
-    protected virtual void Working()
+    protected virtual void DoingTask()
     {
         this.GetBuilding().BuildingTask.DoingTask(this.workerCtrl);
     }

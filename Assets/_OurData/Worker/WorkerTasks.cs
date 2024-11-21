@@ -24,10 +24,15 @@ public class WorkerTasks : SaiBehaviour
         this.DisableTasks();
     }
 
-    protected virtual void FixedUpdate()
+    //protected virtual void FixedUpdate()
+    //{
+    //    this.Working();
+    //}
+
+    public virtual void Working()
     {
-        if (this.isNightTime) this.GoHome();
-        else this.GoWork();
+        if (this.isNightTime) this.WorkAtHome();
+        else this.WorkAtStation();
     }
 
     protected override void LoadComponents()
@@ -59,16 +64,14 @@ public class WorkerTasks : SaiBehaviour
         this.taskGoHome.gameObject.SetActive(false);
     }
 
-    protected virtual void GoHome()
+    protected virtual void WorkAtHome()
     {
-        this.taskWorking.gameObject.SetActive(false);
-        this.taskGoHome.gameObject.SetActive(true);
+        this.taskGoHome.Working();
     }
 
-    protected virtual void GoWork()
+    protected virtual void WorkAtStation()
     {
-        this.taskWorking.gameObject.SetActive(true);
-        this.taskGoHome.gameObject.SetActive(false);
+        this.taskWorking.Working();
     }
 
     public virtual void TaskAdd(TaskType taskType)

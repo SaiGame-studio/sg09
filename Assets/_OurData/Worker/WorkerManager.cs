@@ -4,14 +4,18 @@ using UnityEngine;
 public class WorkerManager : SaiSingleton<WorkerManager>
 {
     [SerializeField] protected WorkerSpawnerCtrl ctrl;
+    
     [SerializeField] protected int workingCount = 0;
     public int WorkingCount => workingCount;
+
+    [SerializeField] protected int workerCheckIndex = 0;
+    [SerializeField] protected int workerCheckCount = 10;
     [SerializeField] protected List<WorkerCtrl> workers;
     public List<WorkerCtrl> Workers => workers;
 
     protected virtual void FixedUpdate()
     {
-        this.CountWorking();
+        this.WorkersChecking();
     }
 
     protected override void LoadComponents()
@@ -36,19 +40,25 @@ public class WorkerManager : SaiSingleton<WorkerManager>
         Debug.Log(transform.name + ": LoadPoolObjects", gameObject);
     }
 
-    protected virtual void CountWorking()
-    {
-        int working = 0;
-        foreach(WorkerCtrl workerCtrl in this.workers)
-        {
-            if (workerCtrl.buildings.WorkBuilding == null) continue;
-            working++;
-        }
-        this.workingCount = working;
-    }
-
     public virtual void Add(WorkerCtrl ctrl)
     {
         this.workers.Add(ctrl);
+    }
+
+    protected virtual void WorkersChecking()
+    {
+        if (this.workers.Count <= 0) return;
+        for (int i = 0; i < this.workerCheckCount; i++)
+        {
+            WorkerCtrl workerCtrl = this.workers[this.workerCheckIndex];
+            workerCtrl.workerMovement.Moving();
+            workerCtrl.workerTasks.Working();
+
+            this.workerCheckIndex++;
+            if (this.workerCheckIndex >= this.workers.Count)
+            {
+                this.workerCheckIndex = 0;
+            }
+        }
     }
 }
