@@ -16,7 +16,7 @@ public class BaseBuildingTask : BuildingTask
                 Debug.Log("makingResource ");
                 break;
             default:
-                if (this.IsTime2Work()) this.Planning(workerCtrl);
+                this.Planning(workerCtrl);
                 break;
         }
     }

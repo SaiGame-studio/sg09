@@ -52,7 +52,7 @@ public class ForestHutTask : BuildingTask
                 this.GoToWorkStation(workerCtrl);
                 break;
             default:
-                if (this.IsTime2Work()) this.Planning(workerCtrl);
+                this.Planning(workerCtrl);
                 break;
         }
     }

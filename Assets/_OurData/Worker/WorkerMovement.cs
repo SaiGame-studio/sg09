@@ -6,7 +6,7 @@ public class WorkerMovement : SaiBehaviour
     public WorkerCtrl workerCtrl;
     [SerializeField] protected Transform target;
     [SerializeField] protected bool isWalking = false;
-    
+
     [SerializeField] protected bool isWorking = false;
     public bool IsWorking => isWorking;
 
@@ -35,6 +35,11 @@ public class WorkerMovement : SaiBehaviour
     public virtual void SetWalking(bool status)
     {
         this.isWalking = status;
+        this.UpdateWalkingAnimation();
+    }
+
+    public virtual void UpdateWalkingAnimation()
+    {
         this.workerCtrl.animator.SetBool("isWalking", this.isWalking);
     }
 
@@ -60,34 +65,22 @@ public class WorkerMovement : SaiBehaviour
     {
         this.target = trans;
 
-        if(this.target == null)
+        if (this.target == null)
         {
-           this.ActiveAgent(false);
+            this.ActiveAgent(false);
+            this.SetWalking(false);
         }
-        else
+        else if (!this.IsCloseToTarget())
         {
             this.ActiveAgent(true);
-            this.IsCloseToTarget();
+            this.workerCtrl.navMeshAgent.SetDestination(this.target.position);
+            this.SetWalking(true);
         }
     }
 
     public virtual void ActiveAgent(bool status)
     {
         this.workerCtrl.navMeshAgent.enabled = status;
-    }
-
-    public virtual void Moving()
-    {
-        if (this.target == null || this.IsCloseToTarget())
-        {
-            this.SetWalking(false);
-            return;
-        }
-
-        this.SetWalking(true);
-
-        //TODO: only set new destination when target change
-        this.workerCtrl.navMeshAgent.SetDestination(this.target.position);
     }
 
     public virtual bool CanReachDestination(Vector3 targetPosition)
