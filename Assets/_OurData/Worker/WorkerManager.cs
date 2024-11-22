@@ -4,12 +4,14 @@ using UnityEngine;
 public class WorkerManager : SaiSingleton<WorkerManager>
 {
     [SerializeField] protected WorkerSpawnerCtrl ctrl;
-    
+    [SerializeField] protected bool enableModel = true;
+
     [SerializeField] protected int workingCount = 0;
     public int WorkingCount => workingCount;
 
     [SerializeField] protected int workerCheckIndex = 0;
     [SerializeField] protected int workerCheckCount = 10;
+
     [SerializeField] protected List<WorkerCtrl> workers;
     public List<WorkerCtrl> Workers => workers;
 
@@ -37,7 +39,7 @@ public class WorkerManager : SaiSingleton<WorkerManager>
         if (this.workers.Count > 0) return;
         WorkerCtrl[] components = this.ctrl.Spawner.PoolHolder.GetComponentsInChildren<WorkerCtrl>();
         this.workers = new List<WorkerCtrl>(components);
-        Debug.Log(transform.name + ": LoadPoolObjects", gameObject);
+        //Debug.Log(transform.name + ": LoadPoolObjects", gameObject);
     }
 
     public virtual void Add(WorkerCtrl ctrl)
@@ -51,7 +53,7 @@ public class WorkerManager : SaiSingleton<WorkerManager>
         for (int i = 0; i < this.workerCheckCount; i++)
         {
             WorkerCtrl workerCtrl = this.workers[this.workerCheckIndex];
-            workerCtrl.workerMovement.Moving();
+            workerCtrl.SetModelActive(this.enableModel);
             workerCtrl.workerTasks.Working();
 
             this.workerCheckIndex++;
@@ -60,5 +62,10 @@ public class WorkerManager : SaiSingleton<WorkerManager>
                 this.workerCheckIndex = 0;
             }
         }
+    }
+
+    public virtual void ToogleModel()
+    {
+        this.enableModel = !this.enableModel;
     }
 }

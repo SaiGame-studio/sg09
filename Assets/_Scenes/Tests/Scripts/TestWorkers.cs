@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class TestWorkers : SaiBehaviour
 {
-    [SerializeField] protected int spawnJunk = 5;
+    [SerializeField] protected int spawnJunk = 10;
     [SerializeField] protected int spawnCount = 0;
-    [SerializeField] protected int spawnMax = 10000;
+    [SerializeField] protected int spawnMax = 1000;
 
     protected virtual void OnEnable()
     {

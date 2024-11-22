@@ -17,7 +17,7 @@ public class WorkerCtrl : PoolObj
 
     public override string GetName()
     {
-        return "Worker";
+        return BuildingName.Worker.ToString();
     }
 
     protected override void LoadComponents()
@@ -102,5 +102,15 @@ public class WorkerCtrl : PoolObj
         this.workerTasks.SetReadyForTask(false);
         this.workerTasks.TaskWorking.GoOutBuilding();
         this.buildings.WorkerReleased();
+    }
+
+    public virtual void SetModelActive(bool status)
+    {
+        this.workerModel.gameObject.SetActive(status);
+
+        if (status)
+        {
+            this.workerMovement.UpdateWalkingAnimation();
+        }
     }
 }
