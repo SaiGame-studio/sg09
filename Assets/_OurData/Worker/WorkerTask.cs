@@ -35,6 +35,7 @@ public abstract class WorkerTask : SaiBehaviour
     protected virtual void FindBuildingForWorkder()
     {
         BuildingHasWorkersCtrl buildingHasWorker = BuildingSpawnerCtrl.Instance.Manager.FindWorkStation();
+        if (buildingHasWorker == null) return;
         buildingHasWorker.Workers.AddWorker(this.workerCtrl);
         this.AssignBuilding(buildingHasWorker);
     }
