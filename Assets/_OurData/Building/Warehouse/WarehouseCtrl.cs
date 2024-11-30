@@ -7,3 +7,4 @@ public class WarehouseCtrl : BuildingHasWorkersCtrl
         return BuildingName.Warehouse.ToString();
     }
 }
+
